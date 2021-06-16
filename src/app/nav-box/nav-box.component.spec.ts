@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NavBoxComponent } from './nav-box.component';
+import {NavBoxComponent} from './nav-box.component';
 
 describe('NavBoxComponent', () => {
   let component: NavBoxComponent;
@@ -8,9 +8,9 @@ describe('NavBoxComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavBoxComponent ]
+      declarations: [NavBoxComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

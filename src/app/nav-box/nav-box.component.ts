@@ -30,5 +30,4 @@ export class NavBoxComponent implements OnInit {
         return '#3498db';
     }
   }
-
 }
