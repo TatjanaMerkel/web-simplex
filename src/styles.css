@@ -6,6 +6,10 @@
   color: white;
 }
 
+input {
+  color: black;
+}
+
 body {
   height: 100%;
   background-image: linear-gradient(to right top, #475366, #414c5d, #3a4454, #343d4b, #2e3642);

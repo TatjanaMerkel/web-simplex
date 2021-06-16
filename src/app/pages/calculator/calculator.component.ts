@@ -24,4 +24,8 @@ export class CalculatorComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  onConstraintVarChanged(event: Event, row: number, col: number) {
+    this.data.constraintVars[row][col] = +(<HTMLInputElement>event.target).value;
+  }
 }

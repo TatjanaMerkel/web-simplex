@@ -10,6 +10,7 @@ import {PractiseComponent} from './pages/practise/practise.component';
 import {CalculatorComponent} from './pages/calculator/calculator.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home/home.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {HomeComponent} from './home/home.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     NgbModule,
     AppRoutingModule
   ],

@@ -21,3 +21,9 @@ td:nth-child(1) {
 td {
   padding: 8px;
 }
+
+/***/
+
+td input {
+  width: 24px;
+}

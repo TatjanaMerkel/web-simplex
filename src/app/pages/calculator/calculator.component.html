@@ -1,3 +1,6 @@
+Rows: <input type="number"/><br/>
+Columns: <input type="number"/>
+
 <table>
   <thead>
   <tr>
@@ -10,7 +13,9 @@
   <tbody>
   <tr *ngFor="let row of [].constructor(constraints); let i = index">
     <td>x<sub>{{i}}</sub></td>
-    <td *ngFor="let constraintVar of data.constraintVars[i]">{{constraintVar}}</td>
+    <td *ngFor="let constraintVar of data.constraintVars[i]; let j = index">
+      <input [ngModel]="data.constraintVars[i][j]" (change)="onConstraintVarChanged($event, i, j)"/>
+    </td>
     <td class="verical-bar">{{data.constraintVals[i]}}</td>
   </tr>
   </tbody>
