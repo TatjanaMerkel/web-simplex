@@ -1,1 +1,25 @@
-<p>calculator works!</p>
+<table>
+  <thead>
+  <tr>
+    <td>BV</td>
+    <td *ngFor="let col of cols">x1</td>
+    <td class="verical-bar">b</td>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let row of rows">
+    <td>x3</td>
+    <td *ngFor="let col of cols">40</td>
+    <td class="verical-bar">480</td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td>z</td>
+    <td *ngFor="let col of cols">-10</td>
+    <td class="verical-bar">0</td>
+  </tr>
+  </tfoot>
+</table>
