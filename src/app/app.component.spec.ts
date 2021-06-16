@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'web-simplex'`, () => {
+  it(`should have as title 'bachelor'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('web-simplex');
+    expect(app.title).toEqual('bachelor');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('web-simplex app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('bachelor app is running!');
   });
 });

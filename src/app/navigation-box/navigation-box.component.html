@@ -1,0 +1,8 @@
+<div class="nav-container">
+  <ul>
+    <li *ngFor="let item of buttons" class="button-box rounded">
+      <button [routerLink]="item.route" [ngStyle]="{'background-color':getColor(item.color)}" type="button"
+              class=" btn button">{{item.title}}</button>
+    </li>
+  </ul>
+</div>

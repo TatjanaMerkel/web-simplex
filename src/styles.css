@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: San Francisco, sans-serif;
+  color: white;
+}
+
+body {
+  height: 100%;
+  background-image: linear-gradient(to right top, #475366, #414c5d, #3a4454, #343d4b, #2e3642);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
