@@ -6,8 +6,18 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
-  rows = [1, 2];
-  cols = [1, 2, 3];
+  vars = 3;
+  constraints = 2;
+
+  data = {
+    constraintVars: [
+      [11, 12, 13],
+      [21, 22, 23]
+    ],
+    constraintVals: [10, 20],
+    targetVars: [1, 2, 3],
+    targetVal: [0]
+  }
 
   constructor() {
   }

@@ -2,24 +2,24 @@
   <thead>
   <tr>
     <td>BV</td>
-    <td *ngFor="let col of cols">x1</td>
+    <td *ngFor="let x of [].constructor(vars); let i = index">x<sub>{{i}}</sub></td>
     <td class="verical-bar">b</td>
   </tr>
   </thead>
 
   <tbody>
-  <tr *ngFor="let row of rows">
-    <td>x3</td>
-    <td *ngFor="let col of cols">40</td>
-    <td class="verical-bar">480</td>
+  <tr *ngFor="let row of [].constructor(constraints); let i = index">
+    <td>x<sub>{{i}}</sub></td>
+    <td *ngFor="let constraintVar of data.constraintVars[i]">{{constraintVar}}</td>
+    <td class="verical-bar">{{data.constraintVals[i]}}</td>
   </tr>
   </tbody>
 
   <tfoot>
   <tr>
     <td>z</td>
-    <td *ngFor="let col of cols">-10</td>
-    <td class="verical-bar">0</td>
+    <td *ngFor="let targetVar of data.targetVars">{{targetVar}}</td>
+    <td class="verical-bar">{{data.targetVal}}</td>
   </tr>
   </tfoot>
 </table>
