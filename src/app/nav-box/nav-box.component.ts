@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-navigation-box',
-  templateUrl: './navigation-box.component.html',
-  styleUrls: ['./navigation-box.component.css']
+  selector: 'app-nav-box',
+  templateUrl: './nav-box.component.html',
+  styleUrls: ['./nav-box.component.css']
 })
-export class NavigationBoxComponent implements OnInit {
+export class NavBoxComponent implements OnInit {
 
 
   buttons = [

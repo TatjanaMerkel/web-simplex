@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavigationBoxComponent } from './navigation-box.component';
+import { NavBoxComponent } from './nav-box.component';
 
-describe('NavigationBoxComponent', () => {
-  let component: NavigationBoxComponent;
-  let fixture: ComponentFixture<NavigationBoxComponent>;
+describe('NavBoxComponent', () => {
+  let component: NavBoxComponent;
+  let fixture: ComponentFixture<NavBoxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationBoxComponent ]
+      declarations: [ NavBoxComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavigationBoxComponent);
+    fixture = TestBed.createComponent(NavBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
