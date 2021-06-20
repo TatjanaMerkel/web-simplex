@@ -13,6 +13,7 @@ import {HomeComponent} from './home/home.component';
 import {FormsModule} from "@angular/forms";
 import { TableSizeComponent } from './pages/calculator/table-size/table-size.component';
 import { TableauComponent } from './pages/calculator/tableau/tableau.component';
+import { LargeLpComponent } from './pages/calculator/large-lp/large-lp.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TableauComponent } from './pages/calculator/tableau/tableau.component';
     CalculatorComponent,
     HomeComponent,
     TableSizeComponent,
-    TableauComponent
+    TableauComponent,
+    LargeLpComponent
   ],
   imports: [
     BrowserModule,
