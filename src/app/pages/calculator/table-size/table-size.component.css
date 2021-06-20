@@ -1,5 +1,5 @@
-/* Style the counter cards */
-.card1 {
+
+.card {
   color: white;
   font-size: 25px;
   position: absolute;
@@ -8,15 +8,13 @@
   transform: translate(-50%, -50%);
   background-color: #475366;
   margin-top: 50px;
+  width: 50%;
+  height: 50%;
+}
+.card1 {
+  margin-top: 50px;
 }
 .card2 {
-  color: white;
-  font-size: 25px;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #475366;
   margin-top: 450px;
 }
 .card-body {
