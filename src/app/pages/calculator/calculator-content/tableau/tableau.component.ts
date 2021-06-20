@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-tableau',
@@ -6,7 +6,6 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./tableau.component.css']
 })
 export class TableauComponent implements OnInit {
-
   vars = 3;
   constraints = 2;
 

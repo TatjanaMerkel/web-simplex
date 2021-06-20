@@ -1,22 +1,12 @@
 
 .card {
+  margin: 50px auto auto;
   color: white;
   font-size: 25px;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background-color: #475366;
-  margin-top: 50px;
   width: 50%;
-  height: 50%;
 }
-.card1 {
-  margin-top: 50px;
-}
-.card2 {
-  margin-top: 500px;
-}
+
 .card-body {
   padding: 50px;
 
@@ -29,8 +19,6 @@ table {
   text-align: left
 }
 
-.test {
+button {
   margin-top: 50px;
 }
-
-

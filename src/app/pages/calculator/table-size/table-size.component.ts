@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-table-size',
@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-size.component.css']
 })
 export class TableSizeComponent implements OnInit {
+
+  data = {
+    large_lp: " Größe des Linearen Programms",
+    Input_lp: " Eingabe des Linearen Programms"
+  }
 
   constructor() { }
 
