@@ -11,7 +11,8 @@ import {CalculatorComponent} from './pages/calculator/calculator.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home/home.component';
 import {FormsModule} from "@angular/forms";
-import { TableSizeComponent } from './table-size/table-size.component';
+import { TableSizeComponent } from './pages/calculator/table-size/table-size.component';
+import { TableauComponent } from './pages/calculator/tableau/tableau.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TableSizeComponent } from './table-size/table-size.component';
     PractiseComponent,
     CalculatorComponent,
     HomeComponent,
-    TableSizeComponent
+    TableSizeComponent,
+    TableauComponent
   ],
   imports: [
     BrowserModule,
