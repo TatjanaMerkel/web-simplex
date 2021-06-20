@@ -1,0 +1,37 @@
+/* Style the counter cards */
+.card1 {
+  color: white;
+  font-size: 25px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #475366;
+  margin-top: 50px;
+}
+.card2 {
+  color: white;
+  font-size: 25px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #475366;
+  margin-top: 450px;
+}
+.card-body {
+  padding: 50px;
+
+}
+
+table {
+  border: 1px solid white;
+  border-collapse: initial;
+  border-spacing: 15px 10px;
+  text-align: left
+}
+
+.test {
+  margin-top: 50px;
+}
+
