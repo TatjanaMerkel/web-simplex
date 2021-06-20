@@ -14,6 +14,7 @@ import {FormsModule} from "@angular/forms";
 import { TableauComponent } from './pages/calculator/calculator-content/tableau/tableau.component';
 import { LargeLpComponent } from './pages/calculator/calculator-content/large-lp/large-lp.component';
 import { CardComponent } from './pages/calculator/card/card.component';
+import {LinearSystemComponent} from "./pages/calculator/calculator-content/linear-system/linear-system.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CardComponent } from './pages/calculator/card/card.component';
     HomeComponent,
     TableauComponent,
     LargeLpComponent,
-    CardComponent
+    CardComponent,
+    LinearSystemComponent
   ],
   imports: [
     BrowserModule,
