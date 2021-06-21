@@ -55,3 +55,4 @@ export class LinearSystemComponent implements OnInit {
     return index;
   }
 }
+
