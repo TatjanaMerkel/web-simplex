@@ -10,6 +10,8 @@ export class CalculatorComponent implements OnInit {
   numberOfVars: number = 0;
   numberOfConstraints: number = 0;
 
+  showLinearSystem: boolean = false;
+
 
   ngOnInit(): void {
   }
@@ -18,8 +20,8 @@ export class CalculatorComponent implements OnInit {
     this.numberOfVars = numberOfVars;
   }
 
-  onChangeNumberOfConstraints( numberOfConstraints: number) {
-    this. numberOfConstraints =  numberOfConstraints;
+  onChangeNumberOfConstraints(numberOfConstraints: number) {
+    this.numberOfConstraints = numberOfConstraints;
   }
 
 }

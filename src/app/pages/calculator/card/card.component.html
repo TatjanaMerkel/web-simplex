@@ -5,7 +5,7 @@
   <div class="card-body">
     <ng-content></ng-content>
     <div class="button">
-      <button class="btn btn-success btn-lg float-right" type="submit">
+      <button class="btn btn-success btn-lg float-right" type="submit" (click)="buttonClick.emit()">
         OK
       </button>
     </div>

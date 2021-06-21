@@ -1,9 +1,9 @@
-<app-card title="Größe des Linearen Programms">
+<app-card title="Größe des Linearen Programms" (buttonClick)="showLinearSystem = true">
   <app-large-lp (numberOfVarsChange)="onChangeNumberOfVars($event)"
                 (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"></app-large-lp>
 </app-card>
 
-<app-card title="Eingabe der Parameter">
+<app-card *ngIf="showLinearSystem" title="Eingabe der Parameter">
   <app-linear-system [numberOfVars]="numberOfVars" [numberOfConstraints]="numberOfConstraints"></app-linear-system>
 </app-card>
 
