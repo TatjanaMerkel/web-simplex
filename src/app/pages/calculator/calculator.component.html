@@ -1,9 +1,10 @@
 <app-card title="Größe des Linearen Programms">
-  <app-large-lp (numberOfVarsChange)="onChangeNumberOfVars($event)" (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"></app-large-lp>
+  <app-large-lp (numberOfVarsChange)="onChangeNumberOfVars($event)"
+                (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"></app-large-lp>
 </app-card>
 
 <app-card title="Eingabe der Parameter">
-  <app-linear-system [numberOfVars]="4" [numberOfConstraints]="5"></app-linear-system>
+  <app-linear-system [numberOfVars]="numberOfVars" [numberOfConstraints]="numberOfConstraints"></app-linear-system>
 </app-card>
 
 <app-card *ngFor="let x of [1, 2, 3, 4]" title="Eingabe des Linearen Programms">

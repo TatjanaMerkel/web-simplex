@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-linear-system',
   templateUrl: './linear-system.component.html',
   styleUrls: ['./linear-system.component.css']
 })
-export class LinearSystemComponent implements OnInit {
+export class LinearSystemComponent implements OnInit, OnChanges {
 
 
   @Input() numberOfVars = -1; // Number of variables
@@ -25,6 +25,9 @@ export class LinearSystemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(): void {
     this.targetVars = new Array<number>(this.numberOfVars);
 
     this.constraintVars = new Array<Array<number>>(this.numberOfConstraints);
@@ -35,6 +38,7 @@ export class LinearSystemComponent implements OnInit {
     this.constraintConstants = new Array<number>(this.numberOfConstraints);
 
     this.initialized = true;
+
   }
 
   onTargetVarChanged(event: Event, v: number) {
