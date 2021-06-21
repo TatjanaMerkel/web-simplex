@@ -7,8 +7,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class LinearSystemComponent implements OnInit {
 
-  @Input() numberOfVars = -1;
-  @Input() numberOfConstraints = -1;
+
+  @Input() numberOfVars = -1; // Number of variables
+  @Input() numberOfConstraints = -1; // Number of constraints
 
   @Output() targetVarsEmitter = new EventEmitter<number[]>();
   @Output() constraintVarsEmitter = new EventEmitter<number[][]>();
@@ -37,6 +38,7 @@ export class LinearSystemComponent implements OnInit {
   }
 
   onTargetVarChanged(event: Event, v: number) {
+    // Convert: string -> number
     this.targetVars[v] = +(<HTMLInputElement>event.target).value;
     this.targetVarsEmitter.emit(this.targetVars);
   }
@@ -51,6 +53,7 @@ export class LinearSystemComponent implements OnInit {
     this.constraintConstantsEmitter.emit(this.constraintConstants);
   }
 
+  // Take array-index instead of the array-value
   trackByIndex(index: number, _item: any) {
     return index;
   }

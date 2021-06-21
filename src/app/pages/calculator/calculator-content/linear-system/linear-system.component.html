@@ -1,4 +1,6 @@
 <table *ngIf="initialized">
+
+  <!-- Target function -->
   <tr>
     <td>Z</td>
     <td>=</td>
@@ -17,6 +19,7 @@
     </ng-container>
   </tr>
 
+  <!-- Constraints -->
   <tr *ngFor="let _ of [].constructor(numberOfConstraints); index as c">
     <td></td>
     <td></td>
@@ -35,6 +38,7 @@
 
     <td>≤</td>
 
+    <!-- Boundary vector -->
     <td><input [ngModel]="constraintConstants[c]"
                (change)="onConstraintConstantChanged($event, c)" /></td>
   </tr>
