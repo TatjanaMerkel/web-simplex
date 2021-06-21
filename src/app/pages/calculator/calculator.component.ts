@@ -6,11 +6,20 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
-  constructor() {
-  }
+
+  numberOfVars: number = 0;
+  numberOfConstraints: number = 0;
+
 
   ngOnInit(): void {
   }
 
+  onChangeNumberOfVars(numberOfVars: number) {
+    this.numberOfVars = numberOfVars;
+  }
+
+  onChangeNumberOfConstraints( numberOfConstraints: number) {
+    this. numberOfConstraints =  numberOfConstraints;
+  }
 
 }

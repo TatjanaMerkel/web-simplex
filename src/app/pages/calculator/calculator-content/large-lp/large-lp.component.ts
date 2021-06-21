@@ -1,4 +1,5 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+
 
 @Component({
   selector: 'app-large-lp',
@@ -7,7 +8,9 @@ import {Component, Input, OnInit, Output} from '@angular/core';
 })
 export class LargeLpComponent implements OnInit {
 
-  constructor() { }
+  @Output() numberOfVarsChange = new EventEmitter<number>();
+  @Output() numberOfConstraintsChange = new EventEmitter<number>();
+
 
   ngOnInit(): void {
   }

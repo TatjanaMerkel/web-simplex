@@ -1,10 +1,12 @@
 <table>
   <tr>
     <td>Anzahl der Variablen:</td>
-    <td><input size="2px"></td>
+    <td><input size="2px" #numberOfVars
+               (change)="numberOfVarsChange.emit(+numberOfVars.value)"></td>
   </tr>
   <tr>
     <td>Anzahl der Nebenbedingungen:</td>
-    <td><input size="2px"></td>
+    <td><input size="2px" #numberOfConstraints
+               (change)="numberOfConstraintsChange.emit(+numberOfConstraints.value)"></td>
   </tr>
 </table>

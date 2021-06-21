@@ -1,5 +1,5 @@
 <app-card title="Größe des Linearen Programms">
-  <app-large-lp></app-large-lp>
+  <app-large-lp (numberOfVarsChange)="onChangeNumberOfVars($event)" (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"></app-large-lp>
 </app-card>
 
 <app-card title="Eingabe der Parameter">
