@@ -13,3 +13,8 @@ table {
 button {
   margin-top: 50px;
 }
+
+.btn-orange {
+  background-color: #FFA500;
+  color:#ffffff;
+}

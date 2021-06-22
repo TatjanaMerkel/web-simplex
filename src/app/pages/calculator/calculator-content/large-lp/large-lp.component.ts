@@ -8,29 +8,40 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class LargeLpComponent implements OnInit {
 
-  @Output() numberOfVarsChange = new EventEmitter<number>();
-  @Output() numberOfConstraintsChange = new EventEmitter<number>();
-
-
   @Input() numberOfVars: number = 0;
   @Input() numberOfConstraints: number = 0;
 
+  @Output() numberOfVarsChange = new EventEmitter<number>();
+  @Output() numberOfConstraintsChange = new EventEmitter<number>();
   @Output() showLinearSystem = new EventEmitter<boolean>();
 
   showInputField: boolean = true;
   showInput: boolean = false;
 
+  disableButton: boolean = true;
+
+  showGenerateButton: boolean = true;
+  showUpdateButton: boolean = false;
+
   ngOnInit(): void {
   }
 
   validInput() {
-    return !(this.numberOfVars > 0 && this.numberOfConstraints > 0);
+    if(this.numberOfVars > 0 && this.numberOfConstraints > 0)  {
+      this.disableButton = false;
+    }
+    return this.disableButton;
   }
 
   removeInputField() {
     this.showInputField = false;
     this.showInput = true;
 
+  }
+
+  removeGenerateButton() {
+    this.showGenerateButton = false;
+    this.showUpdateButton = true;
   }
 
 

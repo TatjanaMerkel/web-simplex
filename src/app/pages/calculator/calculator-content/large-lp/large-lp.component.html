@@ -26,10 +26,20 @@
   </tr>
 </table>
 
-<div class="button">
+<div [hidden]="!showGenerateButton" class="button">
   <button class="btn btn-success btn-lg float-right" type="submit"
           [disabled]="validInput()"
-          (click)="showLinearSystem.emit(true); removeInputField()">
+          (click)="showLinearSystem.emit(true); removeInputField(); removeGenerateButton()">
     Generate
   </button>
 </div>
+
+<div *ngIf="showUpdateButton">
+  <button class="btn btn-orange btn-lg float-right" type="submit"
+          (click)="removeInputField(); removeGenerateButton()">
+    Update
+  </button>
+
+
+</div>
+
