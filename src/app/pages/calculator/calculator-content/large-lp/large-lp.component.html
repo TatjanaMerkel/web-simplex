@@ -1,12 +1,28 @@
 <table>
   <tr>
     <td>Anzahl der Variablen:</td>
-    <td><input size="2px" #numberOfVars
-               (change)="numberOfVarsChange.emit(+numberOfVars.value)"></td>
+    <td>
+      <div [hidden]="false">
+        <input size="2px" #numberOfVars
+               (change)="numberOfVarsChange.emit(+numberOfVars.value)">
+      </div>
+      <div *ngIf="true">
+        {{numberOfVars.value}}
+      </div>
+    </td>
   </tr>
   <tr>
     <td>Anzahl der Nebenbedingungen:</td>
-    <td><input size="2px" #numberOfConstraints
-               (change)="numberOfConstraintsChange.emit(+numberOfConstraints.value)"></td>
+    <td>
+      <input size="2px" #numberOfConstraints
+             (change)="numberOfConstraintsChange.emit(+numberOfConstraints.value)"></td>
   </tr>
 </table>
+
+<div class="button">
+  <button class="btn btn-success btn-lg float-right" type="submit"
+          [disabled]="validInput()"
+          (click)="showLinearSystem.emit(true)">
+    Generate
+  </button>
+</div>

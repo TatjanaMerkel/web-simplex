@@ -1,11 +1,19 @@
-<app-card title="Größe des Linearen Programms" (buttonClick)="showLinearSystem = true"
-          [numberOfVars]="numberOfVars" [numberOfConstraints]="numberOfConstraints">
-  <app-large-lp (numberOfVarsChange)="onChangeNumberOfVars($event)"
-                (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"></app-large-lp>
+<app-card title="Größe des Linearen Programms">
+  <app-large-lp
+    [numberOfVars]="numberOfVars"
+    [numberOfConstraints]="numberOfConstraints"
+    (numberOfVarsChange)="onChangeNumberOfVars($event)"
+    (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"
+    (showLinearSystem)="showChangeLinearSystem($event)">
+  </app-large-lp>
 </app-card>
 
-<app-card *ngIf="showLinearSystem" title="Eingabe der Parameter" (buttonClick)="showTableau= true">
-  <app-linear-system [numberOfVars]="numberOfVars" [numberOfConstraints]="numberOfConstraints"></app-linear-system>
+<app-card *ngIf="showLinearSystem" title="Eingabe der Parameter">
+  <app-linear-system
+    [numberOfVars]="numberOfVars"
+    [numberOfConstraints]="numberOfConstraints"
+    (showTableau)="showChangeTableau($event)">
+  </app-linear-system>
 </app-card>
 
 <app-card *ngIf="showTableau" title="Eingabe des Linearen Programms">

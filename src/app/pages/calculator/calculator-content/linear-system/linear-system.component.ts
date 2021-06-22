@@ -15,6 +15,10 @@ export class LinearSystemComponent implements OnInit, OnChanges {
   @Output() constraintVarsEmitter = new EventEmitter<number[][]>();
   @Output() constraintConstantsEmitter = new EventEmitter<number[]>();
 
+  @Output() buttonClick = new EventEmitter<void>();
+
+  @Output() showTableau = new EventEmitter<boolean>();
+
   targetVars: number[] = []
   constraintVars: number[][] = []
   constraintConstants: number[] = []

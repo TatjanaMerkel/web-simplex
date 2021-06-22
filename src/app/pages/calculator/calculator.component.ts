@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CalculatorComponent implements OnInit {
 
-  numberOfVars: number = 0 ;
+  numberOfVars: number = 0;
   numberOfConstraints: number = 0;
 
   showLinearSystem: boolean = false;
@@ -23,6 +23,14 @@ export class CalculatorComponent implements OnInit {
 
   onChangeNumberOfConstraints(numberOfConstraints: number) {
     this.numberOfConstraints = numberOfConstraints;
+  }
+
+  showChangeLinearSystem(value: boolean) {
+    this.showLinearSystem = value;
+  }
+
+  showChangeTableau(value: boolean) {
+    this.showTableau = value;
   }
 
 }

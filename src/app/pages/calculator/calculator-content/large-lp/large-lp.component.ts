@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 
 @Component({
@@ -12,7 +12,19 @@ export class LargeLpComponent implements OnInit {
   @Output() numberOfConstraintsChange = new EventEmitter<number>();
 
 
+  @Input() numberOfVars: number = 0;
+  @Input() numberOfConstraints: number = 0;
+
+  @Output() showLinearSystem = new EventEmitter<boolean>();
+
+
   ngOnInit(): void {
   }
+
+  validInput() {
+    return !(this.numberOfVars > 0 && this.numberOfConstraints > 0);
+  }
+
+
 
 }
