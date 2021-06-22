@@ -17,12 +17,20 @@ export class LargeLpComponent implements OnInit {
 
   @Output() showLinearSystem = new EventEmitter<boolean>();
 
+  showInputField: boolean = true;
+  showInput: boolean = false;
 
   ngOnInit(): void {
   }
 
   validInput() {
     return !(this.numberOfVars > 0 && this.numberOfConstraints > 0);
+  }
+
+  removeInputField() {
+    this.showInputField = false;
+    this.showInput = true;
+
   }
 
 
