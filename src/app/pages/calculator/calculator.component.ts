@@ -11,6 +11,7 @@ export class CalculatorComponent implements OnInit {
   numberOfConstraints: number = 0;
 
   showLinearSystem: boolean = false;
+  showTableau: boolean = false;
 
 
   ngOnInit(): void {

@@ -3,10 +3,10 @@
                 (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"></app-large-lp>
 </app-card>
 
-<app-card *ngIf="showLinearSystem" title="Eingabe der Parameter">
+<app-card *ngIf="showLinearSystem" title="Eingabe der Parameter" (buttonClick)="showTableau= true">
   <app-linear-system [numberOfVars]="numberOfVars" [numberOfConstraints]="numberOfConstraints"></app-linear-system>
 </app-card>
 
-<app-card *ngFor="let x of [1, 2, 3, 4]" title="Eingabe des Linearen Programms">
+<app-card *ngIf="showTableau" title="Eingabe des Linearen Programms">
   <app-tableau></app-tableau>
 </app-card>
