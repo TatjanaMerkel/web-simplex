@@ -34,14 +34,14 @@ export class LargeLpComponent implements OnInit {
   }
 
   removeInputField() {
-    this.showInputField = false;
-    this.showInput = true;
+    this.showInputField = !this.showInputField;
+    this.showInput = !this.showInput;
 
   }
 
   removeGenerateButton() {
-    this.showGenerateButton = false;
-    this.showUpdateButton = true;
+    this.showGenerateButton = !this.showGenerateButton;
+    this.showUpdateButton = !this.showUpdateButton;
   }
 
 
