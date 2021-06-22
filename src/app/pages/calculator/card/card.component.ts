@@ -10,9 +10,16 @@ export class CardComponent implements OnInit {
   @Input() title: string = '';
   @Output() buttonClick = new EventEmitter<void>();
 
-  constructor() {
-  }
+  @Input() numberOfVars: number = 0;
+  @Input() numberOfConstraints: number = 0;
+
 
   ngOnInit(): void {
   }
+
+  validInput() {
+    return !(this.numberOfVars > 0 && this.numberOfConstraints > 0);
+  }
+
+
 }

@@ -1,4 +1,5 @@
-<app-card title="Größe des Linearen Programms" (buttonClick)="showLinearSystem = true">
+<app-card title="Größe des Linearen Programms" (buttonClick)="showLinearSystem = true"
+          [numberOfVars]="numberOfVars" [numberOfConstraints]="numberOfConstraints">
   <app-large-lp (numberOfVarsChange)="onChangeNumberOfVars($event)"
                 (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"></app-large-lp>
 </app-card>
