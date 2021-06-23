@@ -24,6 +24,7 @@ export class LinearSystemComponent implements OnInit, OnChanges {
   constraintConstants: number[] = []
 
   initialized = false;
+  disableButton: boolean = false;
 
   constructor() {
   }
@@ -64,6 +65,16 @@ export class LinearSystemComponent implements OnInit, OnChanges {
   // Take array-index instead of the array-value
   trackByIndex(index: number, _item: any) {
     return index;
+  }
+
+  validInput() {
+
+    if(!this.disableButton) {
+
+    }
+
+
+    return this.disableButton;
   }
 }
 
