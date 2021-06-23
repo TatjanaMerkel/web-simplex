@@ -6,6 +6,11 @@ table {
   text-align: left;
 }
 
+.td_input {
+  width: 76px;
+  height: 41px;
+}
+
 .test {
   margin-top: 50px;
 }
