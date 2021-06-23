@@ -1,21 +1,35 @@
-<app-card title="Größe des Linearen Programms">
-  <app-large-lp
-    [numberOfVars]="numberOfVars"
-    [numberOfConstraints]="numberOfConstraints"
-    (numberOfVarsChange)="onChangeNumberOfVars($event)"
-    (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"
-    (showLinearSystem)="showChangeLinearSystem($event)">
-  </app-large-lp>
-</app-card>
+<div class="container">
+  <app-card class="item-a" title="Größe des Linearen Programms">
+    <app-large-lp
+      [numberOfVars]="numberOfVars"
+      [numberOfConstraints]="numberOfConstraints"
+      (numberOfVarsChange)="onChangeNumberOfVars($event)"
+      (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"
+      (showLinearSystem)="showChangeLinearSystem($event)">
+    </app-large-lp>
+  </app-card>
 
-<app-card *ngIf="showLinearSystem" title="Eingabe der Parameter">
-  <app-linear-system
-    [numberOfVars]="numberOfVars"
-    [numberOfConstraints]="numberOfConstraints"
-    (showTableau)="showChangeTableau($event)">
-  </app-linear-system>
-</app-card>
+  <div class="arrow1" *ngIf="showLinearSystem">
+    <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
+  </div>
 
-<app-card *ngIf="showTableau" title="Eingabe des Linearen Programms">
-  <app-tableau></app-tableau>
-</app-card>
+
+  <app-card class="item-b" *ngIf="showLinearSystem" title="Eingabe der Parameter">
+    <app-linear-system
+      [numberOfVars]="numberOfVars"
+      [numberOfConstraints]="numberOfConstraints"
+      (showTableau)="showChangeTableau($event)">
+    </app-linear-system>
+  </app-card>
+
+  <div class="arrow2" *ngIf="showTableau">
+    <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
+  </div>
+
+  <app-card class="item-c" *ngIf="showTableau" title="Eingabe des Linearen Programms">
+    <app-tableau></app-tableau>
+  </app-card>
+
+
+</div>
+
