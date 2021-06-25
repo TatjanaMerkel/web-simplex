@@ -7,14 +7,12 @@ import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 })
 export class LinearSystemComponent implements OnChanges {
 
-  @Input()  numberOfVars = -1; // Number of variables
+  @Input() numberOfVars = -1; // Number of variables
   @Input() numberOfConstraints = -1; // Number of constraints
 
   @Output() targetVarsEmitter = new EventEmitter<number[]>();
   @Output() constraintVarsEmitter = new EventEmitter<number[][]>();
   @Output() constraintConstantsEmitter = new EventEmitter<number[]>();
-
-  @Output() buttonClick = new EventEmitter<void>();
 
   @Output() showTableau = new EventEmitter<boolean>();
 
@@ -87,6 +85,8 @@ export class LinearSystemComponent implements OnChanges {
     this.constraintVarsEmitter.emit(this.constraintVars as number[][]);
     this.constraintConstantsEmitter.emit(this.constraintConstants as number[]);
     this.showTableau.emit(true)
+
+    this.editable = false;
   }
 
 
