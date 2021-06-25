@@ -5,16 +5,14 @@
     <td>Z</td>
     <td>=</td>
 
-    <td><input [ngModel]="targetVars[0]"
-               (change)="onTargetVarChanged($event,0)"/>
+    <td><input (input)="onTargetVarChanged($event,0)"/>
     </td>
     <td>x<sub>1</sub></td>
 
     <ng-container *ngFor="let _ of targetVars.slice(1); index as v; trackBy: trackByIndex">
       <td>+</td>
 
-      <td><input [ngModel]="targetVars[v + 1]"
-                 (change)="onTargetVarChanged($event,v + 1)"/></td>
+      <td><input (input)="onTargetVarChanged($event,v + 1)"/></td>
       <td>x<sub>{{v + 2}}</sub></td>
     </ng-container>
   </tr>
@@ -24,30 +22,35 @@
     <td></td>
     <td></td>
 
-    <td><input [ngModel]="constraintVars[c][0]"
-               (change)="onConstraintVarChanged($event, c, 0)"/></td>
+    <td><input (input)="onConstraintVarChanged($event, c, 0)"/></td>
     <td>x<sub>1</sub></td>
 
     <ng-container *ngFor="let _ of constraintVars[c].slice(1); index as v; trackBy: trackByIndex">
       <td>+</td>
 
-      <td><input [ngModel]="constraintVars[c][v + 1]"
-                 (change)="onConstraintVarChanged($event, c,v + 1)"/></td>
+      <td><input (input)="onConstraintVarChanged($event, c,v + 1)"/></td>
       <td>x<sub>{{v + 2}}</sub></td>
     </ng-container>
 
     <td>≤</td>
 
     <!-- Boundary vector -->
-    <td><input [ngModel]="constraintConstants[c]"
-               (change)="onConstraintConstantChanged($event, c)"/></td>
+    <td><input (input)="onConstraintConstantChanged($event, c)"/></td>
   </tr>
 </table>
 
-<div class="button">
-  <button class="btn btn-primary btn-lg float-right" type="submit"
-          [disabled]="validInput()"
-          (click)="showTableau.emit(true)">
-    Calculate
-  </button>
-</div>
+<button *ngIf="editable"
+        class="btn btn-success btn-lg float-right"
+        [disabled]="!validInput()"
+        (click)="emitValues()">
+  Calculate
+</button>
+
+<button *ngIf="!editable"
+        class="btn btn-warning btn-lg float-right"
+        (click)="enableEditing()">
+  Edit
+</button>
+
+
+
