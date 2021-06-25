@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 
 @Component({
@@ -6,44 +6,34 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   templateUrl: './large-lp.component.html',
   styleUrls: ['./large-lp.component.css']
 })
-export class LargeLpComponent implements OnInit {
-
-  @Input() numberOfVars: number = 0;
-  @Input() numberOfConstraints: number = 0;
+export class LargeLpComponent {
 
   @Output() numberOfVarsChange = new EventEmitter<number>();
   @Output() numberOfConstraintsChange = new EventEmitter<number>();
   @Output() showLinearSystem = new EventEmitter<boolean>();
 
-  showInputField: boolean = true;
-  showInput: boolean = false;
+  editable = true;
 
-  disableButton: boolean = true;
+  currentNumberOfVars = 0;
+  currentNumberOfConstraints = 0;
 
-  showGenerateButton: boolean = true;
-  showUpdateButton: boolean = false;
+  lastEmittedNumberOfVars = 0;
+  lastEmittedNumberOfConstraints = 0;
 
-  ngOnInit(): void {
+  emitValues() {
+    this.numberOfVarsChange.emit(this.currentNumberOfVars);
+    this.numberOfConstraintsChange.emit(this.currentNumberOfConstraints);
+    this.showLinearSystem.emit(true);
+
+    this.lastEmittedNumberOfVars = this.currentNumberOfVars;
+    this.lastEmittedNumberOfConstraints = this.currentNumberOfConstraints;
+
+    this.editable = false;
   }
 
-  validInput() {
-    if(this.numberOfVars > 0 && this.numberOfConstraints > 0)  {
-      this.disableButton = false;
-    }
-    return this.disableButton;
+  enableEditing() {
+    this.editable = true;
   }
-
-  removeInputField() {
-    this.showInputField = !this.showInputField;
-    this.showInput = !this.showInput;
-
-  }
-
-  removeGenerateButton() {
-    this.showGenerateButton = !this.showGenerateButton;
-    this.showUpdateButton = !this.showUpdateButton;
-  }
-
 
 
 }

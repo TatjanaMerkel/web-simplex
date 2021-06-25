@@ -6,20 +6,11 @@ table {
   text-align: left;
 }
 
-.td_input {
-  width: 76px;
-  height: 41px;
-}
-
-.test {
-  margin-top: 50px;
+input {
+  width: 60px;
 }
 
 button {
   margin-top: 50px;
 }
 
-.btn-orange {
-  background-color: #FFA500;
-  color:#ffffff;
-}

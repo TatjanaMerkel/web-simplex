@@ -1,45 +1,44 @@
 <table>
   <tr>
     <td>Anzahl der Variablen:</td>
-    <td class="td_input">
-      <div [hidden]="!showInputField">
-        <input size="2px" #numberOfVars
-               (change)="numberOfVarsChange.emit(+numberOfVars.value)">
-      </div>
-      <div *ngIf="showInput">
-        {{numberOfVars.value}}
-      </div>
+    <td>
+      <input #numberOfVarsInput
+             type="number"
+             min="0"
+             [disabled]="!editable"
+             (input)="currentNumberOfVars = +numberOfVarsInput.value">
     </td>
   </tr>
   <tr>
     <td>Anzahl der Nebenbedingungen:</td>
     <td>
-      <div [hidden]="!showInputField">
-
-        <input size="2px" #numberOfConstraints
-               (change)="numberOfConstraintsChange.emit(+numberOfConstraints.value)">
-      </div>
-      <div *ngIf="showInput">
-        {{numberOfConstraints.value}}
-      </div>
+      <input #numberOfConstraintsInput
+             type="number"
+             min="0"
+             [disabled]="!editable"
+             (input)="currentNumberOfConstraints = +numberOfConstraintsInput.value">
     </td>
   </tr>
 </table>
 
-<div [hidden]="!showGenerateButton" class="button">
-  <button class="btn btn-success btn-lg float-right" type="submit"
-          [disabled]="validInput()"
-          (click)="showLinearSystem.emit(true); removeInputField(); removeGenerateButton()">
-    Generate
-  </button>
-</div>
+<button *ngIf="lastEmittedNumberOfVars === 0 && lastEmittedNumberOfConstraints === 0"
+        class="btn btn-success btn-lg float-right"
+        [disabled]="currentNumberOfVars === 0 || currentNumberOfConstraints === 0"
+        (click)="emitValues()">
+  Generate
+</button>
 
-<div *ngIf="showUpdateButton">
-  <button class="btn btn-orange btn-lg float-right" type="submit"
-          (click)="removeInputField(); removeGenerateButton()">
-    Update
-  </button>
+<button *ngIf="lastEmittedNumberOfVars !== 0 && lastEmittedNumberOfConstraints !== 0 && !editable"
+        class="btn btn-warning btn-lg float-right"
+        (click)="enableEditing()">
+  Edit
+</button>
 
+<button *ngIf="lastEmittedNumberOfVars !== 0 && lastEmittedNumberOfConstraints !== 0 && editable"
+        class="btn btn-success btn-lg float-right"
+        [disabled]="currentNumberOfVars === 0 || currentNumberOfConstraints === 0"
+        (click)="emitValues()">
+  Update
+</button>
 
-</div>
 

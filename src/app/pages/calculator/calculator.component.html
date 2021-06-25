@@ -1,8 +1,6 @@
 <div class="container">
   <app-card class="item-a" title="Größe des Linearen Programms">
     <app-large-lp
-      [numberOfVars]="numberOfVars"
-      [numberOfConstraints]="numberOfConstraints"
       (numberOfVarsChange)="onChangeNumberOfVars($event)"
       (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"
       (showLinearSystem)="showChangeLinearSystem($event)">
