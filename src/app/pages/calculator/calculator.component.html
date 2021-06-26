@@ -22,7 +22,7 @@
   </div>
 
   <app-card class="item-c" *ngIf="linearSystemData !== null" title="Standardform">
-    <app-standard-form>
+    <app-standard-form [inputData]="getTableauData()">
 
     </app-standard-form>
   </app-card>

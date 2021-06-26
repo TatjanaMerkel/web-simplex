@@ -1,1 +1,54 @@
-<p>standard-form works!</p>
+<table *ngIf="inputData !== null">
+
+  <!-- Target function -->
+  <tr>
+    <td>Z</td>
+    <td>=</td>
+
+    <td> {{inputData.linearSystemData.targetVars[0]}}
+    </td>
+    <td>x<sub>1</sub></td>
+
+    <ng-container *ngFor="let _ of inputData.linearSystemData.targetVars.slice(1); index as v">
+      <td>+</td>
+
+      <td>{{inputData.linearSystemData.targetVars[v + 1]}}
+      </td>
+      <td>x<sub>{{v + 2}}</sub></td>
+    </ng-container>
+  </tr>
+
+  <!-- Constraints -->
+  <tr *ngFor="let _ of [].constructor(inputData.numberOfConstraints); index as c">
+    <td></td>
+    <td></td>
+
+    <td>{{inputData.linearSystemData.constraintVars[c][0]}}
+    </td>
+    <td>x<sub>1</sub></td>
+
+    <ng-container *ngFor="let _ of inputData.linearSystemData.constraintVars[c].slice(1); index as v">
+      <td>+</td>
+
+      <td>{{inputData.linearSystemData.constraintVars[c][v + 1]}}
+      </td>
+      <td>x<sub>{{v + 2}}</sub></td>
+    </ng-container>
+
+    <td>≤</td>
+
+    <!-- Boundary vector -->
+    <td>{{inputData.linearSystemData.constraintConstants[c]}}
+    </td>
+  </tr>
+</table>
+
+<button
+  class="btn btn-success btn-lg float-right"
+  (click)="emitValues()">
+  Next
+</button>
+
+
+
+
