@@ -15,6 +15,7 @@ import { TableauComponent } from './pages/calculator/calculator-content/tableau/
 import { LargeLpComponent } from './pages/calculator/calculator-content/large-lp/large-lp.component';
 import { CardComponent } from './pages/calculator/card/card.component';
 import {LinearSystemComponent} from "./pages/calculator/calculator-content/linear-system/linear-system.component";
+import { StandardFormComponent } from './pages/calculator/calculator-content/standard-form/standard-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {LinearSystemComponent} from "./pages/calculator/calculator-content/linea
     TableauComponent,
     LargeLpComponent,
     CardComponent,
-    LinearSystemComponent
+    LinearSystemComponent,
+    StandardFormComponent
   ],
   imports: [
     BrowserModule,
