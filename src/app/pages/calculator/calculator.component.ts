@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {LargeLpData} from "./calculator-content/large-lp/large-lp-data";
+
 
 @Component({
   selector: 'app-calculator',
@@ -17,20 +19,15 @@ export class CalculatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onChangeNumberOfVars(numberOfVars: number) {
-    this.numberOfVars = numberOfVars;
-  }
-
-  onChangeNumberOfConstraints(numberOfConstraints: number) {
-    this.numberOfConstraints = numberOfConstraints;
-  }
-
-  showChangeLinearSystem(value: boolean) {
-    this.showLinearSystem = value;
-  }
-
   showChangeTableau(value: boolean) {
     this.showTableau = value;
   }
+
+  onLargeLpDataChange(largeLpData: LargeLpData) {
+    this.numberOfVars = largeLpData.numberOfVars;
+    this.numberOfConstraints = largeLpData.numberOfConstraints;
+    this.showLinearSystem = true;
+  }
+
 
 }

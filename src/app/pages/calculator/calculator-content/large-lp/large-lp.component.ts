@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {LargeLpData} from "./large-lp-data";
 
 
 @Component({
@@ -8,9 +9,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class LargeLpComponent {
 
-  @Output() numberOfVarsChange = new EventEmitter<number>();
-  @Output() numberOfConstraintsChange = new EventEmitter<number>();
-  @Output() showLinearSystem = new EventEmitter<boolean>();
+  @Output() dataChange = new EventEmitter<LargeLpData>();
 
   editable = true;
 
@@ -21,9 +20,10 @@ export class LargeLpComponent {
   lastEmittedNumberOfConstraints = 0;
 
   emitValues() {
-    this.numberOfVarsChange.emit(this.currentNumberOfVars);
-    this.numberOfConstraintsChange.emit(this.currentNumberOfConstraints);
-    this.showLinearSystem.emit(true);
+    this.dataChange.emit({
+      numberOfVars: this.currentNumberOfVars,
+      numberOfConstraints: this.currentNumberOfConstraints
+    })
 
     this.lastEmittedNumberOfVars = this.currentNumberOfVars;
     this.lastEmittedNumberOfConstraints = this.currentNumberOfConstraints;

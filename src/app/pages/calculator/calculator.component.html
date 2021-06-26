@@ -1,9 +1,6 @@
 <div class="container">
   <app-card class="item-a" title="Größe des Linearen Programms">
-    <app-large-lp
-      (numberOfVarsChange)="onChangeNumberOfVars($event)"
-      (numberOfConstraintsChange)="onChangeNumberOfConstraints($event)"
-      (showLinearSystem)="showChangeLinearSystem($event)">
+    <app-large-lp (dataChange)="onLargeLpDataChange($event)">
     </app-large-lp>
   </app-card>
 
@@ -24,7 +21,7 @@
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
 
-  <app-card class="item-c" *ngIf="showTableau" title="Eingabe des Linearen Programms">
+  <app-card class="item-c" *ngIf="showTableau" title="Ausgabe der Tableaus">
     <app-tableau></app-tableau>
   </app-card>
 
