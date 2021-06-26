@@ -1,27 +1,27 @@
-<table>
+<table *ngIf="data !== undefined">
   <thead>
   <tr>
     <td>BV</td>
-    <td *ngFor="let x of [].constructor(vars); let i = index">x<sub>{{i}}</sub></td>
-    <td class="verical-bar">b</td>
+    <td *ngFor="let _ of [].constructor(data.numberOfVars); let i = index">x<sub>{{i}}</sub></td>
+    <td class="vertical-bar">b</td>
   </tr>
   </thead>
 
   <tbody>
-  <tr *ngFor="let row of [].constructor(constraints); let i = index">
+  <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); let i = index">
     <td>x<sub>{{i}}</sub></td>
-    <td *ngFor="let constraintVar of data.constraintVars[i]; let j = index">
-      <input [ngModel]="data.constraintVars[i][j]" (change)="onConstraintVarChanged($event, i, j)"/>
+    <td *ngFor="let _ of [].constructor(data.numberOfVars); let j = index">
+      {{data.linearSystemData.constraintVars[i][j]}}
     </td>
-    <td class="verical-bar">{{data.constraintVals[i]}}</td>
+    <td class="vertical-bar">{{data.linearSystemData.constraintConstants[i]}}</td>
   </tr>
   </tbody>
 
   <tfoot>
   <tr>
     <td>z</td>
-    <td *ngFor="let targetVar of data.targetVars">{{targetVar}}</td>
-    <td class="verical-bar">{{data.targetVal}}</td>
+    <td *ngFor="let targetVar of data.linearSystemData.targetVars">{{targetVar}}</td>
+    <td class="vertical-bar">0</td>
   </tr>
   </tfoot>
 </table>

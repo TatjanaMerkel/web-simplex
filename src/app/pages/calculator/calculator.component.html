@@ -13,16 +13,16 @@
     <app-linear-system
       [numberOfVars]="numberOfVars"
       [numberOfConstraints]="numberOfConstraints"
-      (dataChange)="onLinearSystemDataChange($event)">
+      (dataChange)="linearSystemData = $event">
     </app-linear-system>
   </app-card>
 
-  <div class="arrow2" *ngIf="showTableau">
+  <div class="arrow2" *ngIf="linearSystemData !== null">
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
 
-  <app-card class="item-c" *ngIf="showTableau" title="Ausgabe der Tableaus">
-    <app-tableau></app-tableau>
+  <app-card class="item-c" *ngIf="linearSystemData !== null" title="Ausgabe der Tableaus">
+    <app-tableau [data] = "getTableauData()"></app-tableau>
   </app-card>
 
 

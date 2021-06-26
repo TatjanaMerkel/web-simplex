@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LargeLpData} from "./calculator-content/large-lp/large-lp-data";
 import {LinearSystemData} from "./calculator-content/linear-system/linear-system-data";
+import {TableauData} from "./calculator-content/tableau/tableau-data";
 
 
 @Component({
@@ -16,14 +17,13 @@ export class CalculatorComponent implements OnInit {
   showLinearSystem: boolean = false;
   showTableau: boolean = false;
 
+  linearSystemData: LinearSystemData | null = null;
+  tableauData: TableauData | null = null;
+
 
   ngOnInit(): void {
   }
 
-  onLinearSystemDataChange(linearSystemData: LinearSystemData) {
-    this.showLinearSystem = true;
-
-  }
 
   onLargeLpDataChange(largeLpData: LargeLpData) {
     this.numberOfVars = largeLpData.numberOfVars;
@@ -32,4 +32,11 @@ export class CalculatorComponent implements OnInit {
   }
 
 
+  getTableauData(): TableauData {
+    return {
+      numberOfVars: this.numberOfVars,
+      numberOfConstraints: this.numberOfConstraints,
+      linearSystemData: this.linearSystemData as LinearSystemData
+    }
+  }
 }
