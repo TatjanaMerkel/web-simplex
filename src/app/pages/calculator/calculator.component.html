@@ -13,7 +13,7 @@
     <app-linear-system
       [numberOfVars]="numberOfVars"
       [numberOfConstraints]="numberOfConstraints"
-      (showTableau)="showChangeTableau($event)">
+      (dataChange)="onLinearSystemDataChange($event)">
     </app-linear-system>
   </app-card>
 

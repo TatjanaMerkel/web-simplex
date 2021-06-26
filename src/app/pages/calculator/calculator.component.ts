@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LargeLpData} from "./calculator-content/large-lp/large-lp-data";
+import {LinearSystemData} from "./calculator-content/linear-system/linear-system-data";
 
 
 @Component({
@@ -19,8 +20,9 @@ export class CalculatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showChangeTableau(value: boolean) {
-    this.showTableau = value;
+  onLinearSystemDataChange(linearSystemData: LinearSystemData) {
+    this.showLinearSystem = true;
+
   }
 
   onLargeLpDataChange(largeLpData: LargeLpData) {

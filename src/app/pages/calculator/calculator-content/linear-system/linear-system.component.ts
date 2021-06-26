@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {LinearSystemData} from "./linear-system-data";
 
 @Component({
   selector: 'app-linear-system',
@@ -10,9 +11,7 @@ export class LinearSystemComponent implements OnChanges {
   @Input() numberOfVars = -1; // Number of variables
   @Input() numberOfConstraints = -1; // Number of constraints
 
-  @Output() targetVarsEmitter = new EventEmitter<number[]>();
-  @Output() constraintVarsEmitter = new EventEmitter<number[][]>();
-  @Output() constraintConstantsEmitter = new EventEmitter<number[]>();
+  @Output() dataChange = new EventEmitter<LinearSystemData>();
 
   @Output() showTableau = new EventEmitter<boolean>();
 
@@ -81,14 +80,12 @@ export class LinearSystemComponent implements OnChanges {
   }
 
   emitValues() {
-    this.targetVarsEmitter.emit(this.targetVars as number[]);
-    this.constraintVarsEmitter.emit(this.constraintVars as number[][]);
-    this.constraintConstantsEmitter.emit(this.constraintConstants as number[]);
-    this.showTableau.emit(true)
-
+    this.dataChange.emit({
+      targetVars: this.targetVars as number[],
+      constraintVars: this.constraintVars as number[][],
+      constraintConstants: this.constraintConstants as number[]
+    })
     this.editable = false;
   }
-
-
 }
 
