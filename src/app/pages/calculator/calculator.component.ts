@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {LargeLpData} from "./calculator-content/large-lp/large-lp-data";
 import {LinearSystemData} from "./calculator-content/linear-system/linear-system-data";
 import {TableauData} from "./calculator-content/tableau/tableau-data";
+import {StandardFormData} from "./calculator-content/standard-form/standard-form-data";
+
 
 
 @Component({
@@ -15,10 +17,10 @@ export class CalculatorComponent implements OnInit {
   numberOfConstraints: number = 0;
 
   showLinearSystem: boolean = false;
-  showTableau: boolean = false;
 
   linearSystemData: LinearSystemData | null = null;
-  tableauData: TableauData | null = null;
+  standardFormData: StandardFormData | null = null;
+
 
 
   ngOnInit(): void {

@@ -13,29 +13,21 @@ export class StandardFormComponent implements OnChanges {
   @Input() numberOfConstraints: number | null = null;
   @Input() linearSystemData: LinearSystemData | null = null;
 
-  @Output() outputDataChange = new EventEmitter<StandardFormData>();
+  @Output() dataChange = new EventEmitter<StandardFormData>();
 
   data: StandardFormData | null = null
 
-
-  emitValues() {
-    this.outputDataChange.emit(this.data as StandardFormData);
-    console.log(this.data);
-  }
 
   ngOnChanges(): void {
     if (this.numberOfVars === null || this.numberOfConstraints === null || this.linearSystemData === null) {
       return;
     }
 
-    const oldTargetVars = this.linearSystemData.targetVars;
-    const newTargetVars = new Array<number>(this.numberOfConstraints).fill(0);
-
     this.data = {
-      numberOfVars: this.numberOfVars + this.numberOfConstraints,
+      numberOfVars: this.numberOfVars,
       numberOfConstraints: this.numberOfConstraints,
 
-      targetVars: oldTargetVars.concat(newTargetVars),
+      targetVars: this.linearSystemData.targetVars,
       targetSlackVars: new Array<number>(this.numberOfConstraints).fill(0),
       constraintVars: this.linearSystemData.constraintVars,
       constraintSlackVars: new Array<Array<number>>(this.numberOfConstraints),
@@ -48,6 +40,11 @@ export class StandardFormComponent implements OnChanges {
       this.data.constraintSlackVars[i][i] = 1;
 
     }
+
+  }
+
+  emitValues() {
+    this.dataChange.emit(this.data as StandardFormData);
   }
 
 }

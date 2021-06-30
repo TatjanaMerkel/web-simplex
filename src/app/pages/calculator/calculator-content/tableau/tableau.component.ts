@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TableauData} from "./tableau-data";
+import {StandardFormData} from "../standard-form/standard-form-data";
 
 @Component({
   selector: 'app-tableau',
@@ -8,7 +8,12 @@ import {TableauData} from "./tableau-data";
 })
 export class TableauComponent {
 
-  @Input() data : undefined | TableauData;
+  @Input() data: StandardFormData | null = null;
+
+  ngOnChanges(): void {
+    console.log(this.data);
+  }
+
 
 }
 
