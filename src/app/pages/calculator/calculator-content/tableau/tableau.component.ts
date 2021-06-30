@@ -10,11 +10,6 @@ export class TableauComponent {
 
   @Input() data: StandardFormData | null = null;
 
-  ngOnChanges(): void {
-    console.log(this.data);
-  }
-
-
 }
 
 
