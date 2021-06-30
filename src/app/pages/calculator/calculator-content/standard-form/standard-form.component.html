@@ -65,10 +65,10 @@
 
     <ng-container *ngFor="let _ of data.constraintSlackVars[c]; index as s">
       <ng-container *ngIf="data.constraintSlackVars[c][s] !== 0; else emptyConstraintSlackVar">
-        <td>+</td>
+        <td style="color: orange">+</td>
 
-        <td>
-          <ng-container *ngIf="data.constraintSlackVars[c][s] !== 1">{{data.constraintSlackVars[c][s]}}</ng-container>
+        <td style="color: orange">
+        <ng-container *ngIf="data.constraintSlackVars[c][s] !== 1">{{data.constraintSlackVars[c][s]}}</ng-container>
           x<sub>{{data.numberOfConstraints + 1 + s}}</sub>
         </td>
 
