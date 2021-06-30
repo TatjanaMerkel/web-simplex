@@ -1,60 +1,90 @@
-<table *ngIf="outputData !== null">
+<table *ngIf="data !== null">
 
   <!-- Target function -->
   <tr>
     <td>Z</td>
     <td>=</td>
 
-    <ng-container *ngIf="outputData.linearSystemData.targetVars[0] !== 0; else emptyTargetVar0">
-      <td>{{outputData.linearSystemData.targetVars[0]}}x<sub>1</sub></td>
+    <ng-container *ngIf="data.targetVars[0] !== 0; else emptyTargetVar0">
+      <td>
+        <ng-container *ngIf="data.targetVars[0] !== 1">{{data.targetVars[0]}}</ng-container>x<sub>1</sub>
+      </td>
     </ng-container>
     <ng-template #emptyTargetVar0>
       <td></td>
     </ng-template>
 
 
-    <ng-container *ngFor="let _ of outputData.linearSystemData.targetVars.slice(1); index as v">
-      <ng-container *ngIf="outputData.linearSystemData.targetVars[v + 1] !== 0; else emptyTargetVar">
-        <td>+</td>
-        <td>{{outputData.linearSystemData.targetVars[v + 1]}}x<sub>{{v + 2}}</sub></td>
-      </ng-container>
-      <ng-template #emptyTargetVar>
-        <td></td>
-        <td></td>
-      </ng-template>
 
-    </ng-container>
+      <ng-container *ngFor="let _ of data.targetVars.slice(1); index as v">
+        <ng-container *ngIf="data.targetVars[v + 1] !== 0; else emptyTargetVar">
+          <td>+</td>
+          <td>
+            <ng-container *ngIf="data.targetVars[v + 1] !== 1">{{data.targetVars[v + 1]}}</ng-container>
+            x<sub>{{v + 2}}</sub>
+          </td>
+        </ng-container>
+        <ng-template #emptyTargetVar>
+          <td></td>
+          <td></td>
+        </ng-template>
+
+      </ng-container>
   </tr>
 
   <!-- Constraints -->
-  <tr *ngFor="let _ of [].constructor(outputData.numberOfConstraints); index as c">
+  <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); index as c">
     <td></td>
     <td></td>
 
-    <ng-container *ngIf="outputData.linearSystemData.constraintVars[c][0] !== 0; else emptyConstraintVar0">
-      <td>{{outputData.linearSystemData.constraintVars[c][0]}}x<sub>1</sub></td>
+    <ng-container *ngIf="data.constraintVars[c][0] !== 0; else emptyConstraintVar0">
+
+      <td>
+        <ng-container *ngIf="data.constraintVars[c][0] !== 1">{{data.constraintVars[c][0]}}</ng-container>
+        x<sub>1</sub>
+      </td>
     </ng-container>
     <ng-template #emptyConstraintVar0>
       <td></td>
     </ng-template>
 
 
-    <ng-container *ngFor="let _ of outputData.linearSystemData.constraintVars[c].slice(1); index as v">
-      <ng-container *ngIf="outputData.linearSystemData.constraintVars[c][v + 1] !== 0; else emptyConstraintVar">
+    <ng-container *ngFor="let _ of data.constraintVars[c].slice(1); index as v">
+      <ng-container *ngIf="data.constraintVars[c][v + 1] !== 0; else emptyConstraintVar">
         <td>+</td>
-        <td>{{outputData.linearSystemData.constraintVars[c][v + 1]}}x<sub>{{v + 2}}</sub></td>
+        <td>
+          <ng-container *ngIf="data.constraintVars[c][v + 1] !== 1">{{data.constraintVars[c][v + 1]}}</ng-container>
+          x<sub>{{v + 2}}</sub>
+        </td>
       </ng-container>
       <ng-template #emptyConstraintVar>
         <td></td>
         <td></td>
       </ng-template>
-
     </ng-container>
+
+    <ng-container *ngFor="let _ of data.constraintSlackVars[c]; index as s">
+      <ng-container *ngIf="data.constraintSlackVars[c][s] !== 0; else emptyConstraintSlackVar">
+        <td>+</td>
+
+        <td>
+          <ng-container *ngIf="data.constraintSlackVars[c][s] !== 1">{{data.constraintSlackVars[c][s]}}</ng-container>
+          x<sub>{{data.numberOfConstraints + 1 + s}}</sub>
+        </td>
+
+      </ng-container>
+      <ng-template #emptyConstraintSlackVar>
+        <td></td>
+        <td></td>
+      </ng-template>
+    </ng-container>
+
 
     <td>=</td>
 
     <!-- Boundary vector -->
-    <td>{{outputData.linearSystemData.constraintConstants[c]}}
+    <td>
+    <td>{{data.constraintConstants[c]}}
     </td>
   </tr>
 </table>

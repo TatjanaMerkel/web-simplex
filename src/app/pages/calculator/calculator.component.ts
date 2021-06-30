@@ -31,12 +31,4 @@ export class CalculatorComponent implements OnInit {
     this.showLinearSystem = true;
   }
 
-
-  getTableauData(): TableauData {
-    return {
-      numberOfVars: this.numberOfVars,
-      numberOfConstraints: this.numberOfConstraints,
-      linearSystemData: this.linearSystemData as LinearSystemData
-    }
-  }
 }

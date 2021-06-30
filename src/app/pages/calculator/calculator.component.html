@@ -22,9 +22,11 @@
   </div>
 
   <app-card class="item-c" *ngIf="linearSystemData !== null" title="Standardform">
-    <app-standard-form [inputData]="getTableauData()">
-
+    <app-standard-form [numberOfVars]="numberOfVars"
+                       [numberOfConstraints]="numberOfConstraints"
+                       [linearSystemData]="linearSystemData">
     </app-standard-form>
+
   </app-card>
 
   <div class="arrow3" *ngIf="linearSystemData !== null">
@@ -32,7 +34,7 @@
   </div>
 
   <app-card class="item-d" *ngIf="linearSystemData !== null" title="Ausgabe der Tableaus">
-    <app-tableau [data]="getTableauData()"></app-tableau>
+    <app-tableau></app-tableau>
   </app-card>
 
 
