@@ -24,7 +24,7 @@
   <app-card class="item-c" *ngIf="linearSystemData !== null" title="Standardform">
     <app-standard-form [numberOfVars]="numberOfVars"
                        [numberOfConstraints]="numberOfConstraints"
-                       [linearSystemData]="linearSystemData"
+                       [linearSystemData]="negateTargetVars(linearSystemData)"
                        (dataChange)="standardFormData = $event">
     </app-standard-form>
 

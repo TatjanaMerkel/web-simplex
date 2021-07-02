@@ -33,4 +33,13 @@ export class CalculatorComponent implements OnInit {
     this.showLinearSystem = true;
   }
 
+  negateTargetVars(data: LinearSystemData): LinearSystemData {
+    return {
+      targetVars: data.targetVars.map(x => -x),
+      constraintVars: data.constraintVars,
+      constraintConstants: data.constraintConstants
+    }
+  }
+
+
 }

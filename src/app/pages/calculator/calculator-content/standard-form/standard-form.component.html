@@ -1,18 +1,18 @@
-<!--                                                   -->
-<!--  Z =  1 x1 +  2 x2 +  3 x3                        -->
-<!--                                                   -->
-<!--       4 x1 +  5 x2 +  6 x3 + x4            =  7  -->
-<!--       8 x1 +  9 x2 + 10 x3      + x5       = 11  -->
-<!--      12 x1 + 13 x2 + 14 x3           + x6  = 15  -->
-<!--                                                   -->
+<!--                                                 -->
+<!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
+<!--                                                 -->
+<!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
+<!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
+<!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
+<!--                                                 -->
 <table *ngIf="data !== null">
 
-  <!--  Z =  1 x1 +  2 x2 +  3 x3  -->
+  <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
   <tr>
     <td>Z</td>
     <td>=</td>
 
-    <!--  1 x1  -->
+    <!--  -1 x1  -->
     <ng-container *ngIf="data.targetVars[0] !== 0; else emptyTargetVar0">
       <td>
         <ng-container *ngIf="data.targetVars[0] !== 1">
@@ -26,16 +26,27 @@
     </ng-template>
 
 
-    <!--  2 x2 +  3 x3  -->
+    <!--  -  2 x2 -  3 x3  -->
     <ng-container *ngFor="let _ of data.targetVars.slice(1); index as v">
       <ng-container *ngIf="data.targetVars[v + 1] !== 0; else emptyTargetVar">
-        <td>+</td>
-        <td>
-          <ng-container *ngIf="data.targetVars[v + 1] !== 1">
-            {{data.targetVars[v + 1]}}
-          </ng-container>
-          x<sub>{{v + 2}}</sub>
-        </td>
+        <ng-template *ngIf="data.targetVars[v + 1] > 0; else negativeTargetVar">
+          <td>+</td>
+          <td>
+            <ng-container *ngIf="data.targetVars[v + 1] !== 1">
+              {{data.targetVars[v + 1]}}
+            </ng-container>
+            x<sub>{{v + 2}}</sub>
+          </td>
+        </ng-template>
+        <ng-template #negativeTargetVar>
+          <td>-</td>
+          <td>
+            <ng-container *ngIf="-data.targetVars[v + 1] !== 1">
+              {{-data.targetVars[v + 1]}}
+            </ng-container>
+            x<sub>{{v + 2}}</sub>
+          </td>
+        </ng-template>
       </ng-container>
       <ng-template #emptyTargetVar>
         <td></td>
@@ -43,14 +54,24 @@
       </ng-template>
 
     </ng-container>
+
+    <!--            -->
+    <ng-container *ngFor="let _ of data.constraintVars; index as s">
+      <td></td>
+      <td></td>
+    </ng-container>
+
+    <!--  + z =  0  -->
+    <td>+</td>
+    <td>z</td>
+    <td>=</td>
+    <td>0</td>
   </tr>
 
-  <!--   4 x1 +  5 x2 +  6 x3 + x4            =  7  -->
-  <!--   8 x1 +  9 x2 + 10 x3      + x5       = 11  -->
-  <!--  12 x1 + 13 x2 + 14 x3           + x6  = 15  -->
+  <!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
+  <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
+  <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
   <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); index as c">
-    <td></td>
-    <td></td>
 
     <!--   4 x1  -->
     <!--   8 x1  -->
@@ -107,9 +128,11 @@
       </ng-template>
     </ng-container>
 
-    <!--  =  7  -->
-    <!--  = 11  -->
-    <!--  = 15  -->
+    <!--      =  7  -->
+    <!--      = 11  -->
+    <!--      = 15  -->
+    <td></td>
+    <td></td>
     <td>=</td>
 
     <td>
