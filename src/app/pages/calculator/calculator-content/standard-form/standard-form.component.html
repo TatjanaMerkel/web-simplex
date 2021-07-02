@@ -13,16 +13,21 @@
     <td>=</td>
 
     <!--  -1 x1  -->
-    <ng-container *ngIf="data.targetVars[0] !== 0; else emptyTargetVar0">
-      <td>
+    <ng-container *ngIf="data.targetVars[0] !== 0; else firstTargetVarEmpty">
+    <td>
         <ng-container *ngIf="data.targetVars[0] !== 1">
-          {{data.targetVars[0]}}
+          <ng-container *ngIf="data.targetVars[0] !== -1; else firstTargetVarMinusOne">
+            {{data.targetVars[0]}}
+          </ng-container>
+          <ng-template #firstTargetVarMinusOne>
+            -
+          </ng-template>
         </ng-container>
         x<sub>1</sub>
       </td>
     </ng-container>
-    <ng-template #emptyTargetVar0>
-      <td></td>
+    <ng-template #firstTargetVarEmpty>
+    <td></td>
     </ng-template>
 
 
@@ -76,34 +81,50 @@
     <!--   4 x1  -->
     <!--   8 x1  -->
     <!--  12 x1  -->
-    <ng-container *ngIf="data.constraintVars[c][0] !== 0; else emptyConstraintVar0">
+    <ng-container *ngIf="data.constraintVars[c][0] !== 0; else firstConstraintVarEmpty">
 
-      <td>
+    <td>
         <ng-container *ngIf="data.constraintVars[c][0] !== 1">
-          {{data.constraintVars[c][0]}}
+          <ng-container *ngIf="data.constraintVars[c][0] !== -1; else firstConstraintVarMinusOne">
+            {{data.constraintVars[c][0]}}
+          </ng-container>
+          <ng-template #firstConstraintVarMinusOne>
+            -
+          </ng-template>
         </ng-container>
         x<sub>1</sub>
       </td>
     </ng-container>
-    <ng-template #emptyConstraintVar0>
-      <td></td>
+    <ng-template #firstConstraintVarEmpty>
+    <td></td>
     </ng-template>
 
     <!--   5 x2 +  6 x3  -->
     <!--   9 x2 + 10 x3  -->
     <!--  13 x2 + 14 x3  -->
     <ng-container *ngFor="let _ of data.constraintVars[c].slice(1); index as v">
-      <ng-container *ngIf="data.constraintVars[c][v + 1] !== 0; else emptyConstraintVar">
-        <td>+</td>
-        <td>
-          <ng-container *ngIf="data.constraintVars[c][v + 1] !== 1">
-            {{data.constraintVars[c][v + 1]}}
-          </ng-container>
-          x<sub>{{v + 2}}</sub>
-        </td>
+      <ng-container *ngIf="data.constraintVars[c][v + 1] !== 0; else constraintVarEmpty">
+        <ng-container *ngIf="data.constraintVars[c][v + 1] > 0; else constraintVarNegative">
+          <td>+</td>
+          <td>
+            <ng-container *ngIf="data.constraintVars[c][v + 1] !== 1">
+              {{data.constraintVars[c][v + 1]}}
+            </ng-container>
+            x<sub>{{v + 2}}</sub>
+          </td>
+        </ng-container>
+        <ng-template #constraintVarNegative>
+          <td>-</td>
+          <td>
+            <ng-container *ngIf="-data.constraintVars[c][v + 1] !== 1">
+              {{-data.constraintVars[c][v + 1]}}
+            </ng-container>
+            x<sub>{{v + 2}}</sub>
+          </td>
+        </ng-template>
       </ng-container>
-      <ng-template #emptyConstraintVar>
-        <td></td>
+      <ng-template #constraintVarEmpty>
+      <td></td>
         <td></td>
       </ng-template>
     </ng-container>
@@ -112,8 +133,8 @@
     <!--     + x5       -->
     <!--          + x6  -->
     <ng-container *ngFor="let _ of data.constraintSlackVars[c]; index as s">
-      <ng-container *ngIf="data.constraintSlackVars[c][s] !== 0; else emptyConstraintSlackVar">
-        <td style="color: orange">+</td>
+      <ng-container *ngIf="data.constraintSlackVars[c][s] !== 0; else slackVarEmpty">
+      <td style="color: orange">+</td>
 
         <td style="color: orange">
           <ng-container *ngIf="data.constraintSlackVars[c][s] !== 1">{{data.constraintSlackVars[c][s]}}</ng-container>
@@ -122,8 +143,8 @@
         </td>
 
       </ng-container>
-      <ng-template #emptyConstraintSlackVar>
-        <td></td>
+      <ng-template #slackVarEmpty>
+      <td></td>
         <td></td>
       </ng-template>
     </ng-container>
