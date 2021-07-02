@@ -12,6 +12,8 @@
     ".      .       card3    .         ."
     ".      arrow3      .    .         ."
      ".      .      card4    .         ."
+    ".      arrow4      .    .         ."
+    ".      .       card5    .         ."
     "footer footer footer footer footer";
   margin-top: 40px;
   margin-bottom: 40px;
@@ -43,4 +45,12 @@
 
 .item-d {
   grid-area: card4;
+}
+
+.arrow4 {
+  grid-area: arrow4;
+}
+
+.item-e {
+  grid-area: card5;
 }

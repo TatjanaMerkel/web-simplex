@@ -18,6 +18,9 @@ import {LinearSystemComponent} from "./pages/calculator/calculator-content/linea
 import { StandardFormComponent } from './pages/calculator/calculator-content/standard-form/standard-form.component';
 import { SolutionComponent } from './pages/calculator/calculator-content/solution/solution.component';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
