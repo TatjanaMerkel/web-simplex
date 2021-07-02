@@ -16,6 +16,7 @@ import { LargeLpComponent } from './pages/calculator/calculator-content/large-lp
 import { CardComponent } from './pages/calculator/card/card.component';
 import {LinearSystemComponent} from "./pages/calculator/calculator-content/linear-system/linear-system.component";
 import { StandardFormComponent } from './pages/calculator/calculator-content/standard-form/standard-form.component';
+import { SolutionComponent } from './pages/calculator/calculator-content/solution/solution.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { StandardFormComponent } from './pages/calculator/calculator-content/sta
     LargeLpComponent,
     CardComponent,
     LinearSystemComponent,
-    StandardFormComponent
+    StandardFormComponent,
+    SolutionComponent
   ],
   imports: [
     BrowserModule,
