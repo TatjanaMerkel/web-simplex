@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {SolutionInput} from 'src/app/pages/calculator/calculator-content/solution/solution-input';
 
 @Component({
@@ -6,15 +6,9 @@ import {SolutionInput} from 'src/app/pages/calculator/calculator-content/solutio
   templateUrl: './solution.component.html',
   styleUrls: ['./solution.component.css']
 })
-export class SolutionComponent implements OnChanges {
 
-  @Input() inputData: SolutionInput | null = null;
+export class SolutionComponent {
 
-  loading = true;
-
-  ngOnChanges(_changes: SimpleChanges): void {
-    this.loading = false;
-  }
-
+  @Input() inputData: SolutionInput | undefined;
 
 }

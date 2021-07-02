@@ -1,12 +1,9 @@
-<ng-container *ngIf="loading; else loaded">
+<ng-container *ngIf="inputData">
 
-  Loading...
 
-</ng-container>
-<ng-template #loaded>
-
-  Optimale Lösung gefunden:<br />
+Optimale Lösung gefunden:<br />
   <br />
   Zielfunktionswert z = {{inputData!.targetConstant}}
 
-</ng-template>
+</ng-container>
+

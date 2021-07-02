@@ -8,7 +8,6 @@
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
 
-
   <app-card class="item-b" *ngIf="showLinearSystem" title="Eingabe der Parameter">
     <app-linear-system
       [numberOfVars]="numberOfVars"
@@ -17,35 +16,24 @@
     </app-linear-system>
   </app-card>
 
-  <div class="arrow4">
-    <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
-  </div>
-
-  <app-card class="item-e" title="Lösung">
-    <app-solution [inputData]="{targetConstant: 7}"></app-solution>
-  </app-card>
-
   <div class="arrow2" *ngIf="linearSystemData !== null">
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
 
-  <app-card class="item-c" *ngIf="linearSystemData !== null" title="Standardform">
+  <app-card class="item-c" *ngIf="linearSystemData !== null"
+            title="Standard-Form">
     <app-standard-form [numberOfVars]="numberOfVars"
                        [numberOfConstraints]="numberOfConstraints"
                        [linearSystemData]="negateTargetVars(linearSystemData)"
                        (dataChange)="standardFormData = $event">
     </app-standard-form>
-
   </app-card>
 
   <div class="arrow3" *ngIf="linearSystemData !== null">
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
 
-  <app-card class="item-d" *ngIf="linearSystemData !== null" title="Ausgabe der Tableaus">
-     <app-tableau [data]="standardFormData"></app-tableau>
+  <app-card class="item-d" *ngIf="linearSystemData !== null" title="Eingabe des Linearen Programms">
+    <app-tableau [data]="standardFormData"></app-tableau>
   </app-card>
-
-
 </div>
-
