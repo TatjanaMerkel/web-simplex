@@ -34,6 +34,6 @@
   </div>
 
   <app-card class="item-d" *ngIf="linearSystemData !== null" title="Eingabe des Linearen Programms">
-    <app-tableau [data]="standardFormData"></app-tableau>
+    <app-tableau [inputData]="getTableauData(standardFormData!)"></app-tableau>
   </app-card>
 </div>

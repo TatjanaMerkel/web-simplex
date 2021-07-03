@@ -5,7 +5,7 @@
 <!--  x5 |  7  8  0  0  1 | 9  -->
 <!-- ----+----------------+--- -->
 <!--   z | 10 11  0  0  0 | 0  -->
-<table *ngIf="data !== null">
+<table *ngIf="inputData">
 
   <!--  BV | x1 x2 x3 x4 x5 | b  -->
   <thead>
@@ -13,14 +13,14 @@
     <td>BV</td>
 
     <!-- x1 x2 -->
-    <td *ngFor="let _ of [].constructor(data.numberOfVars); let v = index">
-      x<sub>{{v + 1}}</sub>
+    <td *ngFor="let _ of [].constructor(inputData.numberOfVars); let v = index">
+    x<sub>{{v + 1}}</sub>
     </td>
 
     <!-- x3 x4 x5 -->
-    <td *ngFor="let _ of [].constructor(data.numberOfConstraints); let s = index"
+    <td *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let s = index"
         style="color: orange">
-      x<sub>{{data.numberOfVars + s + 1}}</sub>
+      x<sub>{{inputData.numberOfVars + s + 1}}</sub>
     </td>
 
     <td class="vertical-bar">b</td>
@@ -31,32 +31,33 @@
   <!--  x4 |  4  5  0  1  0 | 6  -->
   <!--  x5 |  7  8  0  0  1 | 9  -->
   <tbody>
-  <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); let c = index">
+  <tr *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let c = index">
 
-    <!-- x3 -->
+  <!-- x3 -->
     <!-- x4 -->
     <!-- x5 -->
-    <td style="color: orange">x<sub>{{data.numberOfVars + c + 1}}</sub></td>
+    <td style="color: orange">x<sub>{{inputData.numberOfVars + c + 1}}</sub></td>
+
 
     <!-- 1  2 -->
     <!-- 4  5 -->
     <!-- 7  8 -->
-    <td *ngFor="let _ of [].constructor(data.numberOfVars); let v = index">
-      {{data.constraintVars[c][v]}}
+    <td *ngFor="let _ of [].constructor(inputData.numberOfVars); let v = index">
+      {{constraintVars![c][v]}}
     </td>
 
     <!-- 1  0  0 -->
     <!-- 0  1  0 -->
     <!-- 0  0  1 -->
-    <td *ngFor="let _ of [].constructor(data.numberOfConstraints); let s = index"
+    <td *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let s = index"
         style="color: orange">
-      {{data.constraintSlackVars[c][s]}}
+      {{constraintSlackVars![c][s]}}
     </td>
 
     <!-- 3 -->
     <!-- 6 -->
     <!-- 9 -->
-    <td class="vertical-bar">{{data.constraintConstants[c]}}</td>
+    <td class="vertical-bar">{{constraintConstants![c]}}</td>
   </tr>
   </tbody>
 
@@ -66,12 +67,12 @@
     <td>z</td>
 
     <!-- 10 11 -->
-    <td *ngFor="let targetVar of data.targetVars">{{targetVar}}</td>
+    <td *ngFor="let targetVar of targetVars!">{{targetVar}}</td>
 
     <!-- 0 0 0 -->
-    <td *ngFor="let targetSlackVar of data.targetSlackVars">{{targetSlackVar}}</td>
+    <td *ngFor="let targetSlackVar of targetSlackVars!">{{targetSlackVar}}</td>
 
-    <td class="vertical-bar">0</td>
+    <td class="vertical-bar">{{targetConstant!}}</td>
 
   </tr>
   </tfoot>

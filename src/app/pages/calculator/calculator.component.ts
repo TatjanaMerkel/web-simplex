@@ -3,6 +3,8 @@ import {LargeLpData} from "./calculator-content/large-lp/large-lp-data";
 import {LinearSystemData} from "./calculator-content/linear-system/linear-system-data";
 import {TableauData} from "./calculator-content/tableau/tableau-data";
 import {StandardFormData} from "./calculator-content/standard-form/standard-form-data";
+import {TableauInput} from "./calculator-content/tableau/tableau-input"
+
 
 
 
@@ -70,6 +72,25 @@ export class CalculatorComponent implements OnInit {
       this.showSolution = true;
     }
   }
+
+
+  getTableauData(standardFormData: StandardFormData): TableauInput {
+    return {
+      numberOfVars: standardFormData.numberOfVars,
+      numberOfConstraints: standardFormData.numberOfConstraints,
+
+      targetVars: standardFormData.targetVars,
+      targetSlackVars: standardFormData.targetSlackVars,
+      targetConstant: 0,
+
+      constraintVars: standardFormData.constraintVars,
+      constraintSlackVars: standardFormData.constraintSlackVars,
+      constraintConstants: standardFormData.constraintConstants,
+
+      calculate: true
+    }
+  }
+
 
 
 
