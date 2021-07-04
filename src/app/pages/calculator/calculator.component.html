@@ -20,12 +20,11 @@
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
 
-  <app-card class="item-c" *ngIf="linearSystemData !== null"
-            title="Standard-Form">
+  <app-card class="item-c" *ngIf="linearSystemData !== null" title="Standard-Form">
     <app-standard-form [numberOfVars]="numberOfVars"
                        [numberOfConstraints]="numberOfConstraints"
                        [linearSystemData]="negateTargetVars(linearSystemData)"
-                       (dataChange)="standardFormData = $event">
+                       (dataChange)="onStandardFormDataChange($event)">
     </app-standard-form>
   </app-card>
 
@@ -34,6 +33,18 @@
   </div>
 
   <app-card class="item-d" *ngIf="linearSystemData !== null" title="Eingabe des Linearen Programms">
-    <app-tableau [inputData]="getTableauData(standardFormData!)"></app-tableau>
+    <app-tableau *ngFor="let tableuaData of tableauDataList; index as i"
+                 [inputData]="getTableauInput(i)">
+    </app-tableau>
   </app-card>
+
+  <ng-container *ngIf="showSolution">
+    <div class="arrow4">
+      <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
+    </div>
+
+    <app-card class="item-e" title="Lösung">
+      <app-solution [inputData]="{targetConstant: targetConstant!}"></app-solution>
+    </app-card>
+  </ng-container>
 </div>

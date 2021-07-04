@@ -1,6 +1,6 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {TableauInput} from "./tableau-input";
-
+import {TableauOutput} from "./tableau-output";
 
 @Component({
   selector: 'app-tableau',
@@ -9,8 +9,9 @@ import {TableauInput} from "./tableau-input";
 })
 export class TableauComponent  implements OnChanges {
 
-
   @Input() inputData: TableauInput | undefined;
+
+  @Output() outputDataChange = new EventEmitter<TableauOutput>();
 
   targetVars: number[] | undefined;
   targetSlackVars: number[] | undefined;
@@ -122,10 +123,16 @@ export class TableauComponent  implements OnChanges {
 
         this.targetConstant = targetConstant - factor * this.constraintConstants[pivotRow];
       }
+
+      this.outputDataChange.emit({
+        targetVars: this.targetVars,
+        targetSlackVars: this.targetSlackVars,
+        targetConstant: this.targetConstant,
+
+        constraintVars: this.constraintVars,
+        constraintSlackVars: this.constraintSlackVars,
+        constraintConstants: this.constraintConstants
+      });
     }
   }
-
-
 }
-
-
