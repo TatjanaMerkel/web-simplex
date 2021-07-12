@@ -8,7 +8,7 @@ import {NewLinearSystemOutput} from "./calculator-content/new-linear-system/new-
 import {NewStandardFormInput} from "./calculator-content/new-standard-form/new-standard-form-input";
 import * as math from "mathjs";
 import {Fraction} from "mathjs";
-
+import {NewTableauData} from "./new-tableau-data";
 
 
 @Component({
@@ -39,6 +39,8 @@ export class CalculatorComponent {
 
   tableauDataList: Array<TableauData> | undefined;
 
+  tableauData: Array<NewTableauData> | undefined;
+
   bla!: NewLinearSystemOutput;
 
   newStandardFormData: NewStandardFormInput = {
@@ -55,8 +57,6 @@ export class CalculatorComponent {
 
     constraintVals: [math.fraction('10/11'), math.fraction('20/21'), math.fraction('30/31')] as Fraction[]
   }
-
-
 
 
   constructor(private changeDetection: ChangeDetectorRef) {
@@ -93,7 +93,7 @@ export class CalculatorComponent {
       this.showSolution = true;
     }
 
-    this.calcTableaus();
+    this.calcNewTableaus();
   }
 
   getTableauInput(i: number): TableauInput {
@@ -107,56 +107,55 @@ export class CalculatorComponent {
     }
   }
 
-  calcTableaus() {
-    this.tableauDataList = new Array<TableauData>();
+  calcNewTableaus(): void {
+    this.tableauData = new Array<NewTableauData>();
 
-    this.tableauDataList[0] = {
-      targetVars: this.standardFormData!.targetVars,
-      targetSlackVars: this.standardFormData!.targetSlackVars,
-      targetConstant: 0,
+    this.tableauData[0] = {
+      targetVars: this.newStandardFormData.targetVars,
+      targetVal: math.fraction(0) as Fraction,
+      constraintVars: this.newStandardFormData.constraintVars,
+      constraintVals: this.newStandardFormData.constraintVals
+    }
 
-      constraintVars: this.standardFormData!.constraintVars,
-      constraintSlackVars: this.standardFormData!.constraintSlackVars,
-      constraintConstants: this.standardFormData!.constraintConstants
-    };
-
-    let previousTableauData = this.tableauDataList[0];
-    let minTargetVar = Math.min(...previousTableauData.targetVars, ...previousTableauData.targetSlackVars);
+    let previousTableau = this.tableauData[0];
+    let minTargetVar = math.min(...previousTableau.targetVars);
 
 
-    while (minTargetVar < 0) {
+    while (math.smaller(minTargetVar, 0)) {
 
       /*
        * Find (non-slack) variable with most negative target variable
        */
 
-      const pivotCol = previousTableauData.targetVars.indexOf(minTargetVar);
+      const pivotCol = previousTableau.targetVars.indexOf(minTargetVar);
 
-      // calculate tableau from previous tableau
+      /*
+       * Shorter var names
+       */
 
-      const targetVars = previousTableauData.targetVars;
-      const targetSlackVars = previousTableauData.targetSlackVars;
-      const targetConstant = previousTableauData.targetConstant;
+      const oldTargetVars = previousTableau.targetVars;
+      const oldTargetVal = previousTableau.targetVal;
 
-      const constraintVars = previousTableauData.constraintVars;
-      const constraintSlackVars = previousTableauData.constraintSlackVars;
-      const constraintConstants = previousTableauData.constraintConstants;
+      const oldConstraintVars = previousTableau.constraintVars;
+      const oldConstraintVals = previousTableau.constraintVals;
+
 
       /*
        * Create new data arrays with same size as input arrays
        */
 
-      const newConstraintVars = new Array<Array<number>>(constraintVars.length);
-      const newConstraintSlackVars = new Array<Array<number>>(constraintSlackVars.length);
-      const newConstraintConstants = new Array<number>(constraintConstants.length);
+      const newConstraintVars = new Array<Array<Fraction>>(oldConstraintVars.length);
+      const newConstraintVals = new Array<Fraction>(oldConstraintVals.length);
 
       /*
        * Calculate theta values
        */
 
-      const thetas = new Array<number>(this.numberOfConstraints);
+      const thetas = new Array<Fraction>(this.numberOfConstraints);
+
       for (let i = 0; i < thetas.length; i++) {
-        thetas[i] = constraintConstants[i] / constraintVars[i][pivotCol];
+        thetas[i] = math.divide(oldConstraintVals[i], oldConstraintVars[i][pivotCol]) as Fraction;
+
       }
 
       /*
@@ -164,73 +163,66 @@ export class CalculatorComponent {
        * - Get pivot element at pivot row/column intersection
        */
 
-      const positiveThetas = thetas.filter(value => value > 0);
-      const pivotRow = positiveThetas.indexOf(Math.min(...positiveThetas));
+      const positiveThetas = thetas.filter(value => math.larger(value, 0));
+      const pivotRow = positiveThetas.indexOf(math.min(...positiveThetas));
 
-      const pivot = constraintVars[pivotRow][pivotCol];
+
+      const pivot = oldConstraintVars[pivotRow][pivotCol];
 
       /*
        * Calculate new pivot row by dividing though pivot element
        */
 
-      newConstraintVars[pivotRow] = constraintVars[pivotRow].map(x => x / pivot);
-      newConstraintSlackVars[pivotRow] = constraintSlackVars[pivotRow].map(x => x / pivot);
-      newConstraintConstants[pivotRow] = constraintConstants[pivotRow] / pivot;
+      newConstraintVars[pivotRow] = oldConstraintVars[pivotRow]
+        .map(value => math.divide(value, pivot) as Fraction);
+
+      newConstraintVals[pivotRow] = math.divide(oldConstraintVals[pivotRow], pivot) as Fraction;
 
       /*
        * Calculate other rows by subtracting multiple of new pivot row
        */
 
-      for (let row = 0; row < constraintVars.length; row++) {
+      for (let row = 0; row < oldConstraintVars.length; row++) {
         if (row !== pivotRow) {
-          const factor = constraintVars[row][pivotCol];
-          console.log('factor');
-          console.log(factor);
+          const factor = oldConstraintVars[row][pivotCol];
 
-          newConstraintVars[row] = constraintVars[row].map(
-            (x, i) => x - factor * newConstraintVars[pivotRow][i]);
+          newConstraintVars[row] = oldConstraintVars[row].map((value, index) =>
+            math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
+          ) as Fraction[];
 
-          newConstraintSlackVars[row] = constraintSlackVars[row].map(
-            (x, i) => x - factor * newConstraintSlackVars[pivotRow][i]);
+          newConstraintVals[row] = math.subtract(oldConstraintVals[row],
+            math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
 
-          newConstraintConstants[row] = constraintConstants[row] - factor * newConstraintConstants[pivotRow];
         }
       }
       /*
        * Calculate target row by subtracting multiple of new pivot row
        */
 
-      const factor = targetVars[pivotCol];
+      const factor = oldTargetVars[pivotCol];
 
-      const newTargetVars = targetVars.map(
-        (x, i) => x - factor * newConstraintVars![pivotRow][i])
+      const newTargetVars = oldTargetVars.map((value, index) =>
+        math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
+      ) as Fraction[];
 
-      const newTargetSlackVars = targetSlackVars.map(
-        (x, i) => x - factor * newConstraintSlackVars![pivotRow][i]);
-
-      const newTargetConstant = targetConstant - factor * newConstraintConstants[pivotRow];
+      const newTargetVal = math.subtract(oldTargetVal,
+        math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
 
 
       const newTableau = {
         targetVars: newTargetVars,
-        targetSlackVars: newTargetSlackVars,
-        targetConstant: newTargetConstant,
+        targetVal: newTargetVal,
+
 
         constraintVars: newConstraintVars,
-        constraintSlackVars: newConstraintSlackVars,
-        constraintConstants: newConstraintConstants
-      };
+        constraintVals: newConstraintVals
+      }
 
-      this.tableauDataList.push(newTableau);
 
-      previousTableauData = newTableau;
-      minTargetVar = Math.min(...previousTableauData.targetVars, ...previousTableauData.targetSlackVars);
+      this.tableauData.push(newTableau);
 
+      previousTableau = newTableau;
+      minTargetVar = math.min(...previousTableau.targetVars);
     }
   }
-
-  log($event: NewLinearSystemOutput) {
-    console.log($event)
-  }
-
 }
