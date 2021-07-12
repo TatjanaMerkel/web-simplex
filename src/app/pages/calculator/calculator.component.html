@@ -43,6 +43,12 @@
     </app-new-standard-form>
   </app-card>
 
+  <!-- Always show hardcoded new-standard-form component -->
+  <app-card class="item-d" title="LGS in Standard-Form">
+    <app-new-standard-form [data]="newStandardFormData">
+    </app-new-standard-form>
+  </app-card>
+
 
   <ng-container *ngIf="showSolution">
     <div class="arrow4">

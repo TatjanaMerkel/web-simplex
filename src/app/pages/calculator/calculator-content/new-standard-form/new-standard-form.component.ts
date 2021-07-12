@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angula
 import {NewStandardFormInput} from "./new-standard-form-input";
 import {NewStandardFormOutput} from "./new-standard-form-output";
 import {Fraction} from "mathjs";
-import {StandardFormData} from "../standard-form/standard-form-data";
 import * as math from "mathjs";
 
 @Component({
@@ -43,10 +42,12 @@ export class NewStandardFormComponent implements OnChanges {
       _ => math.fraction(0) as Fraction)
     this.targetVars = this.data.targetVars.concat(targetSlackVars)
 
+    console.log('test')
+    console.log(this.targetVars);
+    console.log(targetSlackVars);
+
     this.targetVal = math.fraction(0) as Fraction
 
-    console.log('test')
-    console.log(this.constraintVars)
     this.constraintVars = this.data.constraintVars
     const constraintSlackVars = new Array<Array<Fraction>>(this.numberOfConstraints)
     for (let c = 0; c < constraintSlackVars.length; c++) {
@@ -73,4 +74,33 @@ export class NewStandardFormComponent implements OnChanges {
       slackVars: this.slackVars
     });
   }
+
+  formatFraction(fraction: Fraction): string {
+    if (fraction.n === 0) {
+      return '';
+    } else if (fraction.d === 1) {
+      return fraction.n + '';
+    } else {
+      return fraction.d + '/' + fraction.n;
+    }
+  }
+
+  formatVariable(fraction: Fraction, variable: number): string {
+    return fraction.n === 0 ? '' : 'x' + '<sub>' + variable + '</sub>';
+  }
+
+  formatSign(fraction: Fraction): string {
+    return fraction.s === 1 ? '' : '-';
+  }
+
+  formatOperator(fraction: Fraction): string {
+    if (fraction.n === 0) {
+      return '';
+    } else if (fraction.s === 1) {
+      return '+';
+    } else {
+      return '-';
+    }
+  }
+
 }

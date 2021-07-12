@@ -4,8 +4,11 @@ import {LinearSystemData} from "./calculator-content/linear-system/linear-system
 import {StandardFormData} from "./calculator-content/standard-form/standard-form-data";
 import {TableauInput} from "./calculator-content/tableau/tableau-input";
 import {TableauData} from "./tableau-data";
-import {TableauOutput} from "./calculator-content/tableau/tableau-output";
 import {NewLinearSystemOutput} from "./calculator-content/new-linear-system/new-linear-system-output";
+import {NewStandardFormInput} from "./calculator-content/new-standard-form/new-standard-form-input";
+import * as math from "mathjs";
+import {Fraction} from "mathjs";
+
 
 
 @Component({
@@ -37,6 +40,23 @@ export class CalculatorComponent {
   tableauDataList: Array<TableauData> | undefined;
 
   bla!: NewLinearSystemOutput;
+
+  newStandardFormData: NewStandardFormInput = {
+    numberOfVars: 2,
+    numberOfConstraints: 3,
+
+    targetVars: [math.fraction('1.1'), math.fraction('2/3')] as Fraction[],
+
+    constraintVars: [
+      [math.fraction('-4/5'), math.fraction('6.66')],
+      [math.fraction('7'), math.fraction('-8')],
+      [math.fraction('9.9'), math.fraction('-10.23')],
+    ] as Fraction[][],
+
+    constraintVals: [math.fraction('10/11'), math.fraction('20/21'), math.fraction('30/31')] as Fraction[]
+  }
+
+
 
 
   constructor(private changeDetection: ChangeDetectorRef) {
