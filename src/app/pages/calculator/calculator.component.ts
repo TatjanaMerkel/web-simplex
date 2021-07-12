@@ -5,6 +5,8 @@ import {StandardFormData} from "./calculator-content/standard-form/standard-form
 import {TableauInput} from "./calculator-content/tableau/tableau-input";
 import {TableauData} from "./tableau-data";
 import {TableauOutput} from "./calculator-content/tableau/tableau-output";
+import {NewLinearSystemOutput} from "./calculator-content/new-linear-system/new-linear-system-output";
+
 
 @Component({
   selector: 'app-calculator',
@@ -203,4 +205,9 @@ export class CalculatorComponent {
 
     }
   }
+
+  log($event: NewLinearSystemOutput) {
+    console.log($event)
+  }
+
 }

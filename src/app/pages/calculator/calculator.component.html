@@ -19,7 +19,12 @@
   <div class="arrow2" *ngIf="linearSystemData !== null">
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
-
+  <app-card class="item-c" title="Standard-Form">
+    <app-new-linear-system [data]="{numberOfVars: 2, numberOfConstraints: 2}"
+                           (dataChange)="log($event)">
+    </app-new-linear-system>
+  </app-card>
+  
   <app-card class="item-c" *ngIf="linearSystemData !== null" title="Standard-Form">
     <app-standard-form [numberOfVars]="numberOfVars"
                        [numberOfConstraints]="numberOfConstraints"
