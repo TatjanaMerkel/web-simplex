@@ -1,0 +1,68 @@
+<!--                                                 -->
+<!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
+<!--                                                 -->
+<!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
+<!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
+<!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
+<!--                                                 -->
+
+<table *ngIf="data">
+
+  <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
+  <tr>
+
+    <!--  -1 x1  -->
+    <td>{{data.targetVars[0].n}} / {{data.targetVars[0].d}}</td>
+
+    <!--  -  2 x2 -  3 x3  -->
+    <ng-container *ngFor="let _ of data.targetVars.slice(1); index as v">
+      <td>+</td>
+      <td>{{data.targetVars[v + 1]}}</td>
+    </ng-container>
+
+    <!--            -->
+    <ng-container *ngFor="let _ of data.constraintVars; index as s">
+      <td></td>
+      <td></td>
+    </ng-container>
+
+    <!--  + z =  0  -->
+    <td>+</td>
+    <td>z</td>
+    <td>=</td>
+    <td>0</td>
+
+  </tr>
+
+  <!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
+  <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
+  <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
+  <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); index as c">
+
+    <!--   4 x1  -->
+    <!--   8 x1  -->
+    <!--  12 x1  -->
+    <td>{{data.constraintVars[c][0]}}</td>
+
+    <!--   5 x2 +  6 x3  -->
+    <!--   9 x2 + 10 x3  -->
+    <!--  13 x2 + 14 x3  -->
+    <ng-container *ngFor="let _ of data.constraintVars[c].slice(1); index as v">
+      <td>{{data.constraintVars[c][v + 1]}}</td>
+    </ng-container>
+
+    <!--      =  7  -->
+    <!--      = 11  -->
+    <!--      = 15  -->
+    <td></td>
+    <td></td>
+    <td>=</td>
+    <td>{{data.constraintVals[c]}}
+    </td>
+  </tr>
+</table>
+
+<button class="btn btn-success btn-lg float-right" (click)="emitValues()">
+  Next
+</button>
+

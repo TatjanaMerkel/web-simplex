@@ -19,6 +19,7 @@ import { StandardFormComponent } from './pages/calculator/calculator-content/sta
 import { SolutionComponent } from './pages/calculator/calculator-content/solution/solution.component';
 import {VarDirective} from "../ng-var.directive";
 import { NewLinearSystemComponent } from './pages/calculator/calculator-content/new-linear-system/new-linear-system.component';
+import { NewStandardFormComponent } from './pages/calculator/calculator-content/new-standard-form/new-standard-form.component';
 
 
 
@@ -39,7 +40,9 @@ import { NewLinearSystemComponent } from './pages/calculator/calculator-content/
     StandardFormComponent,
     SolutionComponent,
     VarDirective,
-    NewLinearSystemComponent
+    NewLinearSystemComponent,
+    NewStandardFormComponent
+
   ],
   imports: [
     BrowserModule,

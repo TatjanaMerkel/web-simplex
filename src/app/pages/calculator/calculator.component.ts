@@ -36,6 +36,9 @@ export class CalculatorComponent {
 
   tableauDataList: Array<TableauData> | undefined;
 
+  bla!: NewLinearSystemOutput;
+
+
   constructor(private changeDetection: ChangeDetectorRef) {
   }
 
