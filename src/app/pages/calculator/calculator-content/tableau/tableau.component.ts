@@ -7,7 +7,7 @@ import {TableauOutput} from "./tableau-output";
   templateUrl: './tableau.component.html',
   styleUrls: ['./tableau.component.css']
 })
-export class TableauComponent  implements OnChanges {
+export class TableauComponent implements OnChanges {
 
   @Input() inputData: TableauInput | undefined;
 
@@ -133,6 +133,43 @@ export class TableauComponent  implements OnChanges {
         constraintSlackVars: this.constraintSlackVars,
         constraintConstants: this.constraintConstants
       });
+    }
+  }
+
+  getSign(constraintVar: number): string {
+    return constraintVar < 0 ? '-' : '';
+  }
+
+  getPreDecimals(constraintVar: number) {
+    return Math.floor(constraintVar);
+  }
+
+  getParts(value: number) {
+    const sign = value < 0 ? '-' : '';
+    const absValue = Math.abs(value);
+
+    const absValueParts = (absValue + '').split('.');
+
+    let preDecimals;
+    let decimalPoint;
+    let postDecimals;
+
+    if (absValueParts.length === 1) {
+      preDecimals = absValueParts[0];
+      decimalPoint = '';
+      postDecimals = '';
+
+    } else {
+      preDecimals = absValueParts[0];
+      decimalPoint = '.';
+      postDecimals = absValueParts[1].substr(0, 2);
+    }
+
+    return {
+      sign,
+      preDecimals,
+      decimalPoint,
+      postDecimals
     }
   }
 }

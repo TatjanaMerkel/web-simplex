@@ -17,6 +17,7 @@ import { CardComponent } from './pages/calculator/card/card.component';
 import {LinearSystemComponent} from "./pages/calculator/calculator-content/linear-system/linear-system.component";
 import { StandardFormComponent } from './pages/calculator/calculator-content/standard-form/standard-form.component';
 import { SolutionComponent } from './pages/calculator/calculator-content/solution/solution.component';
+import {VarDirective} from "../ng-var.directive";
 
 
 
@@ -35,7 +36,8 @@ import { SolutionComponent } from './pages/calculator/calculator-content/solutio
     CardComponent,
     LinearSystemComponent,
     StandardFormComponent,
-    SolutionComponent
+    SolutionComponent,
+    VarDirective
   ],
   imports: [
     BrowserModule,

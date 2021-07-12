@@ -96,7 +96,8 @@ export class CalculatorComponent {
     };
 
     let previousTableauData = this.tableauDataList[0];
-    let minTargetVar = Math.min(...previousTableauData.targetVars);
+    let minTargetVar = Math.min(...previousTableauData.targetVars, ...previousTableauData.targetSlackVars);
+
 
     while (minTargetVar < 0) {
 
@@ -170,12 +171,6 @@ export class CalculatorComponent {
           newConstraintConstants[row] = constraintConstants[row] - factor * newConstraintConstants[pivotRow];
         }
       }
-
-      console.log('new');
-      console.log(newConstraintVars);
-      console.log(newConstraintSlackVars);
-      console.log(newConstraintConstants);
-
       /*
        * Calculate target row by subtracting multiple of new pivot row
        */
@@ -204,9 +199,8 @@ export class CalculatorComponent {
       this.tableauDataList.push(newTableau);
 
       previousTableauData = newTableau;
-      minTargetVar = Math.min(...previousTableauData.targetVars);
-    }
+      minTargetVar = Math.min(...previousTableauData.targetVars, ...previousTableauData.targetSlackVars);
 
-    console.log(this.tableauDataList);
+    }
   }
 }

@@ -7,73 +7,137 @@
 <!--   z | 10 11  0  0  0 | 0  -->
 <table *ngIf="inputData">
 
-  <!--  BV | x1 x2 x3 x4 x5 | b  -->
+  <!--
+    Header row with variable names
+    BV | x1 x2 x3 x4 x5 | b
+  -->
   <thead>
   <tr>
+    <td class="space"></td>
     <td>BV</td>
+    <td class="space"></td>
+    <td class="space vertical-bar"></td>
 
     <!-- x1 x2 -->
-    <td *ngFor="let _ of [].constructor(inputData.numberOfVars); let v = index">
-    x<sub>{{v + 1}}</sub>
-    </td>
+    <ng-container *ngFor="let _ of [].constructor(inputData.numberOfVars); let v = index">
+      <td class="center" colspan="4">x<sub>{{v + 1}}</sub></td>
+      <td class="space"></td>
+    </ng-container>
+
 
     <!-- x3 x4 x5 -->
-    <td *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let s = index"
-        style="color: orange">
-      x<sub>{{inputData.numberOfVars + s + 1}}</sub>
-    </td>
+    <ng-container *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let s = index">
+      <td class="center" colspan="4">
+        x<sub>{{inputData.numberOfVars + s + 1}}</sub>
+      </td>
+      <td class="space"></td>
+    </ng-container>
 
-    <td class="vertical-bar">b</td>
+    <td class="space vertical-bar"></td>
+    <td class="center" colspan="4">b</td>
+    <td class="space"></td>
   </tr>
   </thead>
 
-  <!--  x3 |  1  2  1  0  0 | 3  -->
-  <!--  x4 |  4  5  0  1  0 | 6  -->
-  <!--  x5 |  7  8  0  0  1 | 9  -->
+  <!--
+  Constraint rows
+  x3 |  1  2  1  0  0 | 3
+  x4 |  4  5  0  1  0 | 6
+  x5 |  7  8  0  0  1 | 9
+   -->
   <tbody>
   <tr *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let c = index">
 
-  <!-- x3 -->
+    <!-- x3 -->
     <!-- x4 -->
     <!-- x5 -->
-    <td style="color: orange">x<sub>{{inputData.numberOfVars + c + 1}}</sub></td>
-
+    <td class="space"></td>
+    <td>
+      x<sub>{{inputData.numberOfVars + c + 1}}</sub>
+    </td>
+    <td class="space"></td>
+    <td class="space vertical-bar"></td>
 
     <!-- 1  2 -->
     <!-- 4  5 -->
     <!-- 7  8 -->
-    <td *ngFor="let _ of [].constructor(inputData.numberOfVars); let v = index">
-      {{constraintVars![c][v]}}
-    </td>
+    <ng-container *ngFor="let _ of [].constructor(inputData.numberOfVars); let v = index">
+      <ng-container *ngVar="getParts(constraintVars![c][v]) as constraintVarParts">
+        <td>{{constraintVarParts.sign}}</td>
+        <td style="text-align: right">{{constraintVarParts.preDecimals}}</td>
+        <td>{{constraintVarParts.decimalPoint}}</td>
+        <td>{{constraintVarParts.postDecimals}}</td>
+        <td class="space"></td>
+      </ng-container>
+    </ng-container>
 
     <!-- 1  0  0 -->
     <!-- 0  1  0 -->
     <!-- 0  0  1 -->
-    <td *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let s = index"
-        style="color: orange">
-      {{constraintSlackVars![c][s]}}
-    </td>
+    <ng-container *ngFor="let _ of [].constructor(inputData.numberOfConstraints); let s = index">
+      <ng-container *ngVar="getParts(constraintSlackVars![c][s]) as constraintSlackVarParts">
+        <td>{{constraintSlackVarParts.sign}}</td>
+        <td style="text-align: right">{{constraintSlackVarParts.preDecimals}}</td>
+        <td>{{constraintSlackVarParts.decimalPoint}}</td>
+        <td>{{constraintSlackVarParts.postDecimals}}</td>
+        <td class="space"></td>
+      </ng-container>
+    </ng-container>
 
     <!-- 3 -->
     <!-- 6 -->
     <!-- 9 -->
-    <td class="vertical-bar">{{constraintConstants![c]}}</td>
+    <td class="space vertical-bar"></td>
+    <ng-container *ngVar="getParts(constraintConstants![c]) as constraintConstantParts">
+      <td>{{constraintConstantParts.sign}}</td>
+      <td style="text-align: right">{{constraintConstantParts.preDecimals}}</td>
+      <td>{{constraintConstantParts.decimalPoint}}</td>
+      <td>{{constraintConstantParts.postDecimals}}</td>
+    </ng-container>
+    <td class="space"></td>
   </tr>
   </tbody>
 
   <!--   z | 10 11  0  0  0 | 0  -->
   <tfoot>
   <tr>
+    <td class="space"></td>
     <td>z</td>
+    <td class="space"></td>
+    <td class="space vertical-bar"></td>
 
     <!-- 10 11 -->
-    <td *ngFor="let targetVar of targetVars!">{{targetVar}}</td>
+    <ng-container *ngFor="let targetVar of targetVars!">
+      <ng-container *ngVar="getParts(targetVar) as targetVarParts">
+        <td>{{targetVarParts.sign}}</td>
+        <td style="text-align: right">{{targetVarParts.preDecimals}}</td>
+        <td>{{targetVarParts.decimalPoint}}</td>
+        <td>{{targetVarParts.postDecimals}}</td>
+        <td class="space"></td>
+      </ng-container>
+    </ng-container>
+
 
     <!-- 0 0 0 -->
-    <td *ngFor="let targetSlackVar of targetSlackVars!">{{targetSlackVar}}</td>
+    <ng-container *ngFor="let targetSlackVar of targetSlackVars!">
+      <ng-container *ngVar="getParts(targetSlackVar) as targetSlackVarParts">
+        <td>{{targetSlackVarParts.sign}}</td>
+        <td style="text-align: right">{{targetSlackVarParts.preDecimals}}</td>
+        <td>{{targetSlackVarParts.decimalPoint}}</td>
+        <td>{{targetSlackVarParts.postDecimals}}</td>
+        <td class="space"></td>
+      </ng-container>
+    </ng-container>
 
-    <td class="vertical-bar">{{targetConstant!}}</td>
 
+    <td class="space vertical-bar"></td>
+    <ng-container *ngVar="getParts(targetConstant!) as targetConstantParts">
+      <td>{{targetConstantParts.sign}}</td>
+      <td style="text-align: right">{{targetConstantParts.preDecimals}}</td>
+      <td>{{targetConstantParts.decimalPoint}}</td>
+      <td>{{targetConstantParts.postDecimals}}</td>
+    </ng-container>
+    <td class="space"></td>
   </tr>
   </tfoot>
 </table>

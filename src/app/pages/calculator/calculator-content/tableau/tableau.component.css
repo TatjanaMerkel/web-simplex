@@ -10,18 +10,19 @@ tfoot {
   border-top: 1px solid white;
 }
 
-td:nth-child(1) {
-  border-right: 1px solid white;
-}
-
 .vertical-bar {
   border-left: 1px solid white;
-}
-
-td {
-  padding: 8px;
 }
 
 td input {
   width: 24px;
 }
+
+.space {
+  width: 12px;
+}
+
+.center {
+  text-align: center;
+}
+
