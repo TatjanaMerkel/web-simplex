@@ -48,9 +48,9 @@ export class CalculatorComponent {
     targetVars: [math.fraction('1.1'), math.fraction('2/3')] as Fraction[],
 
     constraintVars: [
-      [math.fraction('-4/5'), math.fraction('6.66')],
+      [math.fraction('-4/5'), math.fraction('1')],
       [math.fraction('7'), math.fraction('-8')],
-      [math.fraction('9.9'), math.fraction('-10.23')],
+      [math.fraction('9.9'), math.fraction('-1.3')]
     ] as Fraction[][],
 
     constraintVals: [math.fraction('10/11'), math.fraction('20/21'), math.fraction('30/31')] as Fraction[]

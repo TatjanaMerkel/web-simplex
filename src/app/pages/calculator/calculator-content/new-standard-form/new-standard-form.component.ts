@@ -42,10 +42,6 @@ export class NewStandardFormComponent implements OnChanges {
       _ => math.fraction(0) as Fraction)
     this.targetVars = this.data.targetVars.concat(targetSlackVars)
 
-    console.log('test')
-    console.log(this.targetVars);
-    console.log(targetSlackVars);
-
     this.targetVal = math.fraction(0) as Fraction
 
     this.constraintVars = this.data.constraintVars
@@ -78,10 +74,13 @@ export class NewStandardFormComponent implements OnChanges {
   formatFraction(fraction: Fraction): string {
     if (fraction.n === 0) {
       return '';
+    } else if (fraction.n === 1 && fraction.d === 1) {
+      return '';
     } else if (fraction.d === 1) {
       return fraction.n + '';
     } else {
-      return fraction.d + '/' + fraction.n;
+      return fraction.n + '/' + fraction.d;
+
     }
   }
 
