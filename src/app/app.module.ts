@@ -20,6 +20,7 @@ import { SolutionComponent } from './pages/calculator/calculator-content/solutio
 import {VarDirective} from "../ng-var.directive";
 import { NewLinearSystemComponent } from './pages/calculator/calculator-content/new-linear-system/new-linear-system.component';
 import { NewStandardFormComponent } from './pages/calculator/calculator-content/new-standard-form/new-standard-form.component';
+import { NewTableauComponent } from './pages/calculator/calculator-content/new-tableau/new-tableau.component';
 
 
 
@@ -41,7 +42,8 @@ import { NewStandardFormComponent } from './pages/calculator/calculator-content/
     SolutionComponent,
     VarDirective,
     NewLinearSystemComponent,
-    NewStandardFormComponent
+    NewStandardFormComponent,
+    NewTableauComponent
 
   ],
   imports: [
