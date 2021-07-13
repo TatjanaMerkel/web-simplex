@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
-import {LargeLpData} from "./calculator-content/large-lp/large-lp-data";
+import {LinearSystemSizeOutput} from "./calculator-content/linear-system-size/linear-system-size-output";
 import {LinearSystemData} from "./calculator-content/linear-system/linear-system-data";
 import {StandardFormData} from "./calculator-content/standard-form/standard-form-data";
 import {TableauInput} from "./calculator-content/tableau/tableau-input";
@@ -11,7 +11,6 @@ import {Fraction} from "mathjs";
 import {NewTableauData} from "./new-tableau-data";
 import {NewTableauInput} from "./calculator-content/new-tableau/new-tableau-input";
 import {NewStandardFormOutput} from "./calculator-content/new-standard-form/new-standard-form-output";
-
 
 
 @Component({
@@ -65,7 +64,7 @@ export class CalculatorComponent {
   constructor(private changeDetection: ChangeDetectorRef) {
   }
 
-  onLargeLpDataChange(largeLpData: LargeLpData) {
+  onLinearSystemSizeChange(largeLpData: LinearSystemSizeOutput) {
     this.numberOfVars = largeLpData.numberOfVars;
     this.numberOfConstraints = largeLpData.numberOfConstraints;
     this.showLinearSystem = true;
@@ -169,7 +168,6 @@ export class CalculatorComponent {
 
     slackVars: [1, 2, 3]
   }
-
 
 
   calcNewTableaus(): void {

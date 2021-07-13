@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {LargeLpData} from "./large-lp-data";
+import {LinearSystemSizeOutput} from "./linear-system-size-output";
 
 
 @Component({
-  selector: 'app-large-lp',
-  templateUrl: './large-lp.component.html',
-  styleUrls: ['./large-lp.component.css']
+  selector: 'app-linear-system-size',
+  templateUrl: './linear-system-size.component.html',
+  styleUrls: ['./linear-system-size.component.css']
 })
-export class LargeLpComponent {
+export class LinearSystemSize {
 
-  @Output() dataChange = new EventEmitter<LargeLpData>();
+  @Output() dataChange = new EventEmitter<LinearSystemSizeOutput>();
 
   editable = true;
 

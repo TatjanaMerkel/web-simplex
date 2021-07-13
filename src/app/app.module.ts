@@ -12,7 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home/home.component';
 import {FormsModule} from "@angular/forms";
 import { TableauComponent } from './pages/calculator/calculator-content/tableau/tableau.component';
-import { LargeLpComponent } from './pages/calculator/calculator-content/large-lp/large-lp.component';
+import { LinearSystemSize } from './pages/calculator/calculator-content/linear-system-size/linear-system-size.component';
 import { CardComponent } from './pages/calculator/card/card.component';
 import {LinearSystemComponent} from "./pages/calculator/calculator-content/linear-system/linear-system.component";
 import { StandardFormComponent } from './pages/calculator/calculator-content/standard-form/standard-form.component';
@@ -35,7 +35,7 @@ import { NewTableauComponent } from './pages/calculator/calculator-content/new-t
     CalculatorComponent,
     HomeComponent,
     TableauComponent,
-    LargeLpComponent,
+    LinearSystemSize,
     CardComponent,
     LinearSystemComponent,
     StandardFormComponent,

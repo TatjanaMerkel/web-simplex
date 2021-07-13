@@ -1,4 +1,4 @@
-export interface LargeLpData {
+export interface LinearSystemSizeOutput {
   numberOfVars: number,
   numberOfConstraints: number
 }
