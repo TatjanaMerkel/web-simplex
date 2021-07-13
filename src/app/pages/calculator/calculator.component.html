@@ -12,35 +12,31 @@
     <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
 
-  <app-card *ngIf="showLinearSystem"
-            class="card-2"
-            title="Eingabe der Parameter">
-    <app-linear-system [data]="getLinearSystemDataInput()"
-                       (change)="onLinearSystemDataChange($event)">
-    </app-linear-system>
+  <app-card class="card-2" title="Eingabe der Parameter">
+    <app-linear-system-data [data]="getLinearSystemDataInput()"
+                            (change)="onLinearSystemDataChange($event)">
+    </app-linear-system-data>
   </app-card>
 
-  <div class="arrow-3" *ngIf="linearSystemData !== null">
-    <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
-  </div>
 
-  <app-card class="card-3" title="Standard-Form">
-    <app-new-linear-system [data]="{numberOfVars: 2, numberOfConstraints: 2}"
-                           (dataChange)="bla = $event">
-    </app-new-linear-system>
-  </app-card>
+    <!-- Standard Form -->
+    <!--  <div class="arrow-3" *ngIf="linearSystemData !== null">-->
+    <!--    <img src="assets/images/bluearrow.png" alt="arrow1">-->
+    <!--  </div>-->
 
-  <app-card class="card-3" *ngIf="linearSystemData !== null" title="Standard-Form">
-    <app-standard-form [numberOfVars]="numberOfVars"
-                       [numberOfConstraints]="numberOfConstraints"
-                       [linearSystemData]="negateTargetVars(linearSystemData)"
-                       (dataChange)="onStandardFormDataChange($event)">
-    </app-standard-form>
-  </app-card>
 
-  <div class="arrow-4" *ngIf="linearSystemData !== null">
-    <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
-  </div>
+  <!--  <app-card class="card-3" *ngIf="linearSystemData !== null" title="Standard-Form">-->
+  <!--    <app-standard-form [numberOfVars]="numberOfVars"-->
+  <!--                       [numberOfConstraints]="numberOfConstraints"-->
+  <!--                       [linearSystemData]="negateTargetVars(linearSystemData)"-->
+  <!--                       (dataChange)="onStandardFormDataChange($event)">-->
+  <!--    </app-standard-form>-->
+  <!--  </app-card>-->
+
+  <!--  <div class="arrow-4" *ngIf="linearSystemData !== null">-->
+  <!--    <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">-->
+  <!--  </div>-->
+
 
   <app-card class="card-3" *ngIf="bla" title="Eingabe des Linearen Programms">
     <app-new-standard-form
@@ -54,11 +50,11 @@
     </app-new-standard-form>
   </app-card>
 
-  <app-card class="card-4" *ngIf="linearSystemData !== null" title="Eingabe des Linearen Programms">
-    <app-tableau *ngFor="let tableuaData of tableauDataList; index as i"
-                 [inputData]="getTableauInput(i)">
-    </app-tableau>
-  </app-card>
+  <!--  <app-card class="card-4" *ngIf="linearSystemData !== null" title="Eingabe des Linearen Programms">-->
+  <!--    <app-tableau *ngFor="let tableuaData of tableauDataList; index as i"-->
+  <!--                 [inputData]="getTableauInput(i)">-->
+  <!--    </app-tableau>-->
+  <!--  </app-card>-->
 
 
   <!-- New tableaus -->

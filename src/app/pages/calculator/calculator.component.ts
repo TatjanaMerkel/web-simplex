@@ -1,10 +1,9 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {LinearSystemSizeOutput} from "./calculator-content/linear-system-size/linear-system-size-output";
-import {LinearSystemDataOutput} from "./calculator-content/linear-system-data/linear-system-data-output";
 import {StandardFormData} from "./calculator-content/standard-form/standard-form-data";
 import {TableauInput} from "./calculator-content/tableau/tableau-input";
 import {TableauData} from "./tableau-data";
-import {NewLinearSystemOutput} from "./calculator-content/new-linear-system/new-linear-system-output";
+import {LinearSystemDataOutput} from "./calculator-content/linear-system-data/linear-system-data-output";
 import {NewStandardFormInput} from "./calculator-content/new-standard-form/new-standard-form-input";
 import * as math from "mathjs";
 import {Fraction} from "mathjs";
@@ -26,8 +25,6 @@ export class CalculatorComponent {
 
   showLinearSystem: boolean = false;
 
-  linearSystemData: LinearSystemDataOutput | null = null;
-
   standardFormData: StandardFormData | null = null;
 
   targetVars: number[] | undefined;
@@ -44,7 +41,7 @@ export class CalculatorComponent {
 
   tableauData: Array<NewTableauData> | undefined;
 
-  bla!: NewLinearSystemOutput;
+  bla!: LinearSystemDataOutput;
 
   newStandardFormData: NewStandardFormInput = {
     numberOfVars: 2,
@@ -71,13 +68,14 @@ export class CalculatorComponent {
     this.showLinearSystem = true;
   }
 
-  negateTargetVars(data: LinearSystemDataOutput): LinearSystemDataOutput {
-    return {
-      targetVars: data.targetVars.map(x => -x),
-      constraintVars: data.constraintVars,
-      constraintConstants: data.constraintConstants
-    }
-  }
+  // negateTargetVars(data: LinearSystemDataOutput): LinearSystemDataOutput {
+  //   return {
+  //     targetVars: data.targetVars.map(x => -x),
+  //     constraintVars: data.constraintVars,
+  //     constraintConstants: data.constraintConstants
+  //   }
+  // }
+
 
   onStandardFormDataChange(standardFormData: StandardFormData) {
     this.standardFormData = standardFormData;
@@ -300,8 +298,8 @@ export class CalculatorComponent {
     }
   }
 
-  onLinearSystemDataChange(event: LinearSystemDataOutput): void {
-    this.linearSystemData = event;
+  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput): void {
+    this.bla = linearSystemDataOutput;
   }
 
 }

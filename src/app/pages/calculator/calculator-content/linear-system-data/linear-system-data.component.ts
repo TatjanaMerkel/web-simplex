@@ -1,9 +1,12 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {LinearSystemDataOutput} from "./linear-system-data-output";
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {LinearSystemDataInput} from "./linear-system-data-input";
+import {LinearSystemDataOutput} from "./linear-system-data-output";
+import {Fraction} from "mathjs";
+import * as math from "mathjs";
+
 
 @Component({
-  selector: 'app-linear-system',
+  selector: 'app-linear-system-data',
   templateUrl: './linear-system-data.component.html',
   styleUrls: ['./linear-system-data.component.css']
 })
@@ -11,58 +14,71 @@ export class LinearSystemDataComponent implements OnChanges {
 
   @Input() data: LinearSystemDataInput | undefined
 
-  numberOfVars = -1; // Number of variables
-  numberOfConstraints = -1; // Number of constraints
 
   @Output() change = new EventEmitter<LinearSystemDataOutput>()
 
+  initialized = false
+  editable = true
 
-  editable = true;
-
-  targetVars: (number | null)[] = []
-  constraintVars: (number | null)[][] = []
-  constraintConstants: (number | null)[] = []
-
-  initialized = false;
+  targetVars!: Array<Fraction | null>
+  constraintVars!: Array<Array<Fraction | null>>
+  constraintVals!: Array<Fraction | null>
 
 
-  ngOnChanges(): void {
-    if (this.data) {
-      this.numberOfVars = this.data.numberOfVars;
-      this.numberOfConstraints = this.data.numberOfConstraints;
 
-      this.targetVars = new Array<number | null>(this.numberOfVars).fill(null);
-      this.constraintVars = new Array<Array<number | null>>(this.numberOfConstraints);
 
-      for (let i = 0; i < this.constraintVars.length; i++) {
-        this.constraintVars[i] = new Array<number | null>(this.numberOfVars).fill(null);
+  ngOnChanges(changes: SimpleChanges): void {
+    const data = this.data!
+    const numberOfVars = data.numberOfVars
+    const numberOfConstraints = data.numberOfConstraints
 
-      }
+    this.targetVars = new Array<Fraction | null>(numberOfVars).fill(null)
 
-      this.constraintConstants = new Array<number | null>(this.numberOfConstraints).fill(null);
-      this.initialized = true;
+    this.constraintVars = new Array<Array<Fraction | null>>(numberOfConstraints)
+    for (let c = 0; c < this.constraintVars.length; c++) {
+      this.constraintVars[c] = new Array<Fraction | null>(numberOfVars).fill(null)
+    }
+
+    this.constraintVals = new Array<Fraction | null>(numberOfConstraints).fill(null)
+
+    this.initialized = true
+  }
+
+
+  onTargetVarChanged(event: Event, v: number) {
+    const inputValue = (<HTMLInputElement>event.target).value
+
+    try {
+      this.targetVars[v] = math.fraction(inputValue) as Fraction
+    } catch(e) {
+      this.targetVars[v] = null
     }
 
   }
 
-  onTargetVarChanged(event: Event, v: number) {
-    // Convert: string -> number
-    const inputValue = (<HTMLInputElement>event.target).value
-    this.targetVars[v] = (inputValue === '') ? null : +inputValue;
-  }
-
   onConstraintVarChanged(event: Event, c: number, v: number) {
     const inputValue = (<HTMLInputElement>event.target).value
-    this.constraintVars[c][v] = (inputValue === '') ? null : +inputValue;
+
+    try {
+      this.constraintVars[c][v] = math.fraction(inputValue) as Fraction
+    } catch(e) {
+      this.constraintVars[c][v] = null
+    }
+
   }
 
   onConstraintConstantChanged(event: Event, c: number) {
     const inputValue = (<HTMLInputElement>event.target).value
-    this.constraintConstants[c] = (inputValue === '') ? null : +inputValue;
+
+    try {
+      this.constraintVals[c] = math.fraction(inputValue) as Fraction
+    } catch(e) {
+      this.constraintVals[c] = null
+    }
+
 
   }
 
-  // Take array-index instead of the array-value
   trackByIndex(index: number, _item: any) {
     return index;
   }
@@ -80,20 +96,21 @@ export class LinearSystemDataComponent implements OnChanges {
       }
     }
 
-    return this.constraintConstants.indexOf(null) === -1;
+    return this.constraintVals.indexOf(null) === -1;
   }
 
-  enableEditing() {
-    this.editable = true;
-  }
+  /**
+   * Must only be invoked if sure that all input values !== null
+   */
 
   emitValues() {
     this.change.emit({
-      targetVars: this.targetVars as number[],
-      constraintVars: this.constraintVars as number[][],
-      constraintConstants: this.constraintConstants as number[]
+      targetVarsRow: this.targetVars as Array<Fraction>,
+      constraintVarsMatrix: this.constraintVars as Array<Array<Fraction>>,
+      constraintValsCol: this.constraintVals as Array<Fraction>
+
     })
-    this.editable = false;
+    this.editable = false
   }
 }
 

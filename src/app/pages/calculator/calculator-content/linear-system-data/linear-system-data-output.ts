@@ -1,5 +1,9 @@
+import {Fraction} from 'mathjs';
+
 export interface LinearSystemDataOutput {
-  targetVars: number[],
-  constraintVars: number[][],
-  constraintConstants: number[],
+  targetVarsRow: Fraction[],
+
+  constraintVarsMatrix: Fraction[][],
+  constraintValsCol: Fraction[]
+
 }
