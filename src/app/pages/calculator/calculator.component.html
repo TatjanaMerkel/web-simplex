@@ -3,52 +3,35 @@
   <!-- Linear System Size -->
   <app-card class="card-1"
             title="Größe des Linearen Programms">
-    <app-linear-system-size (change)="onLinearSystemSizeChange($event)">
+    <app-linear-system-size (dataChange)="onLinearSystemSizeChange($event)">
     </app-linear-system-size>
   </app-card>
 
   <!-- Linear System Data -->
-  <div *ngIf="showLinearSystem" class="arrow-2">
-    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+  <div class="arrow-2">
+  <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
 
   <app-card class="card-2" title="Eingabe der Parameter">
     <app-linear-system-data [data]="getLinearSystemDataInput()"
-                            (change)="onLinearSystemDataChange($event)">
+                            (dataChange)="onLinearSystemDataChange($event)">
     </app-linear-system-data>
   </app-card>
 
 
     <!-- Standard Form -->
-    <!--  <div class="arrow-3" *ngIf="linearSystemData !== null">-->
-    <!--    <img src="assets/images/bluearrow.png" alt="arrow1">-->
-    <!--  </div>-->
+  <div class="arrow-3">
+    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
 
 
-  <!--  <app-card class="card-3" *ngIf="linearSystemData !== null" title="Standard-Form">-->
-  <!--    <app-standard-form [numberOfVars]="numberOfVars"-->
-  <!--                       [numberOfConstraints]="numberOfConstraints"-->
-  <!--                       [linearSystemData]="negateTargetVars(linearSystemData)"-->
-  <!--                       (dataChange)="onStandardFormDataChange($event)">-->
-  <!--    </app-standard-form>-->
-  <!--  </app-card>-->
-
-  <!--  <div class="arrow-4" *ngIf="linearSystemData !== null">-->
-  <!--    <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">-->
-  <!--  </div>-->
-
-
-  <app-card class="card-3" *ngIf="bla" title="Eingabe des Linearen Programms">
-    <app-new-standard-form
-      [data]="{numberOfVars: numberOfVars, numberOfConstraints: numberOfConstraints, targetVars: bla.targetVarsRow, constraintVars: bla.constraintVarsMatrix, constraintVals: bla.constraintValsCol}">
-    </app-new-standard-form>
-  </app-card>
-
-  <!-- Always show hardcoded new-standard-form component -->
   <app-card class="card-3" title="LGS in Standard-Form">
-    <app-new-standard-form [data]="newStandardFormData">
-    </app-new-standard-form>
+    <app-standard-form [data]="getStandardFormInput()"
+                       (dataChange)="onStandardFormChange($event)">
+    </app-standard-form>
   </app-card>
+
+  <!-- Tableaus -->
 
   <!--  <app-card class="card-4" *ngIf="linearSystemData !== null" title="Eingabe des Linearen Programms">-->
   <!--    <app-tableau *ngFor="let tableuaData of tableauDataList; index as i"-->

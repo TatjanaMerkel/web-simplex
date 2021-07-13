@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {StandardFormData} from "./standard-form-data";
+import {StandardFormInput} from "./standard-form-input";
+import {StandardFormOutput} from "./standard-form-output";
+import {Fraction} from "mathjs";
+import * as math from "mathjs";
 
 @Component({
   selector: 'app-standard-form',
@@ -8,13 +11,19 @@ import {StandardFormData} from "./standard-form-data";
 })
 export class StandardFormComponent implements OnChanges {
 
-  @Input() numberOfVars: number | null = null;
-  @Input() numberOfConstraints: number | null = null;
-  @Input() linearSystemData: any | null = null;
+  @Input() data!: StandardFormInput
 
-  @Output() dataChange = new EventEmitter<StandardFormData>();
+  @Output() dataChange = new EventEmitter<StandardFormOutput>()
 
-  data: StandardFormData | null = null
+  numberOfVars!: number
+  numberOfConstraints!: number
+
+  targetVars!: Array<Fraction>
+  targetVal!: Fraction
+  constraintVars!: Array<Array<Fraction>>
+  constraintVals!: Array<Fraction>
+
+  slackVars!: Array<number>
 
   /**
    *  BV | x1 x2 | b       BV | x1 x2 x3 x4 x5 | b      BV | x1 x2 x3 x4 x5 |  b
@@ -26,33 +35,69 @@ export class StandardFormComponent implements OnChanges {
    *   z | 10 11 | 0        z | 10 11  0  0  0 | 0       z | tv tv ts ts ts |  0
    */
   ngOnChanges(): void {
-    if (this.numberOfVars === null || this.numberOfConstraints === null || this.linearSystemData === null) {
-      return;
-    }
+    this.numberOfVars = this.data.numberOfVars
+    this.numberOfConstraints = this.data.numberOfConstraints
 
-    this.data = {
-      numberOfVars: this.numberOfVars,
-      numberOfConstraints: this.numberOfConstraints,
+    const targetSlackVars = Array.from({length: this.numberOfConstraints},
+      _ => math.fraction(0) as Fraction)
+    this.targetVars = this.data.targetVars.concat(targetSlackVars)
 
-      targetVars: this.linearSystemData.targetVars,                                // tv
-      targetSlackVars: new Array<number>(this.numberOfConstraints).fill(0),   // ts
-      constraintVars: this.linearSystemData.constraintVars,                         // cv
-      constraintSlackVars: new Array<Array<number>>(this.numberOfConstraints),      // cs
-      constraintConstants: this.linearSystemData.constraintConstants                // cc
+    this.targetVal = math.fraction(0) as Fraction
 
-    }
-
-    // Fill constraintSlackVars (cs)
-    for (let i = 0; i < this.data.constraintSlackVars.length; i++) {
-      this.data.constraintSlackVars[i] = new Array<number>(this.numberOfConstraints).fill(0);
-      this.data.constraintSlackVars[i][i] = 1;
+    this.constraintVars = this.data.constraintVars
+    const constraintSlackVars = new Array<Array<Fraction>>(this.numberOfConstraints)
+    for (let c = 0; c < constraintSlackVars.length; c++) {
+      constraintSlackVars[c] = Array.from({length: this.numberOfConstraints},
+        _ => math.fraction(0) as Fraction)
+      constraintSlackVars[c][c] = math.fraction(1) as Fraction
+      console.log(this.constraintVars[c])
+      this.constraintVars[c] = this.constraintVars[c].concat(constraintSlackVars[c])
 
     }
-
+    this.constraintVals = this.data.constraintVals
   }
 
   emitValues() {
-    this.dataChange.emit(this.data as StandardFormData);
+    this.dataChange.emit({
+      numberOfVars: this.numberOfVars,
+      numberOfConstraints: this.numberOfConstraints,
+      targetVars: this.targetVars,
+      targetVal: this.targetVal,
+      constraintVars: this.constraintVars,
+      constraintVals: this.constraintVals,
+
+      slackVars: this.slackVars
+    });
   }
 
+  formatFraction(fraction: Fraction): string {
+    if (fraction.n === 0) {
+      return '';
+    } else if (fraction.n === 1 && fraction.d === 1) {
+      return '';
+    } else if (fraction.d === 1) {
+      return fraction.n + '';
+    } else {
+      return fraction.n + '/' + fraction.d;
+    }
+  }
+
+  formatVariable(fraction: Fraction, variable: number): string {
+    return fraction.n === 0 ? '' : 'x' + '<sub>' + variable + '</sub>';
+  }
+
+  formatSign(fraction: Fraction): string {
+    return fraction.s === 1 ? '' : '-';
+  }
+
+  formatOperator(fraction: Fraction): string {
+    if (fraction.n === 0) {
+      return '';
+    } else if (fraction.s === 1) {
+      return '+';
+    } else {
+      return '-';
+    }
+  }
 }
+

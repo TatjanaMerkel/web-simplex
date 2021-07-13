@@ -9,7 +9,8 @@ import {LinearSystemSizeOutput} from "./linear-system-size-output";
 })
 export class LinearSystemSize {
 
-  @Output() change = new EventEmitter<LinearSystemSizeOutput>();
+  @Output() dataChange = new EventEmitter<LinearSystemSizeOutput>();
+
 
   editable = true;
 
@@ -20,7 +21,7 @@ export class LinearSystemSize {
   lastEmittedNumberOfConstraints = 0;
 
   emitValues() {
-    this.change.emit({
+    this.dataChange.emit({
       numberOfVars: this.currentNumberOfVars,
       numberOfConstraints: this.currentNumberOfConstraints
     })

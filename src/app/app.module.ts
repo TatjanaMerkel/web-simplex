@@ -14,11 +14,10 @@ import {FormsModule} from "@angular/forms";
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component';
 import {LinearSystemSize} from './pages/calculator/calculator-content/linear-system-size/linear-system-size.component';
 import {CardComponent} from './pages/calculator/card/card.component';
-import {StandardFormComponent} from './pages/calculator/calculator-content/standard-form/standard-form.component';
 import {SolutionComponent} from './pages/calculator/calculator-content/solution/solution.component';
 import {VarDirective} from "../ng-var.directive";
 import { LinearSystemDataComponent } from './pages/calculator/calculator-content/linear-system-data/linear-system-data.component';
-import {NewStandardFormComponent} from './pages/calculator/calculator-content/new-standard-form/new-standard-form.component';
+import { StandardFormComponent } from './pages/calculator/calculator-content/standard-form/standard-form.component';
 import {NewTableauComponent} from './pages/calculator/calculator-content/new-tableau/new-tableau.component';
 
 
@@ -34,11 +33,10 @@ import {NewTableauComponent} from './pages/calculator/calculator-content/new-tab
     TableauComponent,
     LinearSystemSize,
     CardComponent,
-    StandardFormComponent,
     SolutionComponent,
     VarDirective,
     LinearSystemDataComponent,
-    NewStandardFormComponent,
+    StandardFormComponent,
     NewTableauComponent
 
   ],

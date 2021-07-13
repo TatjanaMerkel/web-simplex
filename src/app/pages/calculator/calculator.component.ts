@@ -1,16 +1,16 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {LinearSystemSizeOutput} from "./calculator-content/linear-system-size/linear-system-size-output";
-import {StandardFormData} from "./calculator-content/standard-form/standard-form-data";
 import {TableauInput} from "./calculator-content/tableau/tableau-input";
 import {TableauData} from "./tableau-data";
 import {LinearSystemDataOutput} from "./calculator-content/linear-system-data/linear-system-data-output";
-import {NewStandardFormInput} from "./calculator-content/new-standard-form/new-standard-form-input";
+import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
 import * as math from "mathjs";
 import {Fraction} from "mathjs";
 import {NewTableauData} from "./new-tableau-data";
 import {NewTableauInput} from "./calculator-content/new-tableau/new-tableau-input";
-import {NewStandardFormOutput} from "./calculator-content/new-standard-form/new-standard-form-output";
+import {StandardFormOutput} from "./calculator-content/standard-form/standard-form-output";
 import {LinearSystemDataInput} from "./calculator-content/linear-system-data/linear-system-data-input";
+
 
 
 @Component({
@@ -24,8 +24,6 @@ export class CalculatorComponent {
   numberOfConstraints: number = 0;
 
   showLinearSystem: boolean = false;
-
-  standardFormData: StandardFormData | null = null;
 
   targetVars: number[] | undefined;
   targetSlackVars: number[] | undefined;
@@ -43,7 +41,7 @@ export class CalculatorComponent {
 
   bla!: LinearSystemDataOutput;
 
-  newStandardFormData: NewStandardFormInput = {
+  newStandardFormData: StandardFormInput = {
     numberOfVars: 2,
     numberOfConstraints: 3,
 
@@ -76,26 +74,26 @@ export class CalculatorComponent {
   //   }
   // }
 
+  // onStandardFormDataChange(standardFormData: StandardFormData) {
+  //   this.standardFormData = standardFormData;
+  //
+  //   this.targetVars = standardFormData.targetVars;
+  //   this.targetSlackVars = standardFormData.targetSlackVars;
+  //   this.targetConstant = 0;
+  //
+  //   this.constraintVars = standardFormData.constraintVars;
+  //   this.constraintSlackVars = standardFormData.constraintSlackVars;
+  //   this.constraintConstants = standardFormData.constraintConstants;
+  //
+  //   const allTargetVarsPositive = this.targetVars.reduce((old, next) => old && next >= 0, true);
+  //
+  //   if (allTargetVarsPositive) {
+  //     this.showSolution = true;
+  //   }
+  //
+  //   this.calcNewTableaus();
+  // }
 
-  onStandardFormDataChange(standardFormData: StandardFormData) {
-    this.standardFormData = standardFormData;
-
-    this.targetVars = standardFormData.targetVars;
-    this.targetSlackVars = standardFormData.targetSlackVars;
-    this.targetConstant = 0;
-
-    this.constraintVars = standardFormData.constraintVars;
-    this.constraintSlackVars = standardFormData.constraintSlackVars;
-    this.constraintConstants = standardFormData.constraintConstants;
-
-    const allTargetVarsPositive = this.targetVars.reduce((old, next) => old && next >= 0, true);
-
-    if (allTargetVarsPositive) {
-      this.showSolution = true;
-    }
-
-    this.calcNewTableaus();
-  }
 
   getTableauInput(i: number): TableauInput {
     return {
@@ -121,7 +119,7 @@ export class CalculatorComponent {
     this.calcNewTableaus();
   }
 
-  newStandardFormOutput: NewStandardFormOutput = {
+  newStandardFormOutput: StandardFormOutput = {
     numberOfVars: 5,
     numberOfConstraints: 3,
 
@@ -292,9 +290,13 @@ export class CalculatorComponent {
   }
 
   getLinearSystemDataInput(): LinearSystemDataInput {
+    // return {
+    //   numberOfVars: this.numberOfVars,
+    //   numberOfConstraints: this.numberOfConstraints
+    // }
     return {
-      numberOfVars: this.numberOfVars,
-      numberOfConstraints: this.numberOfConstraints
+      numberOfVars: 2,
+      numberOfConstraints: 3
     }
   }
 
@@ -302,4 +304,13 @@ export class CalculatorComponent {
     this.bla = linearSystemDataOutput;
   }
 
+  getStandardFormInput() {
+    return this.newStandardFormData;
+  }
+
+  onStandardFormChange(standardFormOutput: StandardFormOutput) {
+
+  }
 }
+
+

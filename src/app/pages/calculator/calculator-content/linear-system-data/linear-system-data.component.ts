@@ -15,7 +15,7 @@ export class LinearSystemDataComponent implements OnChanges {
   @Input() data: LinearSystemDataInput | undefined
 
 
-  @Output() change = new EventEmitter<LinearSystemDataOutput>()
+  @Output() dataChange = new EventEmitter<LinearSystemDataOutput>()
 
   initialized = false
   editable = true
@@ -104,7 +104,7 @@ export class LinearSystemDataComponent implements OnChanges {
    */
 
   emitValues() {
-    this.change.emit({
+    this.dataChange.emit({
       targetVarsRow: this.targetVars as Array<Fraction>,
       constraintVarsMatrix: this.constraintVars as Array<Array<Fraction>>,
       constraintValsCol: this.constraintVals as Array<Fraction>

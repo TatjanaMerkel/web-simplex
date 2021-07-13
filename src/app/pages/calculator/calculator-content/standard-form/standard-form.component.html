@@ -5,7 +5,7 @@
 <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
 <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
 <!--                                                 -->
-<table *ngIf="data !== null">
+<table *ngIf="data">
 
   <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
   <tr>
@@ -13,151 +13,59 @@
     <td>=</td>
 
     <!--  -1 x1  -->
-    <ng-container *ngIf="data.targetVars[0] !== 0; else firstTargetVarEmpty">
-    <td>
-        <ng-container *ngIf="data.targetVars[0] !== 1">
-          <ng-container *ngIf="data.targetVars[0] !== -1; else firstTargetVarMinusOne">
-            {{data.targetVars[0]}}
-          </ng-container>
-          <ng-template #firstTargetVarMinusOne>
-            -
-          </ng-template>
-        </ng-container>
-        x<sub>1</sub>
-      </td>
+    <ng-container *ngVar="targetVars[0] as targetVar">
+      <td class="value">{{ formatSign(targetVar) + formatFraction(targetVar) }}</td>
+      <td class="variable" [innerHTML]="formatVariable(targetVar, 1)"></td>
     </ng-container>
-    <ng-template #firstTargetVarEmpty>
-    <td></td>
-    </ng-template>
-
 
     <!--  -  2 x2 -  3 x3  -->
-    <ng-container *ngFor="let _ of data.targetVars.slice(1); index as v">
-      <ng-container *ngIf="data.targetVars[v + 1] !== 0; else emptyTargetVar">
-        <ng-template *ngIf="data.targetVars[v + 1] > 0; else negativeTargetVar">
-          <td>+</td>
-          <td>
-            <ng-container *ngIf="data.targetVars[v + 1] !== 1">
-              {{data.targetVars[v + 1]}}
-            </ng-container>
-            x<sub>{{v + 2}}</sub>
-          </td>
-        </ng-template>
-        <ng-template #negativeTargetVar>
-          <td>-</td>
-          <td>
-            <ng-container *ngIf="-data.targetVars[v + 1] !== 1">
-              {{-data.targetVars[v + 1]}}
-            </ng-container>
-            x<sub>{{v + 2}}</sub>
-          </td>
-        </ng-template>
+    <ng-container *ngFor="let _ of targetVars.slice(1); index as v">
+      <ng-container *ngVar="targetVars[v + 1] as targetVar">
+        <td class="operator">{{ formatOperator(targetVar) }}</td>
+        <td class="value">{{ formatFraction(targetVar) }}</td>
+        <td class="variable" [innerHTML]="formatVariable(targetVar, v + 2)"></td>
       </ng-container>
-      <ng-template #emptyTargetVar>
-        <td></td>
-        <td></td>
-      </ng-template>
-
-    </ng-container>
-
-    <!--            -->
-    <ng-container *ngFor="let _ of data.constraintVars; index as s">
-      <td></td>
-      <td></td>
     </ng-container>
 
     <!--  + z =  0  -->
-    <td>+</td>
-    <td>z</td>
-    <td>=</td>
-    <td>0</td>
+    <td class="operator">+</td>
+    <td class="value">z</td>
+    <td class="operator">=</td>
+    <td class="value">0</td>
   </tr>
 
   <!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
   <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
   <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
-  <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); index as c">
+  <tr *ngFor="let _ of [].constructor(numberOfConstraints); index as c">
 
     <!--   4 x1  -->
     <!--   8 x1  -->
     <!--  12 x1  -->
-    <ng-container *ngIf="data.constraintVars[c][0] !== 0; else firstConstraintVarEmpty">
-
-    <td>
-        <ng-container *ngIf="data.constraintVars[c][0] !== 1">
-          <ng-container *ngIf="data.constraintVars[c][0] !== -1; else firstConstraintVarMinusOne">
-            {{data.constraintVars[c][0]}}
-          </ng-container>
-          <ng-template #firstConstraintVarMinusOne>
-            -
-          </ng-template>
-        </ng-container>
-        x<sub>1</sub>
-      </td>
+    <ng-container *ngVar="constraintVars[c][0] as constraintVar">
+      <td class="value">{{ formatSign(constraintVar) + formatFraction(constraintVar) }}</td>
+      <td class="variable" [innerHTML]="formatVariable(constraintVar, 1)"></td>
     </ng-container>
-    <ng-template #firstConstraintVarEmpty>
-    <td></td>
-    </ng-template>
 
     <!--   5 x2 +  6 x3  -->
     <!--   9 x2 + 10 x3  -->
     <!--  13 x2 + 14 x3  -->
-    <ng-container *ngFor="let _ of data.constraintVars[c].slice(1); index as v">
-      <ng-container *ngIf="data.constraintVars[c][v + 1] !== 0; else constraintVarEmpty">
-        <ng-container *ngIf="data.constraintVars[c][v + 1] > 0; else constraintVarNegative">
-          <td>+</td>
-          <td>
-            <ng-container *ngIf="data.constraintVars[c][v + 1] !== 1">
-              {{data.constraintVars[c][v + 1]}}
-            </ng-container>
-            x<sub>{{v + 2}}</sub>
-          </td>
-        </ng-container>
-        <ng-template #constraintVarNegative>
-          <td>-</td>
-          <td>
-            <ng-container *ngIf="-data.constraintVars[c][v + 1] !== 1">
-              {{-data.constraintVars[c][v + 1]}}
-            </ng-container>
-            x<sub>{{v + 2}}</sub>
-          </td>
-        </ng-template>
+    <ng-container *ngFor="let _ of constraintVars[c].slice(1); index as v">
+      <ng-container *ngVar="constraintVars[c][v + 1] as constraintVar">
+        <td class="operator">{{ formatOperator(constraintVar) }}</td>
+        <td class="value">{{ formatFraction(constraintVar) }}</td>
+        <td class="variable" [innerHTML]="formatVariable(constraintVar, v + 2)"></td>
       </ng-container>
-      <ng-template #constraintVarEmpty>
-      <td></td>
-        <td></td>
-      </ng-template>
     </ng-container>
 
-    <!--  x4            -->
-    <!--     + x5       -->
-    <!--          + x6  -->
-    <ng-container *ngFor="let _ of data.constraintSlackVars[c]; index as s">
-      <ng-container *ngIf="data.constraintSlackVars[c][s] !== 0; else slackVarEmpty">
-      <td style="color: orange">+</td>
-
-        <td style="color: orange">
-          <ng-container *ngIf="data.constraintSlackVars[c][s] !== 1">{{data.constraintSlackVars[c][s]}}</ng-container>
-          x<sub>{{data.numberOfConstraints + s}}</sub>
-          x<sub>{{data.numberOfConstraints + 1 + s}}</sub>
-        </td>
-
-      </ng-container>
-      <ng-template #slackVarEmpty>
-      <td></td>
-        <td></td>
-      </ng-template>
-    </ng-container>
 
     <!--      =  7  -->
     <!--      = 11  -->
     <!--      = 15  -->
-    <td></td>
-    <td></td>
-    <td>=</td>
-
-    <td>
-    <td>{{data.constraintConstants[c]}}
+    <td class="operator"></td>
+    <td class="value"></td>
+    <td class="operator">=</td>
+    <td class="value">{{ formatFraction(constraintVals[c]) }}
     </td>
   </tr>
 </table>
