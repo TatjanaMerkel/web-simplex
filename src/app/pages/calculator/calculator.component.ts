@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {LinearSystemSizeOutput} from "./calculator-content/linear-system-size/linear-system-size-output";
-import {LinearSystemData} from "./calculator-content/linear-system/linear-system-data";
+import {LinearSystemDataOutput} from "./calculator-content/linear-system-data/linear-system-data-output";
 import {StandardFormData} from "./calculator-content/standard-form/standard-form-data";
 import {TableauInput} from "./calculator-content/tableau/tableau-input";
 import {TableauData} from "./tableau-data";
@@ -11,6 +11,7 @@ import {Fraction} from "mathjs";
 import {NewTableauData} from "./new-tableau-data";
 import {NewTableauInput} from "./calculator-content/new-tableau/new-tableau-input";
 import {NewStandardFormOutput} from "./calculator-content/new-standard-form/new-standard-form-output";
+import {LinearSystemDataInput} from "./calculator-content/linear-system-data/linear-system-data-input";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class CalculatorComponent {
 
   showLinearSystem: boolean = false;
 
-  linearSystemData: LinearSystemData | null = null;
+  linearSystemData: LinearSystemDataOutput | null = null;
 
   standardFormData: StandardFormData | null = null;
 
@@ -70,7 +71,7 @@ export class CalculatorComponent {
     this.showLinearSystem = true;
   }
 
-  negateTargetVars(data: LinearSystemData): LinearSystemData {
+  negateTargetVars(data: LinearSystemDataOutput): LinearSystemDataOutput {
     return {
       targetVars: data.targetVars.map(x => -x),
       constraintVars: data.constraintVars,
@@ -291,4 +292,16 @@ export class CalculatorComponent {
       minTargetVar = math.min(...previousTableau.targetVars);
     }
   }
+
+  getLinearSystemDataInput(): LinearSystemDataInput {
+    return {
+      numberOfVars: this.numberOfVars,
+      numberOfConstraints: this.numberOfConstraints
+    }
+  }
+
+  onLinearSystemDataChange(event: LinearSystemDataOutput): void {
+    this.linearSystemData = event;
+  }
+
 }

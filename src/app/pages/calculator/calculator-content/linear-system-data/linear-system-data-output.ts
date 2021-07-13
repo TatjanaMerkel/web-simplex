@@ -1,7 +1,5 @@
-export interface LinearSystemData {
+export interface LinearSystemDataOutput {
   targetVars: number[],
   constraintVars: number[][],
   constraintConstants: number[],
-
-
 }

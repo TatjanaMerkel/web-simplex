@@ -1,19 +1,21 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {LinearSystemData} from "./linear-system-data";
+import {LinearSystemDataOutput} from "./linear-system-data-output";
+import {LinearSystemDataInput} from "./linear-system-data-input";
 
 @Component({
   selector: 'app-linear-system',
-  templateUrl: './linear-system.component.html',
-  styleUrls: ['./linear-system.component.css']
+  templateUrl: './linear-system-data.component.html',
+  styleUrls: ['./linear-system-data.component.css']
 })
-export class LinearSystemComponent implements OnChanges {
+export class LinearSystemDataComponent implements OnChanges {
 
-  @Input() numberOfVars = -1; // Number of variables
-  @Input() numberOfConstraints = -1; // Number of constraints
+  @Input() data: LinearSystemDataInput | undefined
 
-  @Output() dataChange = new EventEmitter<LinearSystemData>();
+  numberOfVars = -1; // Number of variables
+  numberOfConstraints = -1; // Number of constraints
 
-  @Output() showTableau = new EventEmitter<boolean>();
+  @Output() change = new EventEmitter<LinearSystemDataOutput>()
+
 
   editable = true;
 
@@ -25,16 +27,22 @@ export class LinearSystemComponent implements OnChanges {
 
 
   ngOnChanges(): void {
-    this.targetVars = new Array<number | null>(this.numberOfVars).fill(null);
-    this.constraintVars = new Array<Array<number | null>>(this.numberOfConstraints);
+    if (this.data) {
+      this.numberOfVars = this.data.numberOfVars;
+      this.numberOfConstraints = this.data.numberOfConstraints;
 
-    for (let i = 0; i < this.constraintVars.length; i++) {
-      this.constraintVars[i] = new Array<number | null>(this.numberOfVars).fill(null);
+      this.targetVars = new Array<number | null>(this.numberOfVars).fill(null);
+      this.constraintVars = new Array<Array<number | null>>(this.numberOfConstraints);
 
+      for (let i = 0; i < this.constraintVars.length; i++) {
+        this.constraintVars[i] = new Array<number | null>(this.numberOfVars).fill(null);
+
+      }
+
+      this.constraintConstants = new Array<number | null>(this.numberOfConstraints).fill(null);
+      this.initialized = true;
     }
 
-    this.constraintConstants = new Array<number | null>(this.numberOfConstraints).fill(null);
-    this.initialized = true;
   }
 
   onTargetVarChanged(event: Event, v: number) {
@@ -80,7 +88,7 @@ export class LinearSystemComponent implements OnChanges {
   }
 
   emitValues() {
-    this.dataChange.emit({
+    this.change.emit({
       targetVars: this.targetVars as number[],
       constraintVars: this.constraintVars as number[][],
       constraintConstants: this.constraintConstants as number[]

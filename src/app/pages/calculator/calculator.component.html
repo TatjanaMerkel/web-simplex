@@ -1,21 +1,22 @@
 <div class="container">
 
-  <!-- LGS Size -->
-
-  <app-card class="card-1" title="Größe des Linearen Programms">
-    <app-linear-system-size (dataChange)="onLinearSystemSizeChange($event)">
+  <!-- Linear System Size -->
+  <app-card class="card-1"
+            title="Größe des Linearen Programms">
+    <app-linear-system-size (change)="onLinearSystemSizeChange($event)">
     </app-linear-system-size>
   </app-card>
 
+  <!-- Linear System Data -->
   <div *ngIf="showLinearSystem" class="arrow-2">
-    <img src="assets/images/bluearrow.png" alt="arrow1">
+    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
 
-  <app-card class="card-2" *ngIf="showLinearSystem" title="Eingabe der Parameter">
-    <app-linear-system
-      [numberOfVars]="numberOfVars"
-      [numberOfConstraints]="numberOfConstraints"
-      (dataChange)="linearSystemData = $event">
+  <app-card *ngIf="showLinearSystem"
+            class="card-2"
+            title="Eingabe der Parameter">
+    <app-linear-system [data]="getLinearSystemDataInput()"
+                       (change)="onLinearSystemDataChange($event)">
     </app-linear-system>
   </app-card>
 

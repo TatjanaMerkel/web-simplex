@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {LinearSystemData} from "../linear-system/linear-system-data";
+import {LinearSystemDataOutput} from "../linear-system-data/linear-system-data-output";
 import {StandardFormData} from "./standard-form-data";
 
 @Component({
@@ -11,7 +11,7 @@ export class StandardFormComponent implements OnChanges {
 
   @Input() numberOfVars: number | null = null;
   @Input() numberOfConstraints: number | null = null;
-  @Input() linearSystemData: LinearSystemData | null = null;
+  @Input() linearSystemData: LinearSystemDataOutput | null = null;
 
   @Output() dataChange = new EventEmitter<StandardFormData>();
 
