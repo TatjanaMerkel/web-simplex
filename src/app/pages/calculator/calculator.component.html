@@ -37,18 +37,23 @@
     <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
   </div>
 
-  <app-card class="item-d" *ngIf="bla" title="Eingabe des Linearen Programms">
-    <app-new-standard-form
+  <app-card class="item-c" *ngIf="bla" title="Eingabe des Linearen Programms">
+  <app-new-standard-form
       [data]="{numberOfVars: numberOfVars, numberOfConstraints: numberOfConstraints, targetVars: bla.targetVarsRow, constraintVars: bla.constraintVarsMatrix, constraintVals: bla.constraintValsCol}">
     </app-new-standard-form>
   </app-card>
 
   <!-- Always show hardcoded new-standard-form component -->
-  <app-card class="item-d" title="LGS in Standard-Form">
-    <app-new-standard-form [data]="newStandardFormData">
+  <app-card class="item-c" title="LGS in Standard-Form">
+  <app-new-standard-form [data]="newStandardFormData">
     </app-new-standard-form>
   </app-card>
 
+  <!-- New tableaus -->
+  <app-card class="item-d" title="Tableaus">
+    <app-new-tableau *ngFor="let tableau of tableauData" [data]="getNewTableauInput(tableau)">
+    </app-new-tableau>
+  </app-card>
 
   <ng-container *ngIf="showSolution">
     <div class="arrow4">

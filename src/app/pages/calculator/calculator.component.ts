@@ -9,6 +9,9 @@ import {NewStandardFormInput} from "./calculator-content/new-standard-form/new-s
 import * as math from "mathjs";
 import {Fraction} from "mathjs";
 import {NewTableauData} from "./new-tableau-data";
+import {NewTableauInput} from "./calculator-content/new-tableau/new-tableau-input";
+import {NewStandardFormOutput} from "./calculator-content/new-standard-form/new-standard-form-output";
+
 
 
 @Component({
@@ -107,14 +110,79 @@ export class CalculatorComponent {
     }
   }
 
+  getNewTableauInput(tableauData: NewTableauData): NewTableauInput {
+    return {
+      numberOfVars: this.numberOfVars,
+      numberOfConstraints: this.numberOfConstraints,
+
+      ...tableauData
+    }
+  }
+
+  ngOnInit(): void {
+    this.calcNewTableaus();
+  }
+
+  newStandardFormOutput: NewStandardFormOutput = {
+    numberOfVars: 5,
+    numberOfConstraints: 3,
+
+    targetVars: [
+      math.fraction('1.1'),
+      math.fraction('2/3'),
+      math.fraction(0),
+      math.fraction(0),
+      math.fraction(0)
+    ] as Fraction[],
+
+    targetVal: math.fraction(0) as Fraction,
+
+    constraintVars: [
+      [
+        math.fraction('-4/5'),
+        math.fraction('1'),
+        math.fraction(1),
+        math.fraction(0),
+        math.fraction(0)
+      ],
+      [
+        math.fraction('7'),
+        math.fraction('-8'),
+        math.fraction(0),
+        math.fraction(1),
+        math.fraction(0)
+      ],
+      [
+        math.fraction('9.9'),
+        math.fraction('-1.3'),
+        math.fraction(0),
+        math.fraction(0),
+        math.fraction(1)
+      ],
+    ] as Fraction[][],
+
+    constraintVals: [
+      math.fraction('1/8'),
+      math.fraction('2/9'),
+      math.fraction('30/31')
+    ] as Fraction[],
+
+    slackVars: [1, 2, 3]
+  }
+
+
+
   calcNewTableaus(): void {
     this.tableauData = new Array<NewTableauData>();
 
+    //
+    // First tableau contains input data
+    //
     this.tableauData[0] = {
-      targetVars: this.newStandardFormData.targetVars,
+      targetVars: this.newStandardFormOutput.targetVars,
       targetVal: math.fraction(0) as Fraction,
-      constraintVars: this.newStandardFormData.constraintVars,
-      constraintVals: this.newStandardFormData.constraintVals
+      constraintVars: this.newStandardFormOutput.constraintVars,
+      constraintVals: this.newStandardFormOutput.constraintVals
     }
 
     let previousTableau = this.tableauData[0];
