@@ -39,10 +39,10 @@
 
 
   <app-card class="card-4" title="Tableaus">
-    <app-tableau *ngFor="let tableau of tableauData"
-                 [data]="getNewTableauInput(tableau)">
-    </app-tableau>
-
+    <ng-container *ngFor="let tableau of tableauData">
+      <app-tableau [data]="getNewTableauInput(tableau)"></app-tableau>
+      <br/>
+    </ng-container>
   </app-card>
 
   <!-- Solution -->

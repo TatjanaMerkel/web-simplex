@@ -21,7 +21,7 @@ export class CalculatorComponent {
 
   numberOfVars: number = 2;
   numberOfConstraints: number = 3;
-  
+
   showLinearSystem: boolean = false;
 
   targetVars: number[] | undefined;

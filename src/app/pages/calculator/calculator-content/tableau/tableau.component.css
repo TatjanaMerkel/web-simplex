@@ -1,6 +1,3 @@
-table {
-}
-
 thead {
   border-bottom: 1px solid white;
 }
@@ -25,3 +22,25 @@ tfoot {
 .center {
   text-align: center;
 }
+
+
+/* Column Widths */
+
+table {
+  table-layout: fixed;
+  /*width: 100%;*/
+  word-wrap: break-word;
+}
+
+td:first-child {
+  width: 50px;
+}
+
+td:not(:first-child):not(:last-child) {
+  width: 80px;
+}
+
+td:last-child {
+  width: 80px;
+}
+
