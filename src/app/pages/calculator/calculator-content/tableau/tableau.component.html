@@ -27,9 +27,9 @@
     <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); let c = index">
       <td>x<sub>0</sub></td>
       <td *ngFor="let constraintVar of data.constraintVars![c]">
-        {{ constraintVar }}
+        {{ formatFraction(constraintVar) }}
       </td>
-      <td>{{ data.constraintVals[c] }}</td>
+      <td class="bar-left">{{ formatFraction(data.constraintVals[c]) }}</td>
     </tr>
     </tbody>
 
@@ -37,8 +37,8 @@
     <tfoot>
     <tr>
       <td>z</td>
-      <td *ngFor="let targetVar of data.targetVars">{{ targetVar }}</td>
-      <td>{{ data.targetVal }}</td>
+      <td *ngFor="let targetVar of data.targetVars">{{ formatFraction(targetVar) }}</td>
+      <td class="bar-left">{{ formatFraction(data.targetVal) }}</td>
     </tr>
     </tfoot>
 
