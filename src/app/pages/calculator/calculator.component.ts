@@ -19,9 +19,9 @@ import {TableauInput} from "./calculator-content/tableau/tableau-input";
 })
 export class CalculatorComponent {
 
-  numberOfVars: number = 0;
-  numberOfConstraints: number = 0;
-
+  numberOfVars: number = 2;
+  numberOfConstraints: number = 3;
+  
   showLinearSystem: boolean = false;
 
   targetVars: number[] | undefined;
@@ -112,8 +112,8 @@ export class CalculatorComponent {
     numberOfConstraints: 3,
 
     targetVars: [
-      math.fraction('1.1'),
-      math.fraction('2/3'),
+      math.fraction('-1.1'),
+      math.fraction('-2/3'),
       math.fraction(0),
       math.fraction(0),
       math.fraction(0)
