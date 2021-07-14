@@ -11,40 +11,37 @@ import {CalculatorComponent} from './pages/calculator/calculator.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeComponent} from './home/home.component';
 import {FormsModule} from "@angular/forms";
-import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component';
 import {LinearSystemSize} from './pages/calculator/calculator-content/linear-system-size/linear-system-size.component';
 import {CardComponent} from './pages/calculator/card/card.component';
 import {SolutionComponent} from './pages/calculator/calculator-content/solution/solution.component';
 import {VarDirective} from "../ng-var.directive";
-import { LinearSystemDataComponent } from './pages/calculator/calculator-content/linear-system-data/linear-system-data.component';
-import { StandardFormComponent } from './pages/calculator/calculator-content/standard-form/standard-form.component';
-import {NewTableauComponent} from './pages/calculator/calculator-content/new-tableau/new-tableau.component';
+import {LinearSystemDataComponent} from './pages/calculator/calculator-content/linear-system-data/linear-system-data.component';
+import {StandardFormComponent} from './pages/calculator/calculator-content/standard-form/standard-form.component';
+import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    CalculatorComponent,
+    CardComponent,
+    HomeComponent,
+    LearningComponent,
+    LinearSystemDataComponent,
+    LinearSystemSize,
     NavBarComponent,
     NavBoxComponent,
-    LearningComponent,
-    PractiseComponent,
-    CalculatorComponent,
-    HomeComponent,
     TableauComponent,
-    LinearSystemSize,
-    CardComponent,
+    PractiseComponent,
     SolutionComponent,
-    VarDirective,
-    LinearSystemDataComponent,
     StandardFormComponent,
-    NewTableauComponent
-
+    VarDirective
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     FormsModule,
-    NgbModule,
-    AppRoutingModule
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,7 @@ import {SolutionInput} from 'src/app/pages/calculator/calculator-content/solutio
 
 export class SolutionComponent {
 
-  @Input() inputData: SolutionInput | undefined;
+  @Input() data: SolutionInput | undefined;
+
 
 }

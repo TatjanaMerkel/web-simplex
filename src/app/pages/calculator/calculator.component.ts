@@ -1,15 +1,14 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {LinearSystemSizeOutput} from "./calculator-content/linear-system-size/linear-system-size-output";
-import {TableauInput} from "./calculator-content/tableau/tableau-input";
-import {TableauData} from "./tableau-data";
 import {LinearSystemDataOutput} from "./calculator-content/linear-system-data/linear-system-data-output";
 import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
 import * as math from "mathjs";
 import {Fraction} from "mathjs";
 import {NewTableauData} from "./new-tableau-data";
-import {NewTableauInput} from "./calculator-content/new-tableau/new-tableau-input";
 import {StandardFormOutput} from "./calculator-content/standard-form/standard-form-output";
 import {LinearSystemDataInput} from "./calculator-content/linear-system-data/linear-system-data-input";
+import {SolutionInput} from "./calculator-content/solution/solution-input";
+import {TableauInput} from "./calculator-content/tableau/tableau-input";
 
 
 
@@ -34,8 +33,6 @@ export class CalculatorComponent {
   constraintConstants: number[] | undefined;
 
   showSolution = false;
-
-  tableauDataList: Array<TableauData> | undefined;
 
   tableauData: Array<NewTableauData> | undefined;
 
@@ -95,20 +92,11 @@ export class CalculatorComponent {
   // }
 
 
-  getTableauInput(i: number): TableauInput {
+
+
+  getNewTableauInput(tableauData: NewTableauData): TableauInput {
     return {
-      numberOfVars: this.numberOfVars,
-      numberOfConstraints: this.numberOfConstraints,
-
-      ...this.tableauDataList![i],
-
-      calculate: false
-    }
-  }
-
-  getNewTableauInput(tableauData: NewTableauData): NewTableauInput {
-    return {
-      numberOfVars: this.numberOfVars,
+      numberOfVars: this.numberOfVars + this.numberOfConstraints,
       numberOfConstraints: this.numberOfConstraints,
 
       ...tableauData
@@ -309,8 +297,12 @@ export class CalculatorComponent {
   }
 
   onStandardFormChange(standardFormOutput: StandardFormOutput) {
-
   }
+
+  getSolutionInput(): SolutionInput {
+    return {targetConstant: this.targetConstant!}
+  }
+
 }
 
 

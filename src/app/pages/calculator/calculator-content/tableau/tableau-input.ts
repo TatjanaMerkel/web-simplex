@@ -1,14 +1,13 @@
+import {Fraction} from 'mathjs';
+
 export interface TableauInput {
   numberOfVars: number,
   numberOfConstraints: number,
 
-  targetVars: number[],
-  targetSlackVars: number[],
-  targetConstant: number,
+  targetVars: Fraction[],
+  targetVal: Fraction,
 
-  constraintVars: number[][],
-  constraintSlackVars: number[][],
-  constraintConstants: number[],
+  constraintVars: Fraction[][],
+  constraintVals: Fraction[]
 
-  calculate: boolean
 }

@@ -9,7 +9,7 @@
 
   <!-- Linear System Data -->
   <div class="arrow-2">
-  <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
 
   <app-card class="card-2" title="Eingabe der Parameter">
@@ -19,7 +19,7 @@
   </app-card>
 
 
-    <!-- Standard Form -->
+  <!-- Standard Form -->
   <div class="arrow-3">
     <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
@@ -33,26 +33,26 @@
 
   <!-- Tableaus -->
 
-  <!--  <app-card class="card-4" *ngIf="linearSystemData !== null" title="Eingabe des Linearen Programms">-->
-  <!--    <app-tableau *ngFor="let tableuaData of tableauDataList; index as i"-->
-  <!--                 [inputData]="getTableauInput(i)">-->
-  <!--    </app-tableau>-->
-  <!--  </app-card>-->
+  <div class="arrow-4">
+    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
 
 
-  <!-- New tableaus -->
   <app-card class="card-4" title="Tableaus">
-    <app-new-tableau *ngFor="let tableau of tableauData" [data]="getNewTableauInput(tableau)">
-    </app-new-tableau>
+    <app-tableau *ngFor="let tableau of tableauData"
+                 [data]="getNewTableauInput(tableau)">
+    </app-tableau>
+
   </app-card>
 
-  <ng-container *ngIf="showSolution">
-    <div class="arrow-5">
-      <img src="assets/images/bluearrow.png" alt="arrow1" width="50px" height="50px">
-    </div>
+  <!-- Solution -->
 
-    <app-card class="card-5" title="Lösung">
-      <app-solution [inputData]="{targetConstant: targetConstant!}"></app-solution>
-    </app-card>
-  </ng-container>
+  <div class="arrow-5">
+    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card class="card-5" title="Lösung">
+    <app-solution [data]="getSolutionInput()"></app-solution>
+  </app-card>
+
 </div>

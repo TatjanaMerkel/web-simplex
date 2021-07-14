@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TableauComponent } from './tableau.component';
 
-describe('TableauComponent', () => {
+describe('NewTableauComponent', () => {
   let component: TableauComponent;
   let fixture: ComponentFixture<TableauComponent>;
 

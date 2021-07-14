@@ -1,5 +1,4 @@
 table {
-  border-collapse: collapse;
 }
 
 thead {
@@ -10,13 +9,14 @@ tfoot {
   border-top: 1px solid white;
 }
 
-.vertical-bar {
+.bar-left {
   border-left: 1px solid white;
 }
 
-td input {
-  width: 24px;
+.bar-right {
+  border-right: 1px solid white;
 }
+
 
 .space {
   width: 12px;
@@ -25,4 +25,3 @@ td input {
 .center {
   text-align: center;
 }
-
