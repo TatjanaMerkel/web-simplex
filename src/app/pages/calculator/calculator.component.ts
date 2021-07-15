@@ -4,13 +4,11 @@ import {LinearSystemDataOutput} from "./calculator-content/linear-system-data/li
 import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
 import * as math from "mathjs";
 import {Fraction} from "mathjs";
-import {NewTableauData} from "./new-tableau-data";
+import {TableauData} from "./tableau-data";
 import {StandardFormOutput} from "./calculator-content/standard-form/standard-form-output";
 import {LinearSystemDataInput} from "./calculator-content/linear-system-data/linear-system-data-input";
 import {SolutionInput} from "./calculator-content/solution/solution-input";
 import {TableauInput} from "./calculator-content/tableau/tableau-input";
-
-
 
 @Component({
   selector: 'app-calculator',
@@ -34,7 +32,7 @@ export class CalculatorComponent {
 
   showSolution = false;
 
-  tableauData: Array<NewTableauData> | undefined;
+  tableauData: Array<TableauData> | undefined;
 
   bla!: LinearSystemDataOutput;
 
@@ -47,12 +45,11 @@ export class CalculatorComponent {
     constraintVars: [
       [math.fraction('-4/5'), math.fraction('1')],
       [math.fraction('7'), math.fraction('-8')],
-      [math.fraction('9.9'), math.fraction('-1.3')]
+      [math.fraction('9.9'), math.fraction('-1.3')],
     ] as Fraction[][],
 
-    constraintVals: [math.fraction('10/11'), math.fraction('20/21'), math.fraction('30/31')] as Fraction[]
+    constraintVals: [math.fraction('1/8'), math.fraction('2/9'), math.fraction('30/31')] as Fraction[]
   }
-
 
   constructor(private changeDetection: ChangeDetectorRef) {
   }
@@ -91,10 +88,7 @@ export class CalculatorComponent {
   //   this.calcNewTableaus();
   // }
 
-
-
-
-  getNewTableauInput(tableauData: NewTableauData): TableauInput {
+  getTableauInput(tableauData: TableauData): TableauInput {
     return {
       numberOfVars: this.numberOfVars + this.numberOfConstraints,
       numberOfConstraints: this.numberOfConstraints,
@@ -154,23 +148,26 @@ export class CalculatorComponent {
     slackVars: [1, 2, 3]
   }
 
-
   calcNewTableaus(): void {
-    this.tableauData = new Array<NewTableauData>();
+    this.tableauData = new Array<TableauData>();
 
     //
     // First tableau contains input data
     //
+
     this.tableauData[0] = {
       targetVars: this.newStandardFormOutput.targetVars,
       targetVal: math.fraction(0) as Fraction,
+
       constraintVars: this.newStandardFormOutput.constraintVars,
-      constraintVals: this.newStandardFormOutput.constraintVals
+      constraintVals: this.newStandardFormOutput.constraintVals,
+
+      pivotCol: -1,
+      pivotRow: -1
     }
 
     let previousTableau = this.tableauData[0];
     let minTargetVar = math.min(...previousTableau.targetVars);
-
 
     while (math.smaller(minTargetVar, 0)) {
 
@@ -179,11 +176,11 @@ export class CalculatorComponent {
        */
 
       const pivotCol = previousTableau.targetVars.indexOf(minTargetVar);
+      previousTableau.pivotCol = pivotCol;
 
       /*
        * Shorter var names
        */
-
       const oldTargetVars = previousTableau.targetVars;
       const oldTargetVal = previousTableau.targetVal;
 
@@ -202,6 +199,7 @@ export class CalculatorComponent {
        * Calculate theta values
        */
 
+
       const thetas = new Array<Fraction>(this.numberOfConstraints);
 
       for (let i = 0; i < thetas.length; i++) {
@@ -210,13 +208,14 @@ export class CalculatorComponent {
       }
 
       /*
-       * - Find pivot row, i.e. row with smallest positive theta value
-       * - Get pivot element at pivot row/column intersection
+        * - Find pivot row, i.e. row with smallest positive theta value
+        * - Get pivot element at pivot row/column intersection
        */
+
 
       const positiveThetas = thetas.filter(value => math.larger(value, 0));
       const pivotRow = positiveThetas.indexOf(math.min(...positiveThetas));
-
+      previousTableau.pivotRow = pivotRow;
 
       const pivot = oldConstraintVars[pivotRow][pivotCol];
 
@@ -238,19 +237,22 @@ export class CalculatorComponent {
           const factor = oldConstraintVars[row][pivotCol];
 
           newConstraintVars[row] = oldConstraintVars[row].map((value, index) =>
+
             math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
           ) as Fraction[];
 
           newConstraintVals[row] = math.subtract(oldConstraintVals[row],
             math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
-
         }
       }
+
       /*
-       * Calculate target row by subtracting multiple of new pivot row
-       */
+ * Calculate target row by subtracting multiple of new pivot row
+ */
+
 
       const factor = oldTargetVars[pivotCol];
+
 
       const newTargetVars = oldTargetVars.map((value, index) =>
         math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
@@ -264,16 +266,20 @@ export class CalculatorComponent {
         targetVars: newTargetVars,
         targetVal: newTargetVal,
 
-
         constraintVars: newConstraintVars,
-        constraintVals: newConstraintVals
-      }
+        constraintVals: newConstraintVals,
 
+        pivotCol: -1,
+        pivotRow: -1
+
+      }
 
       this.tableauData.push(newTableau);
 
       previousTableau = newTableau;
       minTargetVar = math.min(...previousTableau.targetVars);
+
+
     }
   }
 
@@ -282,6 +288,7 @@ export class CalculatorComponent {
     //   numberOfVars: this.numberOfVars,
     //   numberOfConstraints: this.numberOfConstraints
     // }
+
     return {
       numberOfVars: 2,
       numberOfConstraints: 3
@@ -297,12 +304,10 @@ export class CalculatorComponent {
   }
 
   onStandardFormChange(standardFormOutput: StandardFormOutput) {
+
   }
 
   getSolutionInput(): SolutionInput {
     return {targetConstant: this.targetConstant!}
   }
-
 }
-
-

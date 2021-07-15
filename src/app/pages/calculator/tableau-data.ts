@@ -1,10 +1,13 @@
+import {Fraction} from 'mathjs';
+
 export interface TableauData {
-  targetVars: number[],
-  targetSlackVars: number[],
-  targetConstant: number,
+  targetVars: Fraction[],
+  targetVal: Fraction,
 
-  constraintVars: number[][],
-  constraintSlackVars: number[][],
-  constraintConstants: number[]
+  constraintVars: Fraction[][],
+  constraintVals: Fraction[],
+
+  pivotCol: number,
+  pivotRow: number
+
 }
-

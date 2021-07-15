@@ -1,6 +1,7 @@
 <div class="container">
 
   <!-- Linear System Size -->
+
   <app-card class="card-1"
             title="Größe des Linearen Programms">
     <app-linear-system-size (dataChange)="onLinearSystemSizeChange($event)">
@@ -8,6 +9,7 @@
   </app-card>
 
   <!-- Linear System Data -->
+
   <div class="arrow-2">
     <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
@@ -18,12 +20,11 @@
     </app-linear-system-data>
   </app-card>
 
-
   <!-- Standard Form -->
+
   <div class="arrow-3">
     <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
-
 
   <app-card class="card-3" title="LGS in Standard-Form">
     <app-standard-form [data]="getStandardFormInput()"
@@ -37,10 +38,9 @@
     <img src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
 
-
   <app-card class="card-4" title="Tableaus">
     <ng-container *ngFor="let tableau of tableauData">
-      <app-tableau [data]="getNewTableauInput(tableau)"></app-tableau>
+      <app-tableau [data]="getTableauInput(tableau)"></app-tableau>
       <br/>
     </ng-container>
   </app-card>

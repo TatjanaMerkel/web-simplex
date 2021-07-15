@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 5% 5% 80% 5% 5%;
   grid-template-rows: auto;
+
   grid-template-areas:
     "header  header  header  header  header"
     ".       .       card-1  .       .     "
@@ -23,16 +24,13 @@
   grid-area: card-1;
 }
 
-
 .arrow-2 {
   grid-area: arrow-2;
 }
 
-
 .card-2 {
   grid-area: card-2;
 }
-
 
 .arrow-3 {
   grid-area: arrow-3;
@@ -41,7 +39,6 @@
 .card-3 {
   grid-area: card-3;
 }
-
 
 .arrow-4 {
   grid-area: arrow-4;
@@ -63,5 +60,3 @@ img {
   width: 50px;
   height: 50px;
 }
-
-
