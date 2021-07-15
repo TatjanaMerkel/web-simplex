@@ -5,12 +5,11 @@
 <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
 <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
 <!--                                                 -->
+
 <table *ngIf="data">
 
   <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
   <tr>
-    <td>Z</td>
-    <td>=</td>
 
     <!--  -1 x1  -->
     <ng-container *ngVar="targetVars[0] as targetVar">
@@ -32,6 +31,7 @@
     <td class="value">z</td>
     <td class="operator">=</td>
     <td class="value">0</td>
+
   </tr>
 
   <!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
@@ -58,7 +58,6 @@
       </ng-container>
     </ng-container>
 
-
     <!--      =  7  -->
     <!--      = 11  -->
     <!--      = 15  -->
@@ -70,12 +69,6 @@
   </tr>
 </table>
 
-<button
-  class="btn btn-success btn-lg float-right"
-  (click)="emitValues()">
+<button class="btn btn-success btn-lg float-right" (click)="emitValues()">
   Next
 </button>
-
-
-
-

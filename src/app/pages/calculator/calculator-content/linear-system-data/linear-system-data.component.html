@@ -40,7 +40,6 @@
 
     <ng-container *ngFor="let _ of constraintVars[c].slice(1); index as v; trackBy: trackByIndex">
       <td>+</td>
-
       <td>
         <input (input)="onConstraintVarChanged($event, c,v + 1)"
                [disabled]="!editable"/>
@@ -58,6 +57,7 @@
              [disabled]="!editable"/>
     </td>
   </tr>
+
 </table>
 
 <ng-container *ngIf="editable; else disabledButton">
@@ -73,7 +73,3 @@
     Edit
   </button>
 </ng-template>
-
-
-
-

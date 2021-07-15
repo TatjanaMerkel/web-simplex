@@ -52,8 +52,8 @@ export class StandardFormComponent implements OnChanges {
       constraintSlackVars[c][c] = math.fraction(1) as Fraction
       console.log(this.constraintVars[c])
       this.constraintVars[c] = this.constraintVars[c].concat(constraintSlackVars[c])
-
     }
+
     this.constraintVals = this.data.constraintVals
   }
 
@@ -61,6 +61,7 @@ export class StandardFormComponent implements OnChanges {
     this.dataChange.emit({
       numberOfVars: this.numberOfVars,
       numberOfConstraints: this.numberOfConstraints,
+
       targetVars: this.targetVars,
       targetVal: this.targetVal,
       constraintVars: this.constraintVars,
@@ -100,4 +101,3 @@ export class StandardFormComponent implements OnChanges {
     }
   }
 }
-

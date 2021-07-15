@@ -5,5 +5,4 @@ export interface LinearSystemDataOutput {
 
   constraintVarsMatrix: Fraction[][],
   constraintValsCol: Fraction[]
-
 }

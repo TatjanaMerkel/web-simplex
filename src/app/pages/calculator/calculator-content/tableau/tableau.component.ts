@@ -23,6 +23,10 @@ export class TableauComponent {
     const pivotRow = this.data!.pivotRow;
     const pivotCol = this.data!.pivotCol;
 
+    if (pivotRow === null && pivotCol === null) {
+      return [];
+    }
+
     if (c === pivotRow && v === pivotCol) {
       return ['pivot-row-col'];
     } else if (c === pivotRow) {

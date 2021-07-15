@@ -4,7 +4,6 @@ import {LinearSystemDataOutput} from "./linear-system-data-output";
 import {Fraction} from "mathjs";
 import * as math from "mathjs";
 
-
 @Component({
   selector: 'app-linear-system-data',
   templateUrl: './linear-system-data.component.html',
@@ -14,7 +13,6 @@ export class LinearSystemDataComponent implements OnChanges {
 
   @Input() data: LinearSystemDataInput | undefined
 
-
   @Output() dataChange = new EventEmitter<LinearSystemDataOutput>()
 
   initialized = false
@@ -23,9 +21,6 @@ export class LinearSystemDataComponent implements OnChanges {
   targetVars!: Array<Fraction | null>
   constraintVars!: Array<Array<Fraction | null>>
   constraintVals!: Array<Fraction | null>
-
-
-
 
   ngOnChanges(changes: SimpleChanges): void {
     const data = this.data!
@@ -44,7 +39,6 @@ export class LinearSystemDataComponent implements OnChanges {
     this.initialized = true
   }
 
-
   onTargetVarChanged(event: Event, v: number) {
     const inputValue = (<HTMLInputElement>event.target).value
 
@@ -53,7 +47,6 @@ export class LinearSystemDataComponent implements OnChanges {
     } catch(e) {
       this.targetVars[v] = null
     }
-
   }
 
   onConstraintVarChanged(event: Event, c: number, v: number) {
@@ -64,7 +57,6 @@ export class LinearSystemDataComponent implements OnChanges {
     } catch(e) {
       this.constraintVars[c][v] = null
     }
-
   }
 
   onConstraintConstantChanged(event: Event, c: number) {
@@ -75,8 +67,6 @@ export class LinearSystemDataComponent implements OnChanges {
     } catch(e) {
       this.constraintVals[c] = null
     }
-
-
   }
 
   trackByIndex(index: number, _item: any) {
@@ -102,15 +92,13 @@ export class LinearSystemDataComponent implements OnChanges {
   /**
    * Must only be invoked if sure that all input values !== null
    */
-
   emitValues() {
     this.dataChange.emit({
       targetVarsRow: this.targetVars as Array<Fraction>,
       constraintVarsMatrix: this.constraintVars as Array<Array<Fraction>>,
       constraintValsCol: this.constraintVals as Array<Fraction>
-
     })
+
     this.editable = false
   }
 }
-

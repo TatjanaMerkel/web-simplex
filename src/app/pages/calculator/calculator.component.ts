@@ -106,8 +106,8 @@ export class CalculatorComponent {
     numberOfConstraints: 3,
 
     targetVars: [
-      math.fraction('-1.1'),
-      math.fraction('-2/3'),
+      math.fraction('-5'),
+      math.fraction('-2'),
       math.fraction(0),
       math.fraction(0),
       math.fraction(0)
@@ -117,22 +117,22 @@ export class CalculatorComponent {
 
     constraintVars: [
       [
-        math.fraction('-4/5'),
-        math.fraction('1'),
+        math.fraction('-3'),
+        math.fraction('4'),
         math.fraction(1),
         math.fraction(0),
         math.fraction(0)
       ],
       [
-        math.fraction('7'),
-        math.fraction('-8'),
+        math.fraction('6'),
+        math.fraction('-7'),
         math.fraction(0),
         math.fraction(1),
         math.fraction(0)
       ],
       [
-        math.fraction('9.9'),
-        math.fraction('-1.3'),
+        math.fraction('9'),
+        math.fraction('10'),
         math.fraction(0),
         math.fraction(0),
         math.fraction(1)
@@ -140,9 +140,9 @@ export class CalculatorComponent {
     ] as Fraction[][],
 
     constraintVals: [
-      math.fraction('1/8'),
-      math.fraction('2/9'),
-      math.fraction('30/31')
+      math.fraction('5'),
+      math.fraction('8'),
+      math.fraction('11')
     ] as Fraction[],
 
     slackVars: [1, 2, 3]
@@ -162,105 +162,92 @@ export class CalculatorComponent {
       constraintVars: this.newStandardFormOutput.constraintVars,
       constraintVals: this.newStandardFormOutput.constraintVals,
 
-      pivotCol: -1,
-      pivotRow: -1
-    }
+      pivotRow: null,
+      pivotCol: null,
 
-    let previousTableau = this.tableauData[0];
-    let minTargetVar = math.min(...previousTableau.targetVars);
+      thetas: null
+    };
+
+    let prevTableau = this.tableauData[0];
+    let minTargetVar = math.min(...prevTableau.targetVars);
 
     while (math.smaller(minTargetVar, 0)) {
 
-      /*
-       * Find (non-slack) variable with most negative target variable
-       */
+      //
+      // Find pivot col (var with most negative value)
+      //
 
-      const pivotCol = previousTableau.targetVars.indexOf(minTargetVar);
-      previousTableau.pivotCol = pivotCol;
+      const pivotCol = prevTableau.targetVars.indexOf(minTargetVar);
 
-      /*
-       * Shorter var names
-       */
-      const oldTargetVars = previousTableau.targetVars;
-      const oldTargetVal = previousTableau.targetVal;
+      prevTableau.pivotCol = pivotCol;
 
-      const oldConstraintVars = previousTableau.constraintVars;
-      const oldConstraintVals = previousTableau.constraintVals;
-
-
-      /*
-       * Create new data arrays with same size as input arrays
-       */
-
-      const newConstraintVars = new Array<Array<Fraction>>(oldConstraintVars.length);
-      const newConstraintVals = new Array<Fraction>(oldConstraintVals.length);
-
-      /*
-       * Calculate theta values
-       */
-
+      //
+      // Calculate theta values
+      //
 
       const thetas = new Array<Fraction>(this.numberOfConstraints);
 
-      for (let i = 0; i < thetas.length; i++) {
-        thetas[i] = math.divide(oldConstraintVals[i], oldConstraintVars[i][pivotCol]) as Fraction;
-
+      for (let c = 0; c < thetas.length; c++) {
+        thetas[c] = math.divide(prevTableau.constraintVals[c], prevTableau.constraintVars[c][pivotCol]) as Fraction;
       }
 
-      /*
-        * - Find pivot row, i.e. row with smallest positive theta value
-        * - Get pivot element at pivot row/column intersection
-       */
+      prevTableau.thetas = thetas;
 
+      //
+      // Find pivot row (row with smallest positive theta) and pivot element
+      //
 
       const positiveThetas = thetas.filter(value => math.larger(value, 0));
       const pivotRow = positiveThetas.indexOf(math.min(...positiveThetas));
-      previousTableau.pivotRow = pivotRow;
 
-      const pivot = oldConstraintVars[pivotRow][pivotCol];
+      prevTableau.pivotRow = pivotRow;
 
-      /*
-       * Calculate new pivot row by dividing though pivot element
-       */
+      const pivot = prevTableau.constraintVars[pivotRow][pivotCol];
 
-      newConstraintVars[pivotRow] = oldConstraintVars[pivotRow]
+      //
+      // Calculate new pivot row by dividing though pivot element
+      //
+
+      const newConstraintVars = new Array<Array<Fraction>>(prevTableau.constraintVars.length);
+      newConstraintVars[pivotRow] = prevTableau.constraintVars[pivotRow]
         .map(value => math.divide(value, pivot) as Fraction);
 
-      newConstraintVals[pivotRow] = math.divide(oldConstraintVals[pivotRow], pivot) as Fraction;
+      const newConstraintVals = new Array<Fraction>(prevTableau.constraintVals.length);
+      newConstraintVals[pivotRow] = math.divide(prevTableau.constraintVals[pivotRow], pivot) as Fraction;
 
-      /*
-       * Calculate other rows by subtracting multiple of new pivot row
-       */
+      //
+      // Calculate other rows by subtracting multiple of new pivot row
+      //
 
-      for (let row = 0; row < oldConstraintVars.length; row++) {
-        if (row !== pivotRow) {
-          const factor = oldConstraintVars[row][pivotCol];
+      for (let c = 0; c < prevTableau.constraintVars.length; c++) {
+        if (c !== pivotRow) {
+          const factor = prevTableau.constraintVars[c][pivotCol];
 
-          newConstraintVars[row] = oldConstraintVars[row].map((value, index) =>
-
+          newConstraintVars[c] = prevTableau.constraintVars[c].map((value, index) =>
             math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
           ) as Fraction[];
 
-          newConstraintVals[row] = math.subtract(oldConstraintVals[row],
+          newConstraintVals[c] = math.subtract(prevTableau.constraintVals[c],
             math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
         }
       }
 
-      /*
- * Calculate target row by subtracting multiple of new pivot row
- */
+      //
+      // Calculate target row by subtracting multiple of new pivot row
+      //
 
+      const factor = prevTableau.targetVars[pivotCol];
 
-      const factor = oldTargetVars[pivotCol];
-
-
-      const newTargetVars = oldTargetVars.map((value, index) =>
+      const newTargetVars = prevTableau.targetVars.map((value, index) =>
         math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
       ) as Fraction[];
 
-      const newTargetVal = math.subtract(oldTargetVal,
+      const newTargetVal = math.subtract(prevTableau.targetVal,
         math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
 
+      //
+      // Add new tableau
+      //
 
       const newTableau = {
         targetVars: newTargetVars,
@@ -269,17 +256,16 @@ export class CalculatorComponent {
         constraintVars: newConstraintVars,
         constraintVals: newConstraintVals,
 
-        pivotCol: -1,
-        pivotRow: -1
+        pivotCol: null,
+        pivotRow: null,
 
+        thetas: null
       }
 
       this.tableauData.push(newTableau);
 
-      previousTableau = newTableau;
-      minTargetVar = math.min(...previousTableau.targetVars);
-
-
+      prevTableau = newTableau;
+      minTargetVar = math.min(...prevTableau.targetVars);
     }
   }
 

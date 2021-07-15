@@ -10,7 +10,8 @@ export interface TableauInput {
   constraintVars: Fraction[][],
   constraintVals: Fraction[],
 
-  pivotCol: number,
-  pivotRow: number
+  pivotCol: number | null,
+  pivotRow: number | null,
 
+  thetas: Fraction[] | null
 }

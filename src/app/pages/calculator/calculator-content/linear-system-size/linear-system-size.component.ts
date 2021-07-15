@@ -11,7 +11,6 @@ export class LinearSystemSize {
 
   @Output() dataChange = new EventEmitter<LinearSystemSizeOutput>();
 
-
   editable = true;
 
   currentNumberOfVars = 0;
@@ -35,6 +34,4 @@ export class LinearSystemSize {
   enableEditing() {
     this.editable = true;
   }
-
-
 }
