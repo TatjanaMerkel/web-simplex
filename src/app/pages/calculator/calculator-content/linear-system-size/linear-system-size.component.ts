@@ -11,38 +11,26 @@ export class LinearSystemSize {
 
   @Output() dataChange = new EventEmitter<LinearSystemSizeOutput | null>()
 
-
   editable = true
   inputValid = false
-
 
   numberOfVars: number | null = null
   numberOfConstraints: number | null = null
 
-
-  validateInput(): boolean {
-    return this.numberOfVars !== null && this.numberOfConstraints !== null
-  }
-
   onGenerate(): void {
-
     this.dataChange.emit({
       numberOfVars: this.numberOfVars!,
       numberOfConstraints: this.numberOfConstraints!
-
-
     })
-    this.editable = false
 
+    this.editable = false
   }
 
   onEdit(): void {
-
     this.dataChange.emit(null)
 
     this.editable = true
   }
-
 
   onNumberOfVarsChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement
@@ -70,4 +58,7 @@ export class LinearSystemSize {
     this.inputValid = this.validateInput()
   }
 
+  validateInput(): boolean {
+    return this.numberOfVars !== null && this.numberOfConstraints !== null
+  }
 }

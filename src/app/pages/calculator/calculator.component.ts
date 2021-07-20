@@ -18,8 +18,9 @@ import {TableauInput} from './calculator-content/tableau/tableau-input';
 })
 export class CalculatorComponent {
 
-  linearSystemSizeOutput: LinearSystemSizeOutput | null = null;
-  linearSystemDataOutput: LinearSystemDataOutput | undefined;
+  linearSystemSizeOutput: LinearSystemSizeOutput | null = null
+  linearSystemDataOutput: LinearSystemDataOutput | null = null
+
 
 
   numberOfVars: number = 2;
@@ -38,8 +39,6 @@ export class CalculatorComponent {
   showSolution = false;
 
   tableauData: Array<TableauData> | undefined;
-
-  bla!: LinearSystemDataOutput;
 
   newStandardFormData: StandardFormInput = {
     numberOfVars: 2,
@@ -261,9 +260,8 @@ export class CalculatorComponent {
     }
   }
 
-  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput): void {
+  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput | null): void {
     this.linearSystemDataOutput = linearSystemDataOutput;
-    this.bla = linearSystemDataOutput;
   }
 
   getStandardFormInput() {

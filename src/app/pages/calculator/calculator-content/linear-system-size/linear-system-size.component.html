@@ -3,12 +3,9 @@
     <td>Anzahl der Variablen:</td>
     <td>
       <input type="number"
-
              min="0"
              [disabled]="!editable"
              (input)="onNumberOfVarsChange($event)">
-
-
     </td>
   </tr>
   <tr>
@@ -18,19 +15,19 @@
              min="0"
              [disabled]="!editable"
              (input)="onNumberOfConstraintsChange($event)">
-
     </td>
   </tr>
 </table>
 
 <!-- Button -->
+
 <ng-container *ngIf="editable; then generate; else edit"></ng-container>
 <ng-template #generate>
+
   <button class="btn btn-success btn-lg float-right"
           [disabled]="!inputValid"
           (click)="onGenerate()">
-
-  Generate
+    Generate
   </button>
 
 </ng-template>
@@ -38,14 +35,7 @@
 
   <button class="btn btn-warning btn-lg float-right"
           (click)="onEdit()">
-
-  Edit
+    Edit
   </button>
 
 </ng-template>
-
-
-
-
-
-

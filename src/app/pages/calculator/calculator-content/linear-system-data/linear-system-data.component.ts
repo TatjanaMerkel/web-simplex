@@ -4,7 +4,6 @@ import {LinearSystemDataOutput} from './linear-system-data-output';
 import {Fraction} from 'mathjs';
 import * as math from 'mathjs';
 
-
 @Component({
   selector: 'app-linear-system-data',
   templateUrl: './linear-system-data.component.html',
@@ -12,25 +11,21 @@ import * as math from 'mathjs';
 })
 export class LinearSystemDataComponent implements OnChanges {
 
-  @Input() data: LinearSystemDataInput | undefined
+  @Input() data: LinearSystemDataInput | null = null
 
-  @Output() dataChange = new EventEmitter<LinearSystemDataOutput>()
+  @Output() dataChange = new EventEmitter<LinearSystemDataOutput | null>()
 
-  initialized = false
   editable = true
+  inputValid = false
 
   targetVars!: Array<Fraction | null>
   constraintVars!: Array<Array<Fraction | null>>
   constraintVals!: Array<Fraction | null>
 
-  inputValid = false
-
-
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data.firstChange) {
-      const numberOfVars = this.data!.numberOfVars;
-      const numberOfConstraints = this.data!.numberOfConstraints
-
+    if (this.data && changes.data.firstChange) {
+      const numberOfVars = this.data.numberOfVars
+      const numberOfConstraints = this.data.numberOfConstraints
 
       this.targetVars = new Array<Fraction | null>(numberOfVars).fill(null)
 
@@ -39,67 +34,72 @@ export class LinearSystemDataComponent implements OnChanges {
         this.constraintVars[c] = new Array<Fraction | null>(numberOfVars).fill(null)
       }
 
-
       this.constraintVals = new Array<Fraction | null>(numberOfConstraints).fill(null)
-
-
-      this.initialized = true
     }
+  }
 
+  /**
+   * Must only be invoked if sure that all input values !== null
+   */
+  onCalculate(): void {
+    this.dataChange.emit({
+      targetVarsRow: this.targetVars as Array<Fraction>,
+      constraintVarsMatrix: this.constraintVars as Array<Array<Fraction>>,
+      constraintValsCol: this.constraintVals as Array<Fraction>
+    })
+
+    this.editable = false
+  }
+
+  onEdit(): void {
+    this.dataChange.emit(null)
+
+    this.editable = true
   }
 
   onTargetVarChanged(event: Event, v: number) {
-    const inputValue = (<HTMLInputElement>event.target).value
+    const inputElement = event.target as HTMLInputElement
+    const inputValue = inputElement.value
 
     try {
       this.targetVars[v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
+    } catch(e) {
       this.targetVars[v] = null
     }
 
     this.inputValid = this.validateInput()
-    console.log(this.inputValid)
-
   }
 
   onConstraintVarChanged(event: Event, c: number, v: number) {
-    const inputValue = (<HTMLInputElement>event.target).value
+    const inputElement = event.target as HTMLInputElement
+    const inputValue = inputElement.value
 
     try {
       this.constraintVars[c][v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
+    } catch(e) {
       this.constraintVars[c][v] = null
     }
 
     this.inputValid = this.validateInput()
-    console.log(this.inputValid)
-
-
   }
 
   onConstraintConstantChanged(event: Event, c: number) {
-    const inputValue = (<HTMLInputElement>event.target).value
+    const inputElement = event.target as HTMLInputElement
+    const inputValue = inputElement.value
 
     try {
       this.constraintVals[c] = math.fraction(inputValue) as Fraction
-    } catch (e) {
+    } catch(e) {
       this.constraintVals[c] = null
     }
 
-
     this.inputValid = this.validateInput()
-    console.log(this.inputValid)
-
-  }
-
-  trackByIndex(index: number, _item: any) {
-    return index;
   }
 
   /**
    * Check if all input fields are filled.
    */
-  validateInput() {
+  validateInput(): boolean {
     if (this.targetVars.indexOf(null) !== -1) {
       return false;
     }
@@ -113,16 +113,7 @@ export class LinearSystemDataComponent implements OnChanges {
     return this.constraintVals.indexOf(null) === -1;
   }
 
-  /**
-   * Must only be invoked if sure that all input values !== null
-   */
-  emitValues() {
-    this.dataChange.emit({
-      targetVarsRow: this.targetVars as Array<Fraction>,
-      constraintVarsMatrix: this.constraintVars as Array<Array<Fraction>>,
-      constraintValsCol: this.constraintVals as Array<Fraction>
-    })
-
-    this.editable = false
+  trackByIndex(index: number, _item: any) {
+    return index;
   }
 }
