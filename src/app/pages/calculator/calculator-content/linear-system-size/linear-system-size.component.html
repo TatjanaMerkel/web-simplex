@@ -2,22 +2,22 @@
   <tr>
     <td>Anzahl der Variablen:</td>
     <td>
-      <input #numberOfVarsInput
-             type="number"
+      <input type="number"
+
              min="0"
              [disabled]="!editable"
-             (input)="numberOfVars = +numberOfVarsInput.value">
+             (input)="onNumberOfVarsChange($event)">
+
 
     </td>
   </tr>
   <tr>
     <td>Anzahl der Nebenbedingungen:</td>
     <td>
-      <input #numberOfConstraintsInput
-             type="number"
+      <input type="number"
              min="0"
              [disabled]="!editable"
-             (input)="numberOfConstraints = +numberOfConstraintsInput.value">
+             (input)="onNumberOfConstraintsChange($event)">
 
     </td>
   </tr>
@@ -27,16 +27,19 @@
 <ng-container *ngIf="editable; then generate; else edit"></ng-container>
 <ng-template #generate>
   <button class="btn btn-success btn-lg float-right"
-          (click)="emitValues()">
-    Generate
+          [disabled]="!inputValid"
+          (click)="onGenerate()">
+
+  Generate
   </button>
 
 </ng-template>
 <ng-template #edit>
 
   <button class="btn btn-warning btn-lg float-right"
-          (click)="enableEditing()">
-    Edit
+          (click)="onEdit()">
+
+  Edit
   </button>
 
 </ng-template>

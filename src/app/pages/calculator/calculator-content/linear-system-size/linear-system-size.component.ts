@@ -13,26 +13,61 @@ export class LinearSystemSize {
 
 
   editable = true
-
-  numberOfVars = 0
-  numberOfConstraints = 0
+  inputValid = false
 
 
-  emitValues() {
+  numberOfVars: number | null = null
+  numberOfConstraints: number | null = null
+
+
+  validateInput(): boolean {
+    return this.numberOfVars !== null && this.numberOfConstraints !== null
+  }
+
+  onGenerate(): void {
+
     this.dataChange.emit({
-      numberOfVars: this.numberOfVars,
-      numberOfConstraints: this.numberOfConstraints
+      numberOfVars: this.numberOfVars!,
+      numberOfConstraints: this.numberOfConstraints!
+
 
     })
     this.editable = false
 
   }
 
-  enableEditing() {
+  onEdit(): void {
+
     this.dataChange.emit(null)
 
     this.editable = true
   }
 
+
+  onNumberOfVarsChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement
+    const inputValue = inputElement.value
+
+    if (inputValue === '') {
+      this.numberOfVars = null
+    } else {
+      this.numberOfVars = Number(inputValue)
+    }
+
+    this.inputValid = this.validateInput()
+  }
+
+  onNumberOfConstraintsChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement
+    const inputValue = inputElement.value
+
+    if (inputValue === '') {
+      this.numberOfConstraints = null
+    } else {
+      this.numberOfConstraints = Number(inputValue)
+    }
+
+    this.inputValid = this.validateInput()
+  }
 
 }
