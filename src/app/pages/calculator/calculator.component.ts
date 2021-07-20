@@ -1,14 +1,15 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
-import {LinearSystemSizeOutput} from "./calculator-content/linear-system-size/linear-system-size-output";
-import {LinearSystemDataOutput} from "./calculator-content/linear-system-data/linear-system-data-output";
-import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
-import * as math from "mathjs";
-import {Fraction} from "mathjs";
-import {TableauData} from "./tableau-data";
-import {StandardFormOutput} from "./calculator-content/standard-form/standard-form-output";
-import {LinearSystemDataInput} from "./calculator-content/linear-system-data/linear-system-data-input";
-import {SolutionInput} from "./calculator-content/solution/solution-input";
-import {TableauInput} from "./calculator-content/tableau/tableau-input";
+import {Component} from '@angular/core';
+import {LinearSystemSizeOutput} from './calculator-content/linear-system-size/linear-system-size-output';
+import {LinearSystemDataOutput} from './calculator-content/linear-system-data/linear-system-data-output';
+import {StandardFormInput} from './calculator-content/standard-form/standard-form-input';
+import * as math from 'mathjs';
+import {Fraction} from 'mathjs';
+import {TableauData} from './tableau-data';
+import {StandardFormOutput} from './calculator-content/standard-form/standard-form-output';
+import {LinearSystemDataInput} from './calculator-content/linear-system-data/linear-system-data-input';
+import {SolutionInput} from './calculator-content/solution/solution-input';
+import {TableauInput} from './calculator-content/tableau/tableau-input';
+
 
 @Component({
   selector: 'app-calculator',
@@ -16,6 +17,10 @@ import {TableauInput} from "./calculator-content/tableau/tableau-input";
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent {
+
+  linearSystemSizeOutput: LinearSystemSizeOutput | null = null;
+  linearSystemDataOutput: LinearSystemDataOutput | undefined;
+
 
   numberOfVars: number = 2;
   numberOfConstraints: number = 3;
@@ -51,42 +56,17 @@ export class CalculatorComponent {
     constraintVals: [math.fraction('1/8'), math.fraction('2/9'), math.fraction('30/31')] as Fraction[]
   }
 
-  constructor(private changeDetection: ChangeDetectorRef) {
+  onLinearSystemSizeChange(linearSystemSizeOutput: LinearSystemSizeOutput | null) {
+    this.linearSystemSizeOutput = linearSystemSizeOutput;
+
+    if (linearSystemSizeOutput) {
+      this.numberOfVars = linearSystemSizeOutput.numberOfVars;
+      this.numberOfConstraints = linearSystemSizeOutput.numberOfConstraints;
+      this.showLinearSystem = true;
+    }
+
   }
 
-  onLinearSystemSizeChange(largeLpData: LinearSystemSizeOutput) {
-    this.numberOfVars = largeLpData.numberOfVars;
-    this.numberOfConstraints = largeLpData.numberOfConstraints;
-    this.showLinearSystem = true;
-  }
-
-  // negateTargetVars(data: LinearSystemDataOutput): LinearSystemDataOutput {
-  //   return {
-  //     targetVars: data.targetVars.map(x => -x),
-  //     constraintVars: data.constraintVars,
-  //     constraintConstants: data.constraintConstants
-  //   }
-  // }
-
-  // onStandardFormDataChange(standardFormData: StandardFormData) {
-  //   this.standardFormData = standardFormData;
-  //
-  //   this.targetVars = standardFormData.targetVars;
-  //   this.targetSlackVars = standardFormData.targetSlackVars;
-  //   this.targetConstant = 0;
-  //
-  //   this.constraintVars = standardFormData.constraintVars;
-  //   this.constraintSlackVars = standardFormData.constraintSlackVars;
-  //   this.constraintConstants = standardFormData.constraintConstants;
-  //
-  //   const allTargetVarsPositive = this.targetVars.reduce((old, next) => old && next >= 0, true);
-  //
-  //   if (allTargetVarsPositive) {
-  //     this.showSolution = true;
-  //   }
-  //
-  //   this.calcNewTableaus();
-  // }
 
   getTableauInput(tableauData: TableauData): TableauInput {
     return {
@@ -282,6 +262,7 @@ export class CalculatorComponent {
   }
 
   onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput): void {
+    this.linearSystemDataOutput = linearSystemDataOutput;
     this.bla = linearSystemDataOutput;
   }
 

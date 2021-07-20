@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
-import {LinearSystemDataInput} from "./linear-system-data-input";
-import {LinearSystemDataOutput} from "./linear-system-data-output";
-import {Fraction} from "mathjs";
-import * as math from "mathjs";
+import {LinearSystemDataInput} from './linear-system-data-input';
+import {LinearSystemDataOutput} from './linear-system-data-output';
+import {Fraction} from 'mathjs';
+import * as math from 'mathjs';
+
 
 @Component({
   selector: 'app-linear-system-data',
@@ -22,21 +23,29 @@ export class LinearSystemDataComponent implements OnChanges {
   constraintVars!: Array<Array<Fraction | null>>
   constraintVals!: Array<Fraction | null>
 
+  inputValid = false
+
+
   ngOnChanges(changes: SimpleChanges): void {
-    const data = this.data!
-    const numberOfVars = data.numberOfVars
-    const numberOfConstraints = data.numberOfConstraints
+    if (changes.data.firstChange) {
+      const numberOfVars = this.data!.numberOfVars;
+      const numberOfConstraints = this.data!.numberOfConstraints
 
-    this.targetVars = new Array<Fraction | null>(numberOfVars).fill(null)
 
-    this.constraintVars = new Array<Array<Fraction | null>>(numberOfConstraints)
-    for (let c = 0; c < this.constraintVars.length; c++) {
-      this.constraintVars[c] = new Array<Fraction | null>(numberOfVars).fill(null)
+      this.targetVars = new Array<Fraction | null>(numberOfVars).fill(null)
+
+      this.constraintVars = new Array<Array<Fraction | null>>(numberOfConstraints)
+      for (let c = 0; c < this.constraintVars.length; c++) {
+        this.constraintVars[c] = new Array<Fraction | null>(numberOfVars).fill(null)
+      }
+
+
+      this.constraintVals = new Array<Fraction | null>(numberOfConstraints).fill(null)
+
+
+      this.initialized = true
     }
 
-    this.constraintVals = new Array<Fraction | null>(numberOfConstraints).fill(null)
-
-    this.initialized = true
   }
 
   onTargetVarChanged(event: Event, v: number) {
@@ -44,9 +53,13 @@ export class LinearSystemDataComponent implements OnChanges {
 
     try {
       this.targetVars[v] = math.fraction(inputValue) as Fraction
-    } catch(e) {
+    } catch (e) {
       this.targetVars[v] = null
     }
+
+    this.inputValid = this.validateInput()
+    console.log(this.inputValid)
+
   }
 
   onConstraintVarChanged(event: Event, c: number, v: number) {
@@ -54,9 +67,14 @@ export class LinearSystemDataComponent implements OnChanges {
 
     try {
       this.constraintVars[c][v] = math.fraction(inputValue) as Fraction
-    } catch(e) {
+    } catch (e) {
       this.constraintVars[c][v] = null
     }
+
+    this.inputValid = this.validateInput()
+    console.log(this.inputValid)
+
+
   }
 
   onConstraintConstantChanged(event: Event, c: number) {
@@ -64,9 +82,14 @@ export class LinearSystemDataComponent implements OnChanges {
 
     try {
       this.constraintVals[c] = math.fraction(inputValue) as Fraction
-    } catch(e) {
+    } catch (e) {
       this.constraintVals[c] = null
     }
+
+
+    this.inputValid = this.validateInput()
+    console.log(this.inputValid)
+
   }
 
   trackByIndex(index: number, _item: any) {
@@ -76,10 +99,11 @@ export class LinearSystemDataComponent implements OnChanges {
   /**
    * Check if all input fields are filled.
    */
-  validInput() {
+  validateInput() {
     if (this.targetVars.indexOf(null) !== -1) {
       return false;
     }
+
     for (const constraintVarsLine of this.constraintVars) {
       if (constraintVarsLine.indexOf(null) !== -1) {
         return false;

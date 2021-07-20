@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {LinearSystemSizeOutput} from "./linear-system-size-output";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 
 @Component({
@@ -9,29 +10,53 @@ import {LinearSystemSizeOutput} from "./linear-system-size-output";
 })
 export class LinearSystemSize {
 
-  @Output() dataChange = new EventEmitter<LinearSystemSizeOutput>();
+  @Output() dataChange = new EventEmitter<LinearSystemSizeOutput | null>()
 
-  editable = true;
 
-  currentNumberOfVars = 0;
-  currentNumberOfConstraints = 0;
+  editable = true
 
-  lastEmittedNumberOfVars = 0;
-  lastEmittedNumberOfConstraints = 0;
+  numberOfVars = 0
+  numberOfConstraints = 0
+
 
   emitValues() {
     this.dataChange.emit({
-      numberOfVars: this.currentNumberOfVars,
-      numberOfConstraints: this.currentNumberOfConstraints
+      numberOfVars: this.numberOfVars,
+      numberOfConstraints: this.numberOfConstraints
+
     })
+    this.editable = false
 
-    this.lastEmittedNumberOfVars = this.currentNumberOfVars;
-    this.lastEmittedNumberOfConstraints = this.currentNumberOfConstraints;
-
-    this.editable = false;
   }
 
   enableEditing() {
-    this.editable = true;
+    this.dataChange.emit(null)
+
+    this.editable = true
+  }
+
+
+  closeResult = '';
+
+  constructor(private modalService: NgbModal) {
+  }
+
+  open(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+
   }
 }

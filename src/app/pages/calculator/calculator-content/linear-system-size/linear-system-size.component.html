@@ -6,7 +6,8 @@
              type="number"
              min="0"
              [disabled]="!editable"
-             (input)="currentNumberOfVars = +numberOfVarsInput.value">
+             (input)="numberOfVars = +numberOfVarsInput.value">
+
     </td>
   </tr>
   <tr>
@@ -16,29 +17,63 @@
              type="number"
              min="0"
              [disabled]="!editable"
-             (input)="currentNumberOfConstraints = +numberOfConstraintsInput.value">
+             (input)="numberOfConstraints = +numberOfConstraintsInput.value">
+
     </td>
   </tr>
 </table>
 
-<button *ngIf="lastEmittedNumberOfVars === 0 && lastEmittedNumberOfConstraints === 0"
-        class="btn btn-success btn-lg float-right"
-        [disabled]="currentNumberOfVars === 0 || currentNumberOfConstraints === 0"
-        (click)="emitValues()">
-  Generate
-</button>
+<!-- Button -->
+<ng-container *ngIf="editable; then generate; else edit"></ng-container>
+<ng-template #generate>
+  <button class="btn btn-success btn-lg float-right"
+          (click)="emitValues()">
+    Generate
+  </button>
 
-<button *ngIf="lastEmittedNumberOfVars !== 0 && lastEmittedNumberOfConstraints !== 0 && !editable"
-        class="btn btn-warning btn-lg float-right"
-        (click)="enableEditing()">
-  Edit
-</button>
+</ng-template>
+<ng-template #edit>
 
-<button *ngIf="lastEmittedNumberOfVars !== 0 && lastEmittedNumberOfConstraints !== 0 && editable"
-        class="btn btn-success btn-lg float-right"
-        [disabled]="currentNumberOfVars === 0 || currentNumberOfConstraints === 0"
-        (click)="emitValues()">
-  Update
-</button>
+  <button class="btn btn-warning btn-lg float-right"
+          (click)="enableEditing()">
+    Edit
+  </button>
+
+</ng-template>
+
+<!-- Warning Modal -->
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker
+                 #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+
+<hr>
+
+<pre>{{ closeResult }}</pre>
+
 
 
