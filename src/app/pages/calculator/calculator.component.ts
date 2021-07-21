@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {LinearSystemSizeOutput} from './calculator-content/linear-system-size/linear-system-size-output';
 import {LinearSystemDataOutput} from './calculator-content/linear-system-data/linear-system-data-output';
-import {StandardFormInput} from './calculator-content/standard-form/standard-form-input';
 import * as math from 'mathjs';
 import {Fraction} from 'mathjs';
 import {TableauData} from './tableau-data';
@@ -21,113 +20,53 @@ export class CalculatorComponent {
   linearSystemSizeOutput: LinearSystemSizeOutput | null = null
   linearSystemDataOutput: LinearSystemDataOutput | null = null
 
+  standardFormOutput: StandardFormOutput | null = null
 
-
-  numberOfVars: number = 2;
-  numberOfConstraints: number = 3;
-
-  showLinearSystem: boolean = false;
-
-  targetVars: number[] | undefined;
-  targetSlackVars: number[] | undefined;
-  targetConstant: number | undefined;
-
-  constraintVars: number[][] | undefined;
-  constraintSlackVars: number[][] | undefined;
-  constraintConstants: number[] | undefined;
-
-  showSolution = false;
 
   tableauData: Array<TableauData> | undefined;
 
-  newStandardFormData: StandardFormInput = {
-    numberOfVars: 2,
-    numberOfConstraints: 3,
-
-    targetVars: [math.fraction('1.1'), math.fraction('2/3')] as Fraction[],
-
-    constraintVars: [
-      [math.fraction('-4/5'), math.fraction('1')],
-      [math.fraction('7'), math.fraction('-8')],
-      [math.fraction('9.9'), math.fraction('-1.3')],
-    ] as Fraction[][],
-
-    constraintVals: [math.fraction('1/8'), math.fraction('2/9'), math.fraction('30/31')] as Fraction[]
-  }
-
-  onLinearSystemSizeChange(linearSystemSizeOutput: LinearSystemSizeOutput | null) {
-    this.linearSystemSizeOutput = linearSystemSizeOutput;
-
-    if (linearSystemSizeOutput) {
-      this.numberOfVars = linearSystemSizeOutput.numberOfVars;
-      this.numberOfConstraints = linearSystemSizeOutput.numberOfConstraints;
-      this.showLinearSystem = true;
-    }
-
+  //
+  // Data Change Listeners
+  //
+  onLinearSystemSizeChange(linearSystemSizeOutput: LinearSystemSizeOutput | null): void {
+    this.linearSystemSizeOutput = linearSystemSizeOutput
   }
 
 
+  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput | null): void {
+    this.linearSystemDataOutput = linearSystemDataOutput
+
+  }
+
+  onStandardFormChange(standardFormOutput: StandardFormOutput | null): void {
+    this.standardFormOutput = standardFormOutput
+
+
+    this.calcTableaus()
+
+  }
+
+  //
+  // Input Data Getters
+  //
   getTableauInput(tableauData: TableauData): TableauInput {
+    const numberOfVars = this.linearSystemSizeOutput!.numberOfVars
+    const numberOfConstraints = this.linearSystemSizeOutput!.numberOfConstraints
+
+
     return {
-      numberOfVars: this.numberOfVars + this.numberOfConstraints,
-      numberOfConstraints: this.numberOfConstraints,
+      numberOfVars: numberOfVars + numberOfConstraints,
+      numberOfConstraints: numberOfConstraints,
 
       ...tableauData
     }
   }
 
-  ngOnInit(): void {
-    this.calcNewTableaus();
-  }
+  //
+  // Simplex
+  //
+  calcTableaus(): void {
 
-  newStandardFormOutput: StandardFormOutput = {
-    numberOfVars: 5,
-    numberOfConstraints: 3,
-
-    targetVars: [
-      math.fraction('-5'),
-      math.fraction('-2'),
-      math.fraction(0),
-      math.fraction(0),
-      math.fraction(0)
-    ] as Fraction[],
-
-    targetVal: math.fraction(0) as Fraction,
-
-    constraintVars: [
-      [
-        math.fraction('-3'),
-        math.fraction('4'),
-        math.fraction(1),
-        math.fraction(0),
-        math.fraction(0)
-      ],
-      [
-        math.fraction('6'),
-        math.fraction('-7'),
-        math.fraction(0),
-        math.fraction(1),
-        math.fraction(0)
-      ],
-      [
-        math.fraction('9'),
-        math.fraction('10'),
-        math.fraction(0),
-        math.fraction(0),
-        math.fraction(1)
-      ],
-    ] as Fraction[][],
-
-    constraintVals: [
-      math.fraction('5'),
-      math.fraction('8'),
-      math.fraction('11')
-    ] as Fraction[],
-
-    slackVars: [1, 2, 3]
-  }
-
-  calcNewTableaus(): void {
     this.tableauData = new Array<TableauData>();
 
     //
@@ -135,11 +74,11 @@ export class CalculatorComponent {
     //
 
     this.tableauData[0] = {
-      targetVars: this.newStandardFormOutput.targetVars,
+      targetVars: this.standardFormOutputMock.targetVars,
       targetVal: math.fraction(0) as Fraction,
 
-      constraintVars: this.newStandardFormOutput.constraintVars,
-      constraintVals: this.newStandardFormOutput.constraintVals,
+      constraintVars: this.standardFormOutputMock.constraintVars,
+      constraintVals: this.standardFormOutputMock.constraintVals,
 
       pivotRow: null,
       pivotCol: null,
@@ -164,7 +103,9 @@ export class CalculatorComponent {
       // Calculate theta values
       //
 
-      const thetas = new Array<Fraction>(this.numberOfConstraints);
+      const numberOfConstraints = this.linearSystemSizeOutput!.numberOfConstraints
+
+      const thetas = new Array<Fraction>(numberOfConstraints);
 
       for (let c = 0; c < thetas.length; c++) {
         thetas[c] = math.divide(prevTableau.constraintVals[c], prevTableau.constraintVars[c][pivotCol]) as Fraction;
@@ -176,8 +117,19 @@ export class CalculatorComponent {
       // Find pivot row (row with smallest positive theta) and pivot element
       //
 
-      const positiveThetas = thetas.filter(value => math.larger(value, 0));
-      const pivotRow = positiveThetas.indexOf(math.min(...positiveThetas));
+      let minPosTheta = math.fraction('9999') as Fraction
+      let minPosThetaIndex = -1
+
+      for (let i = 0; i < thetas.length; i++) {
+        const theta = thetas[i]
+        if (math.larger(theta, 0) && math.smaller(theta, minPosTheta)) {
+          minPosTheta = theta
+          minPosThetaIndex = i
+        }
+      }
+
+      const pivotRow = minPosThetaIndex
+
 
       prevTableau.pivotRow = pivotRow;
 
@@ -248,11 +200,11 @@ export class CalculatorComponent {
     }
   }
 
-  getLinearSystemDataInput(): LinearSystemDataInput {
-    // return {
-    //   numberOfVars: this.numberOfVars,
-    //   numberOfConstraints: this.numberOfConstraints
-    // }
+  //
+  // Mock Data
+  //
+
+  getLinearSystemDataInputMock(): LinearSystemDataInput {
 
     return {
       numberOfVars: 2,
@@ -260,19 +212,81 @@ export class CalculatorComponent {
     }
   }
 
-  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput | null): void {
-    this.linearSystemDataOutput = linearSystemDataOutput;
+  getStandardFormInputMock() {
+    return {
+      numberOfVars: 2,
+      numberOfConstraints: 3,
+
+      targetVars: [
+        math.fraction('1.1'),
+        math.fraction('2/3')
+      ] as Fraction[],
+
+      constraintVars: [
+        [math.fraction('-4/5'), math.fraction('1')],
+        [math.fraction('7'), math.fraction('-8')],
+        [math.fraction('9.9'), math.fraction('-1.3')],
+      ] as Fraction[][],
+
+      constraintVals: [
+        math.fraction('1/8'),
+        math.fraction('2/9'),
+        math.fraction('30/31')
+      ] as Fraction[]
+    }
   }
 
-  getStandardFormInput() {
-    return this.newStandardFormData;
+  standardFormOutputMock: StandardFormOutput = {
+    numberOfVars: 5,
+    numberOfConstraints: 3,
+
+    targetVars: [
+      math.fraction('-5'),
+      math.fraction('-2'),
+      math.fraction(0),
+      math.fraction(0),
+      math.fraction(0)
+    ] as Fraction[],
+
+    targetVal: math.fraction(0) as Fraction,
+
+    constraintVars: [
+      [
+        math.fraction('-3'),
+        math.fraction('4'),
+        math.fraction(1),
+        math.fraction(0),
+        math.fraction(0)
+      ],
+      [
+        math.fraction('6'),
+        math.fraction('-7'),
+        math.fraction(0),
+        math.fraction(1),
+        math.fraction(0)
+      ],
+      [
+        math.fraction('9'),
+        math.fraction('10'),
+        math.fraction(0),
+        math.fraction(0),
+        math.fraction(1)
+      ],
+    ] as Fraction[][],
+
+    constraintVals: [
+      math.fraction('5'),
+      math.fraction('8'),
+      math.fraction('11')
+    ] as Fraction[],
+
+    slackVars: [1, 2, 3]
+
   }
 
-  onStandardFormChange(standardFormOutput: StandardFormOutput) {
-
-  }
-
-  getSolutionInput(): SolutionInput {
-    return {targetConstant: this.targetConstant!}
+  getSolutionInputMock(): SolutionInput {
+    return {
+      targetConstant: 42
+    }
   }
 }

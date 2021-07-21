@@ -16,7 +16,8 @@
     </div>
 
     <app-card class="card-2" title="Eingabe der Parameter">
-      <app-linear-system-data [data]="getLinearSystemDataInput()"
+      <app-linear-system-data [data]="getLinearSystemDataInputMock()"
+
                               (dataChange)="onLinearSystemDataChange($event)">
       </app-linear-system-data>
     </app-card>
@@ -31,7 +32,7 @@
     </div>
 
     <app-card class="card-3" title="LGS in Standard-Form">
-      <app-standard-form [data]="getStandardFormInput()"
+      <app-standard-form [data]="getStandardFormInputMock()"
                          (dataChange)="onStandardFormChange($event)">
       </app-standard-form>
     </app-card>
@@ -40,25 +41,31 @@
 
   <!-- Tableaus -->
 
-  <div class="arrow-4">
-    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
-  </div>
+  <ng-container *ngIf="standardFormOutput">
+    <div class="arrow-4">
+      <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
 
-  <app-card class="card-4" title="Tableaus">
-    <ng-container *ngFor="let tableau of tableauData">
-      <app-tableau [data]="getTableauInput(tableau)"></app-tableau>
-      <br/>
-    </ng-container>
-  </app-card>
+    <app-card class="card-4" title="Tableaus">
+      <ng-container *ngFor="let tableau of tableauData">
+        <app-tableau [data]="getTableauInput(tableau)"></app-tableau>
+        <br/>
+      </ng-container>
+    </app-card>
+  </ng-container>
+
 
   <!-- Solution -->
 
-  <div class="arrow-5">
-    <img src="assets/images/bluearrow.png" alt="Blue Arrow">
-  </div>
+  <ng-container *ngIf="standardFormOutput">
+    <div class="arrow-5">
+      <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
 
-  <app-card class="card-5" title="Lösung">
-    <app-solution [data]="getSolutionInput()"></app-solution>
-  </app-card>
+    <app-card class="card-5" title="Lösung">
+      <app-solution [data]="getSolutionInputMock()"></app-solution>
+    </app-card>
+  </ng-container>
+
 
 </div>
