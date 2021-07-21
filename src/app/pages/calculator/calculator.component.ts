@@ -8,6 +8,8 @@ import {StandardFormOutput} from './calculator-content/standard-form/standard-fo
 import {LinearSystemDataInput} from './calculator-content/linear-system-data/linear-system-data-input';
 import {SolutionInput} from './calculator-content/solution/solution-input';
 import {TableauInput} from './calculator-content/tableau/tableau-input';
+import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
+
 
 
 @Component({
@@ -62,6 +64,33 @@ export class CalculatorComponent {
   //
   // Input Data Getters
   //
+  /**
+   * Must only be called when linear-system-size output is available.
+   */
+  getLinearSystemDataInput(): LinearSystemDataInput {
+    const linearSystemSizeOutput = this.linearSystemSizeOutput!
+
+    return {
+      numberOfVars: linearSystemSizeOutput.numberOfVars,
+      numberOfConstraints: linearSystemSizeOutput.numberOfConstraints
+    }
+  }
+
+  getStandardFormInput(): StandardFormInput {
+    const linearSystemSizeOutput = this.linearSystemSizeOutput!
+    const linearSystemDataOutput = this.linearSystemDataOutput!
+
+    return {
+      numberOfVars: linearSystemSizeOutput.numberOfVars,
+      numberOfConstraints: linearSystemSizeOutput.numberOfConstraints,
+
+      targetVars: linearSystemDataOutput.targetVars,
+      constraintVars: linearSystemDataOutput.constraintVars,
+      constraintVals: linearSystemDataOutput.constraintVals
+    }
+  }
+
+
   getTableauInput(tableauData: TableauData): TableauInput {
     const numberOfVars = this.linearSystemSizeOutput!.numberOfVars
     const numberOfConstraints = this.linearSystemSizeOutput!.numberOfConstraints

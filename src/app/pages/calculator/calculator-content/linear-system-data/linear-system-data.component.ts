@@ -43,9 +43,9 @@ export class LinearSystemDataComponent implements OnChanges {
    */
   onCalculate(): void {
     this.dataChange.emit({
-      targetVarsRow: this.targetVars as Array<Fraction>,
-      constraintVarsMatrix: this.constraintVars as Array<Array<Fraction>>,
-      constraintValsCol: this.constraintVals as Array<Fraction>
+      targetVars: this.targetVars as Array<Fraction>,
+      constraintVars: this.constraintVars as Array<Array<Fraction>>,
+      constraintVals: this.constraintVals as Array<Fraction>
     })
 
     this.editable = false

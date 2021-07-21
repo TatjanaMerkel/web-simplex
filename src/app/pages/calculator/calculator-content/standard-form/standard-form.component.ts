@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {StandardFormInput} from "./standard-form-input";
 import {StandardFormOutput} from "./standard-form-output";
 import {Fraction} from "mathjs";
@@ -34,27 +34,30 @@ export class StandardFormComponent implements OnChanges {
    *  ---+-------+---      ---+----------------+---     ---+----------------+----
    *   z | 10 11 | 0        z | 10 11  0  0  0 | 0       z | tv tv ts ts ts |  0
    */
-  ngOnChanges(): void {
-    this.numberOfVars = this.data.numberOfVars
-    this.numberOfConstraints = this.data.numberOfConstraints
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.data && changes.data.firstChange) {
+      this.numberOfVars = this.data.numberOfVars;
+      this.numberOfConstraints = this.data.numberOfConstraints
 
-    const targetSlackVars = Array.from({length: this.numberOfConstraints},
-      _ => math.fraction(0) as Fraction)
-    this.targetVars = this.data.targetVars.concat(targetSlackVars)
-
-    this.targetVal = math.fraction(0) as Fraction
-
-    this.constraintVars = this.data.constraintVars
-    const constraintSlackVars = new Array<Array<Fraction>>(this.numberOfConstraints)
-    for (let c = 0; c < constraintSlackVars.length; c++) {
-      constraintSlackVars[c] = Array.from({length: this.numberOfConstraints},
+      const targetSlackVars = Array.from({length: this.numberOfConstraints},
         _ => math.fraction(0) as Fraction)
-      constraintSlackVars[c][c] = math.fraction(1) as Fraction
-      console.log(this.constraintVars[c])
-      this.constraintVars[c] = this.constraintVars[c].concat(constraintSlackVars[c])
+      this.targetVars = this.data.targetVars.concat(targetSlackVars)
+
+      this.targetVal = math.fraction(0) as Fraction
+
+      this.constraintVars = [...this.data.constraintVars]
+      const constraintSlackVars = new Array<Array<Fraction>>(this.numberOfConstraints)
+      for (let c = 0; c < constraintSlackVars.length; c++) {
+        constraintSlackVars[c] = Array.from({length: this.numberOfConstraints},
+          _ => math.fraction(0) as Fraction)
+        constraintSlackVars[c][c] = math.fraction(1) as Fraction
+        this.constraintVars[c] = this.constraintVars[c].concat(constraintSlackVars[c])
+      }
+
+
+      this.constraintVals = this.data.constraintVals
     }
 
-    this.constraintVals = this.data.constraintVals
   }
 
   emitValues() {

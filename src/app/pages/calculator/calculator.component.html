@@ -16,8 +16,7 @@
     </div>
 
     <app-card class="card-2" title="Eingabe der Parameter">
-      <app-linear-system-data [data]="getLinearSystemDataInputMock()"
-
+      <app-linear-system-data [data]="getLinearSystemDataInput()"
                               (dataChange)="onLinearSystemDataChange($event)">
       </app-linear-system-data>
     </app-card>
@@ -32,7 +31,7 @@
     </div>
 
     <app-card class="card-3" title="LGS in Standard-Form">
-      <app-standard-form [data]="getStandardFormInputMock()"
+      <app-standard-form [data]="getStandardFormInput()"
                          (dataChange)="onStandardFormChange($event)">
       </app-standard-form>
     </app-card>
