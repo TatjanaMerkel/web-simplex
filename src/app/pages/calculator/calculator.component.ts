@@ -109,6 +109,20 @@ export class CalculatorComponent {
     }
   }
 
+  /**
+   * Must only be called when tableau data has been calculated.
+   */
+  getSolutionInput(): SolutionInput {
+    const tableauData = this.tableauData!
+
+    const lastTableau = tableauData[tableauData.length - 1]
+
+    return {
+      targetVal: lastTableau.targetVal
+    }
+  }
+
+
   //
   // Simplex
   //
@@ -338,7 +352,7 @@ export class CalculatorComponent {
 
   getSolutionInputMock(): SolutionInput {
     return {
-      targetConstant: 42
+      targetVal: math.fraction(42) as Fraction
     }
   }
 }

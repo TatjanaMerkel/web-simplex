@@ -1,3 +1,5 @@
+import {Fraction} from 'mathjs';
+
 export interface SolutionInput {
-  targetConstant: number
+  targetVal: Fraction
 }

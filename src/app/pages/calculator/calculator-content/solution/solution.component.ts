@@ -1,5 +1,7 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {SolutionInput} from "./solution-input";
+import {Component, Input} from '@angular/core';
+import {SolutionInput} from './solution-input';
+import {Fraction} from 'mathjs';
+
 
 @Component({
   selector: 'app-solution',
@@ -9,4 +11,18 @@ import {SolutionInput} from "./solution-input";
 export class SolutionComponent {
 
   @Input() data: SolutionInput | undefined;
+
+
+  formatFraction(fraction: Fraction): string {
+    if (fraction.n === 0) {
+      return '';
+    } else if (fraction.n === 1 && fraction.d === 1) {
+      return '';
+    } else if (fraction.d === 1) {
+      return fraction.n + '';
+    } else {
+      return fraction.n + '/' + fraction.d;
+    }
+  }
+
 }
