@@ -23,22 +23,35 @@ export class CalculatorComponent {
   standardFormOutput: StandardFormOutput | null = null
 
 
-  tableauData: Array<TableauData> | undefined;
+  tableauData: Array<TableauData> | null = null;
+
 
   //
   // Data Change Listeners
   //
   onLinearSystemSizeChange(linearSystemSizeOutput: LinearSystemSizeOutput | null): void {
-    this.linearSystemSizeOutput = linearSystemSizeOutput
+    if (linearSystemSizeOutput !== null) {
+      this.linearSystemSizeOutput = linearSystemSizeOutput
+    } else {
+      this.linearSystemSizeOutput = null
+      this.linearSystemDataOutput = null
+      this.standardFormOutput = null
+      this.tableauData = null
+    }
   }
 
 
   onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput | null): void {
-    this.linearSystemDataOutput = linearSystemDataOutput
-
+    if (linearSystemDataOutput !== null) {
+      this.linearSystemDataOutput = linearSystemDataOutput;
+    } else {
+      this.linearSystemDataOutput = null
+      this.standardFormOutput = null
+      this.tableauData = null
+    }
   }
 
-  onStandardFormChange(standardFormOutput: StandardFormOutput | null): void {
+  onStandardFormChange(standardFormOutput: StandardFormOutput): void {
     this.standardFormOutput = standardFormOutput
 
 
