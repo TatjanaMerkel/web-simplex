@@ -36,12 +36,14 @@ export class StandardFormComponent implements OnChanges {
    */
   ngOnChanges(changes: SimpleChanges): void {
     if (this.data && changes.data.firstChange) {
-      this.numberOfVars = this.data.numberOfVars;
+      this.numberOfVars = this.data.numberOfVars
       this.numberOfConstraints = this.data.numberOfConstraints
 
+      const negativeTargetVars = this.data.targetVars
+        .map(value => math.multiply(value, -1)) as Fraction[]
       const targetSlackVars = Array.from({length: this.numberOfConstraints},
         _ => math.fraction(0) as Fraction)
-      this.targetVars = this.data.targetVars.concat(targetSlackVars)
+      this.targetVars = negativeTargetVars.concat(targetSlackVars)
 
       this.targetVal = math.fraction(0) as Fraction
 

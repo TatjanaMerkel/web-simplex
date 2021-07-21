@@ -76,6 +76,10 @@ export class CalculatorComponent {
     }
   }
 
+  /**
+   * Must only be called when linear-system-size output and
+   * linear-system-data output is available.
+   */
   getStandardFormInput(): StandardFormInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
     const linearSystemDataOutput = this.linearSystemDataOutput!
@@ -92,9 +96,10 @@ export class CalculatorComponent {
 
 
   getTableauInput(tableauData: TableauData): TableauInput {
-    const numberOfVars = this.linearSystemSizeOutput!.numberOfVars
-    const numberOfConstraints = this.linearSystemSizeOutput!.numberOfConstraints
+    const linearSystemSizeOutput = this.linearSystemSizeOutput!
 
+    const numberOfVars = linearSystemSizeOutput.numberOfVars
+    const numberOfConstraints = linearSystemSizeOutput.numberOfConstraints
 
     return {
       numberOfVars: numberOfVars + numberOfConstraints,
@@ -107,7 +112,12 @@ export class CalculatorComponent {
   //
   // Simplex
   //
+
+  /**
+   * Must only be called when standard-form output is set.
+   */
   calcTableaus(): void {
+    const standardFormOutput = this.standardFormOutput!
 
     this.tableauData = new Array<TableauData>();
 
@@ -116,11 +126,11 @@ export class CalculatorComponent {
     //
 
     this.tableauData[0] = {
-      targetVars: this.standardFormOutputMock.targetVars,
+      targetVars: standardFormOutput.targetVars,
       targetVal: math.fraction(0) as Fraction,
 
-      constraintVars: this.standardFormOutputMock.constraintVars,
-      constraintVals: this.standardFormOutputMock.constraintVals,
+      constraintVars: standardFormOutput.constraintVars,
+      constraintVals: standardFormOutput.constraintVals,
 
       pivotRow: null,
       pivotCol: null,
