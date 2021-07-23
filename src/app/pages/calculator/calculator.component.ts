@@ -83,8 +83,9 @@ export class CalculatorComponent {
       targetVars: firstTableau.targetVars,
 
       constraintVars: firstTableau.constraintVars,
-      constraintVals: firstTableau.constraintVals
+      constraintVals: firstTableau.constraintVals,
 
+      slackVars: firstTableau.slackVars
     }
   }
 

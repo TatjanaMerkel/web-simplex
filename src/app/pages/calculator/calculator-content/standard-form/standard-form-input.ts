@@ -6,5 +6,8 @@ export interface StandardFormInput {
 
   targetVars: Array<Fraction>,
   constraintVars: Array<Array<Fraction>>,
-  constraintVals: Array<Fraction>
+  constraintVals: Array<Fraction>,
+
+  slackVars: number[]
+
 }

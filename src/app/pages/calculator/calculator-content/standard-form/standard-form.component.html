@@ -27,8 +27,8 @@
     </ng-container>
 
     <!--  + z =  0  -->
-    <td class="operator">+</td>
-    <td class="value">z</td>
+    <td class="operator solution-var">+</td>
+    <td class="value solution-var">z</td>
     <td class="operator">=</td>
     <td class="value">0</td>
 
@@ -52,9 +52,9 @@
     <!--  13 x2 + 14 x3  -->
     <ng-container *ngFor="let _ of data.constraintVars[c].slice(1); index as v">
       <ng-container *ngVar="data.constraintVars[c][v + 1] as constraintVar">
-        <td class="operator">{{ formatOperator(constraintVar) }}</td>
-        <td class="value">{{ formatFraction(constraintVar) }}</td>
-        <td class="variable" [innerHTML]="formatVariable(constraintVar, v + 2)"></td>
+        <td [class.slack-var]="data.slackVars.indexOf(v + 1) !== -1" class="operator">{{ formatOperator(constraintVar) }}</td>
+        <td [class.slack-var]="data.slackVars.indexOf(v + 1) !== -1" class="value">{{ formatFraction(constraintVar) }}</td>
+        <td [class.slack-var]="data.slackVars.indexOf(v + 1) !== -1" class="variable" [innerHTML]="formatVariable(constraintVar, v + 2)"></td>
       </ng-container>
     </ng-container>
 

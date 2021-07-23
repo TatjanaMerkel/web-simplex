@@ -16,3 +16,13 @@ table {
 button {
   margin-top: 50px;
 }
+
+/* Colors */
+
+.slack-var {
+  color: #62bbff;
+}
+
+.solution-var {
+  color: #e261e8;
+}
