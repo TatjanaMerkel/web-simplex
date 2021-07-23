@@ -10,7 +10,6 @@ import {SolutionInput} from './calculator-content/solution/solution-input';
 import {TableauInput} from './calculator-content/tableau/tableau-input';
 import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
 
-
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
@@ -24,10 +23,10 @@ export class CalculatorComponent {
   tableauData: Array<TableauData> | null = null
   showTableauData = false
 
-
   //
   // Data Change Listeners
   //
+
   onLinearSystemSizeChange(linearSystemSizeOutput: LinearSystemSizeOutput | null): void {
     if (linearSystemSizeOutput !== null) {
       this.linearSystemSizeOutput = linearSystemSizeOutput
@@ -36,10 +35,8 @@ export class CalculatorComponent {
       this.linearSystemDataOutput = null
       this.tableauData = null
       this.showTableauData = false
-
     }
   }
-
 
   onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput | null): void {
     if (linearSystemDataOutput !== null) {
@@ -48,16 +45,15 @@ export class CalculatorComponent {
       this.linearSystemDataOutput = null
       this.tableauData = null
       this.showTableauData = false
-
     }
 
     this.calcTableaus()
-
   }
 
   //
   // Input Data Getters
   //
+
   /**
    * Must only be called when linear-system-size output is available.
    */
@@ -80,7 +76,6 @@ export class CalculatorComponent {
 
     const firstTableau = this.tableauData![0]
 
-
     return {
       numberOfVars: linearSystemSizeOutput.numberOfVars,
       numberOfConstraints: linearSystemSizeOutput.numberOfConstraints,
@@ -89,9 +84,9 @@ export class CalculatorComponent {
 
       constraintVars: firstTableau.constraintVars,
       constraintVals: firstTableau.constraintVals
+
     }
   }
-
 
   getTableauInput(tableauData: TableauData): TableauInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
@@ -120,14 +115,13 @@ export class CalculatorComponent {
     }
   }
 
-
   //
   // Simplex
   //
 
-
   calcTableaus(): void {
     const linearSystemDataSize = this.linearSystemSizeOutput!
+    const numberOfVars = linearSystemDataSize.numberOfVars
     const numberOfConstraints = linearSystemDataSize.numberOfConstraints
 
     const linearSystemDataOutput = this.linearSystemDataOutput!
@@ -159,6 +153,14 @@ export class CalculatorComponent {
       constraintVars[c] = linearSystemDataOutput.constraintVars[c].concat(constraintSlackVars)
     }
 
+    //
+    // Calc initial slack var positions
+    //
+
+    const slackVars = []
+    for (let i = 0; i < numberOfConstraints; i++) {
+      slackVars.push(numberOfVars + i)
+    }
 
     //
     // First tableau contains initial data
@@ -168,7 +170,6 @@ export class CalculatorComponent {
 
     this.tableauData[0] = {
       targetVars: targetVars,
-
       targetVal: math.fraction(0) as Fraction,
 
       constraintVars: constraintVars,
@@ -177,7 +178,9 @@ export class CalculatorComponent {
       pivotRow: null,
       pivotCol: null,
 
-      thetas: null
+      thetas: null,
+
+      slackVars
     };
 
     let prevTableau = this.tableauData[0];
@@ -202,7 +205,11 @@ export class CalculatorComponent {
       const thetas = new Array<Fraction>(numberOfConstraints);
 
       for (let c = 0; c < thetas.length; c++) {
-        thetas[c] = math.divide(prevTableau.constraintVals[c], prevTableau.constraintVars[c][pivotCol]) as Fraction;
+        if (math.larger(prevTableau.constraintVars[c][pivotCol], 0)) {
+          thetas[c] = math.divide(prevTableau.constraintVals[c], prevTableau.constraintVars[c][pivotCol]) as Fraction
+        } else {
+          thetas[c] = math.fraction(0) as Fraction
+        }
       }
 
       prevTableau.thetas = thetas;
@@ -223,8 +230,6 @@ export class CalculatorComponent {
       }
 
       const pivotRow = minPosThetaIndex
-
-
       prevTableau.pivotRow = pivotRow;
 
       const pivot = prevTableau.constraintVars[pivotRow][pivotCol];
@@ -268,7 +273,14 @@ export class CalculatorComponent {
       ) as Fraction[];
 
       const newTargetVal = math.subtract(prevTableau.targetVal,
-        math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
+        math.multiply(factor, newConstraintVals[pivotRow])) as Fraction
+
+      //
+      // Calc new slack var positions
+      //
+
+      const newSlackVars = [...prevTableau.slackVars]
+      newSlackVars[pivotRow] = pivotCol
 
       //
       // Add new tableau
@@ -284,7 +296,9 @@ export class CalculatorComponent {
         pivotCol: null,
         pivotRow: null,
 
-        thetas: null
+        thetas: null,
+
+        slackVars: newSlackVars
       }
 
       this.tableauData.push(newTableau);
@@ -299,7 +313,6 @@ export class CalculatorComponent {
   //
 
   getLinearSystemDataInputMock(): LinearSystemDataInput {
-
     return {
       numberOfVars: 2,
       numberOfConstraints: 3
@@ -375,7 +388,6 @@ export class CalculatorComponent {
     ] as Fraction[],
 
     slackVars: [1, 2, 3]
-
   }
 
   getSolutionInputMock(): SolutionInput {
@@ -387,5 +399,4 @@ export class CalculatorComponent {
   onStandardFormClick() {
     this.showTableauData = true
   }
-
 }

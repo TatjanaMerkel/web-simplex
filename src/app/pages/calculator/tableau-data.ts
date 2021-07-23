@@ -10,5 +10,7 @@ export interface TableauData {
   pivotCol: number | null,
   pivotRow: number | null,
 
-  thetas: Fraction[] | null
+  thetas: Fraction[] | null,
+
+  slackVars: number[]
 }

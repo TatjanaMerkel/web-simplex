@@ -28,7 +28,7 @@
     <tbody>
     <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); let c = index">
       <td [ngClass]="getClasses(c, null).concat('bar-right').join(' ')">
-        x<sub>0</sub>
+        x<sub>{{ data.slackVars[c] + 1 }}</sub>
       </td>
 
       <td *ngFor="let constraintVar of data.constraintVars![c]; let v = index"
