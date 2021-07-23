@@ -11,7 +11,6 @@ import {TableauInput} from './calculator-content/tableau/tableau-input';
 import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
 
 
-
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
@@ -22,10 +21,8 @@ export class CalculatorComponent {
   linearSystemSizeOutput: LinearSystemSizeOutput | null = null
   linearSystemDataOutput: LinearSystemDataOutput | null = null
 
-  standardFormOutput: StandardFormOutput | null = null
-
-
-  tableauData: Array<TableauData> | null = null;
+  tableauData: Array<TableauData> | null = null
+  showTableauData = false
 
 
   //
@@ -37,8 +34,9 @@ export class CalculatorComponent {
     } else {
       this.linearSystemSizeOutput = null
       this.linearSystemDataOutput = null
-      this.standardFormOutput = null
       this.tableauData = null
+      this.showTableauData = false
+
     }
   }
 
@@ -48,14 +46,10 @@ export class CalculatorComponent {
       this.linearSystemDataOutput = linearSystemDataOutput;
     } else {
       this.linearSystemDataOutput = null
-      this.standardFormOutput = null
       this.tableauData = null
+      this.showTableauData = false
+
     }
-  }
-
-  onStandardFormChange(standardFormOutput: StandardFormOutput): void {
-    this.standardFormOutput = standardFormOutput
-
 
     this.calcTableaus()
 
@@ -84,13 +78,17 @@ export class CalculatorComponent {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
     const linearSystemDataOutput = this.linearSystemDataOutput!
 
+    const firstTableau = this.tableauData![0]
+
+
     return {
       numberOfVars: linearSystemSizeOutput.numberOfVars,
       numberOfConstraints: linearSystemSizeOutput.numberOfConstraints,
 
-      targetVars: linearSystemDataOutput.targetVars,
-      constraintVars: linearSystemDataOutput.constraintVars,
-      constraintVals: linearSystemDataOutput.constraintVals
+      targetVars: firstTableau.targetVars,
+
+      constraintVars: firstTableau.constraintVars,
+      constraintVals: firstTableau.constraintVals
     }
   }
 
@@ -127,24 +125,54 @@ export class CalculatorComponent {
   // Simplex
   //
 
-  /**
-   * Must only be called when standard-form output is set.
-   */
+
   calcTableaus(): void {
-    const standardFormOutput = this.standardFormOutput!
+    const linearSystemDataSize = this.linearSystemSizeOutput!
+    const numberOfConstraints = linearSystemDataSize.numberOfConstraints
+
+    const linearSystemDataOutput = this.linearSystemDataOutput!
+
+    //
+    // Calc initial target row
+    //
+
+    const negativeTargetVars = linearSystemDataOutput.targetVars
+      .map(value => math.multiply(value, -1)) as Fraction[]
+
+    const targetSlackVars = Array.from(
+      {length: numberOfConstraints},
+      _ => math.fraction(0) as Fraction)
+
+    const targetVars = negativeTargetVars.concat(targetSlackVars)
+
+    //
+    // Calc initial constraint rows
+    //
+
+    const constraintVars = new Array<Array<Fraction>>(numberOfConstraints)
+    for (let c = 0; c < constraintVars.length; c++) {
+      const constraintSlackVars = Array.from(
+        {length: numberOfConstraints},
+        _ => math.fraction(0) as Fraction)
+
+      constraintSlackVars[c] = math.fraction(1) as Fraction
+      constraintVars[c] = linearSystemDataOutput.constraintVars[c].concat(constraintSlackVars)
+    }
+
+
+    //
+    // First tableau contains initial data
+    //
 
     this.tableauData = new Array<TableauData>();
 
-    //
-    // First tableau contains input data
-    //
-
     this.tableauData[0] = {
-      targetVars: standardFormOutput.targetVars,
+      targetVars: targetVars,
+
       targetVal: math.fraction(0) as Fraction,
 
-      constraintVars: standardFormOutput.constraintVars,
-      constraintVals: standardFormOutput.constraintVals,
+      constraintVars: constraintVars,
+      constraintVals: linearSystemDataOutput.constraintVals,
 
       pivotRow: null,
       pivotCol: null,
@@ -355,4 +383,9 @@ export class CalculatorComponent {
       targetVal: math.fraction(42) as Fraction
     }
   }
+
+  onStandardFormClick() {
+    this.showTableauData = true
+  }
+
 }
