@@ -15,7 +15,7 @@
       <td class="bar-right">BV</td>
       <td *ngFor="let _ of [].constructor(data.numberOfVars); let v = index"
           [ngClass]="getClasses(null, v).join(' ')">
-        x<sub>{{ v + 1 }}</sub>
+        <span [class.slack-var]="data.slackVars.indexOf(v) !== -1">x<sub>{{ v + 1 }}</sub></span>
       </td>
       <td class="bar-left">b</td>
       <td class="bar-left">theta</td>

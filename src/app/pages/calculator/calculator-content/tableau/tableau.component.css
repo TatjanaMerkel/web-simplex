@@ -55,3 +55,10 @@ td:last-child {
 .pivot-row-col {
   background-color: rgba(255, 193, 0.00, 0.75);
 }
+
+
+/* Colors */
+
+.slack-var {
+  color: #62bbff;
+}
