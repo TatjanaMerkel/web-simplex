@@ -1,0 +1,35 @@
+ul {
+  width: 50%;
+  margin: auto;
+  list-style: none;
+}
+
+li {
+  margin: 20px 0;
+}
+
+button {
+  width: 100%;
+  padding: 50px 80px;
+  font-size: 25px;
+}
+
+.easy-exercise {
+  background-color: #27ae60;
+  color: white;
+}
+
+.medium-exercise {
+  background-color: #ffb700;
+  color: white;
+}
+
+.hard-exercise {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.random-exercise {
+  background-color: #3498db;
+  color: white;
+}
