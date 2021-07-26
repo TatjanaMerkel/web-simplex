@@ -19,6 +19,7 @@ import {LinearSystemDataComponent} from './pages/calculator/calculator-content/l
 import {StandardFormComponent} from './pages/calculator/calculator-content/standard-form/standard-form.component';
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ExerciseComponent } from './pages/exercise/exercise.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AdminComponent } from './pages/admin/admin.component';
     SolutionComponent,
     StandardFormComponent,
     VarDirective,
-    AdminComponent
+    AdminComponent,
+    ExerciseComponent
   ],
   imports: [
     AppRoutingModule,
