@@ -6,11 +6,14 @@ import {CalculatorComponent} from './pages/calculator/calculator.component'
 import {LearningComponent} from './pages/learning/learning.component'
 import {PractiseComponent} from './pages/practise/practise.component'
 import {AdminComponent} from './pages/admin/admin.component'
+import {ExerciseComponent} from './pages/exercise/exercise.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'admin', component: AdminComponent},
   {path: 'calculator', component: CalculatorComponent},
+  {path: 'exercise', component: ExerciseComponent},
   {path: 'learning', component: LearningComponent},
   {path: 'practise', component: PractiseComponent}
 ]
