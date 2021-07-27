@@ -1,7 +1,11 @@
 import {Fraction} from 'mathjs'
+import {Difficulty} from './difficulty'
+
 
 export interface Exercise {
-  task: string,
+  difficulty: Difficulty,
+
+  task: string | null,
 
   numberOfVars: number,
   numberOfConstraints: number,
