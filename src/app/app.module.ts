@@ -20,6 +20,7 @@ import {StandardFormComponent} from './pages/calculator/calculator-content/stand
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component';
 import {AdminComponent} from './pages/admin/admin.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
+import { AdminExerciesComponent } from './pages/admin-exercies/admin-exercies.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {ExerciseComponent} from './pages/exercise/exercise.component';
     StandardFormComponent,
     VarDirective,
     AdminComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    AdminExerciesComponent
   ],
   imports: [
     AppRoutingModule,
