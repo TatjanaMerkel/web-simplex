@@ -1,26 +1,32 @@
 <ul>
+  <li *ngFor="let exercise of exercises">
+    <button class="btn"
+            routerLink="/exercises/{{ exercise.id }}">
+      {{ exercise.title }}
+    </button>
+  </li>
   <li>
     <button class="btn easy-exercise"
-            routerLink="/exercise">
+            routerLink="/exercises/1">
       Einfach
     </button>
   </li>
   <li>
     <button class="btn medium-exercise"
-            routerLink="/exercise">
+            routerLink="/exercises/2">
       Mittel
     </button>
   </li>
   <li>
     <button class="btn hard-exercise"
-            routerLink="/exercise">
-      Schwer
+            routerLink="/exercises/3">
+    Schwer
     </button>
   </li>
   <li>
     <button class="btn random-exercise"
-            routerLink="/exercise">
-      Zufällig
+            routerLink="/exercises/4">
+    Zufällig
     </button>
   </li>
 </ul>

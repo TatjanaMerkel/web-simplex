@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ExerciseService} from '../../../services/exercise.service'
 
 
 @Component({
@@ -10,7 +9,7 @@ import {ExerciseService} from '../../../services/exercise.service'
 export class ExerciseComponent implements OnInit {
 
 
-  constructor(private exerciseService: ExerciseService) {
+  constructor() {
   }
 
   ngOnInit(): void {

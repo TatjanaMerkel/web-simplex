@@ -3,6 +3,10 @@ import {Difficulty} from './difficulty'
 
 
 export interface Exercise {
+  id: number,
+
+  title: string,
+
   difficulty: Difficulty,
 
   task: string | null,

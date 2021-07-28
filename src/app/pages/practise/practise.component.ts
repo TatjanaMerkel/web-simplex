@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+import {ExerciseService} from '../../../services/exercise.service'
 
 @Component({
   selector: 'app-practise',
@@ -7,7 +8,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PractiseComponent implements OnInit {
 
-  constructor() {
+  exercises = this.exerciseService.getExercises()
+
+  constructor(private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {

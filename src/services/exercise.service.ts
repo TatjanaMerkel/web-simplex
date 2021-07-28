@@ -12,7 +12,12 @@ import {Difficulty} from '../models/difficulty'
 export class ExerciseService {
 
   exercises: Exercise[] = [
+
     {
+      id: 1,
+
+      title: 'Example Exercise',
+
       difficulty: Difficulty.Easy,
 
       task: null,
@@ -50,7 +55,6 @@ export class ExerciseService {
   addExercise(exercise: Exercise): void {
     this.exercises.push(exercise)
   }
-
 
   constructor() {
   }
