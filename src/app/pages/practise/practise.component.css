@@ -1,3 +1,5 @@
+/* List style */
+
 ul {
   width: 50%;
   margin: auto;
@@ -14,22 +16,24 @@ button {
   font-size: 25px;
 }
 
-.easy-exercise {
+/* Button colors */
+
+.easy-exercises {
   background-color: #27ae60;
   color: white;
 }
 
-.medium-exercise {
+.medium-exercises {
   background-color: #ffb700;
   color: white;
 }
 
-.hard-exercise {
+.hard-exercises {
   background-color: #e74c3c;
   color: white;
 }
 
-.random-exercise {
+.random-exercises {
   background-color: #3498db;
   color: white;
 }
