@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {Injectable} from '@angular/core'
 import {Observable} from 'rxjs'
 import {catchError, tap} from 'rxjs/operators'
@@ -12,6 +12,11 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) {
   }
+
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
+
 
   getExercises(): Observable<Exercise[]> {
     return this.http.get<Exercise[]>('http://localhost:3000/exercises').pipe(
@@ -28,6 +33,14 @@ export class ExerciseService {
     )
 
   }
+
+  putExercise(exercise: Exercise): Observable<any> {
+    return this.http.put('http://localhost:3000/exercise', exercise, this.httpOptions).pipe(
+      tap(exercise => console.debug(exercise)),
+      catchError(this.createErrorHandler<any>())
+    );
+  }
+
 
   private createErrorHandler<T>() {
     return (error: any, caught: Observable<T>): Observable<T> => {
