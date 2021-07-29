@@ -1,61 +1,39 @@
+import {HttpClient} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Fraction} from 'mathjs'
-import * as math from 'mathjs'
+import {Observable} from 'rxjs'
+import {catchError, tap} from 'rxjs/operators'
 
 import {Exercise} from '../models/exercise'
-import {Difficulty} from '../models/difficulty'
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseService {
 
-  exercises: Exercise[] = [
+  constructor(private http: HttpClient) {
+  }
 
-    {
-      id: 1,
+  getExercises(): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>('http://localhost:3000/exercises').pipe(
+      tap(exercises => console.debug(exercises)),
+      catchError(this.createErrorHandler<Exercise[]>())
+    )
 
-      title: 'Example Exercise',
+  }
 
-      difficulty: Difficulty.Easy,
+  getExercise(id: number): Observable<Exercise> {
+    return this.http.get<Exercise>(`http://localhost:3000/exercise/${id}`).pipe(
+      tap(exercise => console.debug(exercise)),
+      catchError(this.createErrorHandler<Exercise>())
+    )
 
-      task: null,
+  }
 
-      numberOfVars: 2,
-      numberOfConstraints: 2,
+  private createErrorHandler<T>() {
+    return (error: any, caught: Observable<T>): Observable<T> => {
+      console.error(error)
 
-      targetVars: [
-        math.fraction(1) as Fraction,
-        math.fraction(2) as Fraction
-      ],
-
-      constraintVars: [
-        [
-          math.fraction(3) as Fraction,
-          math.fraction(4) as Fraction
-        ],
-        [
-          math.fraction(5) as Fraction,
-          math.fraction(6) as Fraction
-        ]
-      ],
-
-      constraintVals: [
-        math.fraction(7) as Fraction,
-        math.fraction(8) as Fraction
-      ]
+      return caught
     }
-  ]
-
-  getExercises(): Exercise[] {
-    return this.exercises
-  }
-
-  addExercise(exercise: Exercise): void {
-    this.exercises.push(exercise)
-  }
-
-  constructor() {
   }
 }

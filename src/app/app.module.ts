@@ -21,6 +21,8 @@ import {TableauComponent} from './pages/calculator/calculator-content/tableau/ta
 import {AdminComponent} from './pages/admin/admin.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
 import { AdminExerciesComponent } from './pages/admin-exercies/admin-exercies.component';
+import {HttpClientModule} from "@angular/common/http";
+
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { AdminExerciesComponent } from './pages/admin-exercies/admin-exercies.co
     AppRoutingModule,
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     NgbModule
   ],
   providers: [],
