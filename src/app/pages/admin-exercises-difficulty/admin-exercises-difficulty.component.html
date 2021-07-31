@@ -1,1 +1,12 @@
-<p>admin-exercises-difficulty works!</p>
+<ul *ngIf="exercises">
+  <li *ngFor="let exercise of exercises">
+    <button class="btn"
+            [class.easy-exercises]="difficulty === 'EASY'"
+            [class.medium-exercises]="difficulty === 'MEDIUM'"
+            [class.hard-exercises]="difficulty === 'HARD'"
+            routerLink="/admin/exercises/">
+      {{ exercise.title }}
+    </button>
+  </li>
+</ul>
+
