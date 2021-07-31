@@ -20,9 +20,9 @@ import {StandardFormComponent} from './pages/calculator/calculator-content/stand
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component';
 import {AdminComponent} from './pages/admin/admin.component';
 import {ExerciseComponent} from './pages/exercise/exercise.component';
-import { AdminExerciesComponent } from './pages/admin-exercies/admin-exercies.component';
+import {AdminExerciesComponent} from './pages/admin-exercies/admin-exercies.component';
 import {HttpClientModule} from "@angular/common/http";
-
+import {AdminExercisesDifficultyComponent} from './pages/admin-exercises-difficulty/admin-exercises-difficulty.component';
 
 
 @NgModule({
@@ -43,7 +43,8 @@ import {HttpClientModule} from "@angular/common/http";
     VarDirective,
     AdminComponent,
     ExerciseComponent,
-    AdminExerciesComponent
+    AdminExerciesComponent,
+    AdminExercisesDifficultyComponent
   ],
   imports: [
     AppRoutingModule,
