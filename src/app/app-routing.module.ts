@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'admin', component: AdminComponent},
   {path: 'admin/exercises', component: AdminExercisesComponent},
+  {path: 'admin/exercises/new', component: AdminExercisesComponent},
   {path: 'calculator', component: CalculatorComponent},
   {path: 'exercises/:exerciseId', component: ExerciseComponent},
   {path: 'learning', component: LearningComponent},

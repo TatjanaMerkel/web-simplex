@@ -18,6 +18,11 @@ button {
 
 /* Button colors */
 
+.new-exercise {
+  background-color: #3a8bc9;
+  color: white;
+}
+
 .easy-exercise {
   background-color: #27ae60;
   color: white;

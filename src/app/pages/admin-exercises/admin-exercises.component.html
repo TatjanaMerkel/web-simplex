@@ -1,4 +1,11 @@
 <ul>
+  <li>
+    <button class="btn new-exercise"
+            routerLink="/admin/exercises/new">
+      Create new exercise
+    </button>
+  </li>
+
   <li *ngFor="let easyExercise of easyExercises">
     <button class="btn easy-exercise"
             [routerLink]="'/admin/exercises/' + easyExercise.id">
