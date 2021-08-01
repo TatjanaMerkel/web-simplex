@@ -21,7 +21,8 @@ import {PractiseComponent} from './pages/practise/practise.component'
 import {SolutionComponent} from './pages/calculator/calculator-content/solution/solution.component'
 import {StandardFormComponent} from './pages/calculator/calculator-content/standard-form/standard-form.component'
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive'
+import {VarDirective} from '../ng-var.directive';
+import {AdminExerciseDetailsComponent} from './pages/admin-exercise-details/admin-exercise-details.component'
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {VarDirective} from '../ng-var.directive'
     SolutionComponent,
     StandardFormComponent,
     TableauComponent,
-    VarDirective
+    VarDirective,
+    AdminExerciseDetailsComponent
   ],
   imports: [
     AppRoutingModule,
