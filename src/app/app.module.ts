@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
 
-
 import {AdminComponent} from './pages/admin/admin.component'
+import {AdminExercisesComponent} from './pages/admin-exercises/admin-exercises.component'
 import {AppComponent} from './app.component'
 import {AppRoutingModule} from './app-routing.module'
 import {CalculatorComponent} from './pages/calculator/calculator.component'
@@ -23,26 +23,25 @@ import {StandardFormComponent} from './pages/calculator/calculator-content/stand
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component'
 import {VarDirective} from '../ng-var.directive'
 
-
-
 @NgModule({
   declarations: [
+    AdminComponent,
+    AdminExercisesComponent,
     AppComponent,
     CalculatorComponent,
     CardComponent,
+    ExerciseComponent,
     HomeComponent,
     LearningComponent,
     LinearSystemDataComponent,
     LinearSystemSize,
     NavBarComponent,
     NavBoxComponent,
-    TableauComponent,
     PractiseComponent,
     SolutionComponent,
     StandardFormComponent,
-    VarDirective,
-    AdminComponent,
-    ExerciseComponent,
+    TableauComponent,
+    VarDirective
   ],
   imports: [
     AppRoutingModule,

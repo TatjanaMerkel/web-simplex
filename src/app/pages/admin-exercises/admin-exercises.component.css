@@ -18,17 +18,17 @@ button {
 
 /* Button colors */
 
-.easy-exercises {
+.easy-exercise {
   background-color: #27ae60;
   color: white;
 }
 
-.medium-exercises {
+.medium-exercise {
   background-color: #ffb700;
   color: white;
 }
 
-.hard-exercises {
+.hard-exercise {
   background-color: #e74c3c;
   color: white;
 }
