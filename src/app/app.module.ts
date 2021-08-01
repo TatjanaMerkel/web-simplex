@@ -22,7 +22,8 @@ import {SolutionComponent} from './pages/calculator/calculator-content/solution/
 import {StandardFormComponent} from './pages/calculator/calculator-content/standard-form/standard-form.component'
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component'
 import {VarDirective} from '../ng-var.directive';
-import {AdminExerciseDetailsComponent} from './pages/admin-exercise-details/admin-exercise-details.component'
+import {AdminEditExerciseComponent} from './pages/admin-edit-exercise/admin-edit-exercise.component';
+import { AdminNewExerciseComponent } from './pages/admin-new-exercise/admin-new-exercise.component'
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {AdminExerciseDetailsComponent} from './pages/admin-exercise-details/admi
     StandardFormComponent,
     TableauComponent,
     VarDirective,
-    AdminExerciseDetailsComponent
+    AdminEditExerciseComponent,
+    AdminNewExerciseComponent
   ],
   imports: [
     AppRoutingModule,
