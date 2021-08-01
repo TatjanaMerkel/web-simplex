@@ -3,7 +3,6 @@ import {RouterModule, Routes} from '@angular/router'
 
 import {AdminComponent} from './pages/admin/admin.component'
 import {AdminExerciesComponent} from './pages/admin-exercies/admin-exercies.component';
-import {AdminExercisesDifficultyComponent} from './pages/admin-exercises-difficulty/admin-exercises-difficulty.component'
 
 import {CalculatorComponent} from './pages/calculator/calculator.component'
 import {ExerciseComponent} from './pages/exercise/exercise.component';
@@ -12,12 +11,10 @@ import {LearningComponent} from './pages/learning/learning.component'
 import {PractiseComponent} from './pages/practise/practise.component'
 
 
-
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'admin', component: AdminComponent},
   {path: 'admin/exercises', component: AdminExerciesComponent},
-  {path: 'admin/exercises/:difficulty', component: AdminExercisesDifficultyComponent},
   {path: 'calculator', component: CalculatorComponent},
   {path: 'exercises/:exerciseId', component: ExerciseComponent},
   {path: 'learning', component: LearningComponent},
