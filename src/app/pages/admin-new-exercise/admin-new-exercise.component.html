@@ -1,6 +1,28 @@
 <div class="w-50 mx-auto mt-4">
   <app-card title="New Exercise">
-    empty input fields...
+
+    <div class="form-grid">
+      <label for="title">Title</label>
+      <input id="title" type="text" [(ngModel)]="newExercise.title">
+
+      <label for="difficulty">Difficulty</label>
+      <div id="difficulty">
+        <input id="easy" type="radio"
+               [(ngModel)]="newExercise.difficulty" value="EASY">
+        <label for="easy" class="ml-2">Easy</label>
+
+        <input id="medium" type="radio" class="ml-4"
+               [(ngModel)]="newExercise.difficulty" value="MEDIUM">
+        <label for="medium" class="ml-2">Medium</label>
+
+        <input id="hard" type="radio" class="ml-4"
+               [(ngModel)]="newExercise.difficulty" value="HARD">
+        <label for="hard" class="ml-2">Hard</label>
+      </div>
+
+      <div></div>
+      <input type="submit" value="Create"/>
+    </div>
   </app-card>
 </div>
 
