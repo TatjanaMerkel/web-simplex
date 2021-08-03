@@ -2,7 +2,9 @@ import {NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
 
 import {AdminComponent} from './pages/admin/admin.component'
+import {AdminEditExerciseComponent} from './pages/admin-edit-exercise/admin-edit-exercise.component'
 import {AdminExercisesComponent} from './pages/admin-exercises/admin-exercises.component'
+import {AdminNewExerciseComponent} from './pages/admin-new-exercise/admin-new-exercise.component'
 import {AppComponent} from './app.component'
 import {AppRoutingModule} from './app-routing.module'
 import {CalculatorComponent} from './pages/calculator/calculator.component'
@@ -21,14 +23,14 @@ import {PractiseComponent} from './pages/practise/practise.component'
 import {SolutionComponent} from './pages/calculator/calculator-content/solution/solution.component'
 import {StandardFormComponent} from './pages/calculator/calculator-content/standard-form/standard-form.component'
 import {TableauComponent} from './pages/calculator/calculator-content/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive';
-import {AdminEditExerciseComponent} from './pages/admin-edit-exercise/admin-edit-exercise.component';
-import { AdminNewExerciseComponent } from './pages/admin-new-exercise/admin-new-exercise.component'
+import {VarDirective} from '../ng-var.directive'
 
 @NgModule({
   declarations: [
     AdminComponent,
+    AdminEditExerciseComponent,
     AdminExercisesComponent,
+    AdminNewExerciseComponent,
     AppComponent,
     CalculatorComponent,
     CardComponent,
@@ -43,9 +45,7 @@ import { AdminNewExerciseComponent } from './pages/admin-new-exercise/admin-new-
     SolutionComponent,
     StandardFormComponent,
     TableauComponent,
-    VarDirective,
-    AdminEditExerciseComponent,
-    AdminNewExerciseComponent
+    VarDirective
   ],
   imports: [
     AppRoutingModule,
