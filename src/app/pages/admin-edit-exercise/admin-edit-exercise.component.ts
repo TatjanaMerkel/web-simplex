@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {Exercise} from '../../../models/exercise'
+import {ExerciseService} from '../../../services/exercise.service'
+import {ActivatedRoute} from "@angular/router";
+
 
 @Component({
   selector: 'app-edit-exercise',
@@ -7,9 +12,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminEditExerciseComponent implements OnInit {
 
-  constructor() { }
+  exercise: undefined | Exercise
+
+  constructor(private route: ActivatedRoute,
+              private exerciseService: ExerciseService) {
+  }
+
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const exercise_id = Number(params['exercise_id'])
+
+      this.exerciseService.getExercise(exercise_id).subscribe(exercise => {
+        this.exercise = exercise
+      })
+    })
   }
 
 }
