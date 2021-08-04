@@ -1,9 +1,9 @@
 import * as math from 'mathjs'
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core'
 import {Difficulty} from '../../../models/difficulty'
 import {Exercise} from '../../../models/exercise'
 import {Fraction} from 'mathjs'
-
+import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
 
 @Component({
   selector: 'app-admin-new-exercise',
@@ -45,4 +45,11 @@ export class AdminNewExerciseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getLinearSystemDataInput(): LinearSystemDataInput {
+    return {
+      numberOfVars: this.newExercise.numberOfVars,
+      numberOfConstraints: this.newExercise.numberOfConstraints,
+      editable: true
+    }
+  }
 }

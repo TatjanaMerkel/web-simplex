@@ -1,0 +1,66 @@
+<table *ngIf="data && targetVars && constraintVars && constraintVals">
+
+  <!-- Target function -->
+  <tr>
+    <td>Z</td>
+    <td>=</td>
+
+    <td>
+      <input class="short-input"
+             (input)="onTargetVarChanged($event,0)"
+             [disabled]="!data.editable"/>
+    </td>
+    <td>
+      x<sub>1</sub>
+    </td>
+
+    <ng-container *ngFor="let _ of targetVars.slice(1); index as v; trackBy: trackByIndex">
+      <td>+</td>
+      <td>
+        <input class="short-input"
+               (input)="onTargetVarChanged($event,v + 1)"
+               [disabled]="!data.editable"/>
+      </td>
+      <td>
+        x<sub>{{v + 2}}</sub>
+      </td>
+    </ng-container>
+  </tr>
+
+  <!-- Constraints -->
+  <tr *ngFor="let _ of [].constructor(data!.numberOfConstraints); index as c">
+    <td></td>
+    <td></td>
+
+    <td>
+      <input class="short-input"
+             (input)="onConstraintVarChanged($event, c, 0)"
+             [disabled]="!data.editable"/>
+    </td>
+    <td>
+      x<sub>1</sub>
+    </td>
+
+    <ng-container *ngFor="let _ of constraintVars![c].slice(1); index as v; trackBy: trackByIndex">
+      <td>+</td>
+      <td>
+        <input class="short-input"
+               (input)="onConstraintVarChanged($event, c,v + 1)"
+               [disabled]="!data.editable"/>
+      </td>
+      <td>
+        x<sub>{{v + 2}}</sub>
+      </td>
+    </ng-container>
+
+    <td>≤</td>
+
+    <!-- Boundary vector -->
+    <td>
+      <input class="short-input"
+             (input)="onConstraintConstantChanged($event, c)"
+             [disabled]="!data.editable"/>
+    </td>
+  </tr>
+
+</table>

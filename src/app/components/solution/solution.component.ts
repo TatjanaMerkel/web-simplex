@@ -2,7 +2,6 @@ import {Component, Input} from '@angular/core';
 import {SolutionInput} from './solution-input';
 import {Fraction} from 'mathjs';
 
-
 @Component({
   selector: 'app-solution',
   templateUrl: './solution.component.html',
@@ -11,7 +10,6 @@ import {Fraction} from 'mathjs';
 export class SolutionComponent {
 
   @Input() data: SolutionInput | undefined;
-
 
   formatFraction(fraction: Fraction): string {
     if (fraction.n === 0) {
@@ -24,5 +22,4 @@ export class SolutionComponent {
       return fraction.n + '/' + fraction.d;
     }
   }
-
 }

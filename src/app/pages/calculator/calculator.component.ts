@@ -1,14 +1,16 @@
-import {Component} from '@angular/core';
-import {LinearSystemSizeOutput} from './calculator-content/linear-system-size/linear-system-size-output';
-import {LinearSystemDataOutput} from './calculator-content/linear-system-data/linear-system-data-output';
-import * as math from 'mathjs';
-import {Fraction} from 'mathjs';
-import {TableauData} from './tableau-data';
-import {StandardFormOutput} from './calculator-content/standard-form/standard-form-output';
-import {LinearSystemDataInput} from './calculator-content/linear-system-data/linear-system-data-input';
-import {SolutionInput} from './calculator-content/solution/solution-input';
-import {TableauInput} from './calculator-content/tableau/tableau-input';
-import {StandardFormInput} from "./calculator-content/standard-form/standard-form-input";
+import {Component} from '@angular/core'
+
+import * as math from 'mathjs'
+import {Fraction} from 'mathjs'
+
+import {LinearSystemDataCardInput} from '../../components/linear-system-data-card/linear-system-data-card-input'
+import {LinearSystemDataCardOutput} from '../../components/linear-system-data-card/linear-system-data-card-output'
+import {LinearSystemSizeOutput} from '../../components/linear-system-size/linear-system-size-output'
+import {SolutionInput} from '../../components/solution/solution-input'
+import {StandardFormInput} from '../../components/standard-form/standard-form-input'
+import {StandardFormOutput} from '../../components/standard-form/standard-form-output'
+import {TableauData} from './tableau-data'
+import {TableauInput} from '../../components/tableau/tableau-input'
 
 @Component({
   selector: 'app-calculator',
@@ -18,7 +20,7 @@ import {StandardFormInput} from "./calculator-content/standard-form/standard-for
 export class CalculatorComponent {
 
   linearSystemSizeOutput: LinearSystemSizeOutput | null = null
-  linearSystemDataOutput: LinearSystemDataOutput | null = null
+  linearSystemDataCardOutput: LinearSystemDataCardOutput | null = null
 
   tableauData: Array<TableauData> | null = null
   showTableauData = false
@@ -32,22 +34,24 @@ export class CalculatorComponent {
       this.linearSystemSizeOutput = linearSystemSizeOutput
     } else {
       this.linearSystemSizeOutput = null
-      this.linearSystemDataOutput = null
+      this.linearSystemDataCardOutput = null
       this.tableauData = null
       this.showTableauData = false
     }
   }
 
-  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput | null): void {
-    if (linearSystemDataOutput !== null) {
-      this.linearSystemDataOutput = linearSystemDataOutput;
+  onLinearSystemDataChange(linearSystemDataCardOutput: LinearSystemDataCardOutput | null): void {
+    if (linearSystemDataCardOutput !== null) {
+      this.linearSystemDataCardOutput = linearSystemDataCardOutput
     } else {
-      this.linearSystemDataOutput = null
+      this.linearSystemDataCardOutput = null
       this.tableauData = null
       this.showTableauData = false
     }
 
-    this.calcTableaus()
+    if (linearSystemDataCardOutput) {
+      this.calcTableaus()
+    }
   }
 
   //
@@ -57,7 +61,7 @@ export class CalculatorComponent {
   /**
    * Must only be called when linear-system-size output is available.
    */
-  getLinearSystemDataInput(): LinearSystemDataInput {
+  getLinearSystemDataCardInput(): LinearSystemDataCardInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
 
     return {
@@ -72,7 +76,7 @@ export class CalculatorComponent {
    */
   getStandardFormInput(): StandardFormInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
-    const linearSystemDataOutput = this.linearSystemDataOutput!
+    const linearSystemDataCardOutput = this.linearSystemDataCardOutput!
 
     const firstTableau = this.tableauData![0]
 
@@ -125,13 +129,13 @@ export class CalculatorComponent {
     const numberOfVars = linearSystemDataSize.numberOfVars
     const numberOfConstraints = linearSystemDataSize.numberOfConstraints
 
-    const linearSystemDataOutput = this.linearSystemDataOutput!
+    const linearSystemDataCardOutput = this.linearSystemDataCardOutput!
 
     //
     // Calc initial target row
     //
 
-    const negativeTargetVars = linearSystemDataOutput.targetVars
+    const negativeTargetVars = linearSystemDataCardOutput.targetVars
       .map(value => math.multiply(value, -1)) as Fraction[]
 
     const targetSlackVars = Array.from(
@@ -151,7 +155,7 @@ export class CalculatorComponent {
         _ => math.fraction(0) as Fraction)
 
       constraintSlackVars[c] = math.fraction(1) as Fraction
-      constraintVars[c] = linearSystemDataOutput.constraintVars[c].concat(constraintSlackVars)
+      constraintVars[c] = linearSystemDataCardOutput.constraintVars[c].concat(constraintSlackVars)
     }
 
     //
@@ -174,7 +178,7 @@ export class CalculatorComponent {
       targetVal: math.fraction(0) as Fraction,
 
       constraintVars: constraintVars,
-      constraintVals: linearSystemDataOutput.constraintVals,
+      constraintVals: linearSystemDataCardOutput.constraintVals,
 
       pivotRow: null,
       pivotCol: null,
@@ -313,7 +317,7 @@ export class CalculatorComponent {
   // Mock Data
   //
 
-  getLinearSystemDataInputMock(): LinearSystemDataInput {
+  getlinearSystemDataCardInputMock(): LinearSystemDataCardInput {
     return {
       numberOfVars: 2,
       numberOfConstraints: 3

@@ -15,17 +15,15 @@
       <img src="assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
 
-    <app-card class="card-2" title="Eingabe der Parameter">
-      <app-linear-system-data [data]="getLinearSystemDataInput()"
-                              (dataChange)="onLinearSystemDataChange($event)">
-      </app-linear-system-data>
-    </app-card>
+    <app-linear-system-data-card class="card-2"
+                                 [data]="getLinearSystemDataCardInput()"
+                                 (dataChange)="onLinearSystemDataChange($event)">
+    </app-linear-system-data-card>
   </ng-container>
-
 
   <!-- Standard Form -->
 
-  <ng-container *ngIf="linearSystemDataOutput">
+  <ng-container *ngIf="linearSystemDataCardOutput">
     <div class="arrow-3">
       <img src="assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
@@ -36,7 +34,6 @@
       </app-standard-form>
     </app-card>
   </ng-container>
-
 
   <!-- Tableaus -->
 
@@ -53,11 +50,10 @@
     </app-card>
   </ng-container>
 
-
   <!-- Solution -->
 
   <ng-container *ngIf="showTableauData">
-  <div class="arrow-5">
+    <div class="arrow-5">
       <img src="assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
 
@@ -65,6 +61,5 @@
       <app-solution [data]="getSolutionInput()"></app-solution>
     </app-card>
   </ng-container>
-
 
 </div>

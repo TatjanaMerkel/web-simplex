@@ -1,9 +1,12 @@
 <div class="w-75 mx-auto mt-4">
-  <app-card title="Create new Exercise">
-  <div class="form-grid">
+  <app-card title="Create new exercise">
+
+    <div class="form-grid">
+      <!-- Title -->
       <label for="title">Title</label>
       <input id="title" type="text" [(ngModel)]="newExercise.title">
 
+      <!-- Difficulty -->
       <label for="difficulty">Difficulty</label>
       <div id="difficulty">
         <input id="easy" type="radio"
@@ -19,21 +22,30 @@
         <label for="hard" class="ml-2">Hard</label>
       </div>
 
+      <!-- Task -->
       <label for="task">Task</label>
       <textarea id="task" [(ngModel)]="newExercise.task"></textarea>
 
+      <!-- Number of Variables -->
       <label for="numberOfVars"># Variables</label>
       <input id="numberOfVars" type="number" class="w-25"
              [(ngModel)]="newExercise.numberOfVars"/>
 
+      <!-- Number of Constraints -->
       <label for="numberOfConstraints"># Constraints</label>
       <input id="numberOfConstraints" type="number" class="w-25"
              [(ngModel)]="newExercise.numberOfConstraints"/>
 
+      <!-- Linear System Data -->
+      <label for="linearSystemData">Linear System</label>
+      <app-linear-system-data id="linearSystemData"
+                              [data]="getLinearSystemDataInput()">
+      </app-linear-system-data>
 
+      <!-- Create Button -->
       <div></div>
       <input type="submit" value="Create"/>
     </div>
+
   </app-card>
 </div>
-

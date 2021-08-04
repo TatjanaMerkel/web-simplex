@@ -1,4 +1,4 @@
-input {
+.short-input {
   width: 50px;
 }
 
@@ -18,10 +18,4 @@ tr:first-child > td {
 td {
   padding-left: 4px;
   padding-right: 4px;
-}
-
-/* Button */
-
-button {
-  margin-top: 50px;
 }
