@@ -1,4 +1,4 @@
-<div class="w-50 mx-auto mt-4">
+<div class="w-75 mx-auto mt-4">
   <app-card title="New Exercise">
 
     <div class="form-grid">
@@ -19,6 +19,18 @@
                [(ngModel)]="newExercise.difficulty" value="HARD">
         <label for="hard" class="ml-2">Hard</label>
       </div>
+
+      <label for="task">Task</label>
+      <textarea id="task" [(ngModel)]="newExercise.task"></textarea>
+
+      <label for="numberOfVars"># Variables</label>
+      <input id="numberOfVars" type="number" class="w-25"
+             [(ngModel)]="newExercise.numberOfVars"/>
+
+      <label for="numberOfConstraints"># Constraints</label>
+      <input id="numberOfConstraints" type="number" class="w-25"
+             [(ngModel)]="newExercise.numberOfConstraints"/>
+
 
       <div></div>
       <input type="submit" value="Create"/>
