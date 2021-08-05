@@ -31,6 +31,12 @@
       <input id="numberOfConstraints" type="number" class="w-25"
              [(ngModel)]="exercise.numberOfConstraints"/>
 
+      <!-- Linear System Data -->
+      <label for="linearSystemData">Linear System</label>
+      <app-linear-system-data id="linearSystemData"
+                              [data]="getLinearSystemDataInput()">
+      </app-linear-system-data>
+
       <div></div>
       <input type="submit" value="Create"/>
     </div>

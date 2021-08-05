@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
+import {LinearSystemDataInput} from "../../components/linear-system-data/linear-system-data-input";
 import {ActivatedRoute} from "@angular/router";
 
 
@@ -28,5 +29,16 @@ export class AdminEditExerciseComponent implements OnInit {
       })
     })
   }
+
+  getLinearSystemDataInput(): LinearSystemDataInput {
+    const exercise = this.exercise!
+
+    return {
+      numberOfVars: exercise.numberOfVars,
+      numberOfConstraints: exercise.numberOfConstraints,
+      editable: true
+    }
+  }
+
 
 }
