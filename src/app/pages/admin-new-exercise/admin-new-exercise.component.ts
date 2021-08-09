@@ -1,16 +1,20 @@
+import {Component} from '@angular/core'
+
 import * as math from 'mathjs'
-import {Component, OnInit} from '@angular/core'
+import {Fraction} from 'mathjs'
+
 import {Difficulty} from '../../../models/difficulty'
 import {Exercise} from '../../../models/exercise'
-import {Fraction} from 'mathjs'
+import {ExerciseService} from '../../../services/exercise.service'
 import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-new-exercise',
   templateUrl: './admin-new-exercise.component.html',
   styleUrls: ['./admin-new-exercise.component.css']
 })
-export class AdminNewExerciseComponent implements OnInit {
+export class AdminNewExerciseComponent {
 
   newExercise: Exercise = {
     id: -1,
@@ -39,10 +43,8 @@ export class AdminNewExerciseComponent implements OnInit {
     ],
   }
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
+  constructor(private router: Router,
+              private exerciseService: ExerciseService) {
   }
 
   getLinearSystemDataInput(): LinearSystemDataInput {
@@ -51,5 +53,11 @@ export class AdminNewExerciseComponent implements OnInit {
       numberOfConstraints: this.newExercise.numberOfConstraints,
       editable: true
     }
+  }
+
+  onSubmit() {
+    this.exerciseService.postExercise(this.newExercise).subscribe(() => {
+      this.router.navigate(['/admin/exercises'])
+    })
   }
 }
