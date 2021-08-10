@@ -60,6 +60,12 @@ export class LinearSystemDataCardComponent {
   //
 
   getLinearSystemData(): LinearSystemDataInput {
-    return this.data!
+    return {
+      ...this.data!,
+
+      targetVars: null,
+      constraintVars: null,
+      constraintVals: null
+    }
   }
 }

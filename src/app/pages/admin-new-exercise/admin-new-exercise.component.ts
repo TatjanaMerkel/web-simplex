@@ -50,7 +50,11 @@ export class AdminNewExerciseComponent {
   getLinearSystemDataInput(): LinearSystemDataInput {
     return {
       numberOfVars: this.newExercise.numberOfVars,
-      numberOfConstraints: this.newExercise.numberOfConstraints
+      numberOfConstraints: this.newExercise.numberOfConstraints,
+
+      targetVars: null,
+      constraintVars: null,
+      constraintVals: null
     }
   }
 

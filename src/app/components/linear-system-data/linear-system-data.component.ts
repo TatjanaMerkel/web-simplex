@@ -27,14 +27,13 @@ export class LinearSystemDataComponent implements OnChanges {
   //
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.data) {
+    if (changes.data) {
       const previous = changes.data.previousValue
       const current = changes.data.currentValue
 
+      LinearSystemDataComponent.checkData(current)
 
-
-      const numberOfVars = this.data.numberOfVars
-      const numberOfConstraints = this.data.numberOfConstraints
+      const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = current
 
       if (!previous) {
 
@@ -48,11 +47,45 @@ export class LinearSystemDataComponent implements OnChanges {
 
         this.allocateNewArrays(numberOfVars, numberOfConstraints)
 
-        this.restorePreviousArrays(previousTargetVars, previousConstraintVars, previousConstraintVals)
+        this.overwriteArrays(previousTargetVars, previousConstraintVars, previousConstraintVals)
       }
 
-      console.log('bla')
-      console.log(this.targetVars)
+      if (targetVars && constraintVars && constraintVals) {
+        this.overwriteArrays(targetVars, constraintVars, constraintVals)
+      }
+    }
+  }
+
+  private static checkData(data: LinearSystemDataInput) {
+    const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = data
+
+    if (numberOfVars <= 0) {
+      throw new Error(`Invalid numberOfVars (${numberOfVars}). Must be > 0.`)
+    }
+
+    if (numberOfConstraints <= 0) {
+      throw new Error(`Invalid numberOfConstraints (${numberOfConstraints}). Must be > 0.`)
+    }
+
+    if (targetVars === null && constraintVars === null && constraintVals === null) {
+      // valid
+
+    } else if (targetVars !== null && constraintVars !== null && constraintVals !== null) {
+
+      if (targetVars.length != numberOfVars) {
+        throw new Error(`Invalid targetVars (${targetVars}). Length must be numberOfVars (${numberOfVars}).`)
+      }
+
+      if (constraintVars.length != numberOfConstraints) {
+        throw new Error(`Invalid constraintVars (${constraintVars}). Length must be numberOfConstraints (${numberOfConstraints}).`)
+      }
+
+      if (constraintVals.length != numberOfConstraints) {
+        throw new Error(`Invalid constraintVals (${constraintVals}). Length must be numberOfConstraints (${numberOfConstraints}).`)
+      }
+
+    } else {
+      throw new Error('targetVars, constraintVars, and constraintVals must all be null or not null')
     }
   }
 
@@ -72,7 +105,7 @@ export class LinearSystemDataComponent implements OnChanges {
       || current.numberOfConstraints !== previous.numberOfConstraints
   }
 
-  private restorePreviousArrays(
+  private overwriteArrays(
     previousTargetVars: Array<null | Fraction>,
     previousConstraintVars: Array<Array<null | Fraction>>,
     previousConstraintVals: Array<null | Fraction>
