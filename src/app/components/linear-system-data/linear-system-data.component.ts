@@ -56,6 +56,18 @@ export class LinearSystemDataComponent implements OnChanges {
     }
   }
 
+  formatFraction(fraction: null | Fraction): string {
+    if (!fraction) {
+      return ''
+    }
+
+    const sign = fraction.s === 1 ? '' : '-';
+
+    return fraction.d === 1
+      ? sign + fraction.n
+      : sign + fraction.n + '/' + fraction.d;
+  }
+
   private static checkData(data: LinearSystemDataInput) {
     const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = data
 

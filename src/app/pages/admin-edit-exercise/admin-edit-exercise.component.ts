@@ -1,11 +1,13 @@
-import {ActivatedRoute} from '@angular/router'
+import {ActivatedRoute, Router} from '@angular/router'
 import {Component, OnInit} from '@angular/core'
 
 import * as math from 'mathjs'
 
 import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
-import {LinearSystemDataInput} from "../../components/linear-system-data/linear-system-data-input";
+import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
+import {LinearSystemDataOutput} from "../../components/linear-system-data/linear-system-data-output";
+import {Fraction} from "mathjs";
 
 @Component({
   selector: 'app-admin-edit-exercise',
@@ -17,6 +19,7 @@ export class AdminEditExerciseComponent implements OnInit {
   exercise: undefined | Exercise
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private exerciseService: ExerciseService) {
   }
 
@@ -47,6 +50,24 @@ export class AdminEditExerciseComponent implements OnInit {
       targetVars: exercise.targetVars,
       constraintVars: exercise.constraintVars,
       constraintVals: exercise.constraintVals
+    }
+  }
+
+  onSubmit() {
+    this.exerciseService.putExercise(this.exercise!).subscribe(() => {
+      this.router.navigate(['/admin/exercises'])
+    })
+  }
+
+  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput) {
+    const {targetVars, constraintVars, constraintVals, isValid} = linearSystemDataOutput
+
+    if (isValid) {
+      this.exercise!.targetVars = targetVars as Array<Fraction>
+      this.exercise!.constraintVars = constraintVars as Array<Array<Fraction>>
+      this.exercise!.constraintVals = constraintVals as Array<Fraction>
+    } else {
+      // TODO
     }
   }
 }

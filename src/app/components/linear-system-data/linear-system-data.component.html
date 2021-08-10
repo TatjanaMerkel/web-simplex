@@ -7,8 +7,8 @@
 
     <td>
       <input class="short-input"
-             (input)="onTargetVarChanged($event,0)"
-             [value]="targetVars[0]"
+             (change)="onTargetVarChanged($event,0)"
+             [value]="data.targetVars ? formatFraction(data.targetVars[0]) : ''"
              [disabled]="disabled"/>
     </td>
     <td>
@@ -19,7 +19,9 @@
       <td>+</td>
       <td>
         <input class="short-input"
-               (input)="onTargetVarChanged($event,v + 1)"
+               (change)="onTargetVarChanged($event,v + 1)"
+               [value]="data.targetVars ? formatFraction(targetVars[v + 1]) : ''"
+
                [disabled]="disabled"/>
       </td>
       <td>
@@ -35,7 +37,8 @@
 
     <td>
       <input class="short-input"
-             (input)="onConstraintVarChanged($event, c, 0)"
+             (change)="onConstraintVarChanged($event, c, 0)"
+             [value]="data.constraintVars ? formatFraction(constraintVars[c][0]) : ''"
              [disabled]="disabled"/>
     </td>
     <td>
@@ -46,7 +49,8 @@
       <td>+</td>
       <td>
         <input class="short-input"
-               (input)="onConstraintVarChanged($event, c,v + 1)"
+               (change)="onConstraintVarChanged($event, c,v + 1)"
+               [value]="data.constraintVars ? formatFraction(constraintVars[c][v + 1]) : ''"
                [disabled]="disabled"/>
       </td>
       <td>
@@ -59,7 +63,8 @@
     <!-- Boundary vector -->
     <td>
       <input class="short-input"
-             (input)="onConstraintConstantChanged($event, c)"
+             (change)="onConstraintConstantChanged($event, c)"
+             [value]="data.constraintVals ? formatFraction(constraintVals[c]) : ''"
              [disabled]="disabled"/>
     </td>
   </tr>

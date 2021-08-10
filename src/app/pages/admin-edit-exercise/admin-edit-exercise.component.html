@@ -34,11 +34,12 @@
       <!-- Linear System Data -->
       <label for="linearSystemData">Linear System</label>
       <app-linear-system-data id="linearSystemData"
-                              [data]="getLinearSystemDataInput()">
+                              [data]="getLinearSystemDataInput()"
+                              (dataChange)="onLinearSystemDataChange($event)">
       </app-linear-system-data>
 
       <div></div>
-      <input type="submit" value="Create"/>
+      <button type="submit" (click)="onSubmit()">Update</button>
     </div>
   </app-card>
 </div>

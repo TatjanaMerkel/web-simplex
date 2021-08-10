@@ -39,7 +39,8 @@
       <!-- Linear System Data -->
       <label for="linearSystemData">Linear System</label>
       <app-linear-system-data id="linearSystemData"
-                              [data]="getLinearSystemDataInput()">
+                              [data]="getLinearSystemDataInput()"
+                              (dataChange)="onLinearSystemDataChange($event)">
       </app-linear-system-data>
 
       <!-- Create Button -->

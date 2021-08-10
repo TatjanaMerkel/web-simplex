@@ -7,7 +7,9 @@ import {Difficulty} from '../../../models/difficulty'
 import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
 import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
-import {Router} from "@angular/router";
+import {Router} from "@angular/router"
+import {LinearSystemDataOutput} from "../../components/linear-system-data/linear-system-data-output"
+
 
 @Component({
   selector: 'app-admin-new-exercise',
@@ -62,5 +64,17 @@ export class AdminNewExerciseComponent {
     this.exerciseService.postExercise(this.newExercise).subscribe(() => {
       this.router.navigate(['/admin/exercises'])
     })
+  }
+
+  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput) {
+    const {targetVars, constraintVars, constraintVals, isValid} = linearSystemDataOutput
+
+    if (isValid) {
+      this.newExercise.targetVars = targetVars as Array<Fraction>
+      this.newExercise.constraintVars = constraintVars as Array<Array<Fraction>>
+      this.newExercise.constraintVals = constraintVals as Array<Fraction>
+    } else {
+      // TODO
+    }
   }
 }

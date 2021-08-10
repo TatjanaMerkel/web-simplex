@@ -5,6 +5,8 @@ import {Observable, of, throwError} from 'rxjs'
 import {catchError, tap} from 'rxjs/operators'
 
 import {Exercise} from '../models/exercise'
+import * as math from "mathjs";
+
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +35,13 @@ export class ExerciseService {
   }
 
   postExercise(exercise: Exercise): Observable<Exercise> {
+    const replacer = (math as any).replacer
+
     const dbExercise = {
       ...exercise,
-      targetVars: JSON.stringify(exercise.targetVars),
-      constraintVars: JSON.stringify(exercise.constraintVars),
-      constraintVals: JSON.stringify(exercise.constraintVals)
+      targetVars: JSON.stringify(exercise.targetVars, replacer),
+      constraintVars: JSON.stringify(exercise.constraintVars, replacer),
+      constraintVals: JSON.stringify(exercise.constraintVals, replacer)
     }
 
     return this.http.post<Exercise>('http://localhost:3000/exercise', dbExercise, this.httpOptions).pipe(
@@ -47,7 +51,16 @@ export class ExerciseService {
   }
 
   putExercise(exercise: Exercise): Observable<any> {
-    return this.http.put('http://localhost:3000/exercise', exercise, this.httpOptions).pipe(
+    const replacer = (math as any).replacer
+
+    const dbExercise = {
+      ...exercise,
+      targetVars: JSON.stringify(exercise.targetVars, replacer),
+      constraintVars: JSON.stringify(exercise.constraintVars, replacer),
+      constraintVals: JSON.stringify(exercise.constraintVals, replacer)
+    }
+
+    return this.http.put(`http://localhost:3000/exercise/${exercise.id}`, dbExercise, this.httpOptions).pipe(
       tap(exercise => console.debug(exercise)),
       catchError(ExerciseService.handleError)
     )
