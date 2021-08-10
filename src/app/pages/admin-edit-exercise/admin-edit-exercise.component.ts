@@ -45,8 +45,7 @@ export class AdminEditExerciseComponent implements OnInit {
 
     return {
       numberOfVars: exercise.numberOfVars,
-      numberOfConstraints: exercise.numberOfConstraints,
-      editable: true
+      numberOfConstraints: exercise.numberOfConstraints
     }
   }
 }

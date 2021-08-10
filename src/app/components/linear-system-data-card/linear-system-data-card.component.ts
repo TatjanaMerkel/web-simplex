@@ -60,11 +60,6 @@ export class LinearSystemDataCardComponent {
   //
 
   getLinearSystemData(): LinearSystemDataInput {
-    const data = this.data!
-
-    return {
-      ...data,
-      editable: this.editable
-    }
+    return this.data!
   }
 }

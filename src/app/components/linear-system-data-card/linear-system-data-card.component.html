@@ -1,5 +1,6 @@
 <app-card title="Eingabe der Parameter">
   <app-linear-system-data [data]="getLinearSystemData()"
+                          [disabled]="!editable"
                           (dataChange)="onLinearSystemDataChange($event)">
   </app-linear-system-data>
 

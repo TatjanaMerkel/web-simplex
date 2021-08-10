@@ -8,7 +8,8 @@
     <td>
       <input class="short-input"
              (input)="onTargetVarChanged($event,0)"
-             [disabled]="!data.editable"/>
+             [value]="targetVars[0]"
+             [disabled]="disabled"/>
     </td>
     <td>
       x<sub>1</sub>
@@ -19,7 +20,7 @@
       <td>
         <input class="short-input"
                (input)="onTargetVarChanged($event,v + 1)"
-               [disabled]="!data.editable"/>
+               [disabled]="disabled"/>
       </td>
       <td>
         x<sub>{{v + 2}}</sub>
@@ -35,7 +36,7 @@
     <td>
       <input class="short-input"
              (input)="onConstraintVarChanged($event, c, 0)"
-             [disabled]="!data.editable"/>
+             [disabled]="disabled"/>
     </td>
     <td>
       x<sub>1</sub>
@@ -46,7 +47,7 @@
       <td>
         <input class="short-input"
                (input)="onConstraintVarChanged($event, c,v + 1)"
-               [disabled]="!data.editable"/>
+               [disabled]="disabled"/>
       </td>
       <td>
         x<sub>{{v + 2}}</sub>
@@ -59,7 +60,7 @@
     <td>
       <input class="short-input"
              (input)="onConstraintConstantChanged($event, c)"
-             [disabled]="!data.editable"/>
+             [disabled]="disabled"/>
     </td>
   </tr>
 
