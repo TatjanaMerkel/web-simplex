@@ -18,6 +18,10 @@ import {LinearSystemDataOutput} from "../../components/linear-system-data/linear
 })
 export class AdminNewExerciseComponent {
 
+  taskPlaceholder =
+    'Leer lassen um Rechenaufgabe (erstes Tableau vorgegeben) statt Textaufgabe' +
+    ' (erstes Tableau muss anhand von Text bestimmt werden) zu erstellen.'
+
   newExercise: Exercise = {
     id: -1,
     title: '',

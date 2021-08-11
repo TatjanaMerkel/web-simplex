@@ -1,52 +1,65 @@
 <div class="w-75 mx-auto mt-4">
-  <app-card title="Create New Exercise">
+  <app-card title="Neue Aufgabe erstellen">
+    <div class="form-grid">
 
-  <div class="form-grid">
       <!-- Title -->
-      <label for="title">Title</label>
+
+      <label for="title">Titel</label>
       <input id="title" type="text" [(ngModel)]="newExercise.title">
 
       <!-- Difficulty -->
-      <label for="difficulty">Difficulty</label>
+
+      <label for="difficulty">Schwierigkeit</label>
       <div id="difficulty">
-        <input id="easy" type="radio"
+        <input id="easy"
+               type="radio" name="difficulty"
                [(ngModel)]="newExercise.difficulty" value="EASY">
-        <label for="easy" class="ml-2">Easy</label>
+        <label for="easy" class="ml-2">Einfach</label>
 
-        <input id="medium" type="radio" class="ml-4"
+        <input id="medium" class="ml-4"
+               type="radio" name="difficulty"
                [(ngModel)]="newExercise.difficulty" value="MEDIUM">
-        <label for="medium" class="ml-2">Medium</label>
+        <label for="medium" class="ml-2">Mittel</label>
 
-        <input id="hard" type="radio" class="ml-4"
+        <input id="hard"  class="ml-4"
+               type="radio" name="difficulty"
                [(ngModel)]="newExercise.difficulty" value="HARD">
-        <label for="hard" class="ml-2">Hard</label>
+        <label for="hard" class="ml-2">Schwer</label>
       </div>
 
       <!-- Task -->
-      <label for="task">Task</label>
-      <textarea id="task" [(ngModel)]="newExercise.task"></textarea>
+
+      <label for="task">Textaufgabe</label>
+      <textarea id="task"
+                [(ngModel)]="newExercise.task"
+                [placeholder]="taskPlaceholder"
+                rows="3"></textarea>
 
       <!-- Number of Variables -->
-      <label for="numberOfVars"># Variables</label>
+
+      <label for="numberOfVars">Variablen</label>
       <input id="numberOfVars" type="number" class="w-25"
              [(ngModel)]="newExercise.numberOfVars"/>
 
       <!-- Number of Constraints -->
-      <label for="numberOfConstraints"># Constraints</label>
+
+      <label for="numberOfConstraints">Nebenbedingungen</label>
       <input id="numberOfConstraints" type="number" class="w-25"
              [(ngModel)]="newExercise.numberOfConstraints"/>
 
       <!-- Linear System Data -->
-      <label for="linearSystemData">Linear System</label>
+
+      <label for="linearSystemData">Gleichungssystem</label>
       <app-linear-system-data id="linearSystemData"
                               [data]="getLinearSystemDataInput()"
                               (dataChange)="onLinearSystemDataChange($event)">
       </app-linear-system-data>
 
       <!-- Create Button -->
-      <div></div>
-      <button type="submit" (click)="onSubmit()">Create</button>
-    </div>
 
+      <div></div>
+      <button type="submit" (click)="onSubmit()">Erstellen</button>
+
+    </div>
   </app-card>
 </div>
