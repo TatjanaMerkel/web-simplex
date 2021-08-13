@@ -1,14 +1,13 @@
 import {Component} from '@angular/core'
+import {Router} from '@angular/router'
 
-import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
 import {Difficulty} from '../../../models/difficulty'
-import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
+import {Exercise} from '../../../models/exercise'
 import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
-import {Router} from "@angular/router"
-import {LinearSystemDataOutput} from "../../components/linear-system-data/linear-system-data-output"
+import {LinearSystemDataOutput} from '../../components/linear-system-data/linear-system-data-output'
 
 
 @Component({
@@ -22,32 +21,15 @@ export class AdminNewExerciseComponent {
     'Leer lassen um Rechenaufgabe (erstes Tableau vorgegeben) statt Textaufgabe' +
     ' (erstes Tableau muss anhand von Text bestimmt werden) zu erstellen.'
 
-  newExercise: Exercise = {
-    id: -1,
-    title: '',
-    difficulty: Difficulty.EASY,
-    task: '',
-    numberOfVars: 2,
-    numberOfConstraints: 2,
-    targetVars: [
-      math.fraction(0) as Fraction,
-      math.fraction(0) as Fraction
-    ],
-    constraintVars: [
-      [
-        math.fraction(0) as Fraction,
-        math.fraction(0) as Fraction
-      ],
-      [
-        math.fraction(0) as Fraction,
-        math.fraction(0) as Fraction
-      ]
-    ],
-    constraintVals: [
-      math.fraction(0) as Fraction,
-      math.fraction(0) as Fraction
-    ],
-  }
+  title = ''
+  difficulty = Difficulty.EASY
+  task = ''
+  numberOfVars = 2
+  numberOfConstraints = 2
+  targetVars: Array<null | Fraction> = [null, null]
+  constraintVars: Array<Array<null | Fraction>> = [[null, null], [null, null]]
+  constraintVals: Array<null | Fraction> = [null, null]
+
 
   constructor(private router: Router,
               private exerciseService: ExerciseService) {
@@ -55,8 +37,8 @@ export class AdminNewExerciseComponent {
 
   getLinearSystemDataInput(): LinearSystemDataInput {
     return {
-      numberOfVars: this.newExercise.numberOfVars,
-      numberOfConstraints: this.newExercise.numberOfConstraints,
+      numberOfVars: this.numberOfVars,
+      numberOfConstraints: this.numberOfConstraints,
 
       targetVars: null,
       constraintVars: null,
@@ -65,18 +47,57 @@ export class AdminNewExerciseComponent {
   }
 
   onSubmit() {
-    this.exerciseService.postExercise(this.newExercise).subscribe(() => {
-      this.router.navigate(['/admin/exercises'])
-    })
+    if (this.isInputValid()) {
+      const exercise: Exercise = {
+        id: -1,
+        title: this.title,
+        difficulty: this.difficulty,
+        task: this.task,
+        numberOfVars: this.numberOfVars,
+        numberOfConstraints: this.numberOfConstraints,
+        targetVars: this.targetVars as Array<Fraction>,
+        constraintVars: this.constraintVars as Array<Array<Fraction>>,
+        constraintVals: this.constraintVals as Array<Fraction>
+      }
+
+      this.exerciseService.postExercise(exercise).subscribe(() => {
+        this.router.navigate(['/admin/exercises'])
+      })
+    } else {
+      alert('Unvollständige oder fehlerhafte Werte. Bitte überprüfen Sie Ihre Eingabe.')
+    }
+  }
+
+  isInputValid(): boolean {
+    if (this.title === '') {
+      return false
+    }
+
+    if (this.targetVars.indexOf(null) !== -1) {
+      return false
+    }
+
+    for (let constraintVarsRow of this.constraintVars) {
+      if (constraintVarsRow.indexOf(null) !== -1) {
+        return false
+      }
+    }
+
+    if (this.constraintVals.indexOf(null) !== -1) {
+      return false
+    }
+
+    return true;
+
   }
 
   onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput) {
     const {targetVars, constraintVars, constraintVals, isValid} = linearSystemDataOutput
 
     if (isValid) {
-      this.newExercise.targetVars = targetVars as Array<Fraction>
-      this.newExercise.constraintVars = constraintVars as Array<Array<Fraction>>
-      this.newExercise.constraintVals = constraintVals as Array<Fraction>
+      this.targetVars = targetVars as Array<Fraction>
+      this.constraintVars = constraintVars as Array<Array<Fraction>>
+      this.constraintVals = constraintVals as Array<Fraction>
     } else {
       // TODO
     }

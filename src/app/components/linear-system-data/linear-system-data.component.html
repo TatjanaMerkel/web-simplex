@@ -6,7 +6,7 @@
     <td>=</td>
 
     <td>
-      <input class="short-input"
+      <input class="fraction-input"
              (change)="onTargetVarChanged($event,0)"
              [value]="data.targetVars ? formatFraction(data.targetVars[0]) : ''"
              [disabled]="disabled"/>
@@ -18,7 +18,7 @@
     <ng-container *ngFor="let _ of targetVars.slice(1); index as v; trackBy: trackByIndex">
       <td>+</td>
       <td>
-        <input class="short-input"
+        <input class="fraction-input"
                (change)="onTargetVarChanged($event,v + 1)"
                [value]="data.targetVars ? formatFraction(targetVars[v + 1]) : ''"
 
@@ -36,7 +36,7 @@
     <td></td>
 
     <td>
-      <input class="short-input"
+      <input class="fraction-input"
              (change)="onConstraintVarChanged($event, c, 0)"
              [value]="data.constraintVars ? formatFraction(constraintVars[c][0]) : ''"
              [disabled]="disabled"/>
@@ -48,7 +48,7 @@
     <ng-container *ngFor="let _ of constraintVars![c].slice(1); index as v; trackBy: trackByIndex">
       <td>+</td>
       <td>
-        <input class="short-input"
+        <input class="fraction-input"
                (change)="onConstraintVarChanged($event, c,v + 1)"
                [value]="data.constraintVars ? formatFraction(constraintVars[c][v + 1]) : ''"
                [disabled]="disabled"/>
@@ -62,7 +62,7 @@
 
     <!-- Boundary vector -->
     <td>
-      <input class="short-input"
+      <input class="fraction-input"
              (change)="onConstraintConstantChanged($event, c)"
              [value]="data.constraintVals ? formatFraction(constraintVals[c]) : ''"
              [disabled]="disabled"/>

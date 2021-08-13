@@ -5,7 +5,7 @@
       <!-- Title -->
 
       <label for="title">Titel</label>
-      <input id="title" type="text" [(ngModel)]="newExercise.title">
+      <input id="title" type="text" [(ngModel)]="title">
 
       <!-- Difficulty -->
 
@@ -13,17 +13,17 @@
       <div id="difficulty">
         <input id="easy"
                type="radio" name="difficulty"
-               [(ngModel)]="newExercise.difficulty" value="EASY">
+               [(ngModel)]="difficulty" value="EASY">
         <label for="easy" class="ml-2">Einfach</label>
 
         <input id="medium" class="ml-4"
                type="radio" name="difficulty"
-               [(ngModel)]="newExercise.difficulty" value="MEDIUM">
+               [(ngModel)]="difficulty" value="MEDIUM">
         <label for="medium" class="ml-2">Mittel</label>
 
         <input id="hard"  class="ml-4"
                type="radio" name="difficulty"
-               [(ngModel)]="newExercise.difficulty" value="HARD">
+               [(ngModel)]="difficulty" value="HARD">
         <label for="hard" class="ml-2">Schwer</label>
       </div>
 
@@ -31,21 +31,23 @@
 
       <label for="task">Textaufgabe</label>
       <textarea id="task"
-                [(ngModel)]="newExercise.task"
+                [(ngModel)]="task"
                 [placeholder]="taskPlaceholder"
                 rows="3"></textarea>
 
       <!-- Number of Variables -->
 
       <label for="numberOfVars">Variablen</label>
-      <input id="numberOfVars" type="number" class="w-25"
-             [(ngModel)]="newExercise.numberOfVars"/>
+      <input id="numberOfVars" class="number-input"
+             type="number"
+             [(ngModel)]="numberOfVars"/>
 
       <!-- Number of Constraints -->
 
       <label for="numberOfConstraints">Nebenbedingungen</label>
-      <input id="numberOfConstraints" type="number" class="w-25"
-             [(ngModel)]="newExercise.numberOfConstraints"/>
+      <input id="numberOfConstraints" class="number-input"
+             type="number"
+             [(ngModel)]="numberOfConstraints"/>
 
       <!-- Linear System Data -->
 
