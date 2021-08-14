@@ -2,11 +2,10 @@
   <div class="navbar-brand">
     <ul class="text-light mt-1 mb-2">
       <li class="nav-item ml-2 mr-2 ul d-inline-block align-top">
-        <div *ngIf="router.url !== '/'">
-          <a routerLink="">
-            <img src="assets/images/back-arrow.png" alt="">
-          </a>
-        </div>
+        <img *ngIf="router.url !== '/'"
+             class="cursor-pointer"
+             src="assets/images/back-arrow.png" alt=""
+             (click)="onBack()">
       </li>
 
       <li class="nav-item">
