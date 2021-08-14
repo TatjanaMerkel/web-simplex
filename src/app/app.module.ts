@@ -5,7 +5,6 @@ import {NgModule} from '@angular/core'
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 
-import {AdminComponent} from './pages/admin/admin.component'
 import {AdminEditExerciseComponent} from './pages/admin-edit-exercise/admin-edit-exercise.component'
 import {AdminExercisesComponent} from './pages/admin-exercises/admin-exercises.component'
 import {AdminNewExerciseComponent} from './pages/admin-new-exercise/admin-new-exercise.component'
@@ -28,7 +27,6 @@ import {VarDirective} from '../ng-var.directive'
 
 @NgModule({
   declarations: [
-    AdminComponent,
     AdminEditExerciseComponent,
     AdminExercisesComponent,
     AdminNewExerciseComponent,
