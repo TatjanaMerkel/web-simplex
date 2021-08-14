@@ -7,8 +7,8 @@ import {AdminExercisesComponent} from './pages/admin-exercises/admin-exercises.c
 import {AdminNewExerciseComponent} from './pages/admin-new-exercise/admin-new-exercise.component'
 import {CalculatorComponent} from './pages/calculator/calculator.component'
 import {ExerciseComponent} from './pages/exercise/exercise.component'
-import {HomeComponent} from './home/home.component'
 import {LearningComponent} from './pages/learning/learning.component'
+import {HomeComponent} from './pages/home/home.component'
 import {PractiseComponent} from './pages/practise/practise.component'
 
 const routes: Routes = [
