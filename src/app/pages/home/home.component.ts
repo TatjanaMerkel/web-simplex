@@ -1,15 +1,26 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  constructor() {
-  }
+  buttons = [
+    {title: 'Lernen', color: 'red', route: '/learning'},
+    {title: 'Üben', color: 'green', route: '/practise'},
+    {title: 'Rechnen', color: 'blue', route: '/calculator'},
+  ]
 
-  ngOnInit(): void {
+  getColor(color: string): any {
+    switch (color) {
+      case 'red':
+        return '#e74c3c';
+      case 'green':
+        return '#27ae60';
+      case 'blue':
+        return '#3498db';
+    }
   }
 }

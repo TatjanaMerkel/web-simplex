@@ -26,7 +26,6 @@ import {StandardFormComponent} from './components/standard-form/standard-form.co
 import {TableauComponent} from './components/tableau/tableau.component'
 import {VarDirective} from '../ng-var.directive'
 
-
 @NgModule({
   declarations: [
     AdminComponent,
