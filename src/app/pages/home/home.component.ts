@@ -9,7 +9,7 @@ export class HomeComponent {
 
   buttons = [
     {title: 'Lernen', color: 'red', route: '/learning'},
-    {title: 'Üben', color: 'green', route: '/practise'},
+    {title: 'Üben', color: 'green', route: '/practice'},
     {title: 'Rechnen', color: 'blue', route: '/calculator'},
   ]
 

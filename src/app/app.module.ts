@@ -19,7 +19,7 @@ import {LinearSystemDataCardComponent} from './components/linear-system-data-car
 import {LinearSystemDataComponent} from './components/linear-system-data/linear-system-data.component'
 import {LinearSystemSize} from './components/linear-system-size/linear-system-size.component'
 import {NavBarComponent} from './components/nav-bar/nav-bar.component'
-import {PractiseComponent} from './pages/practise/practise.component'
+import {PracticeComponent} from './pages/practice/practice.component'
 import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
@@ -40,7 +40,7 @@ import {VarDirective} from '../ng-var.directive'
     LinearSystemSize,
     NavBarComponent,
     HomeComponent,
-    PractiseComponent,
+    PracticeComponent,
     SolutionComponent,
     StandardFormComponent,
     TableauComponent,

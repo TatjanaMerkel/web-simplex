@@ -4,12 +4,12 @@ import {Exercise} from '../../../models/exercise'
 
 
 @Component({
-  selector: 'app-practise',
-  templateUrl: './practise.component.html',
-  styleUrls: ['./practise.component.css']
+  selector: 'app-practice',
+  templateUrl: './practice.component.html',
+  styleUrls: ['./practice.component.css']
 })
 
-export class PractiseComponent implements OnInit {
+export class PracticeComponent implements OnInit {
 
   exercises: undefined | Exercise[]
 
