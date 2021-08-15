@@ -9,6 +9,8 @@ import {ExerciseComponent} from './pages/exercise/exercise.component'
 import {LearningComponent} from './pages/learning/learning.component'
 import {HomeComponent} from './pages/home/home.component'
 import {PracticeComponent} from './pages/practice/practice.component'
+import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -19,7 +21,8 @@ const routes: Routes = [
   {path: 'calculator', component: CalculatorComponent},
   {path: 'exercises/:exerciseId', component: ExerciseComponent},
   {path: 'learning', component: LearningComponent},
-  {path: 'practice', component: PracticeComponent}
+  {path: 'practice', component: PracticeComponent},
+  {path: 'practice/:exercise_id', component: PracticeExerciseComponent}
 ]
 
 @NgModule({
