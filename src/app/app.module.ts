@@ -23,7 +23,8 @@ import {PracticeComponent} from './pages/practice/practice.component'
 import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive'
+import {VarDirective} from '../ng-var.directive';
+import { PracticeExerciseComponent } from './pages/practice-exercise/practice-exercise.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {VarDirective} from '../ng-var.directive'
     SolutionComponent,
     StandardFormComponent,
     TableauComponent,
-    VarDirective
+    VarDirective,
+    PracticeExerciseComponent
   ],
   imports: [
     AppRoutingModule,
