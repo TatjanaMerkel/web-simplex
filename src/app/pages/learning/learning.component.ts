@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+
+import {HeaderService} from '../../../services/header.service'
 
 @Component({
   selector: 'app-learning',
@@ -7,9 +9,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LearningComponent implements OnInit {
 
-  constructor() {
+  constructor(private headerService: HeaderService) {
   }
 
   ngOnInit(): void {
+    this.headerService.title.next('Lernen')
   }
 }

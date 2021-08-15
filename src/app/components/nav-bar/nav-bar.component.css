@@ -1,28 +1,16 @@
-* {
+.bg-darker {
   background-color: #2e3642;
-
 }
 
-ul, li {
-  display: inline-block;
-  list-style: none;
+.icon {
+  width: 28px;
   height: 40px;
-}
-
-.ul {
-  width: 40px;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-img {
-  max-width: 40px;
-  max-height: 40px;
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.larger {
+  font-size: 1.5em;
 }

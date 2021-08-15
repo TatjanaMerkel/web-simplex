@@ -9,6 +9,7 @@ import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
 import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
 import {LinearSystemDataOutput} from '../../components/linear-system-data/linear-system-data-output'
+import {HeaderService} from "../../../services/header.service";
 
 @Component({
   selector: 'app-admin-edit-exercise',
@@ -33,10 +34,13 @@ export class AdminEditExerciseComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private exerciseService: ExerciseService) {
+              private exerciseService: ExerciseService,
+              private headerService: HeaderService) {
   }
 
   ngOnInit(): void {
+    this.headerService.title.next('Aufgabe bearbeiten')
+
     this.route.params.subscribe(params => {
       const exercise_id = Number(params['exercise_id'])
 

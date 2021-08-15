@@ -1,8 +1,9 @@
-import {Component} from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 
 import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
+import {HeaderService} from '../../../services/header.service'
 import {LinearSystemDataCardInput} from '../../components/linear-system-data-card/linear-system-data-card-input'
 import {LinearSystemDataCardOutput} from '../../components/linear-system-data-card/linear-system-data-card-output'
 import {LinearSystemSizeOutput} from '../../components/linear-system-size/linear-system-size-output'
@@ -17,13 +18,20 @@ import {TableauInput} from '../../components/tableau/tableau-input'
   templateUrl: './calculator.component.html',
   styleUrls: ['./calculator.component.css']
 })
-export class CalculatorComponent {
+export class CalculatorComponent implements OnInit {
 
   linearSystemSizeOutput: LinearSystemSizeOutput | null = null
   linearSystemDataCardOutput: LinearSystemDataCardOutput | null = null
 
   tableauData: Array<TableauData> | null = null
   showTableauData = false
+
+  constructor(private headerService: HeaderService) {
+  }
+
+  ngOnInit(): void {
+    this.headerService.title.next('Rechnen')
+  }
 
   //
   // Data Change Listeners

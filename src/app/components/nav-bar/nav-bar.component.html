@@ -1,16 +1,10 @@
-<nav class="nav navbar-light">
-  <div class="navbar-brand">
-    <ul class="text-light mt-1 mb-2">
-      <li class="nav-item ml-2 mr-2 ul d-inline-block align-top">
-        <img *ngIf="router.url !== '/'"
-             class="cursor-pointer"
-             src="../../../assets/images/back-arrow.png" alt=""
-             (click)="onBack()">
-      </li>
+<nav class="d-flex align-items-center p-2 bg-darker">
+  <img *ngIf="router.url !== '/'"
+       class="icon cursor-pointer"
+       src="../../../assets/images/back-arrow.png" alt="Back Arrow"
+       (click)="onBack()">
 
-      <li class="nav-item">
-        <a routerLink=""> Simplex-Algorithmus</a>
-      </li>
-    </ul>
+  <div class="pl-2 larger">
+    {{ title ?? '' }}
   </div>
 </nav>

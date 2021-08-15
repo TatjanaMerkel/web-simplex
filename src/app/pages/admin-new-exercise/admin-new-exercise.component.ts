@@ -1,4 +1,4 @@
-import {Component} from '@angular/core'
+import {Component, OnInit} from '@angular/core'
 import {Router} from '@angular/router'
 
 import {Fraction} from 'mathjs'
@@ -6,16 +6,16 @@ import {Fraction} from 'mathjs'
 import {Difficulty} from '../../../models/difficulty'
 import {ExerciseService} from '../../../services/exercise.service'
 import {Exercise} from '../../../models/exercise'
+import {HeaderService} from '../../../services/header.service'
 import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
 import {LinearSystemDataOutput} from '../../components/linear-system-data/linear-system-data-output'
-
 
 @Component({
   selector: 'app-admin-new-exercise',
   templateUrl: './admin-new-exercise.component.html',
   styleUrls: ['./admin-new-exercise.component.css']
 })
-export class AdminNewExerciseComponent {
+export class AdminNewExerciseComponent implements OnInit {
 
   taskPlaceholder =
     'Leer lassen um Rechenaufgabe (erstes Tableau vorgegeben) statt Textaufgabe' +
@@ -30,9 +30,13 @@ export class AdminNewExerciseComponent {
   constraintVars: Array<Array<null | Fraction>> = [[null, null], [null, null]]
   constraintVals: Array<null | Fraction> = [null, null]
 
-
   constructor(private router: Router,
-              private exerciseService: ExerciseService) {
+              private exerciseService: ExerciseService,
+              private headerService: HeaderService) {
+  }
+
+  ngOnInit(): void {
+    this.headerService.title.next('Neue Aufgabe erstellen')
   }
 
   getLinearSystemDataInput(): LinearSystemDataInput {
@@ -88,7 +92,6 @@ export class AdminNewExerciseComponent {
     }
 
     return true;
-
   }
 
   onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput) {
