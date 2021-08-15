@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Exercise} from "../../../models/exercise";
-import * as math from "mathjs";
-import {ActivatedRoute, Router} from "@angular/router";
-import {ExerciseService} from "../../../services/exercise.service";
-import {HeaderService} from "../../../services/header.service";
+import {ActivatedRoute, Router} from '@angular/router'
+
+import {Exercise} from '../../../models/exercise'
+import {ExerciseService} from '../../../services/exercise.service'
+import {HeaderService} from '../../../services/header.service'
+import {StandardFormInput} from '../../components/standard-form/standard-form-input'
 
 
 @Component({
@@ -32,5 +33,20 @@ export class PracticeExerciseComponent implements OnInit {
       })
     })
   }
+
+  getStandardFormInput(): StandardFormInput {
+    return {
+      numberOfVars: this.exercise!.numberOfVars,
+      numberOfConstraints: this.exercise!.numberOfConstraints,
+
+      targetVars: this.exercise!.targetVars,
+
+      constraintVars: this.exercise!.constraintVars,
+      constraintVals: this.exercise!.constraintVals,
+
+      slackVars: []
+    }
+  }
+
 
 }

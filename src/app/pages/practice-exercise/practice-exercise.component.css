@@ -1,0 +1,17 @@
+.container {
+  display: grid;
+  grid-template-columns: 5% 5% 80% 5% 5%;
+  grid-template-rows: auto;
+
+  grid-template-areas:
+    "header  header  header  header  header"
+    ".       .       card-1  .       .     "
+    "footer  footer  footer  footer  footer";
+
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.card-1 {
+  grid-area: card-1;
+}

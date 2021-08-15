@@ -1,1 +1,11 @@
-<p>practice-exercise works!</p>
+<div class="container">
+  <!-- Standard Form -->
+
+  <ng-container *ngIf="exercise">
+    <app-card class="card-1" title="LGS in Standard-Form">
+      <app-standard-form [data]="getStandardFormInput()">
+      </app-standard-form>
+    </app-card>
+  </ng-container>
+</div>
+
