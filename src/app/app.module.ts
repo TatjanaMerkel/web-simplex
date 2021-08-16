@@ -24,7 +24,10 @@ import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
 import {VarDirective} from '../ng-var.directive';
-import { PracticeExerciseComponent } from './pages/practice-exercise/practice-exercise.component'
+import { PracticeExerciseComponent } from './pages/practice-exercise/practice-exercise.component';
+import { PracticeSolutionComponent } from './components/practice-solution/practice-solution.component';
+import { PracticeStandardFormComponent } from './components/practice-standard-form/practice-standard-form.component';
+import { PracticeTableauComponent } from './components/practice-tableau/practice-tableau.component'
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { PracticeExerciseComponent } from './pages/practice-exercise/practice-ex
     StandardFormComponent,
     TableauComponent,
     VarDirective,
-    PracticeExerciseComponent
+    PracticeExerciseComponent,
+    PracticeSolutionComponent,
+    PracticeStandardFormComponent,
+    PracticeTableauComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,11 +1,88 @@
 <div class="container">
+
+  <!-- Overview -->
+
+  <app-card class="card-1"
+            title="Übersicht">
+
+    Löse die Textaufgabe indem du
+
+    <ol class="task-list">
+      <li>die Anzahl der Variablen und Nebenbedingungen bestimmst</li>
+      <li>das lineare Gleichungssystem aufstellst</li>
+      <li>das lineare Gleichungssystem in Normalform überführst</li>
+      <li>das lineare Gleichungssystem in mehreren Tableaus löst</li>
+      <li>die Lösung aus dem letzten Tableau abliest</li>
+    </ol>
+  </app-card>
+
+  <!-- Task -->
+
+  <div class="arrow-2">
+    <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card *ngIf="exercise"
+            class="card-2"
+            title="Aufgabe">
+
+    {{ exercise.task }}
+  </app-card>
+
+  <!-- Number of Variables & Constraints -->
+
+  <div class="arrow-3">
+    <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card class="card-3"
+            title="Anzahl Variablen & Nebenbedingungen">
+    <app-linear-system-size>
+    </app-linear-system-size>
+  </app-card>
+
+  <!-- Target Function and Constraints -->
+
+  <div class="arrow-4">
+    <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card class="card-4" title="Zielfunktion und Nebenbedingungen">
+    <app-linear-system-data>
+    </app-linear-system-data>
+  </app-card>
+
   <!-- Standard Form -->
 
-  <ng-container *ngIf="exercise">
-    <app-card class="card-1" title="LGS in Standard-Form">
-      <app-standard-form [data]="getStandardFormInput()">
-      </app-standard-form>
-    </app-card>
-  </ng-container>
+  <div class="arrow-5">
+    <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card class="card-5" title="LGS in Standard-Form">
+    <app-practice-standard-form>
+    </app-practice-standard-form>
+  </app-card>
+
+  <!-- Tableaus -->
+
+  <div class="arrow-6">
+    <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card class="card-6" title="Tableaus">
+    <app-practice-tableau>
+    </app-practice-tableau>
+  </app-card>
+
+  <!-- Solution -->
+
+  <div class="arrow-7">
+    <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card class="card-7" title="Lösung">
+    <app-practice-solution>
+    </app-practice-solution>
+  </app-card>
 </div>
 
