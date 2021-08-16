@@ -29,17 +29,17 @@
     {{ exercise.task }}
   </app-card>
 
-  <!-- Number of Variables & Constraints -->
+  <!-- Linear System Size -->
 
   <div class="arrow-3">
     <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
 
-  <app-card class="card-3"
-            title="Anzahl Variablen & Nebenbedingungen">
-    <app-linear-system-size>
-    </app-linear-system-size>
-  </app-card>
+  <app-practice-linear-system-size-card class="card-3"
+                                        [expectedUserInput]="{numberOfVars: 2, numberOfConstraints: 2}"
+                                        (userInputCorrect)="alert()">
+  </app-practice-linear-system-size-card>
+
 
   <!-- Target Function and Constraints -->
 

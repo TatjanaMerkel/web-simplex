@@ -48,5 +48,7 @@ export class PracticeExerciseComponent implements OnInit {
     }
   }
 
-
+  alert() {
+    alert('yes')
+  }
 }
