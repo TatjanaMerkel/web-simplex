@@ -28,7 +28,7 @@ import { PracticeExerciseComponent } from './pages/practice-exercise/practice-ex
 import { PracticeSolutionComponent } from './components/practice-solution/practice-solution.component';
 import { PracticeStandardFormComponent } from './components/practice-standard-form/practice-standard-form.component';
 import { PracticeTableauComponent } from './components/practice-tableau/practice-tableau.component';
-import { PracticeLinearSystemSizeComponent } from './components/practice-linear-system-size/practice-linear-system-size.component'
+import { PracticeLinearSystemSizeCardComponent } from './components/practice-linear-system-size-card/practice-linear-system-size-card.component'
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { PracticeLinearSystemSizeComponent } from './components/practice-linear-
     PracticeSolutionComponent,
     PracticeStandardFormComponent,
     PracticeTableauComponent,
-    PracticeLinearSystemSizeComponent
+    PracticeLinearSystemSizeCardComponent
   ],
   imports: [
     AppRoutingModule,

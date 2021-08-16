@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PracticeLinearSystemSizeComponent } from './practice-linear-system-size.component';
+import { PracticeLinearSystemSizeCardComponent } from './practice-linear-system-size-card.component';
 
 describe('PracticeLinearSystemSizeComponent', () => {
-  let component: PracticeLinearSystemSizeComponent;
-  let fixture: ComponentFixture<PracticeLinearSystemSizeComponent>;
+  let component: PracticeLinearSystemSizeCardComponent;
+  let fixture: ComponentFixture<PracticeLinearSystemSizeCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PracticeLinearSystemSizeComponent ]
+      declarations: [ PracticeLinearSystemSizeCardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PracticeLinearSystemSizeComponent);
+    fixture = TestBed.createComponent(PracticeLinearSystemSizeCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
