@@ -27,7 +27,8 @@ import {VarDirective} from '../ng-var.directive';
 import { PracticeExerciseComponent } from './pages/practice-exercise/practice-exercise.component';
 import { PracticeSolutionComponent } from './components/practice-solution/practice-solution.component';
 import { PracticeStandardFormComponent } from './components/practice-standard-form/practice-standard-form.component';
-import { PracticeTableauComponent } from './components/practice-tableau/practice-tableau.component'
+import { PracticeTableauComponent } from './components/practice-tableau/practice-tableau.component';
+import { PracticeLinearSystemSizeComponent } from './components/practice-linear-system-size/practice-linear-system-size.component'
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PracticeTableauComponent } from './components/practice-tableau/practice
     PracticeExerciseComponent,
     PracticeSolutionComponent,
     PracticeStandardFormComponent,
-    PracticeTableauComponent
+    PracticeTableauComponent,
+    PracticeLinearSystemSizeComponent
   ],
   imports: [
     AppRoutingModule,
