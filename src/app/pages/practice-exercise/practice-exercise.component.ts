@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
 
 import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
 import {HeaderService} from '../../../services/header.service'
 import {StandardFormInput} from '../../components/standard-form/standard-form-input'
-
+import {PracticeLinearSystemDataCardExpected} from "../../components/practice-linear-system-data-card/practice-linear-system-data-card-expected";
+import * as math from "mathjs";
 
 @Component({
   selector: 'app-practice-exercise',
@@ -22,6 +23,18 @@ export class PracticeExerciseComponent implements OnInit {
   tableausCorrect = false
   solutionCorrect = false
 
+  get expectedLinearSystemData(): PracticeLinearSystemDataCardExpected {
+    const exercise = this.exercise!
+
+    return {
+      numberOfVars: exercise.numberOfVars,
+      numberOfConstraints: exercise.numberOfConstraints,
+      targetVars: exercise.targetVars,
+      constraintVars: exercise.constraintVars,
+      constraintVals: exercise.constraintVals
+    }
+  }
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private exerciseService: ExerciseService,
@@ -29,13 +42,21 @@ export class PracticeExerciseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.headerService.title.next('Üben')
+
     this.route.params.subscribe(params => {
       const exercise_id = Number(params['exercise_id'])
 
       this.exerciseService.getExercise(exercise_id).subscribe((exercise: Exercise) => {
-        this.exercise = exercise
+        const reviver = (math as any).reviver
 
-        console.log(this.exercise)
+        this.exercise = {
+          ...exercise,
+
+          targetVars: JSON.parse(JSON.stringify(exercise.targetVars), reviver),
+          constraintVars: JSON.parse(JSON.stringify(exercise.constraintVars), reviver),
+          constraintVals: JSON.parse(JSON.stringify(exercise.constraintVals), reviver)
+        }
       })
     })
   }
@@ -52,9 +73,5 @@ export class PracticeExerciseComponent implements OnInit {
 
       slackVars: []
     }
-  }
-
-  alert() {
-    alert('yes')
   }
 }

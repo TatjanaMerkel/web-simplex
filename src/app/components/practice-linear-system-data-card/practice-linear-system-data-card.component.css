@@ -1,0 +1,21 @@
+.fraction-input {
+  width: 60px;
+}
+
+td {
+  text-align: center;
+}
+
+table {
+  border-collapse: initial;
+  border-spacing: 4px;
+}
+
+tr:first-child > td {
+  padding-bottom: 20px;
+}
+
+td {
+  padding-left: 4px;
+  padding-right: 4px;
+}

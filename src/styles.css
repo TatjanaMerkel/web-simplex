@@ -18,3 +18,8 @@ body {
   color: white;
 }
 
+.wrong {
+  outline: 4px solid red;
+}
+
+

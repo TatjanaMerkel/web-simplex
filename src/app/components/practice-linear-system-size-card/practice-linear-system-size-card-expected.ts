@@ -1,4 +1,4 @@
-export interface PracticeLinearSystemSizeCardData {
+export interface PracticeLinearSystemSizeCardExpected {
   numberOfVars: number,
   numberOfConstraints: number
 }

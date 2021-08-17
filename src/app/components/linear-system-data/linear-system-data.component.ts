@@ -3,8 +3,8 @@ import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '
 import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
-import {LinearSystemDataInput} from './linear-system-data-input'
-import {LinearSystemDataOutput} from './linear-system-data-output'
+import {LinearSystemDataInit} from './linear-system-data-init'
+import {LinearSystemDataValues} from './linear-system-data-values'
 
 @Component({
   selector: 'app-linear-system-data',
@@ -13,10 +13,10 @@ import {LinearSystemDataOutput} from './linear-system-data-output'
 })
 export class LinearSystemDataComponent implements OnChanges {
 
-  @Input() data: undefined | LinearSystemDataInput
+  @Input() init: undefined | LinearSystemDataInit
   @Input() disabled = false
 
-  @Output() dataChange = new EventEmitter<LinearSystemDataOutput>()
+  @Output() dataChange = new EventEmitter<LinearSystemDataValues>()
 
   targetVars: undefined | Array<null | Fraction>
   constraintVars: undefined | Array<Array<null | Fraction>>
@@ -27,9 +27,9 @@ export class LinearSystemDataComponent implements OnChanges {
   //
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data) {
-      const previous = changes.data.previousValue
-      const current = changes.data.currentValue
+    if (changes.init) {
+      const previous = changes.init.previousValue
+      const current = changes.init.currentValue
 
       LinearSystemDataComponent.checkData(current)
 
@@ -39,7 +39,7 @@ export class LinearSystemDataComponent implements OnChanges {
 
         this.allocateNewArrays(numberOfVars, numberOfConstraints)
 
-      } else if (this.linearSystemSizeChanged(previous, current)) {
+      } else if (LinearSystemDataComponent.linearSystemSizeChanged(previous, current)) {
 
         const previousTargetVars = this.targetVars!
         const previousConstraintVars = this.constraintVars!
@@ -68,7 +68,7 @@ export class LinearSystemDataComponent implements OnChanges {
       : sign + fraction.n + '/' + fraction.d;
   }
 
-  private static checkData(data: LinearSystemDataInput) {
+  private static checkData(data: LinearSystemDataInit) {
     const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = data
 
     if (numberOfVars <= 0) {
@@ -105,6 +105,7 @@ export class LinearSystemDataComponent implements OnChanges {
     this.targetVars = new Array<null | Fraction>(numberOfVars).fill(null)
 
     this.constraintVars = new Array<Array<null | Fraction>>(numberOfConstraints)
+
     for (let c = 0; c < this.constraintVars.length; c++) {
       this.constraintVars[c] = new Array<null | Fraction>(numberOfVars).fill(null)
     }
@@ -112,7 +113,7 @@ export class LinearSystemDataComponent implements OnChanges {
     this.constraintVals = new Array<null | Fraction>(numberOfConstraints).fill(null)
   }
 
-  private linearSystemSizeChanged(previous: LinearSystemDataInput, current: LinearSystemDataInput): boolean {
+  private static linearSystemSizeChanged(previous: LinearSystemDataInit, current: LinearSystemDataInit): boolean {
     return current.numberOfVars !== previous.numberOfVars
       || current.numberOfConstraints !== previous.numberOfConstraints
   }

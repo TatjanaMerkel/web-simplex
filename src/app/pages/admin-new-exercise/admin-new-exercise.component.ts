@@ -7,8 +7,8 @@ import {Difficulty} from '../../../models/difficulty'
 import {ExerciseService} from '../../../services/exercise.service'
 import {Exercise} from '../../../models/exercise'
 import {HeaderService} from '../../../services/header.service'
-import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
-import {LinearSystemDataOutput} from '../../components/linear-system-data/linear-system-data-output'
+import {LinearSystemDataInit} from '../../components/linear-system-data/linear-system-data-init'
+import {LinearSystemDataValues} from '../../components/linear-system-data/linear-system-data-values'
 
 @Component({
   selector: 'app-admin-new-exercise',
@@ -39,7 +39,7 @@ export class AdminNewExerciseComponent implements OnInit {
     this.headerService.title.next('Neue Aufgabe erstellen')
   }
 
-  getLinearSystemDataInput(): LinearSystemDataInput {
+  getLinearSystemDataInput(): LinearSystemDataInit {
     return {
       numberOfVars: this.numberOfVars,
       numberOfConstraints: this.numberOfConstraints,
@@ -87,14 +87,10 @@ export class AdminNewExerciseComponent implements OnInit {
       }
     }
 
-    if (this.constraintVals.indexOf(null) !== -1) {
-      return false
-    }
-
-    return true;
+    return this.constraintVals.indexOf(null) === -1
   }
 
-  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput) {
+  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataValues) {
     const {targetVars, constraintVars, constraintVals, isValid} = linearSystemDataOutput
 
     if (isValid) {

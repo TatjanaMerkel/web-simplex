@@ -4,8 +4,8 @@ import {Fraction} from 'mathjs'
 
 import {LinearSystemDataCardInput} from './linear-system-data-card-input'
 import {LinearSystemDataCardOutput} from './linear-system-data-card-output'
-import {LinearSystemDataInput} from '../linear-system-data/linear-system-data-input'
-import {LinearSystemDataOutput} from '../linear-system-data/linear-system-data-output'
+import {LinearSystemDataInit} from '../linear-system-data/linear-system-data-init'
+import {LinearSystemDataValues} from '../linear-system-data/linear-system-data-values'
 
 @Component({
   selector: 'app-linear-system-data-card',
@@ -18,7 +18,7 @@ export class LinearSystemDataCardComponent {
 
   @Output() dataChange = new EventEmitter<LinearSystemDataCardOutput | null>()
 
-  linearSystemData: undefined | LinearSystemDataOutput
+  linearSystemData: undefined | LinearSystemDataValues
 
   editable = true
 
@@ -26,7 +26,7 @@ export class LinearSystemDataCardComponent {
   // Event Handlers
   //
 
-  onLinearSystemDataChange(linearSystemData: LinearSystemDataOutput): void {
+  onLinearSystemDataChange(linearSystemData: LinearSystemDataValues): void {
     this.linearSystemData = linearSystemData
   }
 
@@ -59,7 +59,7 @@ export class LinearSystemDataCardComponent {
   // Helper
   //
 
-  getLinearSystemData(): LinearSystemDataInput {
+  getLinearSystemData(): LinearSystemDataInit {
     return {
       ...this.data!,
 

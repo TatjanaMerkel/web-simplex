@@ -9,7 +9,7 @@
                type="number" min="0"
                [disabled]="disabled"
                (input)="numberOfVarsCorrect = true"
-               (change)="storeNumberOfVars($event)"/>
+               (change)="saveNumberOfVars($event)"/>
       </td>
     </tr>
     <tr>
@@ -20,7 +20,7 @@
                type="number" min="0"
                [disabled]="disabled"
                (input)="numberOfConstraintsCorrect = true"
-               (change)="storeNumberOfConstraints($event)"/>
+               (change)="saveNumberOfConstraints($event)"/>
       </td>
     </tr>
   </table>
@@ -28,7 +28,7 @@
   <!-- Button -->
 
   <button class="btn btn-lg float-right mt-5"
-          [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
+          [ngClass]="allCorrect ? 'btn-success' : 'btn-danger'"
           [disabled]="disabled"
           (click)="checkUserInputAndEmit()">
     Continue

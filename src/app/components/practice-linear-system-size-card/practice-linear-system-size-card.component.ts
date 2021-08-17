@@ -1,18 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
-import {PracticeLinearSystemSizeCardData} from './practice-linear-system.size-card-data'
+import {Component, EventEmitter, Input, Output} from '@angular/core'
 
+import {PracticeLinearSystemSizeCardExpected} from './practice-linear-system-size-card-expected'
 
 @Component({
   selector: 'app-practice-linear-system-size-card',
   templateUrl: './practice-linear-system-size-card.component.html',
   styleUrls: ['./practice-linear-system-size-card.component.css']
 })
-export class PracticeLinearSystemSizeCardComponent implements OnInit {
+export class PracticeLinearSystemSizeCardComponent {
 
-  @Input() expectedUserInput: undefined | PracticeLinearSystemSizeCardData
+  @Input() expected: undefined | PracticeLinearSystemSizeCardExpected
   @Input() disabled = false
 
-  @Output() userInputCorrect = new EventEmitter<void>()
+  @Output() correct = new EventEmitter<void>()
 
   numberOfVars: null | number = null
   numberOfConstraints: null | number = null
@@ -20,56 +20,47 @@ export class PracticeLinearSystemSizeCardComponent implements OnInit {
   numberOfVarsCorrect = true
   numberOfConstraintsCorrect = true
 
-  get isInputCorrect(): boolean {
+  //
+  // Getter
+  //
+
+  get allCorrect(): boolean {
     return this.numberOfVarsCorrect && this.numberOfConstraintsCorrect
   }
 
-  constructor() {
-  }
+  //
+  // Methods
+  //
 
-  ngOnInit(): void {
-  }
-
-
-  storeNumberOfVars(event: Event): void {
+  saveNumberOfVars(event: Event): void {
     const numberInput = event.target as HTMLInputElement
 
     this.numberOfVars = Number(numberInput.value)
   }
 
-  storeNumberOfConstraints(event: Event): void {
+  saveNumberOfConstraints(event: Event): void {
     const numberInput = event.target as HTMLInputElement
 
     this.numberOfConstraints = Number(numberInput.value)
   }
 
   checkUserInputAndEmit(): void {
-    const userInputCorrect = this.checkUserInput()
+    this.checkUserInput()
 
-    if (userInputCorrect) {
-      this.userInputCorrect.emit()
+    if (this.allCorrect) {
+      this.correct.emit()
     }
   }
 
-  checkUserInput(): boolean {
-    if (!this.expectedUserInput) {
-      return true
-    }
+  checkUserInput(): void {
+    const expected = this.expected!
 
-    let allCorrect = true
-
-    if (this.numberOfVars !== this.expectedUserInput.numberOfVars) {
+    if (this.numberOfVars !== expected.numberOfVars) {
       this.numberOfVarsCorrect = false
-      allCorrect = false
     }
 
-    if (this.numberOfConstraints !== this.expectedUserInput.numberOfConstraints) {
+    if (this.numberOfConstraints !== expected.numberOfConstraints) {
       this.numberOfConstraintsCorrect = false
-      allCorrect = false
     }
-
-    return allCorrect
   }
-
-
 }

@@ -1,6 +1,6 @@
 import {Fraction} from 'mathjs'
 
-export interface LinearSystemDataInput {
+export interface LinearSystemDataInit {
   numberOfVars: number,
   numberOfConstraints: number,
 

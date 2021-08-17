@@ -45,7 +45,7 @@
 
       <label for="linearSystemData">Gleichungssystem</label>
       <app-linear-system-data id="linearSystemData"
-                              [data]="getLinearSystemDataInput()"
+                              [init]="getLinearSystemDataInput()"
                               (dataChange)="onLinearSystemDataChange($event)">
       </app-linear-system-data>
 

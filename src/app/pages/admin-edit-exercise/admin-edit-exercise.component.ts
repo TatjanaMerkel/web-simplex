@@ -7,9 +7,9 @@ import {Fraction} from 'mathjs'
 import {Difficulty} from '../../../models/difficulty'
 import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
-import {LinearSystemDataInput} from '../../components/linear-system-data/linear-system-data-input'
-import {LinearSystemDataOutput} from '../../components/linear-system-data/linear-system-data-output'
-import {HeaderService} from "../../../services/header.service";
+import {LinearSystemDataInit} from '../../components/linear-system-data/linear-system-data-init'
+import {LinearSystemDataValues} from '../../components/linear-system-data/linear-system-data-values'
+import {HeaderService} from '../../../services/header.service'
 
 @Component({
   selector: 'app-admin-edit-exercise',
@@ -60,7 +60,7 @@ export class AdminEditExerciseComponent implements OnInit {
     })
   }
 
-  getLinearSystemDataInput(): LinearSystemDataInput {
+  getLinearSystemDataInput(): LinearSystemDataInit {
     return {
       numberOfVars: this.numberOfVars as number,
       numberOfConstraints: this.numberOfConstraints as number,
@@ -93,7 +93,7 @@ export class AdminEditExerciseComponent implements OnInit {
     }
   }
 
-  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataOutput) {
+  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataValues) {
     const {targetVars, constraintVars, constraintVals} = linearSystemDataOutput
 
     this.targetVars = targetVars as Array<Fraction>
@@ -120,10 +120,6 @@ export class AdminEditExerciseComponent implements OnInit {
       }
     }
 
-    if (!this.constraintVals || this.constraintVals.indexOf(null) !== -1) {
-      return false
-    }
-
-    return true;
+    return !(!this.constraintVals || this.constraintVals.indexOf(null) !== -1)
   }
 }

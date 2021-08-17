@@ -1,15 +1,16 @@
-<table *ngIf="data && targetVars && constraintVars && constraintVals">
+<table *ngIf="init && targetVars && constraintVars && constraintVals">
 
   <!-- Target function -->
+
   <tr>
     <td>Z</td>
     <td>=</td>
 
     <td>
       <input class="fraction-input"
-             (change)="onTargetVarChanged($event,0)"
-             [value]="data.targetVars ? formatFraction(data.targetVars[0]) : ''"
-             [disabled]="disabled"/>
+             [value]="init.targetVars ? formatFraction(init.targetVars[0]) : ''"
+             [disabled]="disabled"
+             (change)="onTargetVarChanged($event,0)"/>
     </td>
     <td>
       x<sub>1</sub>
@@ -19,10 +20,9 @@
       <td>+</td>
       <td>
         <input class="fraction-input"
-               (change)="onTargetVarChanged($event,v + 1)"
-               [value]="data.targetVars ? formatFraction(targetVars[v + 1]) : ''"
-
-               [disabled]="disabled"/>
+               [value]="init.targetVars ? formatFraction(targetVars[v + 1]) : ''"
+               [disabled]="disabled"
+               (change)="onTargetVarChanged($event,v + 1)"/>
       </td>
       <td>
         x<sub>{{v + 2}}</sub>
@@ -31,15 +31,16 @@
   </tr>
 
   <!-- Constraints -->
-  <tr *ngFor="let _ of [].constructor(data!.numberOfConstraints); index as c">
+
+  <tr *ngFor="let _ of [].constructor(init!.numberOfConstraints); index as c">
     <td></td>
     <td></td>
 
     <td>
       <input class="fraction-input"
-             (change)="onConstraintVarChanged($event, c, 0)"
-             [value]="data.constraintVars ? formatFraction(constraintVars[c][0]) : ''"
-             [disabled]="disabled"/>
+             [value]="init.constraintVars ? formatFraction(constraintVars[c][0]) : ''"
+             [disabled]="disabled"
+             (change)="onConstraintVarChanged($event, c, 0)"/>
     </td>
     <td>
       x<sub>1</sub>
@@ -49,9 +50,9 @@
       <td>+</td>
       <td>
         <input class="fraction-input"
-               (change)="onConstraintVarChanged($event, c,v + 1)"
-               [value]="data.constraintVars ? formatFraction(constraintVars[c][v + 1]) : ''"
-               [disabled]="disabled"/>
+               [value]="init.constraintVars ? formatFraction(constraintVars[c][v + 1]) : ''"
+               [disabled]="disabled"
+               (change)="onConstraintVarChanged($event, c,v + 1)"/>
       </td>
       <td>
         x<sub>{{v + 2}}</sub>
@@ -61,11 +62,12 @@
     <td>≤</td>
 
     <!-- Boundary vector -->
+
     <td>
       <input class="fraction-input"
-             (change)="onConstraintConstantChanged($event, c)"
-             [value]="data.constraintVals ? formatFraction(constraintVals[c]) : ''"
-             [disabled]="disabled"/>
+             [value]="init.constraintVals ? formatFraction(constraintVals[c]) : ''"
+             [disabled]="disabled"
+             (change)="onConstraintConstantChanged($event, c)"/>
     </td>
   </tr>
 
