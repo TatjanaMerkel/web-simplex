@@ -16,6 +16,12 @@ export class PracticeExerciseComponent implements OnInit {
 
   exercise: undefined | Exercise
 
+  linearSystemSizeCorrect = false
+  linearSystemDataCorrect = false
+  standardFormCorrect = false
+  tableausCorrect = false
+  solutionCorrect = false
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private exerciseService: ExerciseService,

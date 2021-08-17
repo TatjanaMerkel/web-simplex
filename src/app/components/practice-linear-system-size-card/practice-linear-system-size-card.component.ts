@@ -10,10 +10,9 @@ import {PracticeLinearSystemSizeCardData} from './practice-linear-system.size-ca
 export class PracticeLinearSystemSizeCardComponent implements OnInit {
 
   @Input() expectedUserInput: undefined | PracticeLinearSystemSizeCardData
+  @Input() disabled = false
 
   @Output() userInputCorrect = new EventEmitter<void>()
-
-  disabled = false
 
   numberOfVars: null | number = null
   numberOfConstraints: null | number = null
@@ -24,7 +23,7 @@ export class PracticeLinearSystemSizeCardComponent implements OnInit {
   get isInputCorrect(): boolean {
     return this.numberOfVarsCorrect && this.numberOfConstraintsCorrect
   }
-  
+
   constructor() {
   }
 
