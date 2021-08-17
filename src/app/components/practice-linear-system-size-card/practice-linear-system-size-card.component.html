@@ -27,7 +27,8 @@
 
   <!-- Button -->
 
-  <button class="btn btn-success btn-lg float-right mt-5"
+  <button class="btn btn-lg float-right mt-5"
+          [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
           [disabled]="disabled"
           (click)="checkUserInputAndEmit()">
     Continue

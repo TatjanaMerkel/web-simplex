@@ -21,9 +21,12 @@ export class PracticeLinearSystemSizeCardComponent implements OnInit {
   numberOfVarsCorrect = true
   numberOfConstraintsCorrect = true
 
-
-
-  constructor() { }
+  get isInputCorrect(): boolean {
+    return this.numberOfVarsCorrect && this.numberOfConstraintsCorrect
+  }
+  
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
