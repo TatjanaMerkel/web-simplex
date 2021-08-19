@@ -7,6 +7,9 @@ import {HeaderService} from '../../../services/header.service'
 import {StandardFormInput} from '../../components/standard-form/standard-form-input'
 import {PracticeLinearSystemDataCardExpected} from "../../components/practice-linear-system-data-card/practice-linear-system-data-card-expected";
 import * as math from "mathjs";
+import {PracticeLinearSystemSizeCardExpected} from "../../components/practice-linear-system-size-card/practice-linear-system-size-card-expected";
+import {PracticeStandardFormCardExpected} from "../../components/practice-standard-form-card/practice-standard-form-card-expected";
+
 
 @Component({
   selector: 'app-practice-exercise',
@@ -23,7 +26,28 @@ export class PracticeExerciseComponent implements OnInit {
   tableausCorrect = false
   solutionCorrect = false
 
+  get expectedLinearSystemSize(): PracticeLinearSystemSizeCardExpected {
+    const exercise = this.exercise!
+
+    return {
+      numberOfVars: exercise.numberOfVars,
+      numberOfConstraints: exercise.numberOfConstraints
+    }
+  }
+
   get expectedLinearSystemData(): PracticeLinearSystemDataCardExpected {
+    const exercise = this.exercise!
+
+    return {
+      numberOfVars: exercise.numberOfVars,
+      numberOfConstraints: exercise.numberOfConstraints,
+      targetVars: exercise.targetVars,
+      constraintVars: exercise.constraintVars,
+      constraintVals: exercise.constraintVals
+    }
+  }
+
+  get expectedStandardForm(): PracticeStandardFormCardExpected {
     const exercise = this.exercise!
 
     return {
