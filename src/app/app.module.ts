@@ -29,7 +29,8 @@ import {PracticeTableauComponent} from './components/practice-tableau/practice-t
 import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive'
+import {VarDirective} from '../ng-var.directive';
+import { PracticeTableausCardComponent } from './components/practice-tableaus-card/practice-tableaus-card.component'
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {VarDirective} from '../ng-var.directive'
     TableauComponent,
     VarDirective,
     PracticeLinearSystemDataCardComponent,
-    PracticeStandardFormCardComponent
+    PracticeStandardFormCardComponent,
+    PracticeTableausCardComponent
   ],
   imports: [
     AppRoutingModule,
