@@ -1,0 +1,25 @@
+.fraction-input {
+  width: 60px;
+}
+
+table {
+  border-spacing: 8px;
+}
+
+.value {
+  text-align: right;
+}
+
+.operator {
+  padding: 0 12px;
+}
+
+.variable {
+  padding-left: 4px;
+}
+
+/* Button */
+
+button {
+  margin-top: 50px;
+}

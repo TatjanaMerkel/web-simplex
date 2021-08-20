@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {StandardFormInput} from './standard-form-input';
-import {StandardFormOutput} from './standard-form-output';
+
 import {Fraction} from 'mathjs';
+
+import {StandardFormInput} from './standard-form-input';
 
 @Component({
   selector: 'app-standard-form',

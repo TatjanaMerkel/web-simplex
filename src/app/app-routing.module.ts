@@ -11,7 +11,6 @@ import {HomeComponent} from './pages/home/home.component'
 import {PracticeComponent} from './pages/practice/practice.component'
 import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
 
-
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'admin', redirectTo: 'admin/exercises', pathMatch: 'full'},

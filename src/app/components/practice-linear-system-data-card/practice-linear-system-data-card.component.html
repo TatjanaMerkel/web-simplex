@@ -11,7 +11,6 @@
       <td>
         <input class="fraction-input"
                [class.wrong]="!targetVarsCorrect[0]"
-               [value]="targetVars ? formatFraction(targetVars[0]) : ''"
                [disabled]="disabled"
                (input)="targetVarsCorrect[0] = true"
                (change)="saveTargetVar($event,0)"/>
@@ -25,7 +24,6 @@
         <td>
           <input class="fraction-input"
                  [class.wrong]="!targetVarsCorrect[v + 1]"
-                 [value]="targetVars ? formatFraction(targetVars[v + 1]) : ''"
                  [disabled]="disabled"
                  (input)="targetVarsCorrect[v + 1] = true"
                  (change)="saveTargetVar($event,v + 1)"/>
@@ -45,7 +43,6 @@
       <td>
         <input class="fraction-input"
                [class.wrong]="!constraintVarsCorrect[c][0]"
-               [value]="constraintVars ? formatFraction(constraintVars[c][0]) : ''"
                [disabled]="disabled"
                (input)="constraintVarsCorrect[c][0] = true"
                (change)="saveConstraintVar($event, c, 0)"/>
@@ -59,7 +56,6 @@
         <td>
           <input class="fraction-input"
                  [class.wrong]="!constraintVarsCorrect[c][v + 1]"
-                 [value]="constraintVars ? formatFraction(constraintVars[c][v + 1]) : ''"
                  [disabled]="disabled"
                  (input)="constraintVarsCorrect[c][v + 1] = true"
                  (change)="saveConstraintVar($event, c,v + 1)"/>
@@ -76,7 +72,6 @@
       <td>
         <input class="fraction-input"
                [class.wrong]="!constraintValsCorrect[c]"
-               [value]="constraintVals ? formatFraction(constraintVals[c]) : ''"
                [disabled]="disabled"
                (input)="constraintValsCorrect[c] = true"
                (change)="saveConstraintVal($event, c)"/>
@@ -84,7 +79,6 @@
     </tr>
 
   </table>
-
 
   <!-- Button -->
 

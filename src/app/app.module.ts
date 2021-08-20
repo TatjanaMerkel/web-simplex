@@ -20,17 +20,17 @@ import {LinearSystemDataComponent} from './components/linear-system-data/linear-
 import {LinearSystemSize} from './components/linear-system-size/linear-system-size.component'
 import {NavBarComponent} from './components/nav-bar/nav-bar.component'
 import {PracticeComponent} from './pages/practice/practice.component'
+import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
+import {PracticeLinearSystemDataCardComponent} from './components/practice-linear-system-data-card/practice-linear-system-data-card.component'
+import {PracticeLinearSystemSizeCardComponent} from './components/practice-linear-system-size-card/practice-linear-system-size-card.component'
+import {PracticeSolutionComponent} from './components/practice-solution/practice-solution.component'
+import {PracticeStandardFormCardComponent} from './components/practice-standard-form-card/practice-standard-form-card.component'
+import {PracticeTableauComponent} from './components/practice-tableau/practice-tableau.component'
 import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive';
-import { PracticeExerciseComponent } from './pages/practice-exercise/practice-exercise.component';
-import { PracticeSolutionComponent } from './components/practice-solution/practice-solution.component';
-import { PracticeStandardFormComponent } from './components/practice-standard-form/practice-standard-form.component';
-import { PracticeTableauComponent } from './components/practice-tableau/practice-tableau.component';
-import { PracticeLinearSystemSizeCardComponent } from './components/practice-linear-system-size-card/practice-linear-system-size-card.component';
-import { PracticeLinearSystemDataCardComponent } from './components/practice-linear-system-data-card/practice-linear-system-data-card.component';
-import { PracticeStandardFormCardComponent } from './components/practice-standard-form-card/practice-standard-form-card.component'
+import {VarDirective} from '../ng-var.directive'
+
 
 @NgModule({
   declarations: [
@@ -48,15 +48,14 @@ import { PracticeStandardFormCardComponent } from './components/practice-standar
     NavBarComponent,
     HomeComponent,
     PracticeComponent,
+    PracticeExerciseComponent,
+    PracticeLinearSystemSizeCardComponent,
+    PracticeSolutionComponent,
+    PracticeTableauComponent,
     SolutionComponent,
     StandardFormComponent,
     TableauComponent,
     VarDirective,
-    PracticeExerciseComponent,
-    PracticeSolutionComponent,
-    PracticeStandardFormComponent,
-    PracticeTableauComponent,
-    PracticeLinearSystemSizeCardComponent,
     PracticeLinearSystemDataCardComponent,
     PracticeStandardFormCardComponent
   ],

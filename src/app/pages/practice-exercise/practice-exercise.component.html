@@ -31,15 +31,17 @@
 
   <!-- Linear System Size -->
 
-  <div class="arrow-3">
-    <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
-  </div>
+  <ng-template [ngIf]="exercise">
+    <div class="arrow-3">
+      <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
 
-  <app-practice-linear-system-size-card class="card-3"
-                                        [expected]="expectedLinearSystemSize"
-                                        [disabled]="linearSystemSizeCorrect"
-                                        (correct)="linearSystemSizeCorrect = true">
-  </app-practice-linear-system-size-card>
+    <app-practice-linear-system-size-card class="card-3"
+                                          [expected]="expectedLinearSystemSize"
+                                          [disabled]="linearSystemSizeCorrect"
+                                          (correct)="linearSystemSizeCorrect = true">
+    </app-practice-linear-system-size-card>
+  </ng-template>
 
   <!-- Linear System Data -->
 

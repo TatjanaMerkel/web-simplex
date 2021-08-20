@@ -5,7 +5,6 @@ import {Exercise} from "../../../models/exercise";
 import {ExerciseService} from "../../../services/exercise.service";
 import {Difficulty} from "../../../models/difficulty";
 
-
 @Component({
   selector: 'app-practice',
   templateUrl: './practice.component.html',
@@ -34,6 +33,5 @@ export class PracticeComponent implements OnInit {
       this.hardExercises = exercises
         .filter(exercise => exercise.difficulty === Difficulty.HARD)
     })
-
   }
 }

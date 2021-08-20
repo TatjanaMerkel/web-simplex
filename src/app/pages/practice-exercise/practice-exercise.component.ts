@@ -10,7 +10,6 @@ import * as math from "mathjs";
 import {PracticeLinearSystemSizeCardExpected} from "../../components/practice-linear-system-size-card/practice-linear-system-size-card-expected";
 import {PracticeStandardFormCardExpected} from "../../components/practice-standard-form-card/practice-standard-form-card-expected";
 
-
 @Component({
   selector: 'app-practice-exercise',
   templateUrl: './practice-exercise.component.html',

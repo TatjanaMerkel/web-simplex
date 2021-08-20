@@ -2,20 +2,20 @@
   <li *ngFor="let easyExercise of easyExercises">
     <button class="btn easy-exercise"
             [routerLink]="'/practice/' + easyExercise.id">
-    {{ easyExercise.title }}
+      {{ easyExercise.title }}
     </button>
   </li>
 
   <li *ngFor="let mediumExercise of mediumExercises">
     <button class="btn medium-exercise"
             [routerLink]="'/practice/' + mediumExercise.id">
-    {{ mediumExercise.title }}
+      {{ mediumExercise.title }}
     </button>
   </li>
 
   <li *ngFor="let hardExercise of hardExercises">
     <button class="btn hard-exercise"
-            [routerLink]="'/admin/exercises/' + hardExercise.id">
+            [routerLink]="'/practice/' + hardExercise.id">
       {{ hardExercise.title }}
     </button>
   </li>
