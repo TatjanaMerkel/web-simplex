@@ -10,7 +10,7 @@ import {LinearSystemSizeOutput} from '../../components/linear-system-size/linear
 import {SolutionInput} from '../../components/solution/solution-input'
 import {StandardFormInput} from '../../components/standard-form/standard-form-input'
 import {StandardFormOutput} from '../../components/standard-form/standard-form-output'
-import {TableauData} from './tableau-data'
+import {Simplex, Tableau} from '../../../common/simplex'
 import {TableauInput} from '../../components/tableau/tableau-input'
 
 @Component({
@@ -23,8 +23,8 @@ export class CalculatorComponent implements OnInit {
   linearSystemSizeOutput: LinearSystemSizeOutput | null = null
   linearSystemDataCardOutput: LinearSystemDataCardOutput | null = null
 
-  tableauData: Array<TableauData> | null = null
-  showTableauData = false
+  tableaus: Tableau[] | null = null
+  showTableaus = false
 
   constructor(private headerService: HeaderService) {
   }
@@ -43,8 +43,8 @@ export class CalculatorComponent implements OnInit {
     } else {
       this.linearSystemSizeOutput = null
       this.linearSystemDataCardOutput = null
-      this.tableauData = null
-      this.showTableauData = false
+      this.tableaus = null
+      this.showTableaus = false
     }
   }
 
@@ -53,12 +53,12 @@ export class CalculatorComponent implements OnInit {
       this.linearSystemDataCardOutput = linearSystemDataCardOutput
     } else {
       this.linearSystemDataCardOutput = null
-      this.tableauData = null
-      this.showTableauData = false
+      this.tableaus = null
+      this.showTableaus = false
     }
 
     if (linearSystemDataCardOutput) {
-      this.calcTableaus()
+      this.tableaus = Simplex.calcTableaus(this.linearSystemSizeOutput!, this.linearSystemDataCardOutput!)
     }
   }
 
@@ -84,9 +84,8 @@ export class CalculatorComponent implements OnInit {
    */
   getStandardFormInput(): StandardFormInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
-    const linearSystemDataCardOutput = this.linearSystemDataCardOutput!
 
-    const firstTableau = this.tableauData![0]
+    const firstTableau = this.tableaus![0]
 
     return {
       numberOfVars: linearSystemSizeOutput.numberOfVars,
@@ -101,7 +100,7 @@ export class CalculatorComponent implements OnInit {
     }
   }
 
-  getTableauInput(tableauData: TableauData): TableauInput {
+  getTableauInput(tableau: Tableau): TableauInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
 
     const numberOfVars = linearSystemSizeOutput.numberOfVars
@@ -111,7 +110,7 @@ export class CalculatorComponent implements OnInit {
       numberOfVars: numberOfVars + numberOfConstraints,
       numberOfConstraints: numberOfConstraints,
 
-      ...tableauData
+      ...tableau
     }
   }
 
@@ -119,7 +118,7 @@ export class CalculatorComponent implements OnInit {
    * Must only be called when tableau data has been calculated.
    */
   getSolutionInput(): SolutionInput {
-    const tableauData = this.tableauData!
+    const tableauData = this.tableaus!
 
     const lastTableau = tableauData[tableauData.length - 1]
 
@@ -129,203 +128,10 @@ export class CalculatorComponent implements OnInit {
   }
 
   //
-  // Simplex
-  //
-
-  calcTableaus(): void {
-    const linearSystemDataSize = this.linearSystemSizeOutput!
-    const numberOfVars = linearSystemDataSize.numberOfVars
-    const numberOfConstraints = linearSystemDataSize.numberOfConstraints
-
-    const linearSystemDataCardOutput = this.linearSystemDataCardOutput!
-
-    //
-    // Calc initial target row
-    //
-
-    const negativeTargetVars = linearSystemDataCardOutput.targetVars
-      .map(value => math.multiply(value, -1)) as Fraction[]
-
-    const targetSlackVars = Array.from(
-      {length: numberOfConstraints},
-      _ => math.fraction(0) as Fraction)
-
-    const targetVars = negativeTargetVars.concat(targetSlackVars)
-
-    //
-    // Calc initial constraint rows
-    //
-
-    const constraintVars = new Array<Array<Fraction>>(numberOfConstraints)
-    for (let c = 0; c < constraintVars.length; c++) {
-      const constraintSlackVars = Array.from(
-        {length: numberOfConstraints},
-        _ => math.fraction(0) as Fraction)
-
-      constraintSlackVars[c] = math.fraction(1) as Fraction
-      constraintVars[c] = linearSystemDataCardOutput.constraintVars[c].concat(constraintSlackVars)
-    }
-
-    //
-    // Calc initial slack var positions
-    //
-
-    const slackVars = []
-    for (let i = 0; i < numberOfConstraints; i++) {
-      slackVars.push(numberOfVars + i)
-    }
-
-    //
-    // First tableau contains initial data
-    //
-
-    this.tableauData = new Array<TableauData>();
-
-    this.tableauData[0] = {
-      targetVars: targetVars,
-      targetVal: math.fraction(0) as Fraction,
-
-      constraintVars: constraintVars,
-      constraintVals: linearSystemDataCardOutput.constraintVals,
-
-      pivotRow: null,
-      pivotCol: null,
-
-      thetas: null,
-
-      slackVars
-    };
-
-    let prevTableau = this.tableauData[0];
-    let minTargetVar = math.min(...prevTableau.targetVars);
-
-    while (math.smaller(minTargetVar, 0)) {
-
-      //
-      // Find pivot col (var with most negative value)
-      //
-
-      const pivotCol = prevTableau.targetVars.indexOf(minTargetVar);
-
-      prevTableau.pivotCol = pivotCol;
-
-      //
-      // Calculate theta values
-      //
-
-      const numberOfConstraints = this.linearSystemSizeOutput!.numberOfConstraints
-
-      const thetas = new Array<Fraction>(numberOfConstraints);
-
-      for (let c = 0; c < thetas.length; c++) {
-        if (math.larger(prevTableau.constraintVars[c][pivotCol], 0)) {
-          thetas[c] = math.divide(prevTableau.constraintVals[c], prevTableau.constraintVars[c][pivotCol]) as Fraction
-        } else {
-          thetas[c] = math.fraction(0) as Fraction
-        }
-      }
-
-      prevTableau.thetas = thetas;
-
-      //
-      // Find pivot row (row with smallest positive theta) and pivot element
-      //
-
-      let minPosTheta = math.fraction('9999') as Fraction
-      let minPosThetaIndex = -1
-
-      for (let i = 0; i < thetas.length; i++) {
-        const theta = thetas[i]
-        if (math.larger(theta, 0) && math.smaller(theta, minPosTheta)) {
-          minPosTheta = theta
-          minPosThetaIndex = i
-        }
-      }
-
-      const pivotRow = minPosThetaIndex
-      prevTableau.pivotRow = pivotRow;
-
-      const pivot = prevTableau.constraintVars[pivotRow][pivotCol];
-
-      //
-      // Calculate new pivot row by dividing though pivot element
-      //
-
-      const newConstraintVars = new Array<Array<Fraction>>(prevTableau.constraintVars.length);
-      newConstraintVars[pivotRow] = prevTableau.constraintVars[pivotRow]
-        .map(value => math.divide(value, pivot) as Fraction);
-
-      const newConstraintVals = new Array<Fraction>(prevTableau.constraintVals.length);
-      newConstraintVals[pivotRow] = math.divide(prevTableau.constraintVals[pivotRow], pivot) as Fraction;
-
-      //
-      // Calculate other rows by subtracting multiple of new pivot row
-      //
-
-      for (let c = 0; c < prevTableau.constraintVars.length; c++) {
-        if (c !== pivotRow) {
-          const factor = prevTableau.constraintVars[c][pivotCol];
-
-          newConstraintVars[c] = prevTableau.constraintVars[c].map((value, index) =>
-            math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
-          ) as Fraction[];
-
-          newConstraintVals[c] = math.subtract(prevTableau.constraintVals[c],
-            math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
-        }
-      }
-
-      //
-      // Calculate target row by subtracting multiple of new pivot row
-      //
-
-      const factor = prevTableau.targetVars[pivotCol];
-
-      const newTargetVars = prevTableau.targetVars.map((value, index) =>
-        math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
-      ) as Fraction[];
-
-      const newTargetVal = math.subtract(prevTableau.targetVal,
-        math.multiply(factor, newConstraintVals[pivotRow])) as Fraction
-
-      //
-      // Calc new slack var positions
-      //
-
-      const newSlackVars = [...prevTableau.slackVars]
-      newSlackVars[pivotRow] = pivotCol
-
-      //
-      // Add new tableau
-      //
-
-      const newTableau = {
-        targetVars: newTargetVars,
-        targetVal: newTargetVal,
-
-        constraintVars: newConstraintVars,
-        constraintVals: newConstraintVals,
-
-        pivotCol: null,
-        pivotRow: null,
-
-        thetas: null,
-
-        slackVars: newSlackVars
-      }
-
-      this.tableauData.push(newTableau);
-
-      prevTableau = newTableau;
-      minTargetVar = math.min(...prevTableau.targetVars);
-    }
-  }
-
-  //
   // Mock Data
   //
 
-  getlinearSystemDataCardInputMock(): LinearSystemDataCardInput {
+  getLinearSystemDataCardInputMock(): LinearSystemDataCardInput {
     return {
       numberOfVars: 2,
       numberOfConstraints: 3
@@ -410,6 +216,6 @@ export class CalculatorComponent implements OnInit {
   }
 
   onStandardFormClick() {
-    this.showTableauData = true
+    this.showTableaus = true
   }
 }

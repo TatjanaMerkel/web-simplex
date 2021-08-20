@@ -1,11 +1,11 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http'
 import {Injectable} from '@angular/core'
 
-import {Observable, of, throwError} from 'rxjs'
+import {Observable, throwError} from 'rxjs'
 import {catchError, tap} from 'rxjs/operators'
 
 import {Exercise} from '../models/exercise'
-import * as math from "mathjs";
+import * as math from 'mathjs'
 
 
 @Injectable({
