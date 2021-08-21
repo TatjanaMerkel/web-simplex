@@ -5,8 +5,8 @@ import {Fraction} from 'mathjs'
 
 import {HeaderService} from '../../../services/header.service'
 import {LinearSystemDataCardInput} from '../../components/linear-system-data-card/linear-system-data-card-input'
-import {LinearSystemDataCardOutput} from '../../components/linear-system-data-card/linear-system-data-card-output'
-import {LinearSystemSizeOutput} from '../../components/linear-system-size/linear-system-size-output'
+import {LinearSystemData} from '../../components/linear-system-data-card/linear-system-data'
+import {LinearSystemSize} from '../../components/linear-system-size/linear-system-size'
 import {SolutionInput} from '../../components/solution/solution-input'
 import {StandardFormInput} from '../../components/standard-form/standard-form-input'
 import {StandardFormOutput} from '../../components/standard-form/standard-form-output'
@@ -20,8 +20,9 @@ import {TableauInput} from '../../components/tableau/tableau-input'
 })
 export class CalculatorComponent implements OnInit {
 
-  linearSystemSizeOutput: LinearSystemSizeOutput | null = null
-  linearSystemDataCardOutput: LinearSystemDataCardOutput | null = null
+  linearSystemSizeOutput: LinearSystemSize | null = null
+  linearSystemDataCardOutput: LinearSystemData | null = null
+
 
   tableaus: Tableau[] | null = null
   showTableaus = false
@@ -37,9 +38,9 @@ export class CalculatorComponent implements OnInit {
   // Data Change Listeners
   //
 
-  onLinearSystemSizeChange(linearSystemSizeOutput: LinearSystemSizeOutput | null): void {
-    if (linearSystemSizeOutput !== null) {
-      this.linearSystemSizeOutput = linearSystemSizeOutput
+  onLinearSystemSizeChange(linearSystemSize: LinearSystemSize | null): void {
+    if (linearSystemSize !== null) {
+      this.linearSystemSizeOutput = linearSystemSize
     } else {
       this.linearSystemSizeOutput = null
       this.linearSystemDataCardOutput = null
@@ -48,7 +49,7 @@ export class CalculatorComponent implements OnInit {
     }
   }
 
-  onLinearSystemDataChange(linearSystemDataCardOutput: LinearSystemDataCardOutput | null): void {
+  onLinearSystemDataChange(linearSystemDataCardOutput: LinearSystemData | null): void {
     if (linearSystemDataCardOutput !== null) {
       this.linearSystemDataCardOutput = linearSystemDataCardOutput
     } else {

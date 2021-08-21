@@ -1,39 +1,39 @@
 import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
-import {LinearSystemSizeOutput} from '../app/components/linear-system-size/linear-system-size-output'
-import {LinearSystemDataCardOutput} from '../app/components/linear-system-data-card/linear-system-data-card-output'
+import {LinearSystemSize} from '../app/components/linear-system-size/linear-system-size'
+import {LinearSystemData} from '../app/components/linear-system-data-card/linear-system-data'
 
 
 export interface Tableau {
-  targetVars: Fraction[],
-  targetVal: Fraction,
+  targetVars: Fraction[]
+  targetVal: Fraction
 
-  constraintVars: Fraction[][],
-  constraintVals: Fraction[],
+  constraintVars: Fraction[][]
+  constraintVals: Fraction[]
 
-  pivotCol: number | null,
-  pivotRow: number | null,
+  pivotCol: number | null
+  pivotRow: number | null
 
-  thetas: Fraction[] | null,
+  thetas: Fraction[] | null
 
   slackVars: number[]
 }
 
 export class Simplex {
 
-  static calcTableaus(linearSystemSizeOutput: LinearSystemSizeOutput,
-                      linearSystemDataCardOutput: LinearSystemDataCardOutput
+  static calcTableaus(linearSystemSize: LinearSystemSize,
+                      linearSystemData: LinearSystemData
   ): Tableau[] {
 
-    const numberOfVars = linearSystemSizeOutput.numberOfVars
-    const numberOfConstraints = linearSystemSizeOutput.numberOfConstraints
+    const numberOfVars = linearSystemSize.numberOfVars
+    const numberOfConstraints = linearSystemSize.numberOfConstraints
 
     //
     // Calc initial target row
     //
 
-    const negativeTargetVars = linearSystemDataCardOutput.targetVars
+    const negativeTargetVars = linearSystemData.targetVars
       .map(value => math.multiply(value, -1)) as Fraction[]
 
     const targetSlackVars = Array.from(
@@ -53,7 +53,7 @@ export class Simplex {
         _ => math.fraction(0) as Fraction)
 
       constraintSlackVars[c] = math.fraction(1) as Fraction
-      constraintVars[c] = linearSystemDataCardOutput.constraintVars[c].concat(constraintSlackVars)
+      constraintVars[c] = linearSystemData.constraintVars[c].concat(constraintSlackVars)
     }
 
     //
@@ -76,7 +76,7 @@ export class Simplex {
       targetVal: math.fraction(0) as Fraction,
 
       constraintVars: constraintVars,
-      constraintVals: linearSystemDataCardOutput.constraintVals,
+      constraintVals: linearSystemData.constraintVals,
 
       pivotRow: null,
       pivotCol: null,
@@ -84,10 +84,10 @@ export class Simplex {
       thetas: null,
 
       slackVars
-    };
+    }
 
-    let prevTableau = tableaus[0];
-    let minTargetVar = math.min(...prevTableau.targetVars);
+    let prevTableau = tableaus[0]
+    let minTargetVar = math.min(...prevTableau.targetVars)
 
     while (math.smaller(minTargetVar, 0)) {
 
@@ -95,15 +95,15 @@ export class Simplex {
       // Find pivot col (var with most negative value)
       //
 
-      const pivotCol = prevTableau.targetVars.indexOf(minTargetVar);
+      const pivotCol = prevTableau.targetVars.indexOf(minTargetVar)
 
-      prevTableau.pivotCol = pivotCol;
+      prevTableau.pivotCol = pivotCol
 
       //
       // Calculate theta values
       //
 
-      const thetas = new Array<Fraction>(numberOfConstraints);
+      const thetas = new Array<Fraction>(numberOfConstraints)
 
       for (let c = 0; c < thetas.length; c++) {
         if (math.larger(prevTableau.constraintVars[c][pivotCol], 0)) {
@@ -113,7 +113,7 @@ export class Simplex {
         }
       }
 
-      prevTableau.thetas = thetas;
+      prevTableau.thetas = thetas
 
       //
       // Find pivot row (row with smallest positive theta) and pivot element
@@ -131,20 +131,20 @@ export class Simplex {
       }
 
       const pivotRow = minPosThetaIndex
-      prevTableau.pivotRow = pivotRow;
+      prevTableau.pivotRow = pivotRow
 
-      const pivot = prevTableau.constraintVars[pivotRow][pivotCol];
+      const pivot = prevTableau.constraintVars[pivotRow][pivotCol]
 
       //
       // Calculate new pivot row by dividing though pivot element
       //
 
-      const newConstraintVars = new Array<Array<Fraction>>(prevTableau.constraintVars.length);
+      const newConstraintVars = new Array<Array<Fraction>>(prevTableau.constraintVars.length)
       newConstraintVars[pivotRow] = prevTableau.constraintVars[pivotRow]
-        .map(value => math.divide(value, pivot) as Fraction);
+        .map(value => math.divide(value, pivot) as Fraction)
 
-      const newConstraintVals = new Array<Fraction>(prevTableau.constraintVals.length);
-      newConstraintVals[pivotRow] = math.divide(prevTableau.constraintVals[pivotRow], pivot) as Fraction;
+      const newConstraintVals = new Array<Fraction>(prevTableau.constraintVals.length)
+      newConstraintVals[pivotRow] = math.divide(prevTableau.constraintVals[pivotRow], pivot) as Fraction
 
       //
       // Calculate other rows by subtracting multiple of new pivot row
@@ -152,14 +152,14 @@ export class Simplex {
 
       for (let c = 0; c < prevTableau.constraintVars.length; c++) {
         if (c !== pivotRow) {
-          const factor = prevTableau.constraintVars[c][pivotCol];
+          const factor = prevTableau.constraintVars[c][pivotCol]
 
           newConstraintVars[c] = prevTableau.constraintVars[c].map((value, index) =>
             math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
-          ) as Fraction[];
+          ) as Fraction[]
 
           newConstraintVals[c] = math.subtract(prevTableau.constraintVals[c],
-            math.multiply(factor, newConstraintVals[pivotRow])) as Fraction;
+            math.multiply(factor, newConstraintVals[pivotRow])) as Fraction
         }
       }
 
@@ -167,11 +167,11 @@ export class Simplex {
       // Calculate target row by subtracting multiple of new pivot row
       //
 
-      const factor = prevTableau.targetVars[pivotCol];
+      const factor = prevTableau.targetVars[pivotCol]
 
       const newTargetVars = prevTableau.targetVars.map((value, index) =>
         math.subtract(value, math.multiply(factor, newConstraintVars[pivotRow][index]))
-      ) as Fraction[];
+      ) as Fraction[]
 
       const newTargetVal = math.subtract(prevTableau.targetVal,
         math.multiply(factor, newConstraintVals[pivotRow])) as Fraction
@@ -202,10 +202,10 @@ export class Simplex {
         slackVars: newSlackVars
       }
 
-      tableaus.push(newTableau);
+      tableaus.push(newTableau)
 
-      prevTableau = newTableau;
-      minTargetVar = math.min(...prevTableau.targetVars);
+      prevTableau = newTableau
+      minTargetVar = math.min(...prevTableau.targetVars)
     }
 
     return tableaus

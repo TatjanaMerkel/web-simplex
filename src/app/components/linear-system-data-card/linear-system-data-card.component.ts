@@ -3,7 +3,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core'
 import {Fraction} from 'mathjs'
 
 import {LinearSystemDataCardInput} from './linear-system-data-card-input'
-import {LinearSystemDataCardOutput} from './linear-system-data-card-output'
+import {LinearSystemData} from './linear-system-data'
 import {LinearSystemDataInit} from '../linear-system-data/linear-system-data-init'
 import {LinearSystemDataValues} from '../linear-system-data/linear-system-data-values'
 
@@ -16,7 +16,7 @@ export class LinearSystemDataCardComponent {
 
   @Input() data: undefined | LinearSystemDataCardInput
 
-  @Output() dataChange = new EventEmitter<LinearSystemDataCardOutput | null>()
+  @Output() dataChange = new EventEmitter<LinearSystemData | null>()
 
   linearSystemData: undefined | LinearSystemDataValues
 

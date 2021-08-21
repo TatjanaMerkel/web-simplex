@@ -1,15 +1,16 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {LinearSystemSizeOutput} from "./linear-system-size-output";
-
+import {Component, EventEmitter, Output} from '@angular/core'
+import {LinearSystemSize} from './linear-system-size'
 
 @Component({
   selector: 'app-linear-system-size',
   templateUrl: './linear-system-size.component.html',
   styleUrls: ['./linear-system-size.component.css']
 })
-export class LinearSystemSize {
 
-  @Output() dataChange = new EventEmitter<LinearSystemSizeOutput | null>()
+export class LinearSystemSizeComponent {
+
+
+  @Output() dataChange = new EventEmitter<LinearSystemSize | null>()
 
   editable = true
   inputValid = false
