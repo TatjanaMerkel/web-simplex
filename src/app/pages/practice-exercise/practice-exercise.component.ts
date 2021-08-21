@@ -1,14 +1,16 @@
 import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
 
-import {Exercise} from '../../../models/exercise'
+import * as math from 'mathjs'
+
 import {ExerciseService} from '../../../services/exercise.service'
+import {Exercise} from '../../../models/exercise'
 import {HeaderService} from '../../../services/header.service'
+import {PracticeLinearSystemDataCardExpected} from '../../components/practice-linear-system-data-card/practice-linear-system-data-card-expected'
+import {PracticeLinearSystemSizeCardExpected} from '../../components/practice-linear-system-size-card/practice-linear-system-size-card-expected'
+import {PracticeStandardFormCardExpected} from '../../components/practice-standard-form-card/practice-standard-form-card-expected'
 import {StandardFormInput} from '../../components/standard-form/standard-form-input'
-import {PracticeLinearSystemDataCardExpected} from "../../components/practice-linear-system-data-card/practice-linear-system-data-card-expected";
-import * as math from "mathjs";
-import {PracticeLinearSystemSizeCardExpected} from "../../components/practice-linear-system-size-card/practice-linear-system-size-card-expected";
-import {PracticeStandardFormCardExpected} from "../../components/practice-standard-form-card/practice-standard-form-card-expected";
+import {Simplex, Tableau} from "../../../common/simplex";
 
 @Component({
   selector: 'app-practice-exercise',
@@ -24,6 +26,8 @@ export class PracticeExerciseComponent implements OnInit {
   standardFormCorrect = false
   tableausCorrect = false
   solutionCorrect = false
+
+  tableaus!: Tableau[]
 
   get expectedLinearSystemSize(): PracticeLinearSystemSizeCardExpected {
     const exercise = this.exercise!
@@ -80,6 +84,14 @@ export class PracticeExerciseComponent implements OnInit {
           constraintVars: JSON.parse(JSON.stringify(exercise.constraintVars), reviver),
           constraintVals: JSON.parse(JSON.stringify(exercise.constraintVals), reviver)
         }
+
+        const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = exercise
+
+        this.tableaus = Simplex.calcTableaus(
+          {numberOfVars, numberOfConstraints},
+          {targetVars, constraintVars, constraintVals})
+
+        console.log(this.tableaus)
       })
     })
   }

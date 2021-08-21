@@ -17,7 +17,7 @@ import {HomeComponent} from './pages/home/home.component'
 import {LearningComponent} from './pages/learning/learning.component'
 import {LinearSystemDataCardComponent} from './components/linear-system-data-card/linear-system-data-card.component'
 import {LinearSystemDataComponent} from './components/linear-system-data/linear-system-data.component'
-import {LinearSystemSize} from './components/linear-system-size/linear-system-size.component'
+import {LinearSystemSizeComponent} from './components/linear-system-size/linear-system-size.component'
 import {NavBarComponent} from './components/nav-bar/nav-bar.component'
 import {PracticeComponent} from './pages/practice/practice.component'
 import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
@@ -26,11 +26,11 @@ import {PracticeLinearSystemSizeCardComponent} from './components/practice-linea
 import {PracticeSolutionComponent} from './components/practice-solution/practice-solution.component'
 import {PracticeStandardFormCardComponent} from './components/practice-standard-form-card/practice-standard-form-card.component'
 import {PracticeTableauComponent} from './components/practice-tableau/practice-tableau.component'
+import {PracticeTableausCardComponent} from './components/practice-tableaus-card/practice-tableaus-card.component'
 import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive';
-import { PracticeTableausCardComponent } from './components/practice-tableaus-card/practice-tableaus-card.component'
+import {VarDirective} from '../ng-var.directive'
 
 
 @NgModule({
@@ -45,7 +45,7 @@ import { PracticeTableausCardComponent } from './components/practice-tableaus-ca
     LearningComponent,
     LinearSystemDataCardComponent,
     LinearSystemDataComponent,
-    LinearSystemSize,
+    LinearSystemSizeComponent,
     NavBarComponent,
     HomeComponent,
     PracticeComponent,
