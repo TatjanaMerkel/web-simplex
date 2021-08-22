@@ -1,78 +1,120 @@
 <app-card title="Tableaus">
+  <ng-container *ngIf="initialized">
+    <!--
+      BV | x1 x2 x3 x4 x5 |  b
+      ---+----------------+---
+      x3 |  1  2  1  0  0 |  3
+      x4 |  4  5  0  1  0 |  6
+      x5 |  7  8  0  0  1 |  9
+      ---+----------------+---
+       z | 10 11  0  0  0 |  0
+    -->
 
-  <table *ngFor="let expectedTableau of expectedTableaus">
+    <ng-container *ngFor="let expectedTableau of expectedTableaus; let t = index; trackBy: trackByIndex">
+      <table *ngIf="t <= solvedTableausCount">
 
-    <!--  BV | x1 x2 x3 x4 x5 | b  -->
-    <thead class="line-bottom">
-    <tr>
-      <td class="line-right">BV</td>
-      <td *ngFor="let _ of expectedTableau.targetVars; let v = index">
-        x<sub>{{ v + 1 }}</sub>
-      </td>
-      <td class="line-left">b</td>
-      <td class="line-left">theta</td>
-    </tr>
-    </thead>
+        <!--
+          Table Header
 
-    <!--  x3 |  1  2  1  0  0 | 3  -->
-    <!--  x4 |  4  5  0  1  0 | 6  -->
-    <!--  x5 |  7  8  0  0  1 | 9  -->
-    <tbody>
-    <tr *ngFor="let constraintVarsRow of expectedTableau.constraintVars; let c = index">
-      <td class="line-right">
-        x<sub>0</sub>
-      </td>
+          BV | x1 x2 x3 x4 x5 |  b
+          ---+----------------+---
+        -->
 
-      <td *ngFor="let constraintVar of constraintVarsRow; let v = index">
-        <input class="fraction-input"
-               [class.wrong]="!constraintVarsCorrect[c][v]"
-               (input)="constraintVarsCorrect[c][v] = true"
-               (change)="saveConstraintVar($event, c, v)"/>
-      </td>
+        <thead class="line-bottom">
+        <tr>
+          <td class="line-right">BV</td>
+          <td *ngFor="let _ of expectedTableau.targetVars; let v = index">
+            x<sub>{{ v + 1 }}</sub>
+          </td>
+          <td class="line-left">b</td>
+          <td class="line-left">theta</td>
+        </tr>
+        </thead>
 
-      <td class="line-left">
-        <input class="fraction-input"
-               [class.wrong]="!constraintValsCorrect[c]"
-               (input)="constraintValsCorrect[c] = true"
-               (change)="saveConstraintVal($event, c)"/>
-      </td>
+        <!--
+          Table Body (Constraints)
 
-      <td class="line-left">
-        <input class="fraction-input"
-               [class.wrong]="!thetasCorrect[c]"
-               (input)="thetasCorrect[c] = true"
-               (change)="saveTheta($event, c)"/>
-      </td>
-    </tr>
-    </tbody>
+          x3 |  1  2  1  0  0 |  3
+          x4 |  4  5  0  1  0 |  6
+          x5 |  7  8  0  0  1 |  9
+        -->
 
-    <!--   z | 10 11  0  0  0 | 0  -->
-    <tfoot class="line-top">
-    <tr>
-      <td class="line-right">
-        z
-      </td>
+        <tbody>
+        <tr *ngFor="let constraintVarsRow of expectedTableau.constraintVars; let c = index">
+          <td class="line-right">
+            x<sub>0</sub>
+          </td>
 
-      <td *ngFor="let targetVar of expectedTableau.targetVars; let v = index">
-        <input class="fraction-input"
-               [class.wrong]="!targetVarsCorrect[v]"
-               (input)="targetVarsCorrect[v] = true"
-               (change)="saveTargetVar($event, v)"/>
-      </td>
+          <td *ngFor="let constraintVar of constraintVarsRow; let v = index">
+            <input class="fraction-input"
+                   [class.wrong]="t === solvedTableausCount && !constraintVarsCorrect[c][v]"
+                   [disabled]="t < solvedTableausCount"
+                   (input)="constraintVarsCorrect[c][v] = true"
+                   (change)="saveConstraintVar($event, c, v)"/>
+          </td>
 
-      <td class="line-left">
-        <input class="fraction-input"
-               [class.wrong]="!targetValCorrect"
-               (input)="targetValCorrect = true"
-               (change)="saveTargetVal($event)"/>
-      </td>
+          <td class="line-left">
+            <input class="fraction-input"
+                   [class.wrong]="t === solvedTableausCount && !constraintValsCorrect[c]"
+                   [disabled]="t < solvedTableausCount"
+                   (input)="constraintValsCorrect[c] = true"
+                   (change)="saveConstraintVal($event, c)"/>
+          </td>
 
-      <td class="line-left">
-        ---
-      </td>
-    </tr>
-    </tfoot>
+          <td class="line-left">
+            <input class="fraction-input"
+                   [class.wrong]="t === solvedTableausCount && !thetasCorrect[c]"
+                   [disabled]="t < solvedTableausCount"
+                   (input)="thetasCorrect[c] = true"
+                   (change)="saveTheta($event, c)"/>
+          </td>
+        </tr>
+        </tbody>
 
-  </table>
+        <!--
+          Table Footer (Target Function)
 
+          z | 10 11  0  0  0 |  0
+        -->
+
+        <tfoot class="line-top">
+        <tr>
+          <td class="line-right">
+            z
+          </td>
+
+          <td *ngFor="let targetVar of expectedTableau.targetVars; let v = index">
+            <input class="fraction-input"
+                   [class.wrong]="t === solvedTableausCount && !targetVarsCorrect[v]"
+                   [disabled]="t < solvedTableausCount"
+                   (input)="targetVarsCorrect[v] = true"
+                   (change)="saveTargetVar($event, v)"/>
+          </td>
+
+          <td class="line-left">
+            <input class="fraction-input"
+                   [class.wrong]="t === solvedTableausCount && !targetValCorrect"
+                   [disabled]="t < solvedTableausCount"
+                   (input)="targetValCorrect = true"
+                   (change)="saveTargetVal($event)"/>
+          </td>
+
+          <td class="line-left">
+            ---
+          </td>
+        </tr>
+        </tfoot>
+
+      </table>
+    </ng-container>
+
+    <!-- Continue Button -->
+
+    <button class="btn btn-lg float-right mt-5"
+            [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
+            (click)="checkUserInputAndEmit()">
+      Continue
+    </button>
+
+  </ng-container>
 </app-card>

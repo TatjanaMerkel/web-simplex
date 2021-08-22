@@ -17,6 +17,9 @@ export class PracticeTableausCardComponent implements OnChanges {
 
   @Output() correct = new EventEmitter<void>()
 
+  solvedTableaus!: boolean[]
+  solvedTableausCount = 0
+
   targetVars!: Array<Fraction | null>
   targetVal: Fraction | null = null
   constraintVars!: Array<Array<Fraction | null>>
@@ -24,11 +27,12 @@ export class PracticeTableausCardComponent implements OnChanges {
   thetas!: Array<Fraction | null>
 
 
-  targetVarsCorrect!: Array<boolean>
+  targetVarsCorrect!: boolean[]
   targetValCorrect = true
-  constraintVarsCorrect!: Array<Array<boolean>>
-  constraintValsCorrect!: Array<boolean>
-  thetasCorrect!: Array<boolean>
+  constraintVarsCorrect!: boolean[][]
+  constraintValsCorrect!: boolean[]
+  thetasCorrect!: boolean[]
+
 
   initialized = false
 
@@ -51,7 +55,11 @@ export class PracticeTableausCardComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.expectedTableaus && !this.initialized && this.expectedTableaus!.length > 0) {
-      const expected: ExpectedTableau = this.expectedTableaus![0]
+      const expectedTableaus = this.expectedTableaus!
+
+      const expected: ExpectedTableau = expectedTableaus[0]
+
+      this.solvedTableaus = new Array<boolean>(expectedTableaus.length)
 
       this.targetVars = new Array<Fraction | null>(expected.targetVars.length).fill(null)
       this.targetVarsCorrect = new Array<boolean>(expected.targetVars.length).fill(true)
@@ -99,9 +107,14 @@ export class PracticeTableausCardComponent implements OnChanges {
   }
 
   checkUserInputAndEmit(): void {
-    this.checkUserInput()
+    this.checkUserInput(this.solvedTableausCount)
 
     if (this.isInputCorrect) {
+      this.solvedTableausCount++
+    }
+
+    if (this.solvedTableausCount === this.solvedTableaus.length) {
+
       this.correct.emit()
     }
   }
