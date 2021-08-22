@@ -10,7 +10,7 @@ import {AdminExercisesComponent} from './pages/admin-exercises/admin-exercises.c
 import {AdminNewExerciseComponent} from './pages/admin-new-exercise/admin-new-exercise.component'
 import {AppComponent} from './app.component'
 import {AppRoutingModule} from './app-routing.module'
-import {CalculatorComponent} from './pages/calculator/calculator.component'
+import {CalcComponent} from './pages/calc/calc.component'
 import {CardComponent} from './components/card/card.component'
 import {ExerciseComponent} from './pages/exercise/exercise.component'
 import {HomeComponent} from './pages/home/home.component'
@@ -39,7 +39,7 @@ import {VarDirective} from '../ng-var.directive'
     AdminExercisesComponent,
     AdminNewExerciseComponent,
     AppComponent,
-    CalculatorComponent,
+    CalcComponent,
     CardComponent,
     ExerciseComponent,
     LearningComponent,

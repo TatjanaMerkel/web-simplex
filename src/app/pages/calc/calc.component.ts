@@ -15,10 +15,10 @@ import {TableauInput} from '../../components/tableau/tableau-input'
 
 @Component({
   selector: 'app-calculator',
-  templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.css']
+  templateUrl: './calc.component.html',
+  styleUrls: ['./calc.component.css']
 })
-export class CalculatorComponent implements OnInit {
+export class CalcComponent implements OnInit {
 
   linearSystemSizeOutput: LinearSystemSize | null = null
   linearSystemDataCardOutput: LinearSystemData | null = null

@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   buttons = [
     {title: 'Lernen', color: 'red', route: '/learning'},
     {title: 'Üben', color: 'green', route: '/practice'},
-    {title: 'Rechnen', color: 'blue', route: '/calculator'},
+    {title: 'Rechnen', color: 'blue', route: '/calc'},
   ]
 
   getColor(color: string): any {
