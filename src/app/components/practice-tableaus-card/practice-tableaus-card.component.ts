@@ -5,7 +5,6 @@ import {Fraction} from 'mathjs'
 import ExpectedTableau from './expected-tableau'
 import {fractionFromInputEvent, fractionsEqual} from '../../../common/fractions'
 
-
 @Component({
   selector: 'app-practice-tableaus-card',
   templateUrl: './practice-tableaus-card.component.html',
@@ -26,13 +25,11 @@ export class PracticeTableausCardComponent implements OnChanges {
   constraintVals!: Array<Fraction | null>
   thetas!: Array<Fraction | null>
 
-
   targetVarsCorrect!: boolean[]
   targetValCorrect = true
   constraintVarsCorrect!: boolean[][]
   constraintValsCorrect!: boolean[]
   thetasCorrect!: boolean[]
-
 
   initialized = false
 
@@ -47,7 +44,6 @@ export class PracticeTableausCardComponent implements OnChanges {
       && this.constraintValsCorrect.every(bool => bool)
       && this.thetasCorrect.every(bool => bool)
   }
-
 
   //
   // Lifecycle
@@ -111,18 +107,19 @@ export class PracticeTableausCardComponent implements OnChanges {
 
     if (this.isInputCorrect) {
       this.solvedTableausCount++
+
+      this.resetUserInput()
     }
 
     if (this.solvedTableausCount === this.solvedTableaus.length) {
-
       this.correct.emit()
     }
   }
 
-  private checkUserInput(): void {
+  private checkUserInput(t: number): void {
     const expectedTableaus = this.expectedTableaus!
 
-    const expected = expectedTableaus[0]
+    const expected = expectedTableaus[t]
 
     for (let v = 0; v < this.targetVars.length; v++) {
       this.targetVarsCorrect[v] = fractionsEqual(this.targetVars[v], expected.targetVars[v])
@@ -147,5 +144,19 @@ export class PracticeTableausCardComponent implements OnChanges {
     }
   }
 
+  private resetUserInput(): void {
+    this.targetVars.fill(null)
+    this.targetVal = null
 
+    for (let constraintVarsRow of this.constraintVars) {
+      constraintVarsRow.fill(null)
+    }
+
+    this.constraintVals.fill(null)
+    this.thetas.fill(null)
+  }
+
+  trackByIndex(index: number, _item: any) {
+    return index
+  }
 }

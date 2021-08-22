@@ -21,7 +21,7 @@ export class PracticeLinearSystemSizeCardComponent {
   numberOfConstraintsCorrect = true
 
   //
-  // Getter
+  // Getters
   //
 
   get allCorrect(): boolean {
@@ -52,7 +52,7 @@ export class PracticeLinearSystemSizeCardComponent {
     }
   }
 
-  checkUserInput(): void {
+  private checkUserInput(): void {
     const expected = this.expected!
 
     if (this.numberOfVars !== expected.numberOfVars) {

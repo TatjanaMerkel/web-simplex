@@ -1,0 +1,38 @@
+<app-card title="Lösung">
+  <ng-container *ngIf="initialized">
+
+    <table>
+      <tr>
+        <td>Lösung:</td>
+        <td>
+          <input [class.wrong]="!solutionValCorrect"
+                 [disabled]="disabled"
+                 (input)="solutionValCorrect = true"
+                 (change)="saveSolutionVal($event)"/>
+        </td>
+      </tr>
+
+      <tr *ngFor="let solutionVar of solutionVars; index as v; trackBy: trackByIndex">
+        <td>
+          x<sub>{{ v + 1 }}</sub>
+        </td>
+        <td>
+          <input [class.wrong]="!solutionVarsCorrect[v]"
+                 [disabled]="disabled"
+                 (input)="solutionVarsCorrect[v] = true"
+                 (change)="saveSolutionsVar($event, v)"/>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Continue Button -->
+
+    <button class="btn btn-lg float-right mt-5"
+            [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
+            [disabled]="disabled"
+            (click)="checkUserInputAndEmit()">
+      Continue
+    </button>
+
+  </ng-container>
+</app-card>

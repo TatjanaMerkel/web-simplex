@@ -23,7 +23,7 @@ import {PracticeComponent} from './pages/practice/practice.component'
 import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
 import {PracticeLinearSystemDataCardComponent} from './components/practice-linear-system-data-card/practice-linear-system-data-card.component'
 import {PracticeLinearSystemSizeCardComponent} from './components/practice-linear-system-size-card/practice-linear-system-size-card.component'
-import {PracticeSolutionComponent} from './components/practice-solution/practice-solution.component'
+import {PracticeSolutionCardComponent} from './components/practice-solution-card/practice-solution-card.component'
 import {PracticeStandardFormCardComponent} from './components/practice-standard-form-card/practice-standard-form-card.component'
 import {PracticeTableauComponent} from './components/practice-tableau/practice-tableau.component'
 import {PracticeTableausCardComponent} from './components/practice-tableaus-card/practice-tableaus-card.component'
@@ -51,7 +51,7 @@ import {VarDirective} from '../ng-var.directive'
     PracticeComponent,
     PracticeExerciseComponent,
     PracticeLinearSystemSizeCardComponent,
-    PracticeSolutionComponent,
+    PracticeSolutionCardComponent,
     PracticeTableauComponent,
     SolutionComponent,
     StandardFormComponent,

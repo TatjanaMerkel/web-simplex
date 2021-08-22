@@ -73,13 +73,14 @@
 
   <!-- Tableaus -->
 
-  <ng-template [ngIf]="true">
-  <div class="arrow-6">
+  <ng-template [ngIf]="standardFormCorrect">
+    <div class="arrow-6">
       <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
 
     <app-practice-tableaus-card class="card-6"
-                                [expectedTableaus]="expectedTableaus">
+                                [expectedTableaus]="expectedTableaus"
+                                (correct)="tableausCorrect = true">
     </app-practice-tableaus-card>
   </ng-template>
 
@@ -90,9 +91,22 @@
       <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
 
-    <app-card class="card-7" title="Lösung">
-      <app-practice-solution>
-      </app-practice-solution>
+    <app-practice-solution-card class="card-7"
+                                [expected]="expectedSolution"
+                                [disabled]="solutionCorrect"
+                                (correct)="solutionCorrect = true">
+    </app-practice-solution-card>
+  </ng-template>
+
+  <!-- Congratulations -->
+
+  <ng-template [ngIf]="solutionCorrect">
+    <div class="arrow-8">
+      <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-card class="card-8" title="Glückwunsch">
+      Du hast die Aufgabe korrekt gelöst!
     </app-card>
   </ng-template>
 

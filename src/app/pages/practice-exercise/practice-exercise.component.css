@@ -20,6 +20,8 @@
     ".       .       card-6  .       .     "
     ".       arrow-7 .       .       .     "
     ".       .       card-7  .       .     "
+    ".       arrow-8 .       .       .     "
+    ".       .       card-8  .       .     "
     "footer  footer  footer  footer  footer";
 
   margin-top: 40px;
@@ -76,6 +78,14 @@
 
 .card-7 {
   grid-area: card-7;
+}
+
+.arrow-8 {
+  grid-area: arrow-8;
+}
+
+.card-8 {
+  grid-area: card-8;
 }
 
 .arrow {

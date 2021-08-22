@@ -12,7 +12,8 @@ import {PracticeStandardFormCardExpected} from '../../components/practice-standa
 import {StandardFormInput} from '../../components/standard-form/standard-form-input'
 import {Simplex, Tableau} from '../../../common/simplex'
 import ExpectedTableau from "../../components/practice-tableaus-card/expected-tableau";
-
+import {ExpectedSolution} from "../../components/practice-solution-card/expected-solution";
+import {Fraction} from "mathjs";
 
 @Component({
   selector: 'app-practice-exercise',
@@ -81,7 +82,20 @@ export class PracticeExerciseComponent implements OnInit {
         constraintVals: tableau.constraintVals,
         thetas: tableau.thetas
       }
-    });
+    })
+  }
+
+  get expectedSolution(): ExpectedSolution {
+    console.log('test')
+    console.log(this.tableaus)
+    const lastTableau = this.tableaus[this.tableaus.length - 1]
+
+    const solutionVars = new Array<Fraction>(lastTableau.targetVars.length).fill(math.fraction(0) as Fraction)
+
+    return {
+      solutionVal: lastTableau.targetVal,
+      solutionVars: solutionVars
+    }
   }
 
   constructor(private route: ActivatedRoute,
@@ -108,7 +122,6 @@ export class PracticeExerciseComponent implements OnInit {
         }
 
         const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = this.exercise
-
 
         this.tableaus = Simplex.calcTableaus(
           {numberOfVars, numberOfConstraints},
