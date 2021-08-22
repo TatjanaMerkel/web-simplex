@@ -5,11 +5,11 @@ import {Router} from '@angular/router'
 import {HeaderService} from '../../../services/header.service'
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css']
+  selector: 'header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
-export class NavBarComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
   title: undefined | string
 

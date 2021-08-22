@@ -18,7 +18,7 @@ import {LearnComponent} from './pages/learn/learn.component'
 import {LinearSystemDataCardComponent} from './components/linear-system-data-card/linear-system-data-card.component'
 import {LinearSystemDataComponent} from './components/linear-system-data/linear-system-data.component'
 import {LinearSystemSizeComponent} from './components/linear-system-size/linear-system-size.component'
-import {NavBarComponent} from './components/nav-bar/nav-bar.component'
+import {HeaderComponent} from './components/header/header.component'
 import {PracticeComponent} from './pages/practice/practice.component'
 import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
 import {PracticeLinearSystemDataCardComponent} from './components/practice-linear-system-data-card/practice-linear-system-data-card.component'
@@ -46,7 +46,7 @@ import {VarDirective} from '../ng-var.directive'
     LinearSystemDataCardComponent,
     LinearSystemDataComponent,
     LinearSystemSizeComponent,
-    NavBarComponent,
+    HeaderComponent,
     HomeComponent,
     PracticeComponent,
     PracticeExerciseComponent,
