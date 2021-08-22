@@ -73,15 +73,14 @@
 
   <!-- Tableaus -->
 
-  <ng-template [ngIf]="standardFormCorrect">
-    <div class="arrow-6">
+  <ng-template [ngIf]="true">
+  <div class="arrow-6">
       <img class="arrow" src="assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
 
-    <app-card class="card-6" title="Tableaus">
-      <app-practice-tableau>
-      </app-practice-tableau>
-    </app-card>
+    <app-practice-tableaus-card class="card-6"
+                                [expectedTableaus]="expectedTableaus">
+    </app-practice-tableaus-card>
   </ng-template>
 
   <!-- Solution -->

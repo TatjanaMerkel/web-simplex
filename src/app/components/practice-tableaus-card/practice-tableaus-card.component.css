@@ -1,0 +1,35 @@
+/* Table Layout */
+
+td {
+  padding: 8px;
+}
+
+/* Table Gap */
+
+table:not(:first-child) {
+  margin-top: 32px;
+}
+
+/* Table Lines */
+
+.line-bottom {
+  border-bottom: 1px solid white;
+}
+
+.line-top {
+  border-top: 1px solid white;
+}
+
+.line-left {
+  border-left: 1px solid white;
+}
+
+.line-right {
+  border-right: 1px solid white;
+}
+
+/* Input Fields */
+
+.fraction-input {
+  width: 60px;
+}

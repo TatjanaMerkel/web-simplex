@@ -10,7 +10,9 @@ import {PracticeLinearSystemDataCardExpected} from '../../components/practice-li
 import {PracticeLinearSystemSizeCardExpected} from '../../components/practice-linear-system-size-card/practice-linear-system-size-card-expected'
 import {PracticeStandardFormCardExpected} from '../../components/practice-standard-form-card/practice-standard-form-card-expected'
 import {StandardFormInput} from '../../components/standard-form/standard-form-input'
-import {Simplex, Tableau} from "../../../common/simplex";
+import {Simplex, Tableau} from '../../../common/simplex'
+import ExpectedTableau from "../../components/practice-tableaus-card/expected-tableau";
+
 
 @Component({
   selector: 'app-practice-exercise',
@@ -62,6 +64,26 @@ export class PracticeExerciseComponent implements OnInit {
     }
   }
 
+  get expectedTableaus(): ExpectedTableau[] {
+    const exercise = this.exercise!
+
+    if (!this.tableaus) {
+      return []
+    }
+
+    return this.tableaus.map((tableau: Tableau) => {
+      return {
+        numberOfVars: exercise.numberOfVars,
+        numberOfConstraints: exercise.numberOfConstraints,
+        targetVars: tableau.targetVars,
+        targetVal: tableau.targetVal,
+        constraintVars: tableau.constraintVars,
+        constraintVals: tableau.constraintVals,
+        thetas: tableau.thetas
+      }
+    });
+  }
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private exerciseService: ExerciseService,
@@ -85,13 +107,12 @@ export class PracticeExerciseComponent implements OnInit {
           constraintVals: JSON.parse(JSON.stringify(exercise.constraintVals), reviver)
         }
 
-        const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = exercise
+        const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = this.exercise
+
 
         this.tableaus = Simplex.calcTableaus(
           {numberOfVars, numberOfConstraints},
           {targetVars, constraintVars, constraintVals})
-
-        console.log(this.tableaus)
       })
     })
   }

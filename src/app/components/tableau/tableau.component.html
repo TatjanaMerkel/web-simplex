@@ -12,7 +12,7 @@
     <!--  BV | x1 x2 x3 x4 x5 | b  -->
     <thead>
     <tr>
-      <td class="bar-right">BV</td>
+      <td class="line-right">BV</td>
       <td *ngFor="let _ of [].constructor(data.numberOfVars); let v = index"
           [ngClass]="getClasses(null, v).join(' ')">
         <span [class.slack-var]="data.slackVars.indexOf(v) !== -1">x<sub>{{ v + 1 }}</sub></span>
@@ -49,7 +49,7 @@
     <!--   z | 10 11  0  0  0 | 0  -->
     <tfoot>
     <tr>
-      <td class="bar-right">z</td>
+      <td class="line-right">z</td>
       <td *ngFor="let targetVar of data.targetVars; let v = index"
           [ngClass]="getClasses(null, v).join(' ')">
         {{ formatFraction(targetVar) }}
