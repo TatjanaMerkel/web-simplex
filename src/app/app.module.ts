@@ -14,7 +14,7 @@ import {CalcComponent} from './pages/calc/calc.component'
 import {CardComponent} from './components/card/card.component'
 import {ExerciseComponent} from './pages/exercise/exercise.component'
 import {HomeComponent} from './pages/home/home.component'
-import {LearningComponent} from './pages/learning/learning.component'
+import {LearnComponent} from './pages/learn/learn.component'
 import {LinearSystemDataCardComponent} from './components/linear-system-data-card/linear-system-data-card.component'
 import {LinearSystemDataComponent} from './components/linear-system-data/linear-system-data.component'
 import {LinearSystemSizeComponent} from './components/linear-system-size/linear-system-size.component'
@@ -42,7 +42,7 @@ import {VarDirective} from '../ng-var.directive'
     CalcComponent,
     CardComponent,
     ExerciseComponent,
-    LearningComponent,
+    LearnComponent,
     LinearSystemDataCardComponent,
     LinearSystemDataComponent,
     LinearSystemSizeComponent,

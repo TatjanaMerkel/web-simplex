@@ -6,7 +6,7 @@ import {AdminExercisesComponent} from './pages/admin-exercises/admin-exercises.c
 import {AdminNewExerciseComponent} from './pages/admin-new-exercise/admin-new-exercise.component'
 import {CalcComponent} from './pages/calc/calc.component'
 import {ExerciseComponent} from './pages/exercise/exercise.component'
-import {LearningComponent} from './pages/learning/learning.component'
+import {LearnComponent} from './pages/learn/learn.component'
 import {HomeComponent} from './pages/home/home.component'
 import {PracticeComponent} from './pages/practice/practice.component'
 import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'admin/exercises/:exercise_id', component: AdminEditExerciseComponent},
   {path: 'calc', component: CalcComponent},
   {path: 'exercises/:exerciseId', component: ExerciseComponent},
-  {path: 'learning', component: LearningComponent},
+  {path: 'learn', component: LearnComponent},
   {path: 'practice', component: PracticeComponent},
   {path: 'practice/:exercise_id', component: PracticeExerciseComponent}
 ]

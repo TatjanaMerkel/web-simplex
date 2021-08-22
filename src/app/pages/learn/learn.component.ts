@@ -4,10 +4,10 @@ import {HeaderService} from '../../../services/header.service'
 
 @Component({
   selector: 'app-learning',
-  templateUrl: './learning.component.html',
-  styleUrls: ['./learning.component.css']
+  templateUrl: './learn.component.html',
+  styleUrls: ['./learn.component.css']
 })
-export class LearningComponent implements OnInit {
+export class LearnComponent implements OnInit {
 
   constructor(private headerService: HeaderService) {
   }
