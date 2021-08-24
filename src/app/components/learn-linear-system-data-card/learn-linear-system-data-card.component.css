@@ -1,0 +1,25 @@
+table {
+  margin: 40px auto;
+}
+
+.linear-system-table td {
+  padding: 4px;
+}
+
+.linear-system-table td.value {
+  width: 40px;
+  text-align: right;
+}
+
+.assignment-table td {
+  padding-left: 40px;
+}
+
+.exercise {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+button {
+  margin-top: 40px;
+}

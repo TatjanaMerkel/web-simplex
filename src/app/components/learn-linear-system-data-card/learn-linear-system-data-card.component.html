@@ -1,0 +1,126 @@
+<app-card title="Variablen und Nebenbedingungen erkennen">
+  <p>
+    Aus der Anzahl der Variablen und Nebenbedingungen ergibt sich die
+    Form des Ungleichungssystems. Es besteht aus der Zielfunktion und
+    den Ungleichungen die die Nebenbedingungen abbilden. Das
+    Ungleichungssystem mit zwei Variablen und zwei Nebenbedingungen
+    zur Beispielaufgabe hat folgende Form:
+  </p>
+
+  <table class="linear-system-table">
+    <tr>
+      <td>Z</td>
+      <td>=</td>
+      <td>___</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td>___</td>
+      <td>x<sub>2</sub></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>___</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td>___</td>
+      <td>x<sub>2</sub></td>
+      <td>&#x2264;</td>
+      <td>___</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>___</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td>___</td>
+      <td>x<sub>2</sub></td>
+      <td>&#x2264;</td>
+      <td>___</td>
+    </tr>
+  </table>
+
+  <p>
+    Im nächsten Schritt werden die fehlenden Parameter aus der
+    Aufgabenstellung übertragen. In diesem Beispiel werden die Variablen
+    und Nebenbedingungen in der Reihenfolge übernommen wie sie im Text
+    erwähnt werden. Damit ergibt sich das Ungleichungssystem wie folgt:
+  </p>
+
+  <p class="exercise">
+    Eine Fähre für LKWs und Busse hat 12 Stellplätze und kann bis zu
+    100 Tonnen befördern. Ein LKW benötigt einen Stellplatz, wiegt 15
+    Tonnen und bringt 1000€ Gewinn. Ein Bus benötigt zwei Stellplätze,
+    wiegt 10 Tonnen und bringt 1500€ Gewinn. Insgesamt warten 8 LKWs
+    und 8 Busse auf die Überfahrt. Wie viele LKWs und Busse sollten
+    transportiert werden um den maximalen Gewinn zu erwirtschaften?
+  </p>
+
+  <table class="assignment-table">
+    <tr>
+      <th>Variable x<sub>1</sub></th>
+      <td>Anzahl LKWs</td>
+    </tr>
+    <tr>
+      <th>Variable x<sub>2</sub></th>
+      <td>Anzahl Busse</td>
+    </tr>
+    <tr>
+      <th>1. Nebenbedingung</th>
+      <td>Begrenzte Stellplätze</td>
+    </tr>
+    <tr>
+      <th>2. Nebenbedingung</th>
+      <td>Begrenztes Maximalgewicht</td>
+    </tr>
+  </table>
+
+  <table class="linear-system-table">
+    <tr>
+      <td>Z</td>
+      <td>=</td>
+      <td class="value">1000</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td class="value">1500</td>
+      <td>x<sub>2</sub></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="value">1</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td class="value">2</td>
+      <td>x<sub>2</sub></td>
+      <td>&#x2264;</td>
+      <td class="value">12</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="value">15</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td class="value">10</td>
+      <td>x<sub>2</sub></td>
+      <td>&#x2264;</td>
+      <td class="value">100</td>
+    </tr>
+  </table>
+
+  <button class="btn btn-success btn-lg float-right"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Continue
+  </button>
+</app-card>

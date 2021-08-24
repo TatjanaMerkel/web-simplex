@@ -11,6 +11,8 @@ export class LearnComponent implements OnInit {
 
   overviewRead = false
   linearSystemSizeRead = false
+  linearSystemDataRead = false
+
 
   constructor(private headerService: HeaderService) {
   }

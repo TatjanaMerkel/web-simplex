@@ -1,5 +1,10 @@
+.exercise {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
 ol {
-  padding-left: 1.5em;
+  padding-left: 40px;
 }
 
 button {

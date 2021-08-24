@@ -19,5 +19,16 @@
                                        (next)="linearSystemSizeRead = true">
     </app-learn-linear-system-size-card>
   </ng-container>
+  <!-- Linear System Data -->
 
+  <ng-container *ngIf="linearSystemSizeRead">
+    <div class="arrow-3">
+      <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-linear-system-data-card class="card-3"
+                                       [disabled]="linearSystemDataRead"
+                                       (next)="linearSystemDataRead = true">
+    </app-learn-linear-system-data-card>
+  </ng-container>
 </main>
