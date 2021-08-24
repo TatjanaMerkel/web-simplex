@@ -11,20 +11,22 @@ import {HeaderService} from '../../../services/header.service'
 })
 export class HeaderComponent implements OnInit {
 
-  title: undefined | string
+  title: string | undefined
 
   constructor(private headerService: HeaderService,
               private location: Location,
               public router: Router) {
   }
 
-  onBack() {
-    this.location.back()
-  }
 
   ngOnInit(): void {
     this.headerService.title.subscribe((title: string) => {
       this.title = title
     })
   }
+
+  goBack(): void {
+    this.location.back()
+  }
+
 }
