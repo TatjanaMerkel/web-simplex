@@ -32,6 +32,7 @@ import {StandardFormComponent} from './components/standard-form/standard-form.co
 import {TableauComponent} from './components/tableau/tableau.component'
 import {VarDirective} from '../ng-var.directive';
 import { LearnLinearSystemSizeCardComponent } from './components/learn-linear-system-size-card/learn-linear-system-size-card.component';
+import { LearnOverviewCardComponent } from './components/learn-overview-card/learn-overview-card.component';
 
 
 
@@ -62,7 +63,8 @@ import { LearnLinearSystemSizeCardComponent } from './components/learn-linear-sy
     PracticeLinearSystemDataCardComponent,
     PracticeStandardFormCardComponent,
     PracticeTableausCardComponent,
-    LearnLinearSystemSizeCardComponent
+    LearnLinearSystemSizeCardComponent,
+    LearnOverviewCardComponent
   ],
   imports: [
     AppRoutingModule,

@@ -9,6 +9,9 @@ import {HeaderService} from '../../../services/header.service'
 })
 export class LearnComponent implements OnInit {
 
+  overviewRead = false
+  linearSystemSizeRead = false
+
   constructor(private headerService: HeaderService) {
   }
 

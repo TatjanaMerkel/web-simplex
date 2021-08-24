@@ -2,34 +2,22 @@
 
   <!-- Overview -->
 
-  <app-card class="card-1" title="Übersicht">
-    <p>
-      Der Simplex-Algorithmus ermöglicht das optimale Lösen von häufig
-      auftretenden Ungleichungssystemen - beispielsweise für das folgende:
-    </p>
+  <app-learn-overview-card class="card-1"
+                           [disabled]="overviewRead"
+                           (next)="overviewRead = true">
+  </app-learn-overview-card>
 
-    <p>
-      Eine Fähre für LKWs und Busse hat 12 Stellplätze und kann bis zu
-      100 Tonnen befördern. Ein LKW benötigt einen Stellplatz, wiegt 15
-      Tonnen und bringt 1000€ Gewinn. Ein Bus benötigt zwei Stellplätze,
-      wiegt 10 Tonnen und bringt 1500€ Gewinn. Insgesamt warten 8 LKWs
-      und 8 Busse auf die Überfahrt. Wie viele LKWs und Busse sollten
-      transportiert werden um den maximalen Gewinn zu erwirtschaften?
-    </p>
+  <!-- Linear System Size -->
 
-    Im Folgenden wird erklärt wie ein Maximierungsproblem gelöst wird.
-    Der Lösungsweg besteht aus folgenden Schritten:
+  <ng-container *ngIf="overviewRead">
+    <div class="arrow-2">
+      <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
 
-    <ol>
-      <li>Variablen und Nebenbedingungen erkennen</li>
-      <li>Ungleichungssystem aufstellen</li>
-      <li>Gleichungssystem in Standardform aufstellen</li>
-      <li>
-        Das initiale Tableau mit den Werten des Gleichungssystems befüllen
-        und alle folgenden Tableaus berechnen
-      </li>
-      <li>Die Lösung aus dem letzten Tableau ablesen</li>
-    </ol>
-  </app-card>
+    <app-learn-linear-system-size-card class="card-2"
+                                       [disabled]="linearSystemSizeRead"
+                                       (next)="linearSystemSizeRead = true">
+    </app-learn-linear-system-size-card>
+  </ng-container>
 
 </main>

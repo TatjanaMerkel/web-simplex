@@ -38,4 +38,11 @@
       <td>2</td>
     </tr>
   </table>
+
+  <button class="btn btn-success btn-lg float-right"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Continue
+  </button>
+
 </app-card>
