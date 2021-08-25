@@ -12,7 +12,7 @@ export class LearnComponent implements OnInit {
   overviewRead = false
   linearSystemSizeRead = false
   linearSystemDataRead = false
-
+  standardFormRead = false
 
   constructor(private headerService: HeaderService) {
   }

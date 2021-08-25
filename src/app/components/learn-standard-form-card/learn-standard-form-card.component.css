@@ -1,0 +1,22 @@
+table {
+  margin: 40px auto;
+}
+
+td {
+  padding: 4px;
+  text-align: right;
+}
+
+.value {
+  width: 60px;
+}
+
+/* Colors */
+
+.slack {
+  color: #62bbff;
+}
+
+.z {
+  color: #e261e8;
+}

@@ -31,4 +31,18 @@
                                        (next)="linearSystemDataRead = true">
     </app-learn-linear-system-data-card>
   </ng-container>
+
+  <!-- Standard Form -->
+
+  <ng-container *ngIf="linearSystemDataRead">
+    <div class="arrow-4">
+      <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-standard-form-card class="card-4"
+                                  [disabled]="standardFormRead"
+                                  (next)="standardFormRead = true">
+    </app-learn-standard-form-card>
+  </ng-container>
+
 </main>

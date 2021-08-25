@@ -1,0 +1,88 @@
+<app-card title="Gleichungssystem in Standardform aufstellen">
+  <p>
+    Um den Simplex-Algorithmus anwenden zu können muss das Ungleichungssystem
+    in ein Gleichungssystem mit bestimmten Eigenschaften umgewandelt werden.
+    Dabei werden die Ungleichungen, welche die Nebenbedingungen representieren,
+    durch Hinzufügen sogenannter Schlupfvariablen in Gleichungen umgewandelt.
+    Außerdem muss die Gleichung der Zielfunktion auf der rechten Seite des
+    Gleichheitszeichen gleich 0 sein. Dazu werden die Variablen durch
+    Subtraktion auf die Seite der Z-Variablen gezogen.
+  </p>
+
+  <p>
+    Für die Beispielaufgabe ergibt sich aus dem zuvor aufgestellte Ungleichungssystem
+    das folgende Gleichungssystem in Standardform. Die Variable Z sowie die neu
+    eingeführten Schlupfvariablen sind farblich hervorgehoben:
+  </p>
+
+  <table>
+    <tr>
+      <td class="value">-1000</td>
+      <td>x<sub>1</sub></td>
+
+      <td>-</td>
+      <td class="value">1500</td>
+      <td>x<sub>2</sub></td>
+
+      <td class="slack"></td>
+      <td class="slack"></td>
+
+      <td class="slack"></td>
+      <td class="slack"></td>
+
+      <td class="z">+</td>
+      <td class="z">z</td>
+
+      <td>=</td>
+      <td class="value">0</td>
+    </tr>
+
+    <tr>
+      <td class="value"></td>
+      <td>x<sub>1</sub></td>
+
+      <td>+</td>
+      <td class="value">2</td>
+      <td>x<sub>2</sub></td>
+
+      <td class="slack">+</td>
+      <td class="slack">x<sub>3</sub></td>
+
+      <td class="slack"></td>
+      <td class="slack"></td>
+
+      <td class="z"></td>
+      <td class="z"></td>
+
+      <td>=</td>
+      <td class="value">12</td>
+    </tr>
+
+    <tr>
+      <td class="value">15</td>
+      <td>x<sub>1</sub></td>
+
+      <td>-</td>
+      <td class="value">10</td>
+      <td>x<sub>2</sub></td>
+
+      <td class="slack"></td>
+      <td class="slack"></td>
+
+      <td class="slack">+</td>
+      <td class="slack">x<sub>4</sub></td>
+
+      <td class="z"></td>
+      <td class="z"></td>
+
+      <td>=</td>
+      <td class="value">100</td>
+    </tr>
+  </table>
+
+  <button class="btn btn-success btn-lg float-right"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Continue
+  </button>
+</app-card>
