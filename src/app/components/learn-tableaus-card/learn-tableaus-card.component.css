@@ -1,0 +1,32 @@
+table {
+  margin: 40px auto;
+}
+
+thead th {
+  border-bottom: 1px solid white;
+}
+
+tfoot > * {
+  border-top: 1px solid white;
+}
+
+tr > *:first-child {
+  border-right: 1px solid white;
+}
+
+tr > *:nth-last-child(2), tr > *:last-child {
+  border-left: 1px solid white;
+}
+
+th,td {
+  width: 80px;
+  padding: 8px;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  text-align: right;
+}

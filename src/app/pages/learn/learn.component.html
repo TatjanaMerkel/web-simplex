@@ -2,10 +2,10 @@
 
   <!-- Overview -->
 
-  <app-learn-overview-card class="card-1"
-                           [disabled]="overviewRead"
-                           (next)="overviewRead = true">
-  </app-learn-overview-card>
+  <!--  <app-learn-overview-card class="card-1"-->
+  <!--                           [disabled]="overviewRead"-->
+  <!--                           (next)="overviewRead = true">-->
+  <!--  </app-learn-overview-card>-->
 
   <!-- Linear System Size -->
 
@@ -19,6 +19,7 @@
                                        (next)="linearSystemSizeRead = true">
     </app-learn-linear-system-size-card>
   </ng-container>
+
   <!-- Linear System Data -->
 
   <ng-container *ngIf="linearSystemSizeRead">
@@ -47,7 +48,7 @@
 
   <!-- Tableaus -->
 
-  <ng-container *ngIf="standardFormRead">
+  <ng-container *ngIf="true">
     <div class="arrow-5">
       <img src="assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
@@ -57,6 +58,5 @@
                              (next)="tableausRead = true">
     </app-learn-tableaus-card>
   </ng-container>
-
 
 </main>

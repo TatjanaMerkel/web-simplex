@@ -13,12 +13,17 @@ import {AppRoutingModule} from './app-routing.module'
 import {CalcComponent} from './pages/calc/calc.component'
 import {CardComponent} from './components/card/card.component'
 import {ExerciseComponent} from './pages/exercise/exercise.component'
+import {HeaderComponent} from './components/header/header.component'
 import {HomeComponent} from './pages/home/home.component'
 import {LearnComponent} from './pages/learn/learn.component'
+import {LearnLinearSystemDataCardComponent} from './components/learn-linear-system-data-card/learn-linear-system-data-card.component'
+import {LearnLinearSystemSizeCardComponent} from './components/learn-linear-system-size-card/learn-linear-system-size-card.component'
+import {LearnOverviewCardComponent} from './components/learn-overview-card/learn-overview-card.component'
+import {LearnStandardFormCardComponent} from './components/learn-standard-form-card/learn-standard-form-card.component'
+import {LearnTableausCardComponent} from './components/learn-tableaus-card/learn-tableaus-card.component'
 import {LinearSystemDataCardComponent} from './components/linear-system-data-card/linear-system-data-card.component'
 import {LinearSystemDataComponent} from './components/linear-system-data/linear-system-data.component'
 import {LinearSystemSizeComponent} from './components/linear-system-size/linear-system-size.component'
-import {HeaderComponent} from './components/header/header.component'
 import {PracticeComponent} from './pages/practice/practice.component'
 import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
 import {PracticeLinearSystemDataCardComponent} from './components/practice-linear-system-data-card/practice-linear-system-data-card.component'
@@ -30,13 +35,7 @@ import {PracticeTableausCardComponent} from './components/practice-tableaus-card
 import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive';
-import { LearnLinearSystemSizeCardComponent } from './components/learn-linear-system-size-card/learn-linear-system-size-card.component';
-import { LearnOverviewCardComponent } from './components/learn-overview-card/learn-overview-card.component';
-import { LearnLinearSystemDataCardComponent } from './components/learn-linear-system-data-card/learn-linear-system-data-card.component';
-import { LearnStandardFormCardComponent } from './components/learn-standard-form-card/learn-standard-form-card.component';
-import { LearnTableausCardComponent } from './components/learn-tableaus-card/learn-tableaus-card.component';
-
+import {VarDirective} from '../ng-var.directive'
 
 
 @NgModule({
