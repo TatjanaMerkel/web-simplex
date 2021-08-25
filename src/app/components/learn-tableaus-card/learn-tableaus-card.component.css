@@ -30,3 +30,21 @@ th {
 td {
   text-align: right;
 }
+
+.wider {
+  width: 180px;
+}
+
+/* Mark pivot col and row */
+
+.pivot-row {
+  background-color: rgba(255, 193, 0.00, 0.50);
+}
+
+.pivot-col {
+  background-color: rgba(255, 193, 0.00, 0.50);
+}
+
+.pivot-row-col {
+  background-color: rgba(255, 193, 0.00, 0.75);
+}
