@@ -20,7 +20,7 @@ import {LearnLinearSystemDataCardComponent} from './components/learn-linear-syst
 import {LearnLinearSystemSizeCardComponent} from './components/learn-linear-system-size-card/learn-linear-system-size-card.component'
 import {LearnOverviewCardComponent} from './components/learn-overview-card/learn-overview-card.component'
 import {LearnStandardFormCardComponent} from './components/learn-standard-form-card/learn-standard-form-card.component'
-import {LearnTableausCardComponent} from './components/learn-tableaus-card/learn-tableaus-card.component'
+import {LearnTableausThirdCardComponent} from './components/learn-tableaus-third-card/learn-tableaus-third-card.component'
 import {LinearSystemDataCardComponent} from './components/linear-system-data-card/linear-system-data-card.component'
 import {LinearSystemDataComponent} from './components/linear-system-data/linear-system-data.component'
 import {LinearSystemSizeComponent} from './components/linear-system-size/linear-system-size.component'
@@ -35,7 +35,10 @@ import {PracticeTableausCardComponent} from './components/practice-tableaus-card
 import {SolutionComponent} from './components/solution/solution.component'
 import {StandardFormComponent} from './components/standard-form/standard-form.component'
 import {TableauComponent} from './components/tableau/tableau.component'
-import {VarDirective} from '../ng-var.directive'
+import {VarDirective} from '../ng-var.directive';
+import { LearnTableausGeneralCardComponent } from './components/learn-tableaus-general-card/learn-tableaus-general-card.component';
+import { LearnTableausFirstCardComponent } from './components/learn-tableaus-first-card/learn-tableaus-first-card.component';
+import { LearnTableausSecondCardComponent } from './components/learn-tableaus-second-card/learn-tableaus-second-card.component'
 
 
 @NgModule({
@@ -69,7 +72,10 @@ import {VarDirective} from '../ng-var.directive'
     LearnOverviewCardComponent,
     LearnLinearSystemDataCardComponent,
     LearnStandardFormCardComponent,
-    LearnTableausCardComponent
+    LearnTableausThirdCardComponent,
+    LearnTableausGeneralCardComponent,
+    LearnTableausFirstCardComponent,
+    LearnTableausSecondCardComponent
   ],
   imports: [
     AppRoutingModule,

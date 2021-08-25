@@ -23,3 +23,64 @@ body {
 }
 
 
+/* Learn Tableau */
+
+.learn-tableau {
+  margin: 40px auto;
+}
+
+.learn-tableau thead th {
+  border-bottom: 1px solid white;
+}
+
+.learn-tableau tfoot > * {
+  border-top: 1px solid white;
+}
+
+.learn-tableau tr > *:first-child {
+  border-right: 1px solid white;
+}
+
+.learn-tableau tr > *:nth-last-child(2), .learn-tableau tr > *:last-child {
+  border-left: 1px solid white;
+}
+
+.learn-tableau th,td {
+  width: 80px;
+  padding: 8px;
+}
+
+.learn-tableau th {
+  text-align: center;
+}
+
+.learn-tableau td {
+  text-align: right;
+}
+
+.learn-tableau .wider {
+  width: 180px;
+}
+
+/* Mark pivot col and row */
+
+.pivot-row {
+  background-color: rgba(255, 193, 0.00, 0.50);
+}
+
+.pivot-col {
+  background-color: rgba(255, 193, 0.00, 0.50);
+}
+
+.pivot-row-col {
+  background-color: rgba(255, 193, 0.00, 0.75);
+}
+
+/* Lists */
+
+ol, ul {
+  padding-left: 1.5em;
+}
+
+
+

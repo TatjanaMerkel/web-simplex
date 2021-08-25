@@ -13,7 +13,10 @@ export class LearnComponent implements OnInit {
   linearSystemSizeRead = false
   linearSystemDataRead = false
   standardFormRead = false
-  tableausRead = false
+  tableausGeneralRead = false
+  tableausFirstRead = false
+  tableausSecondRead = false
+  tableausThirdRead = false
 
   constructor(private headerService: HeaderService) {
   }

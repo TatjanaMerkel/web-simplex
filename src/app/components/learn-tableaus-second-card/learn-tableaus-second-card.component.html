@@ -1,180 +1,4 @@
-<app-card title="Tableaus berechnen">
-  <p>
-    Im nächsten Schritt wird das erste einer Reihe von Tableaus aufgestellt
-    indem es mit den Werten des Gleichungssystems befüllt wird. Alle folgenden
-    Tableaus werden anschließend gemäß dem Simplex-Algorithmus sukzessive aus
-    dem jeweils vorangehenden Tableau berechnet bis eine Abbruchbedingung
-    erreicht wird. Aus dem letzten Tableau kann dann die Lösung des ursprüngichen
-    Problems abgelesen werden.
-  </p>
-
-  <p>
-    Alle Tableaus haben die gleiche Form. Neben der Zeilen- und Spaltenbeschriftung
-    hat ein Tableau soviele Zeilen wie es Nebenbedingungen gibt und eine Zeile für
-    die Zielfunktion sowie Spalten für die ursprünglichen Variablen, die Schlupfvariablen,
-    den Wert b auf der rechten Seite der jeweiligen Gleichung und den Wert theta der
-    unter anderem aus b berechnet wird:
-  </p>
-
-  <table>
-    <thead>
-    <tr>
-      <th>BV</th>
-      <th>x<sub>1</sub></th>
-      <th>x<sub>2</sub></th>
-      <th>x<sub>3</sub></th>
-      <th>x<sub>4</sub></th>
-      <th>b</th>
-      <th>theta</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr>
-      <th>&nbsp;</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>&nbsp;</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    </tbody>
-
-    <tfoot>
-    <tr>
-      <th>z</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    </tfoot>
-  </table>
-
-  <p>
-    Das initiale Tableau kann fast vollständig aus dem Gleichungssystem in Standardform
-    befüllt werden - nur die theta-Spalte bleibt vorerst leer. Man beachte, dass die Zielfunktion
-    anders als beim Gleichungssystem konventionsgemäß in der letzten Zeile des Tableaus notiert
-    wird. Für die Beispielaufgabe ergibt sich das folgende Tableau:
-  </p>
-
-  <table>
-    <thead>
-    <tr>
-      <th>BV</th>
-      <th>x<sub>1</sub></th>
-      <th>x<sub>2</sub></th>
-      <th>x<sub>3</sub></th>
-      <th>x<sub>4</sub></th>
-      <th>b</th>
-      <th>theta</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr>
-      <th></th>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>12</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th></th>
-      <td>15</td>
-      <td>10</td>
-      <td>0</td>
-      <td>1</td>
-      <td>100</td>
-      <td></td>
-    </tr>
-    </tbody>
-
-    <tfoot>
-    <tr>
-      <th>z</th>
-      <td>-1000</td>
-      <td>-1500</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td></td>
-    </tr>
-    </tfoot>
-  </table>
-
-  <p>
-    Im obigen Tableau ist gut erkennbar, dass die Variablenparameter spaltenweise als
-    Vektoren gelesen werden können. Dabei bilden die Schlupfvariablen Einheitsvektoren.
-    Die Vektoren der anderen Variablen können als Linearkombination der Einheitsvektoren
-    ausgedrückt werden. Somit bilden die Vektoren der Schlupfvariablen zu Beginn eine
-    Basis und werden auch als Basisvariablen bezeichnet. Die Basisvariablen bilden die
-    bisher fehldende Zeilenbeschriftung im Tableau. Im ersten Tableau werden die Zeilen
-    also mit den Schlupfvariablen beschriftet wie im folgenden Tableau ergänzt. Im Laufe
-    des Simplex-Algorithmus werden sich die Basisvariablen ändern.
-  </p>
-
-  <table>
-    <thead>
-    <tr>
-      <th>BV</th>
-      <th>x<sub>1</sub></th>
-      <th>x<sub>2</sub></th>
-      <th>x<sub>3</sub></th>
-      <th>x<sub>4</sub></th>
-      <th>b</th>
-      <th>theta</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr>
-      <th>x<sub>3</sub></th>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>0</td>
-      <td>12</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>x<sub>4</sub></th>
-      <td>15</td>
-      <td>10</td>
-      <td>0</td>
-      <td>1</td>
-      <td>100</td>
-      <td></td>
-    </tr>
-    </tbody>
-
-    <tfoot>
-    <tr>
-      <th>z</th>
-      <td>-1000</td>
-      <td>-1500</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td></td>
-    </tr>
-    </tfoot>
-  </table>
-
+<app-card title="Tableaus berechnen (2. Tableau)">
   <p>
     Ausgehend vom initialen Tableau werden nun weitere Tableaus solange der negativste
     Wert in der Zielfunktions-Zeile negativ ist. Theoretisch kann der Algorithmus also
@@ -183,7 +7,7 @@
     "Pivot-Spalte":
   </p>
 
-  <table>
+  <table class="learn-tableau">
     <thead>
     <tr>
       <th>BV</th>
@@ -238,7 +62,7 @@
     Betrachtungen ingoriert.
   </p>
 
-  <table>
+  <table class="learn-tableau">
     <thead>
     <tr>
       <th>BV</th>
@@ -291,7 +115,7 @@
     von Pivot-Spalte und -Zeile ist das "Pivot-Element" - hier also der Wert 2.
   </p>
 
-  <table>
+  <table class="learn-tableau">
     <thead>
     <tr>
       <th></th>
@@ -350,7 +174,7 @@
     das 1-Element im Vektor:
   </p>
 
-  <table>
+  <table class="learn-tableau">
     <thead>
     <tr>
       <th></th>
@@ -407,7 +231,7 @@
     Pivot-Spalte der Wert 0 ergibt.
   </p>
 
-  <table>
+  <table class="learn-tableau">
     <thead>
     <tr>
       <th class="wider"></th>
@@ -464,7 +288,7 @@
     angepasste Beschriftung der Nebenbedingungs-Zeilen wieder:
   </p>
 
-  <table>
+  <table class="learn-tableau">
     <thead>
     <tr>
       <th class="wider"></th>
@@ -515,129 +339,9 @@
     </tfoot>
   </table>
 
-  <p>
-    Damit ist das zweite Tableau komplett und der Simplex-Zyklus wiederholt sich. Wie nach
-    dem Aufstellen des initialen Tableaus wird geprüft ob der negativste Parameter der
-    Zielfunktions-Variablen negativ ist. Da der Wert -250 negativ ist ist die
-    Abbruchbedingung noch nicht erreicht und ein weiterer Berechnungszyklus wird durchgeführt:
-  </p>
-
-  <ol>
-    <li>Pivot-Spalte markieren</li>
-    <li>theta-Werte berechnen</li>
-    <li>Pivot-Zeile und Pivot-Element markieren</li>
-    <li>Ehemalige Pivot-Zeile im nächsten Tableau berechnen</li>
-    <li>Alle weiteren Zeilen im nächsten Tableau berechnen</li>
-    <li>Basisvariablen im nächsten Tableau notieren</li>
-  </ol>
-
-  <p>
-    Nach Schritt 3 erhält man folgendes, ergänztes zweites Tableau als
-    Zwischenergebnis:
-  </p>
-
-  <table>
-    <thead>
-    <tr>
-      <th>BV</th>
-      <th class="pivot-col">x<sub>1</sub></th>
-      <th>x<sub>2</sub></th>
-      <th>x<sub>3</sub></th>
-      <th>x<sub>4</sub></th>
-      <th>b</th>
-      <th>theta</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr>
-      <th>x<sub>2</sub></th>
-      <td class="pivot-col">1/2</td>
-      <td>1</td>
-      <td>1/2</td>
-      <td>0</td>
-      <td>6</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th class="pivot-row">x<sub>4</sub></th>
-      <td class="pivot-row-col">10</td>
-      <td class="pivot-row">0</td>
-      <td class="pivot-row">-5</td>
-      <td class="pivot-row">1</td>
-      <td class="pivot-row">40</td>
-      <td class="pivot-row">4</td>
-    </tr>
-    </tbody>
-
-    <tfoot>
-    <tr>
-      <th>z</th>
-      <td class="pivot-col">-250</td>
-      <td>0</td>
-      <td>750</td>
-      <td>0</td>
-      <td>9000</td>
-      <td></td>
-    </tr>
-    </tfoot>
-  </table>
-
-  <p>
-    Nach Schritt 6 erhält man folgendes drittes Tableau:
-  </p>
-
-  <table>
-    <thead>
-    <tr>
-      <th>BV</th>
-      <th>x<sub>1</sub></th>
-      <th>x<sub>2</sub></th>
-      <th>x<sub>3</sub></th>
-      <th>x<sub>4</sub></th>
-      <th>b</th>
-      <th>theta</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr>
-      <th>x<sub>2</sub></th>
-      <td>0</td>
-      <td>1</td>
-      <td>3/4</td>
-      <td>-1/20</td>
-      <td>4</td>
-      <td></td>
-    </tr>
-    <tr>
-      <th>x<sub>1</sub></th>
-      <td>1</td>
-      <td>0</td>
-      <td>-1/2</td>
-      <td>1/10</td>
-      <td>4</td>
-      <td></td>
-    </tr>
-    </tbody>
-
-    <tfoot>
-    <tr>
-      <th>z</th>
-      <td>0</td>
-      <td>0</td>
-      <td>625</td>
-      <td>25</td>
-      <td>10000</td>
-      <td></td>
-    </tr>
-    </tfoot>
-  </table>
-
-  <p>
-    Das dritte Tableau enthält keine negativen Parameter mehr in der Zielfunktion. Damit
-    greift die Abbruchbedingung des Simplex-Algorithmus und die Lösung kann aus dem letzten
-    Tableau abgelesen werden.
-  </p>
-
+  <button class="btn btn-success btn-lg float-right"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Continue
+  </button>
 </app-card>

@@ -1,0 +1,119 @@
+<app-card title="Tableaus berechnen (1. Tableau)">
+  <p>
+    Das initiale Tableau kann fast vollständig aus dem Gleichungssystem in Standardform
+    befüllt werden - nur die theta-Spalte bleibt vorerst leer. Man beachte, dass die Zielfunktion
+    anders als beim Gleichungssystem konventionsgemäß in der letzten Zeile des Tableaus notiert
+    wird. Für die Beispielaufgabe ergibt sich das folgende Tableau:
+  </p>
+
+  <table class="learn-tableau">
+    <thead>
+    <tr>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th>x<sub>2</sub></th>
+      <th>x<sub>3</sub></th>
+      <th>x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th></th>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>12</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>15</td>
+      <td>10</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td></td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th>z</th>
+      <td>-1000</td>
+      <td>-1500</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Im obigen Tableau ist gut erkennbar, dass die Variablenparameter spaltenweise als
+    Vektoren gelesen werden können. Dabei bilden die Schlupfvariablen Einheitsvektoren.
+    Die Vektoren der anderen Variablen können als Linearkombination der Einheitsvektoren
+    ausgedrückt werden. Somit bilden die Vektoren der Schlupfvariablen zu Beginn eine
+    Basis und werden auch als Basisvariablen bezeichnet. Die Basisvariablen bilden die
+    bisher fehldende Zeilenbeschriftung im Tableau. Im ersten Tableau werden die Zeilen
+    also mit den Schlupfvariablen beschriftet wie im folgenden Tableau ergänzt. Im Laufe
+    des Simplex-Algorithmus werden sich die Basisvariablen ändern.
+  </p>
+
+  <table class="learn-tableau">
+    <thead>
+    <tr>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th>x<sub>2</sub></th>
+      <th>x<sub>3</sub></th>
+      <th>x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th>x<sub>3</sub></th>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>12</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>x<sub>4</sub></th>
+      <td>15</td>
+      <td>10</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td></td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th>z</th>
+      <td>-1000</td>
+      <td>-1500</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <button class="btn btn-success btn-lg float-right"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Continue
+  </button>
+</app-card>
