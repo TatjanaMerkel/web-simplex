@@ -35,6 +35,7 @@ import { LearnLinearSystemSizeCardComponent } from './components/learn-linear-sy
 import { LearnOverviewCardComponent } from './components/learn-overview-card/learn-overview-card.component';
 import { LearnLinearSystemDataCardComponent } from './components/learn-linear-system-data-card/learn-linear-system-data-card.component';
 import { LearnStandardFormCardComponent } from './components/learn-standard-form-card/learn-standard-form-card.component';
+import { LearnTableausCardComponent } from './components/learn-tableaus-card/learn-tableaus-card.component';
 
 
 
@@ -68,7 +69,8 @@ import { LearnStandardFormCardComponent } from './components/learn-standard-form
     LearnLinearSystemSizeCardComponent,
     LearnOverviewCardComponent,
     LearnLinearSystemDataCardComponent,
-    LearnStandardFormCardComponent
+    LearnStandardFormCardComponent,
+    LearnTableausCardComponent
   ],
   imports: [
     AppRoutingModule,

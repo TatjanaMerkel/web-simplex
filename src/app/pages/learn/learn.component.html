@@ -45,4 +45,18 @@
     </app-learn-standard-form-card>
   </ng-container>
 
+  <!-- Tableaus -->
+
+  <ng-container *ngIf="standardFormRead">
+    <div class="arrow-5">
+      <img src="assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-tableaus-card class="card-5"
+                             [disabled]="tableausRead"
+                             (next)="tableausRead = true">
+    </app-learn-tableaus-card>
+  </ng-container>
+
+
 </main>
