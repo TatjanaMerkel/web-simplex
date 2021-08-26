@@ -38,7 +38,8 @@ import {TableauComponent} from './components/tableau/tableau.component'
 import {VarDirective} from '../ng-var.directive';
 import { LearnTableausGeneralCardComponent } from './components/learn-tableaus-general-card/learn-tableaus-general-card.component';
 import { LearnTableausFirstCardComponent } from './components/learn-tableaus-first-card/learn-tableaus-first-card.component';
-import { LearnTableausSecondCardComponent } from './components/learn-tableaus-second-card/learn-tableaus-second-card.component'
+import { LearnTableausSecondCardComponent } from './components/learn-tableaus-second-card/learn-tableaus-second-card.component';
+import { LearnSolutionCardComponent } from './components/learn-solution-card/learn-solution-card.component'
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { LearnTableausSecondCardComponent } from './components/learn-tableaus-se
     LearnTableausThirdCardComponent,
     LearnTableausGeneralCardComponent,
     LearnTableausFirstCardComponent,
-    LearnTableausSecondCardComponent
+    LearnTableausSecondCardComponent,
+    LearnSolutionCardComponent
   ],
   imports: [
     AppRoutingModule,
