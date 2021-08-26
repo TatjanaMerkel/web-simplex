@@ -1,0 +1,151 @@
+<app-card title="LGS in Standard-Form">
+
+  <!--                                                 -->
+  <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
+  <!--                                                 -->
+  <!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
+  <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
+  <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
+  <!--                                                 -->
+  <table *ngIf="initialized">
+
+    <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
+    <tr>
+
+      <!--  -1 x1  -->
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!targetVarsCorrect[0]"
+               [disabled]="disabled"
+               (input)="targetVarsCorrect[0] = true"
+               (change)="saveTargetVar($event,0)"/>
+      </td>
+      <td class="variable">
+        x<sub>1</sub>
+      </td>
+
+      <!--  -  2 x2 -  3 x3  -->
+      <ng-container *ngFor="let _ of this.targetVars.slice(1); index as v; trackBy: trackByIndex">
+        <td class="operator">
+          +
+        </td>
+        <td>
+          <input class="fraction-input"
+                 [class.wrong]="!targetVarsCorrect[v + 1]"
+                 [disabled]="disabled"
+                 (input)="targetVarsCorrect[v + 1] = true"
+                 (change)="saveTargetVar($event,v + 1)"/>
+        </td>
+        <td class="variable">
+          x<sub>{{ v + 2 }}</sub>
+        </td>
+      </ng-container>
+
+      <!--  + z  -->
+      <td class="operator">
+        +
+      </td>
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!targetZValCorrect"
+               [disabled]="disabled"
+               (input)="targetZValCorrect = true"
+               (change)="saveTargetZVal($event)"/>
+      </td>
+      <td class="variable">
+        z
+      </td>
+
+      <!--  =  0  -->
+      <td class="operator">
+        =
+      </td>
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!targetValCorrect"
+               [disabled]="disabled"
+               (input)="targetValCorrect = true"
+               (change)="saveTargetVal($event)"/>
+      </td>
+    </tr>
+
+    <!--   4 x1 +  5 x2 +  6 x3 + x4               =  7  -->
+    <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
+    <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
+    <tr *ngFor="let constraintVarsRow of constraintVars; index as c">
+
+      <!--   4 x1  -->
+      <!--   8 x1  -->
+      <!--  12 x1  -->
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!constraintVarsCorrect[c][0]"
+               [disabled]="disabled"
+               (input)="constraintVarsCorrect[c][0] = true"
+               (change)="saveConstraintVar($event,c, 0)"/>
+      </td>
+      <td class="variable">
+        x<sub>1</sub>
+      </td>
+
+      <!--  +  5 x2 +  6 x3  -->
+      <!--  +  9 x2 + 10 x3  -->
+      <!--  + 13 x2 + 14 x3  -->
+      <ng-container *ngFor="let _ of constraintVarsRow.slice(1); index as v; trackBy: trackByIndex">
+        <td class="operator">
+          +
+        </td>
+        <td>
+          <input class="fraction-input"
+                 [class.wrong]="!constraintVarsCorrect[c][v + 1]"
+                 [disabled]="disabled"
+                 (input)="constraintVarsCorrect[c][v + 1] = true"
+                 (change)="saveConstraintVar($event,c, v + 1)"/>
+        </td>
+        <td class="variable">
+          x<sub>{{ v + 2 }}</sub>
+        </td>
+      </ng-container>
+
+      <!--  + z  -->
+      <td class="operator solution-var">
+        +
+      </td>
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!constraintZValsCorrect[c]"
+               [disabled]="disabled"
+               (input)="constraintZValsCorrect[c] = true"
+               (change)="saveConstraintZVal($event, c)"/>
+      </td>
+      <td class="variable">
+        z
+      </td>
+
+      <!--      =  7  -->
+      <!--      = 11  -->
+      <!--      = 15  -->
+      <td class="operator">
+        =
+      </td>
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!constraintValsCorrect[c]"
+               [disabled]="disabled"
+               (input)="constraintValsCorrect[c] = true"
+               (change)="saveConstraintVal($event, c)"/>
+      </td>
+
+    </tr>
+  </table>
+
+  <!-- Button -->
+
+  <button class="btn btn-lg float-right mt-5"
+          [ngClass]="allCorrect ? 'btn-success' : 'btn-danger'"
+          [disabled]="disabled"
+          (click)="checkUserInputAndEmit()">
+    Continue
+  </button>
+
+</app-card>

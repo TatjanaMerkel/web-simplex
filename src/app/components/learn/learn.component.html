@@ -54,8 +54,8 @@
     </div>
 
     <app-learn-tableaus-general-card class="card-5"
-                                   [disabled]="tableausGeneralRead"
-                                   (next)="tableausGeneralRead = true">
+                                     [disabled]="tableausGeneralRead"
+                                     (next)="tableausGeneralRead = true">
     </app-learn-tableaus-general-card>
   </ng-container>
 
@@ -80,8 +80,8 @@
     </div>
 
     <app-learn-tableaus-second-card class="card-7"
-                                   [disabled]="tableausSecondRead"
-                                   (next)="tableausSecondRead = true">
+                                    [disabled]="tableausSecondRead"
+                                    (next)="tableausSecondRead = true">
     </app-learn-tableaus-second-card>
   </ng-container>
 
@@ -96,6 +96,17 @@
                                    [disabled]="tableausThirdRead"
                                    (next)="tableausThirdRead = true">
     </app-learn-tableaus-third-card>
+  </ng-container>
+
+  <!-- Solution -->
+
+  <ng-container *ngIf="tableausThirdRead">
+    <div class="arrow-9">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-solution-card class="card-9">
+    </app-learn-solution-card>
   </ng-container>
 
 </main>

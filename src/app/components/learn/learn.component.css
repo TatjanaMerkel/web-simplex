@@ -18,7 +18,9 @@ main {
     "arrow-7 .       .     "
     ".       card-7  .     "
     "arrow-8 .       .     "
-    ".       card-8  .     ";
+    ".       card-8  .     "
+    "arrow-9 .       .     "
+    ".       card-9  .     ";
 
   width: 90%;
   margin: 40px auto;
@@ -82,6 +84,14 @@ main {
 
 .card-8 {
   grid-area: card-8;
+}
+
+.arrow-9 {
+  grid-area: arrow-9;
+}
+
+.card-9 {
+  grid-area: card-9;
 }
 
 .arrow {
