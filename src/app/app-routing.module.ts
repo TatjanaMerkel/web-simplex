@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core'
 import {RouterModule, Routes} from '@angular/router'
 
-import {AdminEditExerciseComponent} from './pages/admin-edit-exercise/admin-edit-exercise.component'
-import {AdminExercisesComponent} from './pages/admin-exercises/admin-exercises.component'
-import {AdminNewExerciseComponent} from './pages/admin-new-exercise/admin-new-exercise.component'
-import {CalcComponent} from './pages/calc/calc.component'
-import {ExerciseComponent} from './pages/exercise/exercise.component'
-import {LearnComponent} from './pages/learn/learn.component'
-import {HomeComponent} from './pages/home/home.component'
-import {PracticeComponent} from './pages/practice/practice.component'
-import {PracticeExerciseComponent} from './pages/practice-exercise/practice-exercise.component'
+import {AdminEditExerciseComponent} from './components/admin-edit-exercise/admin-edit-exercise.component'
+import {AdminExercisesComponent} from './components/admin-exercises/admin-exercises.component'
+import {AdminNewExerciseComponent} from './components/admin-new-exercise/admin-new-exercise.component'
+import {CalcComponent} from './components/calc/calc.component'
+import {ExerciseComponent} from './components/exercise/exercise.component'
+import {LearnComponent} from './components/learn/learn.component'
+import {HomeComponent} from './components/home/home.component'
+import {PracticeComponent} from './components/practice/practice.component'
+import {PracticeExerciseComponent} from './components/practice-exercise/practice-exercise.component'
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},

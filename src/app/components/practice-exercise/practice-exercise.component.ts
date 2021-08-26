@@ -6,13 +6,13 @@ import * as math from 'mathjs'
 import {ExerciseService} from '../../../services/exercise.service'
 import {Exercise} from '../../../models/exercise'
 import {HeaderService} from '../../../services/header.service'
-import {PracticeLinearSystemDataCardExpected} from '../../components/practice-linear-system-data-card/practice-linear-system-data-card-expected'
-import {PracticeLinearSystemSizeCardExpected} from '../../components/practice-linear-system-size-card/practice-linear-system-size-card-expected'
-import {PracticeStandardFormCardExpected} from '../../components/practice-standard-form-card/practice-standard-form-card-expected'
-import {StandardFormInput} from '../../components/standard-form/standard-form-input'
+import {PracticeLinearSystemDataCardExpected} from '../practice-linear-system-data-card/practice-linear-system-data-card-expected'
+import {PracticeLinearSystemSizeCardExpected} from '../practice-linear-system-size-card/practice-linear-system-size-card-expected'
+import {PracticeStandardFormCardExpected} from '../practice-standard-form-card/practice-standard-form-card-expected'
+import {StandardFormInput} from '../standard-form/standard-form-input'
 import {Simplex, Tableau} from '../../../common/simplex'
-import ExpectedTableau from "../../components/practice-tableaus-card/expected-tableau";
-import {ExpectedSolution} from "../../components/practice-solution-card/expected-solution";
+import ExpectedTableau from "../practice-tableaus-card/expected-tableau";
+import {ExpectedSolution} from "../practice-solution-card/expected-solution";
 import {Fraction} from "mathjs";
 
 @Component({

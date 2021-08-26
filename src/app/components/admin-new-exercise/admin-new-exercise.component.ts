@@ -7,8 +7,8 @@ import {Difficulty} from '../../../models/difficulty'
 import {ExerciseService} from '../../../services/exercise.service'
 import {Exercise} from '../../../models/exercise'
 import {HeaderService} from '../../../services/header.service'
-import {LinearSystemDataInit} from '../../components/linear-system-data/linear-system-data-init'
-import {LinearSystemDataValues} from '../../components/linear-system-data/linear-system-data-values'
+import {LinearSystemDataInit} from '../linear-system-data/linear-system-data-init'
+import {LinearSystemDataValues} from '../linear-system-data/linear-system-data-values'
 
 @Component({
   selector: 'app-admin-new-exercise',

@@ -4,14 +4,14 @@ import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
 import {HeaderService} from '../../../services/header.service'
-import {LinearSystemDataCardInput} from '../../components/linear-system-data-card/linear-system-data-card-input'
-import {LinearSystemData} from '../../components/linear-system-data-card/linear-system-data'
-import {LinearSystemSize} from '../../components/linear-system-size/linear-system-size'
-import {SolutionInput} from '../../components/solution/solution-input'
-import {StandardFormInput} from '../../components/standard-form/standard-form-input'
-import {StandardFormOutput} from '../../components/standard-form/standard-form-output'
+import {LinearSystemDataCardInput} from './calc-linear-system-data-card/linear-system-data-card-input'
+import {LinearSystemData} from './calc-linear-system-data-card/linear-system-data'
+import {LinearSystemSize} from './calc-linear-system-size-card/linear-system-size'
+import {SolutionInput} from './calc-solution-card/solution-input'
+import {StandardFormInput} from './calc-standard-form-card/standard-form-input'
+import {StandardFormOutput} from './calc-standard-form-card/standard-form-output'
 import {Simplex, Tableau} from '../../../common/simplex'
-import {TableauInput} from '../../components/tableau/tableau-input'
+import {TableauInput} from './calc-tableau-card/tableau-input'
 
 @Component({
   selector: 'app-calculator',
@@ -22,7 +22,6 @@ export class CalcComponent implements OnInit {
 
   linearSystemSizeOutput: LinearSystemSize | null = null
   linearSystemDataCardOutput: LinearSystemData | null = null
-
 
   tableaus: Tableau[] | null = null
   showTableaus = false
@@ -68,7 +67,7 @@ export class CalcComponent implements OnInit {
   //
 
   /**
-   * Must only be called when linear-system-size output is available.
+   * Must only be called when calc-linear-system-size-card output is available.
    */
   getLinearSystemDataCardInput(): LinearSystemDataCardInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
@@ -80,7 +79,7 @@ export class CalcComponent implements OnInit {
   }
 
   /**
-   * Must only be called when linear-system-size output and
+   * Must only be called when calc-linear-system-size-card output and
    * linear-system-data output is available.
    */
   getStandardFormInput(): StandardFormInput {
