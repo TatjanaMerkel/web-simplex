@@ -32,28 +32,10 @@ export class PracticeLinearSystemDataCardComponent {
   // Getter
   //
 
-  get allCorrect(): boolean {
-    for (let targetVarCorrect of this.targetVarsCorrect) {
-      if (!targetVarCorrect) {
-        return false
-      }
-    }
-
-    for (let constraintVarsCorrect of this.constraintVarsCorrect) {
-      for (let constraintVarCorrect of constraintVarsCorrect) {
-        if (!constraintVarCorrect) {
-          return false
-        }
-      }
-    }
-
-    for (let constraintValCorrect of this.constraintValsCorrect) {
-      if (!constraintValCorrect) {
-        return false
-      }
-    }
-
-    return true
+  get isInputCorrect(): boolean {
+    return this.targetVarsCorrect.every(bool => bool)
+      && this.constraintVarsCorrect.every(bools => bools.every(bool => bool))
+      && this.constraintValsCorrect.every(bool => bool)
   }
 
   //
@@ -141,7 +123,7 @@ export class PracticeLinearSystemDataCardComponent {
   checkUserInputAndEmit(): void {
     this.checkUserInput()
 
-    if (this.allCorrect) {
+    if (this.isInputCorrect) {
       this.correct.emit()
     }
   }

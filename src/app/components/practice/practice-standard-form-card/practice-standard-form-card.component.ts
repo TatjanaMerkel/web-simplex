@@ -37,42 +37,13 @@ export class PracticeStandardFormCardComponent implements OnChanges {
   // Getter
   //
 
-  get allCorrect(): boolean {
-    for (let targetVarCorrect of this.targetVarsCorrect) {
-      if (!targetVarCorrect) {
-        return false
-      }
-    }
-
-    if (!this.targetZValCorrect) {
-      return false
-    }
-
-    if (!this.targetValCorrect) {
-      return false
-    }
-
-    for (let constraintVarsCorrect of this.constraintVarsCorrect) {
-      for (let constraintVarCorrect of constraintVarsCorrect) {
-        if (!constraintVarCorrect) {
-          return false
-        }
-      }
-    }
-
-    for (let constraintZValCorrect of this.constraintZValsCorrect) {
-      if (!constraintZValCorrect) {
-        return false
-      }
-    }
-
-    for (let constraintValCorrect of this.constraintValsCorrect) {
-      if (!constraintValCorrect) {
-        return false
-      }
-    }
-
-    return true
+  get isInputCorrect(): boolean {
+    return this.targetVarsCorrect.every(bool => bool)
+      && this.targetZValCorrect
+      && this.targetValCorrect
+      && this.constraintVarsCorrect.every(bools => bools.every(bool => bool))
+      && this.constraintZValsCorrect.every(bool => bool)
+      && this.constraintValsCorrect.every(bool => bool)
   }
 
   //
@@ -177,7 +148,7 @@ export class PracticeStandardFormCardComponent implements OnChanges {
   checkUserInputAndEmit(): void {
     this.checkUserInput()
 
-    if (this.allCorrect) {
+    if (this.isInputCorrect) {
       this.correct.emit()
     }
   }

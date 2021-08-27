@@ -24,7 +24,7 @@ export class PracticeLinearSystemSizeCardComponent {
   // Getters
   //
 
-  get allCorrect(): boolean {
+  get isInputCorrect(): boolean {
     return this.numberOfVarsCorrect && this.numberOfConstraintsCorrect
   }
 
@@ -47,7 +47,7 @@ export class PracticeLinearSystemSizeCardComponent {
   checkUserInputAndEmit(): void {
     this.checkUserInput()
 
-    if (this.allCorrect) {
+    if (this.isInputCorrect) {
       this.correct.emit()
     }
   }
