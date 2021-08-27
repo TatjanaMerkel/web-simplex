@@ -18,10 +18,6 @@ import {LinearSystemDataValues} from '../common/linear-system-data/linear-system
 })
 export class AdminEditExerciseComponent implements OnInit {
 
-  taskPlaceholder =
-    'Leer lassen um Rechenaufgabe (erstes Tableau vorgegeben) statt Textaufgabe' +
-    ' (erstes Tableau muss anhand von Text bestimmt werden) zu erstellen.'
-
   id: null | number = null
   title: null | string = null
   difficulty: null | Difficulty = null
@@ -32,30 +28,30 @@ export class AdminEditExerciseComponent implements OnInit {
   constraintVars: null | Array<Array<null | Fraction>> = null
   constraintVals: null | Array<null | Fraction> = null
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private activatedRoute: ActivatedRoute,
               private exerciseService: ExerciseService,
-              private headerService: HeaderService) {
+              private headerService: HeaderService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.headerService.title.next('Aufgabe bearbeiten')
 
-    this.route.params.subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
       const exercise_id = Number(params['exercise_id'])
 
-      this.exerciseService.getExercise(exercise_id).subscribe((exerciseData: Exercise) => {
+      this.exerciseService.getExercise(exercise_id).subscribe((exercise: Exercise) => {
         const reviver = (math as any).reviver
 
-        this.id = exerciseData.id
-        this.title = exerciseData.title
-        this.difficulty = exerciseData.difficulty
-        this.task = exerciseData.task
-        this.numberOfVars = exerciseData.numberOfVars
-        this.numberOfConstraints = exerciseData.numberOfConstraints
-        this.targetVars = JSON.parse(JSON.stringify(exerciseData.targetVars), reviver)
-        this.constraintVars = JSON.parse(JSON.stringify(exerciseData.constraintVars), reviver)
-        this.constraintVals = JSON.parse(JSON.stringify(exerciseData.constraintVals), reviver)
+        this.id = exercise.id
+        this.title = exercise.title
+        this.difficulty = exercise.difficulty
+        this.task = exercise.task
+        this.numberOfVars = exercise.numberOfVars
+        this.numberOfConstraints = exercise.numberOfConstraints
+        this.targetVars = JSON.parse(JSON.stringify(exercise.targetVars), reviver)
+        this.constraintVars = JSON.parse(JSON.stringify(exercise.constraintVars), reviver)
+        this.constraintVals = JSON.parse(JSON.stringify(exercise.constraintVals), reviver)
       })
     })
   }
@@ -71,7 +67,7 @@ export class AdminEditExerciseComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  submit() {
     if (this.isInputValid()) {
       const exercise: Exercise = {
         id: this.id!,
@@ -93,7 +89,7 @@ export class AdminEditExerciseComponent implements OnInit {
     }
   }
 
-  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataValues) {
+  storeLinearSystemData(linearSystemDataOutput: LinearSystemDataValues) {
     const {targetVars, constraintVars, constraintVals} = linearSystemDataOutput
 
     this.targetVars = targetVars as Array<Fraction>

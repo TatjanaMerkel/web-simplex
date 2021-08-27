@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core'
 
-import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
 import {LinearSystemDataInit} from './linear-system-data-init'
 import {LinearSystemDataValues} from './linear-system-data-values'
+import {fractionFromInputEvent} from "../../../../common/fractions";
 
 @Component({
   selector: 'app-linear-system-data',
@@ -21,10 +21,6 @@ export class LinearSystemDataComponent implements OnChanges {
   targetVars: undefined | Array<null | Fraction>
   constraintVars: undefined | Array<Array<null | Fraction>>
   constraintVals: undefined | Array<null | Fraction>
-
-  //
-  // Lifecycle
-  //
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.init) {
@@ -143,21 +139,10 @@ export class LinearSystemDataComponent implements OnChanges {
     }
   }
 
-  //
-  // Event Handlers
-  //
-
   onTargetVarChanged(event: Event, v: number) {
     const targetVars = this.targetVars!
 
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      targetVars[v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      targetVars[v] = null
-    }
+    targetVars[v] = fractionFromInputEvent(event)
 
     const isValid = this.validateInput()
     this.emitData(isValid)
@@ -166,14 +151,7 @@ export class LinearSystemDataComponent implements OnChanges {
   onConstraintVarChanged(event: Event, c: number, v: number) {
     const constraintVars = this.constraintVars!
 
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      constraintVars[c][v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      constraintVars[c][v] = null
-    }
+    constraintVars[c][v] = fractionFromInputEvent(event)
 
     const isValid = this.validateInput()
     this.emitData(isValid)
@@ -182,22 +160,11 @@ export class LinearSystemDataComponent implements OnChanges {
   onConstraintConstantChanged(event: Event, c: number) {
     const constraintVals = this.constraintVals!
 
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      constraintVals[c] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      constraintVals[c] = null
-    }
+    constraintVals[c] = fractionFromInputEvent(event)
 
     const isValid = this.validateInput()
     this.emitData(isValid)
   }
-
-  //
-  // Helper
-  //
 
   /**
    * Check if all input fields are filled.
@@ -233,7 +200,7 @@ export class LinearSystemDataComponent implements OnChanges {
     })
   }
 
-  trackByIndex(index: number, _item: any) {
+  trackByIndex(index: number): number {
     return index
   }
 }

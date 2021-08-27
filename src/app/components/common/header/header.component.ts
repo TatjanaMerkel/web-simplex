@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   title: string | undefined
 
   constructor(private headerService: HeaderService,
-              private location: Location,
+              public location: Location,
               public router: Router) {
   }
 
@@ -22,9 +22,5 @@ export class HeaderComponent implements OnInit {
     this.headerService.title.subscribe((title: string) => {
       this.title = title
     })
-  }
-
-  goBack(): void {
-    this.location.back()
   }
 }

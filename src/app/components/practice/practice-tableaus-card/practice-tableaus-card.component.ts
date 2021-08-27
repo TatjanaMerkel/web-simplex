@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core'
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 
 import {Fraction} from 'mathjs'
 
@@ -6,15 +6,17 @@ import ExpectedTableau from './expected-tableau'
 import {fractionFromInputEvent, fractionsEqual} from '../../../../common/fractions'
 
 @Component({
-  selector: 'app-practice-tableaus-card',
+  selector: 'app-practice-tableaus-card[expected]',
   templateUrl: './practice-tableaus-card.component.html',
   styleUrls: ['./practice-tableaus-card.component.css']
 })
-export class PracticeTableausCardComponent implements OnChanges {
+export class PracticeTableausCardComponent implements OnInit {
 
-  @Input() expectedTableaus: undefined | ExpectedTableau[]
+  @Input() expected!: ExpectedTableau[]
 
   @Output() correct = new EventEmitter<void>()
+
+  initialized = false
 
   solvedTableaus!: boolean[]
   solvedTableausCount = 0
@@ -31,12 +33,6 @@ export class PracticeTableausCardComponent implements OnChanges {
   constraintValsCorrect!: boolean[]
   thetasCorrect!: boolean[]
 
-  initialized = false
-
-  //
-  // Getters
-  //
-
   get isInputCorrect(): boolean {
     return this.targetVarsCorrect.every(bool => bool)
       && this.targetValCorrect
@@ -45,42 +41,32 @@ export class PracticeTableausCardComponent implements OnChanges {
       && this.thetasCorrect.every(bool => bool)
   }
 
-  //
-  // Lifecycle
-  //
+  ngOnInit() {
+    const expectedTableaus = this.expected!
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.expectedTableaus && !this.initialized && this.expectedTableaus!.length > 0) {
-      const expectedTableaus = this.expectedTableaus!
+    const expected: ExpectedTableau = expectedTableaus[0]
 
-      const expected: ExpectedTableau = expectedTableaus[0]
+    this.solvedTableaus = new Array<boolean>(expectedTableaus.length)
 
-      this.solvedTableaus = new Array<boolean>(expectedTableaus.length)
+    this.targetVars = new Array<Fraction | null>(expected.targetVars.length).fill(null)
+    this.targetVarsCorrect = new Array<boolean>(expected.targetVars.length).fill(true)
 
-      this.targetVars = new Array<Fraction | null>(expected.targetVars.length).fill(null)
-      this.targetVarsCorrect = new Array<boolean>(expected.targetVars.length).fill(true)
+    this.constraintVars = new Array<Array<Fraction | null>>(expected.constraintVars.length)
+    this.constraintVarsCorrect = new Array<Array<boolean>>(expected.constraintVars.length)
 
-      this.constraintVars = new Array<Array<Fraction | null>>(expected.constraintVars.length)
-      this.constraintVarsCorrect = new Array<Array<boolean>>(expected.constraintVars.length)
-
-      for (let c = 0; c < expected.constraintVars.length; c++) {
-        this.constraintVars[c] = new Array<Fraction | null>(expected.constraintVars[c].length).fill(null)
-        this.constraintVarsCorrect[c] = new Array<boolean>(expected.constraintVars[c].length).fill(true)
-      }
-
-      this.constraintVals = new Array<Fraction | null>(expected.constraintVars.length).fill(null)
-      this.constraintValsCorrect = new Array<boolean>(expected.constraintVars.length).fill(true)
-
-      this.thetas = new Array<Fraction | null>(expected.numberOfConstraints).fill(null)
-      this.thetasCorrect = new Array<boolean>(expected.numberOfConstraints).fill(true)
-
-      this.initialized = true
+    for (let c = 0; c < expected.constraintVars.length; c++) {
+      this.constraintVars[c] = new Array<Fraction | null>(expected.constraintVars[c].length).fill(null)
+      this.constraintVarsCorrect[c] = new Array<boolean>(expected.constraintVars[c].length).fill(true)
     }
-  }
 
-  //
-  // Methods
-  //
+    this.constraintVals = new Array<Fraction | null>(expected.constraintVars.length).fill(null)
+    this.constraintValsCorrect = new Array<boolean>(expected.constraintVars.length).fill(true)
+
+    this.thetas = new Array<Fraction | null>(expected.numberOfConstraints).fill(null)
+    this.thetasCorrect = new Array<boolean>(expected.numberOfConstraints).fill(true)
+
+    this.initialized = true
+  }
 
   saveTargetVar(event: Event, v: number): void {
     this.targetVars[v] = fractionFromInputEvent(event)
@@ -117,7 +103,7 @@ export class PracticeTableausCardComponent implements OnChanges {
   }
 
   private checkUserInput(t: number): void {
-    const expectedTableaus = this.expectedTableaus!
+    const expectedTableaus = this.expected!
 
     const expected = expectedTableaus[t]
 
@@ -156,7 +142,7 @@ export class PracticeTableausCardComponent implements OnChanges {
     this.thetas.fill(null)
   }
 
-  trackByIndex(index: number, _item: any) {
+  trackByIndex(index: number): number {
     return index
   }
 }

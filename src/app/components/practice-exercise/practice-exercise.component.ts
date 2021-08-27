@@ -1,4 +1,4 @@
-import {ActivatedRoute, Router} from '@angular/router'
+import {ActivatedRoute} from '@angular/router'
 import {Component, OnInit} from '@angular/core'
 
 import * as math from 'mathjs'
@@ -9,9 +9,9 @@ import {Exercise} from '../../../models/exercise'
 import {ExpectedSolution} from '../practice/practice-solution-card/expected-solution'
 import {Fraction} from 'mathjs'
 import {HeaderService} from '../../../services/header.service'
-import {PracticeLinearSystemDataCardExpected} from '../practice/practice-linear-system-data-card/practice-linear-system-data-card-expected'
-import {PracticeLinearSystemSizeCardExpected} from '../practice/practice-linear-system-size-card/practice-linear-system-size-card-expected'
-import {PracticeStandardFormCardExpected} from '../practice/practice-standard-form-card/practice-standard-form-card-expected'
+import {ExpectedLinearSystemData} from '../practice/practice-linear-system-data-card/expected-linear-system-data'
+import {ExpectedLinearSystemSize} from '../practice/practice-linear-system-size-card/expected-linear-system-size'
+import {ExpectedStandardForm} from '../practice/practice-standard-form-card/expected-standard-form'
 import {Simplex, Tableau} from '../../../common/simplex'
 import {StandardFormInput} from '../calc/calc-standard-form-card/standard-form-input'
 
@@ -32,37 +32,28 @@ export class PracticeExerciseComponent implements OnInit {
 
   tableaus!: Tableau[]
 
-  get expectedLinearSystemSize(): PracticeLinearSystemSizeCardExpected {
+  get expectedLinearSystemSize(): ExpectedLinearSystemSize {
     const exercise = this.exercise!
 
-    return {
-      numberOfVars: exercise.numberOfVars,
-      numberOfConstraints: exercise.numberOfConstraints
-    }
+    const {numberOfVars, numberOfConstraints} = exercise
+
+    return {numberOfVars, numberOfConstraints}
   }
 
-  get expectedLinearSystemData(): PracticeLinearSystemDataCardExpected {
+  get expectedLinearSystemData(): ExpectedLinearSystemData {
     const exercise = this.exercise!
 
-    return {
-      numberOfVars: exercise.numberOfVars,
-      numberOfConstraints: exercise.numberOfConstraints,
-      targetVars: exercise.targetVars,
-      constraintVars: exercise.constraintVars,
-      constraintVals: exercise.constraintVals
-    }
+    const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = exercise
+
+    return {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals}
   }
 
-  get expectedStandardForm(): PracticeStandardFormCardExpected {
+  get expectedStandardForm(): ExpectedStandardForm {
     const exercise = this.exercise!
 
-    return {
-      numberOfVars: exercise.numberOfVars,
-      numberOfConstraints: exercise.numberOfConstraints,
-      targetVars: exercise.targetVars,
-      constraintVars: exercise.constraintVars,
-      constraintVals: exercise.constraintVals
-    }
+    const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = exercise
+
+    return {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals}
   }
 
   get expectedTableaus(): ExpectedTableau[] {
@@ -73,24 +64,19 @@ export class PracticeExerciseComponent implements OnInit {
     }
 
     return this.tableaus.map((tableau: Tableau) => {
-      return {
-        numberOfVars: exercise.numberOfVars,
-        numberOfConstraints: exercise.numberOfConstraints,
-        targetVars: tableau.targetVars,
-        targetVal: tableau.targetVal,
-        constraintVars: tableau.constraintVars,
-        constraintVals: tableau.constraintVals,
-        thetas: tableau.thetas
-      }
+      const {numberOfVars, numberOfConstraints} = exercise
+      const {targetVars, targetVal, constraintVars, constraintVals, thetas} = tableau
+
+      return {numberOfVars, numberOfConstraints, targetVars, targetVal, constraintVars, constraintVals, thetas}
     })
   }
 
   get expectedSolution(): ExpectedSolution {
-    console.log('test')
-    console.log(this.tableaus)
     const lastTableau = this.tableaus[this.tableaus.length - 1]
 
-    const solutionVars = new Array<Fraction>(lastTableau.targetVars.length).fill(math.fraction(0) as Fraction)
+    const solutionVars = Array.from(
+      {length: lastTableau.targetVars.length},
+      () => math.fraction(0) as Fraction)
 
     return {
       solutionVal: lastTableau.targetVal,
@@ -98,8 +84,7 @@ export class PracticeExerciseComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private activatedRoute: ActivatedRoute,
               private exerciseService: ExerciseService,
               private headerService: HeaderService) {
   }
@@ -107,7 +92,7 @@ export class PracticeExerciseComponent implements OnInit {
   ngOnInit(): void {
     this.headerService.title.next('Üben')
 
-    this.route.params.subscribe(params => {
+    this.activatedRoute.params.subscribe(params => {
       const exercise_id = Number(params['exercise_id'])
 
       this.exerciseService.getExercise(exercise_id).subscribe((exercise: Exercise) => {

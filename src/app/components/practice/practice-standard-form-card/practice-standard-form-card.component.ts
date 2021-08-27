@@ -1,18 +1,19 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core'
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 
 import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
-import {PracticeStandardFormCardExpected} from './practice-standard-form-card-expected'
+import {ExpectedStandardForm} from './expected-standard-form'
+import {fractionFromInputEvent} from '../../../../common/fractions'
 
 @Component({
-  selector: 'app-practice-standard-form-card',
+  selector: 'app-practice-standard-form-card[expected]',
   templateUrl: './practice-standard-form-card.component.html',
   styleUrls: ['./practice-standard-form-card.component.css']
 })
-export class PracticeStandardFormCardComponent implements OnChanges {
+export class PracticeStandardFormCardComponent implements OnInit {
 
-  @Input() expected: undefined | PracticeStandardFormCardExpected
+  @Input() expected!: ExpectedStandardForm
   @Input() disabled = false
 
   @Output() correct = new EventEmitter<void>()
@@ -33,10 +34,6 @@ export class PracticeStandardFormCardComponent implements OnChanges {
   constraintZValsCorrect!: Array<boolean>
   constraintValsCorrect!: Array<boolean>
 
-  //
-  // Getter
-  //
-
   get isInputCorrect(): boolean {
     return this.targetVarsCorrect.every(bool => bool)
       && this.targetZValCorrect
@@ -46,103 +43,51 @@ export class PracticeStandardFormCardComponent implements OnChanges {
       && this.constraintValsCorrect.every(bool => bool)
   }
 
-  //
-  // Lifecycle
-  //
+  ngOnInit() {
+    const expected = this.expected!
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['expected'] && changes['expected'].firstChange) {
-      const expected = this.expected!
+    this.targetVars = new Array<null | Fraction>(expected.targetVars.length).fill(null)
+    this.targetVarsCorrect = new Array<boolean>(expected.targetVars.length).fill(true)
 
-      this.targetVars = new Array<null | Fraction>(expected.targetVars.length).fill(null)
-      this.targetVarsCorrect = new Array<boolean>(expected.targetVars.length).fill(true)
+    this.constraintVars = new Array<Array<null | Fraction>>(expected.constraintVars.length)
+    this.constraintVarsCorrect = new Array<Array<boolean>>(expected.constraintVars.length)
 
-      this.constraintVars = new Array<Array<null | Fraction>>(expected.constraintVars.length)
-      this.constraintVarsCorrect = new Array<Array<boolean>>(expected.constraintVars.length)
-
-      for (let c = 0; c < expected.constraintVars.length; c++) {
-        this.constraintVars[c] = new Array<null | Fraction>(expected.constraintVars[c].length).fill(null)
-        this.constraintVarsCorrect[c] = new Array<boolean>(expected.constraintVars[c].length).fill(true)
-      }
-
-      this.constraintZVals = new Array<null | Fraction>(expected.constraintVars.length).fill(null)
-      this.constraintZValsCorrect = new Array<boolean>(expected.constraintVars.length).fill(true)
-
-      this.constraintVals = new Array<null | Fraction>(expected.constraintVars.length).fill(null)
-      this.constraintValsCorrect = new Array<boolean>(expected.constraintVars.length).fill(true)
-
-      this.initialized = true
+    for (let c = 0; c < expected.constraintVars.length; c++) {
+      this.constraintVars[c] = new Array<null | Fraction>(expected.constraintVars[c].length).fill(null)
+      this.constraintVarsCorrect[c] = new Array<boolean>(expected.constraintVars[c].length).fill(true)
     }
+
+    this.constraintZVals = new Array<null | Fraction>(expected.constraintVars.length).fill(null)
+    this.constraintZValsCorrect = new Array<boolean>(expected.constraintVars.length).fill(true)
+
+    this.constraintVals = new Array<null | Fraction>(expected.constraintVars.length).fill(null)
+    this.constraintValsCorrect = new Array<boolean>(expected.constraintVars.length).fill(true)
+
+    this.initialized = true
   }
 
-  //
-  // Methods
-  //
-
   saveTargetVar(event: Event, v: number): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.targetVars[v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.targetVars[v] = null
-    }
+    this.targetVars[v] = fractionFromInputEvent(event)
   }
 
   saveTargetZVal(event: Event): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.targetZVal = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.targetZVal = null
-    }
+    this.targetZVal = fractionFromInputEvent(event)
   }
 
   saveTargetVal(event: Event): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.targetVal = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.targetVal = null
-    }
+    this.targetVal = fractionFromInputEvent(event)
   }
 
   saveConstraintVar(event: Event, c: number, v: number): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.constraintVars[c][v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.constraintVars[c][v] = null
-    }
+    this.constraintVars[c][v] = fractionFromInputEvent(event)
   }
 
   saveConstraintZVal(event: Event, c: number): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.constraintZVals[c] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.constraintZVals[c] = null
-    }
+    this.constraintZVals[c] = fractionFromInputEvent(event)
   }
 
   saveConstraintVal(event: Event, c: number): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.constraintVals[c] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.constraintVals[c] = null
-    }
+    this.constraintVals[c] = fractionFromInputEvent(event)
   }
 
   checkUserInputAndEmit(): void {
@@ -199,7 +144,7 @@ export class PracticeStandardFormCardComponent implements OnChanges {
     }
   }
 
-  trackByIndex(index: number, _item: any) {
+  trackByIndex(index: number): number {
     return index
   }
 }

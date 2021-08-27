@@ -54,13 +54,13 @@
       <label for="linearSystemData">Gleichungssystem</label>
       <app-linear-system-data id="linearSystemData"
                               [init]="getLinearSystemDataInput()"
-                              (dataChange)="onLinearSystemDataChange($event)">
+                              (dataChange)="storeLinearSystemData($event)">
       </app-linear-system-data>
 
       <!-- Create Button -->
 
       <div></div>
-      <button type="submit" (click)="onSubmit()">Erstellen</button>
+      <button type="submit" (click)="submit()">Erstellen</button>
 
     </div>
   </app-card>

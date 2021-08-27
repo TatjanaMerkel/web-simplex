@@ -22,42 +22,30 @@ export class CalcLinearSystemDataCardComponent {
 
   editable = true
 
-  //
-  // Event Handlers
-  //
-
-  onLinearSystemDataChange(linearSystemData: LinearSystemDataValues): void {
+  storeLinearSystemData(linearSystemData: LinearSystemDataValues): void {
     this.linearSystemData = linearSystemData
   }
 
   /**
    * Must only be invoked if sure that all input values !== null
    */
-  onCalculate(): void {
+  emitInput(): void {
     const linearSystemData = this.linearSystemData!
 
     const targetVars = linearSystemData.targetVars as Array<Fraction>
     const constraintVars = linearSystemData.constraintVars as Array<Array<Fraction>>
     const constraintVals = linearSystemData.constraintVals as Array<Fraction>
 
-    this.dataChange.emit({
-      targetVars,
-      constraintVars,
-      constraintVals
-    })
+    this.dataChange.emit({targetVars, constraintVars, constraintVals})
 
     this.editable = false
   }
 
-  onEdit(): void {
+  startEditing(): void {
     this.dataChange.emit(null)
 
     this.editable = true
   }
-
-  //
-  // Helper
-  //
 
   getLinearSystemData(): LinearSystemDataInit {
     return {

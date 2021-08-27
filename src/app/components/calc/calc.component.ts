@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core'
 
-import * as math from 'mathjs'
-import {Fraction} from 'mathjs'
-
 import {HeaderService} from '../../../services/header.service'
 import {LinearSystemDataCardInput} from './calc-linear-system-data-card/linear-system-data-card-input'
 import {LinearSystemData} from './calc-linear-system-data-card/linear-system-data'
@@ -10,7 +7,6 @@ import {LinearSystemSize} from './calc-linear-system-size-card/linear-system-siz
 import {Simplex, Tableau} from '../../../common/simplex'
 import {SolutionInput} from './calc-solution-card/solution-input'
 import {StandardFormInput} from './calc-standard-form-card/standard-form-input'
-import {StandardFormOutput} from './calc-standard-form-card/standard-form-output'
 import {TableauInput} from './calc-tableau-card/tableau-input'
 
 @Component({
@@ -33,11 +29,7 @@ export class CalcComponent implements OnInit {
     this.headerService.title.next('Rechnen')
   }
 
-  //
-  // Data Change Listeners
-  //
-
-  onLinearSystemSizeChange(linearSystemSize: LinearSystemSize | null): void {
+  setLinearSystemSize(linearSystemSize: LinearSystemSize | null): void {
     if (linearSystemSize !== null) {
       this.linearSystemSizeOutput = linearSystemSize
     } else {
@@ -48,7 +40,7 @@ export class CalcComponent implements OnInit {
     }
   }
 
-  onLinearSystemDataChange(linearSystemDataCardOutput: LinearSystemData | null): void {
+  setLinearSystemData(linearSystemDataCardOutput: LinearSystemData | null): void {
     if (linearSystemDataCardOutput !== null) {
       this.linearSystemDataCardOutput = linearSystemDataCardOutput
     } else {
@@ -61,10 +53,6 @@ export class CalcComponent implements OnInit {
       this.tableaus = Simplex.calcTableaus(this.linearSystemSizeOutput!, this.linearSystemDataCardOutput!)
     }
   }
-
-  //
-  // Input Data Getters
-  //
 
   /**
    * Must only be called when calc-linear-system-size-card output is available.
@@ -125,97 +113,5 @@ export class CalcComponent implements OnInit {
     return {
       targetVal: lastTableau.targetVal
     }
-  }
-
-  //
-  // Mock Data
-  //
-
-  getLinearSystemDataCardInputMock(): LinearSystemDataCardInput {
-    return {
-      numberOfVars: 2,
-      numberOfConstraints: 3
-    }
-  }
-
-  getStandardFormInputMock() {
-    return {
-      numberOfVars: 2,
-      numberOfConstraints: 3,
-
-      targetVars: [
-        math.fraction('1.1'),
-        math.fraction('2/3')
-      ] as Fraction[],
-
-      constraintVars: [
-        [math.fraction('-4/5'), math.fraction('1')],
-        [math.fraction('7'), math.fraction('-8')],
-        [math.fraction('9.9'), math.fraction('-1.3')],
-      ] as Fraction[][],
-
-      constraintVals: [
-        math.fraction('1/8'),
-        math.fraction('2/9'),
-        math.fraction('30/31')
-      ] as Fraction[]
-    }
-  }
-
-  standardFormOutputMock: StandardFormOutput = {
-    numberOfVars: 5,
-    numberOfConstraints: 3,
-
-    targetVars: [
-      math.fraction('-5'),
-      math.fraction('-2'),
-      math.fraction(0),
-      math.fraction(0),
-      math.fraction(0)
-    ] as Fraction[],
-
-    targetVal: math.fraction(0) as Fraction,
-
-    constraintVars: [
-      [
-        math.fraction('-3'),
-        math.fraction('4'),
-        math.fraction(1),
-        math.fraction(0),
-        math.fraction(0)
-      ],
-      [
-        math.fraction('6'),
-        math.fraction('-7'),
-        math.fraction(0),
-        math.fraction(1),
-        math.fraction(0)
-      ],
-      [
-        math.fraction('9'),
-        math.fraction('10'),
-        math.fraction(0),
-        math.fraction(0),
-        math.fraction(1)
-      ],
-    ] as Fraction[][],
-
-    constraintVals: [
-      math.fraction('5'),
-      math.fraction('8'),
-      math.fraction('11')
-    ] as Fraction[],
-
-    slackVars: [1, 2, 3]
-  }
-
-  getSolutionInputMock(): SolutionInput {
-    return {
-      targetVal: math.fraction(42) as Fraction
-    }
-  }
-
-  onStandardFormClick() {
-    this.showTableaus = true
   }
 }

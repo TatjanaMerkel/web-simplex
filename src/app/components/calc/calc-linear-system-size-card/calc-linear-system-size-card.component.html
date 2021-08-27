@@ -28,7 +28,7 @@
 
     <button class="btn btn-success btn-lg float-right"
             [disabled]="!inputValid"
-            (click)="onGenerate()">
+            (click)="emitInput()">
       Generate
     </button>
 
@@ -36,7 +36,7 @@
   <ng-template #edit>
 
     <button class="btn btn-warning btn-lg float-right"
-            (click)="onEdit()">
+            (click)="startEditing()">
       Edit
     </button>
 

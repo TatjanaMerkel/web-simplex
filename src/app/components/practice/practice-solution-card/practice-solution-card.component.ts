@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core'
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 
 import {Fraction} from 'mathjs'
 
@@ -6,16 +6,18 @@ import {ExpectedSolution} from './expected-solution'
 import {fractionFromInputEvent, fractionsEqual} from '../../../../common/fractions'
 
 @Component({
-  selector: 'app-practice-solution-card',
+  selector: 'app-practice-solution-card[expected]',
   templateUrl: './practice-solution-card.component.html',
   styleUrls: ['./practice-solution-card.component.css']
 })
-export class PracticeSolutionCardComponent {
+export class PracticeSolutionCardComponent implements OnInit {
 
   @Input() expected!: ExpectedSolution
   @Input() disabled = false
 
   @Output() correct = new EventEmitter<void>()
+
+  initialized = false
 
   solutionVal: Fraction | null = null
   solutionVars!: Array<Fraction | null>
@@ -23,34 +25,17 @@ export class PracticeSolutionCardComponent {
   solutionValCorrect = true
   solutionVarsCorrect!: boolean[]
 
-  initialized = false
-
-  //
-  // Getters
-  //
-
   get isInputCorrect(): boolean {
     return this.solutionValCorrect
       && this.solutionVarsCorrect.every(bool => bool)
   }
 
-  //
-  // Lifecycle
-  //
+  ngOnInit(): void {
+    this.solutionVars = new Array<Fraction | null>(this.expected.solutionVars.length).fill(null)
+    this.solutionVarsCorrect = new Array<boolean>(this.expected.solutionVars.length).fill(true)
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['expected'] && !this.initialized) {
-
-      this.solutionVars = new Array<Fraction | null>(this.expected.solutionVars.length).fill(null)
-      this.solutionVarsCorrect = new Array<boolean>(this.expected.solutionVars.length).fill(true)
-
-      this.initialized = true
-    }
+    this.initialized = true
   }
-
-  //
-  // Methods
-  //
 
   saveSolutionVal(event: Event): void {
     this.solutionVal = fractionFromInputEvent(event)
@@ -76,7 +61,7 @@ export class PracticeSolutionCardComponent {
     }
   }
 
-  trackByIndex(index: number, _item: any) {
+  trackByIndex(index: number): number {
     return index
   }
 }

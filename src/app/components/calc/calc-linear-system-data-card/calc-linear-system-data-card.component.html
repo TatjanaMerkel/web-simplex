@@ -1,7 +1,7 @@
 <app-card title="Eingabe der Parameter">
   <app-linear-system-data [init]="getLinearSystemData()"
                           [disabled]="!editable"
-                          (dataChange)="onLinearSystemDataChange($event)">
+                          (dataChange)="storeLinearSystemData($event)">
   </app-linear-system-data>
 
   <!-- Button -->
@@ -11,7 +11,7 @@
 
     <button class="btn btn-success btn-lg float-right"
             [disabled]="!linearSystemData || !linearSystemData.isValid"
-            (click)="onCalculate()">
+            (click)="emitInput()">
       Calculate
     </button>
 
@@ -19,7 +19,7 @@
   <ng-template #edit>
 
     <button class="btn btn-warning btn-lg float-right"
-            (click)="onEdit()">
+            (click)="startEditing()">
       Edit
     </button>
 

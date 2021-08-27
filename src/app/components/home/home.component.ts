@@ -25,11 +25,11 @@ export class HomeComponent implements OnInit {
   getColor(color: string): any {
     switch (color) {
       case 'red':
-        return '#e74c3c';
+        return '#e74c3c'
       case 'green':
-        return '#27ae60';
+        return '#27ae60'
       case 'blue':
-        return '#3498db';
+        return '#3498db'
     }
   }
 }

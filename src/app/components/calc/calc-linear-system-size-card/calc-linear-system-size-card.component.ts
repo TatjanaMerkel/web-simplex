@@ -17,7 +17,7 @@ export class CalcLinearSystemSizeCardComponent {
   numberOfVars: number | null = null
   numberOfConstraints: number | null = null
 
-  onGenerate(): void {
+  emitInput(): void {
     this.dataChange.emit({
       numberOfVars: this.numberOfVars!,
       numberOfConstraints: this.numberOfConstraints!
@@ -26,39 +26,34 @@ export class CalcLinearSystemSizeCardComponent {
     this.editable = false
   }
 
-  onEdit(): void {
+  startEditing(): void {
     this.dataChange.emit(null)
 
     this.editable = true
   }
 
   onNumberOfVarsChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    if (inputValue === '') {
-      this.numberOfVars = null
-    } else {
-      this.numberOfVars = Number(inputValue)
-    }
-
+    this.numberOfVars = CalcLinearSystemSizeCardComponent.numberFromInputEvent(event)
     this.inputValid = this.validateInput()
   }
 
   onNumberOfConstraintsChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    if (inputValue === '') {
-      this.numberOfConstraints = null
-    } else {
-      this.numberOfConstraints = Number(inputValue)
-    }
-
+    this.numberOfConstraints = CalcLinearSystemSizeCardComponent.numberFromInputEvent(event)
     this.inputValid = this.validateInput()
   }
 
   validateInput(): boolean {
     return this.numberOfVars !== null && this.numberOfConstraints !== null
+  }
+
+  private static numberFromInputEvent(event: Event): number | null {
+    const inputElement = event.target as HTMLInputElement
+    const inputValue = inputElement.value
+
+    if (inputValue === '') {
+      return null
+    } else {
+      return Number(inputValue)
+    }
   }
 }

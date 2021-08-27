@@ -1,6 +1,7 @@
-<app-card title="Zielfunktion & Nebenbedingungen">
+<app-card *ngIf="initialized"
+          title="Zielfunktion & Nebenbedingungen">
 
-  <table *ngIf="expected">
+  <table>
 
     <!-- Target function -->
 

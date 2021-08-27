@@ -30,9 +30,9 @@ export class AdminNewExerciseComponent implements OnInit {
   constraintVars: Array<Array<null | Fraction>> = [[null, null], [null, null]]
   constraintVals: Array<null | Fraction> = [null, null]
 
-  constructor(private router: Router,
-              private exerciseService: ExerciseService,
-              private headerService: HeaderService) {
+  constructor(private exerciseService: ExerciseService,
+              private headerService: HeaderService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -50,7 +50,7 @@ export class AdminNewExerciseComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  submit() {
     if (this.isInputValid()) {
       const exercise: Exercise = {
         id: -1,
@@ -90,7 +90,7 @@ export class AdminNewExerciseComponent implements OnInit {
     return this.constraintVals.indexOf(null) === -1
   }
 
-  onLinearSystemDataChange(linearSystemDataOutput: LinearSystemDataValues) {
+  storeLinearSystemData(linearSystemDataOutput: LinearSystemDataValues) {
     const {targetVars, constraintVars, constraintVals, isValid} = linearSystemDataOutput
 
     if (isValid) {

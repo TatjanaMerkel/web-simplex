@@ -1,21 +1,24 @@
-import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core'
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 
 import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
-import {PracticeLinearSystemDataCardExpected} from './practice-linear-system-data-card-expected'
+import {ExpectedLinearSystemData} from './expected-linear-system-data'
+import {fractionFromInputEvent} from '../../../../common/fractions'
 
 @Component({
-  selector: 'app-practice-linear-system-data-card',
+  selector: 'app-practice-linear-system-data-card[expected]',
   templateUrl: './practice-linear-system-data-card.component.html',
   styleUrls: ['./practice-linear-system-data-card.component.css']
 })
-export class PracticeLinearSystemDataCardComponent {
+export class PracticeLinearSystemDataCardComponent implements OnInit {
 
-  @Input() expected: undefined | PracticeLinearSystemDataCardExpected
+  @Input() expected!: ExpectedLinearSystemData
   @Input() disabled = false
 
   @Output() correct = new EventEmitter<void>()
+
+  initialized = false
 
   numberOfVars!: number
   numberOfConstraints!: number
@@ -28,95 +31,49 @@ export class PracticeLinearSystemDataCardComponent {
   constraintVarsCorrect!: Array<Array<boolean>>
   constraintValsCorrect!: Array<boolean>
 
-  //
-  // Getter
-  //
-
   get isInputCorrect(): boolean {
     return this.targetVarsCorrect.every(bool => bool)
       && this.constraintVarsCorrect.every(bools => bools.every(bool => bool))
       && this.constraintValsCorrect.every(bool => bool)
   }
 
-  //
-  // Lifecycle
-  //
+  ngOnInit(): void {
+    const numberOfVars = this.expected.numberOfVars
+    const numberOfConstraints = this.expected.numberOfConstraints
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['expected'] && changes['expected'].firstChange) {
+    this.numberOfVars = numberOfVars
+    this.numberOfConstraints = numberOfConstraints
 
-      const numberOfVars = changes.expected.currentValue.numberOfVars
-      const numberOfConstraints = changes.expected.currentValue.numberOfConstraints
+    this.targetVars = new Array<null | Fraction>(numberOfVars).fill(null)
+    this.targetVarsCorrect = new Array<boolean>(numberOfVars).fill(true)
 
-      this.numberOfVars = numberOfVars
-      this.numberOfConstraints = numberOfConstraints
+    this.constraintVars = new Array<Array<null | Fraction>>(numberOfConstraints)
+    this.constraintVarsCorrect = new Array<Array<boolean>>(numberOfConstraints)
 
-      this.targetVars = new Array<null | Fraction>(numberOfVars).fill(null)
-      this.targetVarsCorrect = new Array<boolean>(numberOfVars).fill(true)
-
-      this.constraintVars = new Array<Array<null | Fraction>>(numberOfConstraints)
-      this.constraintVarsCorrect = new Array<Array<boolean>>(numberOfConstraints)
-
-      for (let c = 0; c < numberOfConstraints; c++) {
-        this.constraintVars[c] = new Array<null | Fraction>(numberOfVars).fill(null)
-        this.constraintVarsCorrect[c] = new Array<boolean>(numberOfVars).fill(true)
-      }
-
-      this.constraintVals = new Array<null | Fraction>(numberOfConstraints).fill(null)
-      this.constraintValsCorrect = new Array<boolean>(numberOfConstraints).fill(true)
+    for (let c = 0; c < numberOfConstraints; c++) {
+      this.constraintVars[c] = new Array<null | Fraction>(numberOfVars).fill(null)
+      this.constraintVarsCorrect[c] = new Array<boolean>(numberOfVars).fill(true)
     }
+
+    this.constraintVals = new Array<null | Fraction>(numberOfConstraints).fill(null)
+    this.constraintValsCorrect = new Array<boolean>(numberOfConstraints).fill(true)
+
+    this.initialized = true
   }
 
-  //
-  // Methods
-  //
-
   saveTargetVar(event: Event, v: number): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.targetVars[v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.targetVars[v] = null
-    }
+    this.targetVars[v] = fractionFromInputEvent(event)
   }
 
   saveConstraintVar(event: Event, c: number, v: number): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.constraintVars[c][v] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.constraintVars[c][v] = null
-    }
+    this.constraintVars[c][v] = fractionFromInputEvent(event)
   }
 
   saveConstraintVal(event: Event, c: number): void {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    try {
-      this.constraintVals[c] = math.fraction(inputValue) as Fraction
-    } catch (e) {
-      this.constraintVals[c] = null
-    }
+    this.constraintVals[c] = fractionFromInputEvent(event)
   }
 
-  formatFraction(fraction: null | Fraction): string {
-    if (!fraction) {
-      return ''
-    }
-
-    const sign = fraction.s === 1 ? '' : '-';
-
-    return fraction.d === 1
-      ? sign + fraction.n
-      : sign + fraction.n + '/' + fraction.d;
-  }
-
-  trackByIndex(index: number, _item: any): number {
+  trackByIndex(index: number): number {
     return index
   }
 

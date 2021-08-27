@@ -3,7 +3,7 @@
   <!-- Linear System Size -->
 
   <app-calc-linear-system-size-card class="card-1"
-                                    (dataChange)="onLinearSystemSizeChange($event)">
+                                    (dataChange)="setLinearSystemSize($event)">
   </app-calc-linear-system-size-card>
 
   <!-- Linear System Data -->
@@ -15,7 +15,7 @@
 
     <app-calc-linear-system-data-card class="card-2"
                                       [data]="getLinearSystemDataCardInput()"
-                                      (dataChange)="onLinearSystemDataChange($event)">
+                                      (dataChange)="setLinearSystemData($event)">
     </app-calc-linear-system-data-card>
   </ng-container>
 
@@ -28,7 +28,7 @@
 
     <app-calc-standard-form-card class="card-3"
                                  [data]="getStandardFormInput()"
-                                 (click)="onStandardFormClick()">
+                                 (click)="showTableaus = true">
     </app-calc-standard-form-card>
   </ng-container>
 

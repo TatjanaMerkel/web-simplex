@@ -1,18 +1,20 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core'
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 
-import {PracticeLinearSystemSizeCardExpected} from './practice-linear-system-size-card-expected'
+import {ExpectedLinearSystemSize} from './expected-linear-system-size'
 
 @Component({
-  selector: 'app-practice-linear-system-size-card',
+  selector: 'app-practice-linear-system-size-card[expected]',
   templateUrl: './practice-linear-system-size-card.component.html',
   styleUrls: ['./practice-linear-system-size-card.component.css']
 })
-export class PracticeLinearSystemSizeCardComponent {
+export class PracticeLinearSystemSizeCardComponent implements OnInit {
 
-  @Input() expected: undefined | PracticeLinearSystemSizeCardExpected
+  @Input() expected!: ExpectedLinearSystemSize
   @Input() disabled = false
 
   @Output() correct = new EventEmitter<void>()
+
+  initialized = false
 
   numberOfVars: null | number = null
   numberOfConstraints: null | number = null
@@ -20,17 +22,13 @@ export class PracticeLinearSystemSizeCardComponent {
   numberOfVarsCorrect = true
   numberOfConstraintsCorrect = true
 
-  //
-  // Getters
-  //
-
   get isInputCorrect(): boolean {
     return this.numberOfVarsCorrect && this.numberOfConstraintsCorrect
   }
 
-  //
-  // Methods
-  //
+  ngOnInit() {
+    this.initialized = true
+  }
 
   saveNumberOfVars(event: Event): void {
     const numberInput = event.target as HTMLInputElement
