@@ -6,5 +6,5 @@ export interface LinearSystemDataInit {
 
   targetVars: null | Array<null | Fraction>,
   constraintVars: null | Array<Array<null | Fraction>>,
-  constraintVals: null | Array<null | Fraction>,
+  constraintVals: null | Array<null | Fraction>
 }

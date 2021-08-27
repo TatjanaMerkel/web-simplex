@@ -1,25 +1,25 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing'
 
-import {LinearSystemDataComponent} from './linear-system-data.component';
+import {LinearSystemDataComponent} from './linear-system-data.component'
 
-describe('LinearSystemComponent', () => {
-  let component: LinearSystemDataComponent;
-  let fixture: ComponentFixture<LinearSystemDataComponent>;
+describe('NewLinearSystemComponent', () => {
+  let component: LinearSystemDataComponent
+  let fixture: ComponentFixture<LinearSystemDataComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LinearSystemDataComponent]
     })
-      .compileComponents();
-  });
+      .compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LinearSystemDataComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(LinearSystemDataComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
