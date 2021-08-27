@@ -14,8 +14,8 @@ export class CalcLinearSystemSizeCardComponent {
   editable = true
   inputValid = false
 
-  numberOfVars: number | null = null
-  numberOfConstraints: number | null = null
+  numberOfVars: null | number = null
+  numberOfConstraints: null | number = null
 
   emitInput(): void {
     this.dataChange.emit({

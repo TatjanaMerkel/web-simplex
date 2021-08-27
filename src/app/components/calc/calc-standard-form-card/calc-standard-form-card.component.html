@@ -1,4 +1,5 @@
-<app-card title="LGS in Standard-Form">
+<app-card *ngIf="data"
+          title="LGS in Standard-Form">
 
   <!--                                                 -->
   <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
@@ -8,7 +9,7 @@
   <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
   <!--                                                 -->
 
-  <table *ngIf="data">
+  <table>
 
     <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
     <tr>

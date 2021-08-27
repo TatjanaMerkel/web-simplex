@@ -1,7 +1,9 @@
-<app-card title="Eingabe der Parameter">
+<app-card *ngIf="data"
+          title="Eingabe der Parameter">
+
   <app-linear-system-data [init]="getLinearSystemData()"
                           [disabled]="!editable"
-                          (dataChange)="storeLinearSystemData($event)">
+                          (dataChange)="linearSystemData = $event">
   </app-linear-system-data>
 
   <!-- Button -->

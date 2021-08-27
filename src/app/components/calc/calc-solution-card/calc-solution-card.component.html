@@ -1,9 +1,8 @@
-<app-card title="Lösung">
-  <ng-container *ngIf="data">
+<app-card *ngIf="data"
+          title="Lösung">
 
-    Optimale Lösung gefunden:<br/>
-    <br/>
-    Zielfunktionswert z = {{ formatFraction(data!.targetVal) }}
+  Optimale Lösung gefunden:<br/>
+  <br/>
+  Zielfunktionswert z = {{ formatFraction(data.targetVal) }}
 
-  </ng-container>
 </app-card>

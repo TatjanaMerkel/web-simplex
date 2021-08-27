@@ -12,9 +12,11 @@ import {HeaderService} from '../../../services/header.service'
 })
 export class AdminExercisesComponent implements OnInit {
 
-  easyExercises: Exercise[] = []
-  mediumExercises: Exercise[] = []
-  hardExercises: Exercise[] = []
+  initialized = false
+
+  easyExercises!: Exercise[]
+  mediumExercises!: Exercise[]
+  hardExercises!: Exercise[]
 
   constructor(private exerciseService: ExerciseService,
               private headerService: HeaderService) {
@@ -32,6 +34,8 @@ export class AdminExercisesComponent implements OnInit {
 
       this.hardExercises = exercises
         .filter(exercise => exercise.difficulty === Difficulty.HARD)
+
+      this.initialized = true
     })
   }
 }

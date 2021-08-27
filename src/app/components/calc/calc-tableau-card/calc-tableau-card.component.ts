@@ -5,13 +5,13 @@ import {Fraction} from 'mathjs'
 import {TableauInput} from './tableau-input'
 
 @Component({
-  selector: 'app-calc-tableau-card',
+  selector: 'app-calc-tableau-card[data]',
   templateUrl: './calc-tableau-card.component.html',
   styleUrls: ['./calc-tableau-card.component.css']
 })
 export class CalcTableauCardComponent {
 
-  @Input() data: TableauInput | undefined
+  @Input() data!: TableauInput
 
   formatFraction(fraction: Fraction): string {
     const sign = fraction.s === 1 ? '' : '-'

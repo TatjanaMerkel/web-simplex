@@ -5,13 +5,13 @@ import {Fraction} from 'mathjs'
 import {SolutionInput} from './solution-input'
 
 @Component({
-  selector: 'app-calc-solution-card',
+  selector: 'app-calc-solution-card[data]',
   templateUrl: './calc-solution-card.component.html',
   styleUrls: ['./calc-solution-card.component.css']
 })
 export class CalcSolutionCardComponent {
 
-  @Input() data: SolutionInput | undefined
+  @Input() data!: SolutionInput
 
   formatFraction(fraction: Fraction): string {
     if (fraction.n === 0) {

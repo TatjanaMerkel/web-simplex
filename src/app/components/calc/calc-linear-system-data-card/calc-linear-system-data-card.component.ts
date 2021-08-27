@@ -8,23 +8,19 @@ import {LinearSystemDataValues} from '../../common/linear-system-data/linear-sys
 import {LinearSystemData} from './linear-system-data'
 
 @Component({
-  selector: 'app-calc-linear-system-data-card',
+  selector: 'app-calc-linear-system-data-card[data]',
   templateUrl: './calc-linear-system-data-card.component.html',
   styleUrls: ['./calc-linear-system-data-card.component.css']
 })
 export class CalcLinearSystemDataCardComponent {
 
-  @Input() data: undefined | LinearSystemDataCardInput
+  @Input() data!: LinearSystemDataCardInput
 
   @Output() dataChange = new EventEmitter<LinearSystemData | null>()
 
   linearSystemData: undefined | LinearSystemDataValues
 
   editable = true
-
-  storeLinearSystemData(linearSystemData: LinearSystemDataValues): void {
-    this.linearSystemData = linearSystemData
-  }
 
   /**
    * Must only be invoked if sure that all input values !== null
