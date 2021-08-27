@@ -7,10 +7,10 @@ import {HeaderService} from '../../../services/header.service'
 import {LinearSystemDataCardInput} from './calc-linear-system-data-card/linear-system-data-card-input'
 import {LinearSystemData} from './calc-linear-system-data-card/linear-system-data'
 import {LinearSystemSize} from './calc-linear-system-size-card/linear-system-size'
+import {Simplex, Tableau} from '../../../common/simplex'
 import {SolutionInput} from './calc-solution-card/solution-input'
 import {StandardFormInput} from './calc-standard-form-card/standard-form-input'
 import {StandardFormOutput} from './calc-standard-form-card/standard-form-output'
-import {Simplex, Tableau} from '../../../common/simplex'
 import {TableauInput} from './calc-tableau-card/tableau-input'
 
 @Component({

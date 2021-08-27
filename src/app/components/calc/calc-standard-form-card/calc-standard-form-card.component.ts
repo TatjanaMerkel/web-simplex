@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core'
 
-import {Fraction} from 'mathjs';
+import {Fraction} from 'mathjs'
 
-import {StandardFormInput} from './standard-form-input';
+import {StandardFormInput} from './standard-form-input'
 
 @Component({
   selector: 'app-calc-standard-form-card',
@@ -17,31 +17,31 @@ export class CalcStandardFormCardComponent {
 
   formatFraction(fraction: Fraction): string {
     if (fraction.n === 0) {
-      return '';
+      return ''
     } else if (fraction.n === 1 && fraction.d === 1) {
-      return '';
+      return ''
     } else if (fraction.d === 1) {
-      return fraction.n + '';
+      return fraction.n + ''
     } else {
-      return fraction.n + '/' + fraction.d;
+      return fraction.n + '/' + fraction.d
     }
   }
 
   formatVariable(fraction: Fraction, variable: number): string {
-    return fraction.n === 0 ? '' : 'x' + '<sub>' + variable + '</sub>';
+    return fraction.n === 0 ? '' : 'x' + '<sub>' + variable + '</sub>'
   }
 
   formatSign(fraction: Fraction): string {
-    return fraction.s === 1 ? '' : '-';
+    return fraction.s === 1 ? '' : '-'
   }
 
   formatOperator(fraction: Fraction): string {
     if (fraction.n === 0) {
-      return '';
+      return ''
     } else if (fraction.s === 1) {
-      return '+';
+      return '+'
     } else {
-      return '-';
+      return '-'
     }
   }
 }

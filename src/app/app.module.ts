@@ -11,6 +11,11 @@ import {AdminNewExerciseComponent} from './components/admin-new-exercise/admin-n
 import {AppComponent} from './app.component'
 import {AppRoutingModule} from './app-routing.module'
 import {CalcComponent} from './components/calc/calc.component'
+import {CalcLinearSystemDataCardComponent} from './components/calc/calc-linear-system-data-card/calc-linear-system-data-card.component'
+import {CalcLinearSystemSizeCardComponent} from './components/calc/calc-linear-system-size-card/calc-linear-system-size-card.component'
+import {CalcSolutionCardComponent} from './components/calc/calc-solution-card/calc-solution-card.component'
+import {CalcStandardFormCardComponent} from './components/calc/calc-standard-form-card/calc-standard-form-card.component'
+import {CalcTableauCardComponent} from './components/calc/calc-tableau-card/calc-tableau-card.component'
 import {CardComponent} from './components/common/card/card.component'
 import {ExerciseComponent} from './components/exercise/exercise.component'
 import {HeaderComponent} from './components/common/header/header.component'
@@ -19,11 +24,13 @@ import {LearnComponent} from './components/learn/learn.component'
 import {LearnLinearSystemDataCardComponent} from './components/learn/learn-linear-system-data-card/learn-linear-system-data-card.component'
 import {LearnLinearSystemSizeCardComponent} from './components/learn/learn-linear-system-size-card/learn-linear-system-size-card.component'
 import {LearnOverviewCardComponent} from './components/learn/learn-overview-card/learn-overview-card.component'
+import {LearnSolutionCardComponent} from './components/learn/learn-solution-card/learn-solution-card.component'
 import {LearnStandardFormCardComponent} from './components/learn/learn-standard-form-card/learn-standard-form-card.component'
+import {LearnTableausFirstCardComponent} from './components/learn/learn-tableaus-first-card/learn-tableaus-first-card.component';
+import {LearnTableausGeneralCardComponent} from './components/learn/learn-tableaus-general-card/learn-tableaus-general-card.component';
+import {LearnTableausSecondCardComponent} from './components/learn/learn-tableaus-second-card/learn-tableaus-second-card.component';
 import {LearnTableausThirdCardComponent} from './components/learn/learn-tableaus-third-card/learn-tableaus-third-card.component'
-import {CalcLinearSystemDataCardComponent} from './components/calc/calc-linear-system-data-card/calc-linear-system-data-card.component'
 import {LinearSystemDataComponent} from './components/common/linear-system-data/linear-system-data.component'
-import {CalcLinearSystemSizeCardComponent} from './components/calc/calc-linear-system-size-card/calc-linear-system-size-card.component'
 import {PracticeComponent} from './components/practice/practice.component'
 import {PracticeExerciseComponent} from './components/practice-exercise/practice-exercise.component'
 import {PracticeLinearSystemDataCardComponent} from './components/practice/practice-linear-system-data-card/practice-linear-system-data-card.component'
@@ -32,15 +39,7 @@ import {PracticeSolutionCardComponent} from './components/practice/practice-solu
 import {PracticeStandardFormCardComponent} from './components/practice/practice-standard-form-card/practice-standard-form-card.component'
 import {PracticeTableauComponent} from './components/practice/practice-tableau/practice-tableau.component'
 import {PracticeTableausCardComponent} from './components/practice/practice-tableaus-card/practice-tableaus-card.component'
-import {CalcSolutionCardComponent} from './components/calc/calc-solution-card/calc-solution-card.component'
-import {CalcStandardFormCardComponent} from './components/calc/calc-standard-form-card/calc-standard-form-card.component'
-import {CalcTableauCardComponent} from './components/calc/calc-tableau-card/calc-tableau-card.component'
 import {VarDirective} from '../ng-var.directive';
-import { LearnTableausGeneralCardComponent } from './components/learn/learn-tableaus-general-card/learn-tableaus-general-card.component';
-import { LearnTableausFirstCardComponent } from './components/learn/learn-tableaus-first-card/learn-tableaus-first-card.component';
-import { LearnTableausSecondCardComponent } from './components/learn/learn-tableaus-second-card/learn-tableaus-second-card.component';
-import { LearnSolutionCardComponent } from './components/learn/learn-solution-card/learn-solution-card.component'
-
 
 @NgModule({
   declarations: [
@@ -49,35 +48,35 @@ import { LearnSolutionCardComponent } from './components/learn/learn-solution-ca
     AdminNewExerciseComponent,
     AppComponent,
     CalcComponent,
-    CardComponent,
-    ExerciseComponent,
-    LearnComponent,
     CalcLinearSystemDataCardComponent,
-    LinearSystemDataComponent,
     CalcLinearSystemSizeCardComponent,
-    HeaderComponent,
-    HomeComponent,
-    PracticeComponent,
-    PracticeExerciseComponent,
-    PracticeLinearSystemSizeCardComponent,
-    PracticeSolutionCardComponent,
-    PracticeTableauComponent,
     CalcSolutionCardComponent,
     CalcStandardFormCardComponent,
     CalcTableauCardComponent,
-    VarDirective,
-    PracticeLinearSystemDataCardComponent,
-    PracticeStandardFormCardComponent,
-    PracticeTableausCardComponent,
+    CardComponent,
+    ExerciseComponent,
+    HeaderComponent,
+    HomeComponent,
+    LearnComponent,
+    LearnLinearSystemDataCardComponent,
     LearnLinearSystemSizeCardComponent,
     LearnOverviewCardComponent,
-    LearnLinearSystemDataCardComponent,
+    LearnSolutionCardComponent,
     LearnStandardFormCardComponent,
-    LearnTableausThirdCardComponent,
-    LearnTableausGeneralCardComponent,
     LearnTableausFirstCardComponent,
+    LearnTableausGeneralCardComponent,
     LearnTableausSecondCardComponent,
-    LearnSolutionCardComponent
+    LearnTableausThirdCardComponent,
+    LinearSystemDataComponent,
+    PracticeComponent,
+    PracticeExerciseComponent,
+    PracticeLinearSystemDataCardComponent,
+    PracticeLinearSystemSizeCardComponent,
+    PracticeSolutionCardComponent,
+    PracticeStandardFormCardComponent,
+    PracticeTableauComponent,
+    PracticeTableausCardComponent,
+    VarDirective
   ],
   imports: [
     AppRoutingModule,

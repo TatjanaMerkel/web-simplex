@@ -62,7 +62,7 @@ export class PracticeLinearSystemDataCardComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['expected'] && changes['expected'].firstChange) {
-      
+
       const numberOfVars = changes.expected.currentValue.numberOfVars
       const numberOfConstraints = changes.expected.currentValue.numberOfConstraints
 

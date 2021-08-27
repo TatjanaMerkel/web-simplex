@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/co
 
 import {Fraction} from 'mathjs'
 
-import {fractionFromInputEvent, fractionsEqual} from '../../../../common/fractions'
 import {ExpectedSolution} from './expected-solution'
+import {fractionFromInputEvent, fractionsEqual} from '../../../../common/fractions'
 
 @Component({
   selector: 'app-practice-solution-card',

@@ -1,19 +1,19 @@
-import {Component, OnInit} from '@angular/core'
 import {ActivatedRoute, Router} from '@angular/router'
+import {Component, OnInit} from '@angular/core'
 
 import * as math from 'mathjs'
 
+import ExpectedTableau from '../practice/practice-tableaus-card/expected-tableau'
 import {ExerciseService} from '../../../services/exercise.service'
 import {Exercise} from '../../../models/exercise'
+import {ExpectedSolution} from '../practice/practice-solution-card/expected-solution'
+import {Fraction} from 'mathjs'
 import {HeaderService} from '../../../services/header.service'
 import {PracticeLinearSystemDataCardExpected} from '../practice/practice-linear-system-data-card/practice-linear-system-data-card-expected'
 import {PracticeLinearSystemSizeCardExpected} from '../practice/practice-linear-system-size-card/practice-linear-system-size-card-expected'
 import {PracticeStandardFormCardExpected} from '../practice/practice-standard-form-card/practice-standard-form-card-expected'
-import {StandardFormInput} from '../calc/calc-standard-form-card/standard-form-input'
 import {Simplex, Tableau} from '../../../common/simplex'
-import ExpectedTableau from "../practice/practice-tableaus-card/expected-tableau";
-import {ExpectedSolution} from "../practice/practice-solution-card/expected-solution";
-import {Fraction} from "mathjs";
+import {StandardFormInput} from '../calc/calc-standard-form-card/standard-form-input'
 
 @Component({
   selector: 'app-practice-exercise',

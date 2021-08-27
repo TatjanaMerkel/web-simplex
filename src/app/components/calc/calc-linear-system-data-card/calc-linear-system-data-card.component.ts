@@ -3,9 +3,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core'
 import {Fraction} from 'mathjs'
 
 import {LinearSystemDataCardInput} from './linear-system-data-card-input'
-import {LinearSystemData} from './linear-system-data'
 import {LinearSystemDataInit} from '../../common/linear-system-data/linear-system-data-init'
 import {LinearSystemDataValues} from '../../common/linear-system-data/linear-system-data-values'
+import {LinearSystemData} from './linear-system-data'
 
 @Component({
   selector: 'app-calc-linear-system-data-card',

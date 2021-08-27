@@ -2,7 +2,6 @@ import {Component, EventEmitter, Output} from '@angular/core'
 
 import {LinearSystemSize} from './linear-system-size'
 
-
 @Component({
   selector: 'app-calc-linear-system-size-card',
   templateUrl: './calc-linear-system-size-card.component.html',

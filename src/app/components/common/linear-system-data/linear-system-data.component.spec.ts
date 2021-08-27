@@ -9,8 +9,7 @@ describe('NewLinearSystemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LinearSystemDataComponent]
-    })
-      .compileComponents()
+    }).compileComponents()
   })
 
   beforeEach(() => {

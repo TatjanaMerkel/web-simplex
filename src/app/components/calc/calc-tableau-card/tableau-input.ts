@@ -1,4 +1,4 @@
-import {Fraction} from 'mathjs';
+import {Fraction} from 'mathjs'
 
 export interface TableauInput {
   numberOfVars: number,

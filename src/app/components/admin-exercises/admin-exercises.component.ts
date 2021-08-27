@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core'
 
 import {Difficulty} from '../../../models/difficulty'
-import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
-import {HeaderService} from "../../../services/header.service";
+import {Exercise} from '../../../models/exercise'
+import {HeaderService} from '../../../services/header.service'
 
 @Component({
   selector: 'app-admin-exercises',

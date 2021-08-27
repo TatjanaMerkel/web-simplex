@@ -1,6 +1,8 @@
-import {Component, Input} from '@angular/core';
-import {SolutionInput} from './solution-input';
-import {Fraction} from 'mathjs';
+import {Component, Input} from '@angular/core'
+
+import {Fraction} from 'mathjs'
+
+import {SolutionInput} from './solution-input'
 
 @Component({
   selector: 'app-calc-solution-card',
@@ -9,17 +11,17 @@ import {Fraction} from 'mathjs';
 })
 export class CalcSolutionCardComponent {
 
-  @Input() data: SolutionInput | undefined;
+  @Input() data: SolutionInput | undefined
 
   formatFraction(fraction: Fraction): string {
     if (fraction.n === 0) {
-      return '';
+      return ''
     } else if (fraction.n === 1 && fraction.d === 1) {
-      return '';
+      return ''
     } else if (fraction.d === 1) {
-      return fraction.n + '';
+      return fraction.n + ''
     } else {
-      return fraction.n + '/' + fraction.d;
+      return fraction.n + '/' + fraction.d
     }
   }
 }

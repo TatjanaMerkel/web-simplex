@@ -5,11 +5,11 @@ import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
 import {Difficulty} from '../../../models/difficulty'
-import {Exercise} from '../../../models/exercise'
 import {ExerciseService} from '../../../services/exercise.service'
+import {Exercise} from '../../../models/exercise'
+import {HeaderService} from '../../../services/header.service'
 import {LinearSystemDataInit} from '../common/linear-system-data/linear-system-data-init'
 import {LinearSystemDataValues} from '../common/linear-system-data/linear-system-data-values'
-import {HeaderService} from '../../../services/header.service'
 
 @Component({
   selector: 'app-admin-edit-exercise',
