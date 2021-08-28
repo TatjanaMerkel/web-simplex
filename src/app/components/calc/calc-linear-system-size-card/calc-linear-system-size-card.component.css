@@ -1,5 +1,4 @@
 table {
-  margin: auto;
   border: 1px solid white;
   border-collapse: initial;
   border-spacing: 15px 10px;
@@ -8,10 +7,4 @@ table {
 
 input {
   width: 60px;
-}
-
-/* Button */
-
-button {
-  margin-top: 50px;
 }

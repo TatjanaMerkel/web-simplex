@@ -15,7 +15,7 @@
     eingeführten Schlupfvariablen sind farblich hervorgehoben:
   </p>
 
-  <table>
+  <table class="mx-auto my-4">
     <tr>
       <td class="value">-1000</td>
       <td>x<sub>1</sub></td>
@@ -24,14 +24,14 @@
       <td class="value">1500</td>
       <td>x<sub>2</sub></td>
 
-      <td class="slack"></td>
-      <td class="slack"></td>
+      <td class="slack-var"></td>
+      <td class="slack-var"></td>
 
-      <td class="slack"></td>
-      <td class="slack"></td>
+      <td class="slack-var"></td>
+      <td class="slack-var"></td>
 
-      <td class="z">+</td>
-      <td class="z">z</td>
+      <td class="solution-var">+</td>
+      <td class="solution-var">z</td>
 
       <td>=</td>
       <td class="value">0</td>
@@ -45,14 +45,14 @@
       <td class="value">2</td>
       <td>x<sub>2</sub></td>
 
-      <td class="slack">+</td>
-      <td class="slack">x<sub>3</sub></td>
+      <td class="slack-var">+</td>
+      <td class="slack-var">x<sub>3</sub></td>
 
-      <td class="slack"></td>
-      <td class="slack"></td>
+      <td class="slack-var"></td>
+      <td class="slack-var"></td>
 
-      <td class="z"></td>
-      <td class="z"></td>
+      <td class="solution-var"></td>
+      <td class="solution-var"></td>
 
       <td>=</td>
       <td class="value">12</td>
@@ -66,21 +66,21 @@
       <td class="value">10</td>
       <td>x<sub>2</sub></td>
 
-      <td class="slack"></td>
-      <td class="slack"></td>
+      <td class="slack-var"></td>
+      <td class="slack-var"></td>
 
-      <td class="slack">+</td>
-      <td class="slack">x<sub>4</sub></td>
+      <td class="slack-var">+</td>
+      <td class="slack-var">x<sub>4</sub></td>
 
-      <td class="z"></td>
-      <td class="z"></td>
+      <td class="solution-var"></td>
+      <td class="solution-var"></td>
 
       <td>=</td>
       <td class="value">100</td>
     </tr>
   </table>
 
-  <button class="btn btn-success btn-lg float-right"
+  <button class="btn btn-success btn-lg float-right mt-4"
           [disabled]="disabled"
           (click)="next.emit()">
     Continue

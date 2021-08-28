@@ -1,6 +1,6 @@
 <app-card title="Größe des Linearen Programms">
 
-  <table>
+  <table class="m-auto">
     <tr>
       <td>Anzahl der Variablen:</td>
       <td>
@@ -26,7 +26,7 @@
   <ng-container *ngIf="editable; then generate; else edit"></ng-container>
   <ng-template #generate>
 
-    <button class="btn btn-success btn-lg float-right"
+    <button class="btn btn-success btn-lg float-right mt-4"
             [disabled]="!inputValid"
             (click)="emitInput()">
       Generate
@@ -35,7 +35,7 @@
   </ng-template>
   <ng-template #edit>
 
-    <button class="btn btn-warning btn-lg float-right"
+    <button class="btn btn-warning btn-lg float-right mt-4"
             (click)="startEditing()">
       Edit
     </button>

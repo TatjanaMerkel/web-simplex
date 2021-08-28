@@ -1,11 +1,12 @@
 <app-card *ngIf="initialized"
           title="Lösung">
 
-  <table>
+  <table class="mx-auto">
     <tr>
       <td>Lösung:</td>
       <td>
-        <input [class.wrong]="!solutionValCorrect"
+        <input class="fraction-input"
+               [class.wrong]="!solutionValCorrect"
                [disabled]="disabled"
                (input)="solutionValCorrect = true"
                (change)="saveSolutionVal($event)"/>
@@ -17,7 +18,8 @@
         x<sub>{{ v + 1 }}</sub>
       </td>
       <td>
-        <input [class.wrong]="!solutionVarsCorrect[v]"
+        <input class="fraction-input"
+               [class.wrong]="!solutionVarsCorrect[v]"
                [disabled]="disabled"
                (input)="solutionVarsCorrect[v] = true"
                (change)="saveSolutionsVar($event, v)"/>
@@ -27,7 +29,7 @@
 
   <!-- Continue Button -->
 
-  <button class="btn btn-lg float-right mt-5"
+  <button class="btn btn-lg float-right mt-4"
           [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
           [disabled]="disabled"
           (click)="checkUserInputAndEmit()">

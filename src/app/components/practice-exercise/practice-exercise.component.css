@@ -1,31 +1,27 @@
-/* Layout */
-
-.grid {
+main {
   display: grid;
-  grid-template-columns: 5% 5% 80% 5% 5%;
+  grid-template-columns: 5% 90% 5%;
   grid-template-rows: auto;
-
   grid-template-areas:
-    "header  header  header  header  header"
-    ".       .       card-1  .       .     "
-    ".       arrow-2 .       .       .     "
-    ".       .       card-2  .       .     "
-    ".       arrow-3 .       .       .     "
-    ".       .       card-3  .       .     "
-    ".       arrow-4 .       .       .     "
-    ".       .       card-4  .       .     "
-    ".       arrow-5 .       .       .     "
-    ".       .       card-5  .       .     "
-    ".       arrow-6 .       .       .     "
-    ".       .       card-6  .       .     "
-    ".       arrow-7 .       .       .     "
-    ".       .       card-7  .       .     "
-    ".       arrow-8 .       .       .     "
-    ".       .       card-8  .       .     "
-    "footer  footer  footer  footer  footer";
+    "header  header  header"
+    ".       card-1  .     "
+    "arrow-2 .       .     "
+    ".       card-2  .     "
+    "arrow-3 .       .     "
+    ".       card-3  .     "
+    "arrow-4 .       .     "
+    ".       card-4  .     "
+    "arrow-5 .       .     "
+    ".       card-5  .     "
+    "arrow-6 .       .     "
+    ".       card-6  .     "
+    "arrow-7 .       .     "
+    ".       card-7  .     "
+    "arrow-8 .       .     "
+    ".       card-8  .     ";
 
-  margin-top: 40px;
-  margin-bottom: 40px;
+  width: 90%;
+  margin: 40px auto;
 }
 
 .card-1 {

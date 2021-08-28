@@ -10,7 +10,7 @@
   <table>
 
     <!--  BV | x1 x2 x3 x4 x5 | b  -->
-    <thead>
+    <thead class="line-bottom">
     <tr>
       <td class="line-right">BV</td>
       <td *ngFor="let _ of [].constructor(data.numberOfVars); let v = index"
@@ -47,7 +47,7 @@
     </tbody>
 
     <!--   z | 10 11  0  0  0 | 0  -->
-    <tfoot>
+    <tfoot class="line-top">
     <tr>
       <td class="line-right">z</td>
       <td *ngFor="let targetVar of data.targetVars; let v = index"

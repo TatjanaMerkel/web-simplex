@@ -1,5 +1,6 @@
 <div class="w-75 mx-auto mt-4">
-  <app-card *ngIf="id" title="Aufgabe bearbeiten">
+  <app-card *ngIf="id" title="Aufgabe">
+
     <div class="form-grid">
 
       <!-- Title -->
@@ -49,11 +50,14 @@
                               (dataChange)="storeLinearSystemData($event)">
       </app-linear-system-data>
 
-      <!-- Button -->
-
-      <div></div>
-      <button type="submit" (click)="submit()">Update</button>
-
     </div>
+
+    <!-- Button -->
+
+    <button class="btn btn-success btn-lg float-right mt-4"
+            (click)="submit()">
+      Update
+    </button>
+
   </app-card>
 </div>

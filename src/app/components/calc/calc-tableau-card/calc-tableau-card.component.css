@@ -1,19 +1,3 @@
-thead {
-  border-bottom: 1px solid white;
-}
-
-tfoot {
-  border-top: 1px solid white;
-}
-
-.line-left {
-  border-left: 1px solid white;
-}
-
-.border-right {
-  border-right: 1px solid white;
-}
-
 td {
   padding: 8px;
 }
@@ -26,7 +10,6 @@ td {
 
 table {
   table-layout: fixed;
-  /*width: 100%;*/
   word-wrap: break-word;
 }
 
@@ -40,24 +23,4 @@ td:not(:first-child):not(:last-child) {
 
 td:last-child {
   width: 80px;
-}
-
-/* Mark pivot col and row */
-
-.pivot-row {
-  background-color: rgba(255, 193, 0.00, 0.50);
-}
-
-.pivot-col {
-  background-color: rgba(255, 193, 0.00, 0.50);
-}
-
-.pivot-row-col {
-  background-color: rgba(255, 193, 0.00, 0.75);
-}
-
-/* Colors */
-
-.slack-var {
-  color: #62bbff;
 }

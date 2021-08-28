@@ -17,7 +17,6 @@ import {CalcSolutionCardComponent} from './components/calc/calc-solution-card/ca
 import {CalcStandardFormCardComponent} from './components/calc/calc-standard-form-card/calc-standard-form-card.component'
 import {CalcTableauCardComponent} from './components/calc/calc-tableau-card/calc-tableau-card.component'
 import {CardComponent} from './components/common/card/card.component'
-import {ExerciseComponent} from './components/exercise/exercise.component'
 import {HeaderComponent} from './components/common/header/header.component'
 import {HomeComponent} from './components/home/home.component'
 import {LearnComponent} from './components/learn/learn.component'
@@ -53,7 +52,6 @@ import {VarDirective} from '../ng-var.directive';
     CalcStandardFormCardComponent,
     CalcTableauCardComponent,
     CardComponent,
-    ExerciseComponent,
     HeaderComponent,
     HomeComponent,
     LearnComponent,

@@ -1,7 +1,7 @@
 <app-card *ngIf="initialized"
           title="Anzahl Variablen & Nebenbedingungen">
 
-  <table class="linear-system-size-table">
+  <table class="linear-system-size-table mx-auto">
     <tr>
       <td>Anzahl der Variablen:</td>
       <td>
@@ -28,7 +28,7 @@
 
   <!-- Button -->
 
-  <button class="btn btn-lg float-right mt-5"
+  <button class="btn btn-lg float-right mt-4"
           [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
           [disabled]="disabled"
           (click)="checkUserInputAndEmit()">

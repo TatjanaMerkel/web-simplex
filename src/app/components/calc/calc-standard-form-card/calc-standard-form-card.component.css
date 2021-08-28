@@ -10,19 +10,3 @@ table {
   padding-left: 12px;
   padding-right: 12px;
 }
-
-/* Button */
-
-button {
-  margin-top: 50px;
-}
-
-/* Colors */
-
-.slack-var {
-  color: #62bbff;
-}
-
-.solution-var {
-  color: #e261e8;
-}
