@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core'
 
 import {HeaderService} from '../../../services/header.service'
-import {LinearSystemDataCardInput} from './calc-linear-system-data-card/linear-system-data-card-input'
-import {LinearSystemData} from './calc-linear-system-data-card/linear-system-data'
 import {LinearSystemSize} from './calc-linear-system-size-card/linear-system-size'
 import {Simplex, Tableau} from '../../../common/simplex'
 import {SolutionInput} from './calc-solution-card/solution-input'
 import {StandardFormInput} from './calc-standard-form-card/standard-form-input'
 import {TableauInput} from './calc-tableau-card/tableau-input'
+import {Fraction} from "mathjs";
+import {CalcLinearSystemDataCardOutput} from "./calc-linear-system-data-card/calc-linear-system-data-card-output";
+import {CalcLinearSystemDataCardInput} from "./calc-linear-system-data-card/calc-linear-system-data-card-input";
 
 @Component({
   selector: 'app-calculator',
@@ -17,7 +18,11 @@ import {TableauInput} from './calc-tableau-card/tableau-input'
 export class CalcComponent implements OnInit {
 
   linearSystemSizeOutput: LinearSystemSize | null = null
-  linearSystemDataCardOutput: LinearSystemData | null = null
+
+  linearSystemDataInitialized = false
+  targetVars!: null | Fraction[]
+  constraintVars!: null | Fraction[][]
+  constraintVals!: null | Fraction[]
 
   tableaus: Tableau[] | null = null
   showTableaus = false
@@ -34,36 +39,46 @@ export class CalcComponent implements OnInit {
       this.linearSystemSizeOutput = linearSystemSize
     } else {
       this.linearSystemSizeOutput = null
-      this.linearSystemDataCardOutput = null
+
+      this.targetVars = null
+      this.constraintVars = null
+      this.constraintVals = null
+
       this.tableaus = null
       this.showTableaus = false
     }
   }
 
-  setLinearSystemData(linearSystemDataCardOutput: LinearSystemData | null): void {
-    if (linearSystemDataCardOutput !== null) {
-      this.linearSystemDataCardOutput = linearSystemDataCardOutput
-    } else {
-      this.linearSystemDataCardOutput = null
-      this.tableaus = null
-      this.showTableaus = false
-    }
+  setLinearSystemData(data: CalcLinearSystemDataCardOutput | null): void {
+    this.tableaus = null
+    this.showTableaus = false
 
-    if (linearSystemDataCardOutput) {
-      this.tableaus = Simplex.calcTableaus(this.linearSystemSizeOutput!, this.linearSystemDataCardOutput!)
+    this.targetVars = null
+    this.constraintVars = null
+    this.constraintVals = null
+
+    this.linearSystemDataInitialized = false
+
+    if (data) {
+      const {targetVars, constraintVars, constraintVals} = data
+
+      this.targetVars = targetVars
+      this.constraintVars = constraintVars
+      this.constraintVals = constraintVals
+
+      this.linearSystemDataInitialized = true
+
+      this.tableaus = Simplex.calcTableaus(this.linearSystemSizeOutput!,
+        {targetVars, constraintVars, constraintVals})
     }
   }
 
-  /**
-   * Must only be called when calc-linear-system-size-card output is available.
-   */
-  getLinearSystemDataCardInput(): LinearSystemDataCardInput {
+  get linearSystemDataCardInput(): CalcLinearSystemDataCardInput {
     const linearSystemSizeOutput = this.linearSystemSizeOutput!
 
-    return {
-      numberOfVars: linearSystemSizeOutput.numberOfVars,
-      numberOfConstraints: linearSystemSizeOutput.numberOfConstraints
-    }
+    const {numberOfVars, numberOfConstraints} = linearSystemSizeOutput
+
+    return {numberOfVars, numberOfConstraints}
   }
 
   /**

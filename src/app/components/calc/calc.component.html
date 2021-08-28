@@ -14,14 +14,14 @@
     </div>
 
     <app-calc-linear-system-data-card class="card-2"
-                                      [data]="getLinearSystemDataCardInput()"
-                                      (dataChange)="setLinearSystemData($event)">
+                                      [input]="linearSystemSizeOutput"
+                                      (outputChange)="setLinearSystemData($event)">
     </app-calc-linear-system-data-card>
   </ng-container>
 
   <!-- Standard Form -->
 
-  <ng-container *ngIf="linearSystemDataCardOutput">
+  <ng-container *ngIf="targetVars && constraintVars && constraintVals">
     <div class="arrow arrow-3">
       <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
     </div>

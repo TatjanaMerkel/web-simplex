@@ -1,12 +1,11 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http'
 import {Injectable} from '@angular/core'
 
+import * as math from 'mathjs'
 import {Observable, throwError} from 'rxjs'
 import {catchError, tap} from 'rxjs/operators'
 
 import {Exercise} from '../models/exercise'
-import * as math from 'mathjs'
-
 
 @Injectable({
   providedIn: 'root'

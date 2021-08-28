@@ -4,7 +4,7 @@ import {Fraction} from 'mathjs'
 
 import {LinearSystemDataInit} from './linear-system-data-init'
 import {LinearSystemDataValues} from './linear-system-data-values'
-import {fractionFromInputEvent} from "../../../../common/fractions";
+import {fractionFromInputEvent} from '../../../../common/fractions'
 
 @Component({
   selector: 'app-linear-system-data',

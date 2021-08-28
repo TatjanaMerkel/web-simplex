@@ -2,8 +2,7 @@ import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
 import {LinearSystemSize} from '../app/components/calc/calc-linear-system-size-card/linear-system-size'
-import {LinearSystemData} from '../app/components/calc/calc-linear-system-data-card/linear-system-data'
-
+import {CalcLinearSystemDataCardOutput} from "../app/components/calc/calc-linear-system-data-card/calc-linear-system-data-card-output";
 
 export interface Tableau {
   targetVars: Fraction[]
@@ -23,7 +22,7 @@ export interface Tableau {
 export class Simplex {
 
   static calcTableaus(linearSystemSize: LinearSystemSize,
-                      linearSystemData: LinearSystemData
+                      linearSystemData: CalcLinearSystemDataCardOutput
   ): Tableau[] {
 
     const numberOfVars = linearSystemSize.numberOfVars
@@ -38,7 +37,7 @@ export class Simplex {
 
     const targetSlackVars = Array.from(
       {length: numberOfConstraints},
-      _ => math.fraction(0) as Fraction)
+      () => math.fraction(0) as Fraction)
 
     const targetVars = negativeTargetVars.concat(targetSlackVars)
 
@@ -50,7 +49,7 @@ export class Simplex {
     for (let c = 0; c < constraintVars.length; c++) {
       const constraintSlackVars = Array.from(
         {length: numberOfConstraints},
-        _ => math.fraction(0) as Fraction)
+        () => math.fraction(0) as Fraction)
 
       constraintSlackVars[c] = math.fraction(1) as Fraction
       constraintVars[c] = linearSystemData.constraintVars[c].concat(constraintSlackVars)

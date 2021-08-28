@@ -1,6 +1,6 @@
 import {Fraction} from 'mathjs'
-import {Difficulty} from './difficulty'
 
+import {Difficulty} from './difficulty'
 
 export interface Exercise {
   id: number,

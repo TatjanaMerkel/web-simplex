@@ -1,55 +1,105 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core'
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 
+import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
-import {LinearSystemDataCardInput} from './linear-system-data-card-input'
-import {LinearSystemDataInit} from '../../common/linear-system-data/linear-system-data-init'
-import {LinearSystemDataValues} from '../../common/linear-system-data/linear-system-data-values'
-import {LinearSystemData} from './linear-system-data'
+import {CalcLinearSystemDataCardInput} from './calc-linear-system-data-card-input'
+import {CalcLinearSystemDataCardOutput} from './calc-linear-system-data-card-output'
+import {fractionFromInputEvent} from '../../../../common/fractions'
 
 @Component({
-  selector: 'app-calc-linear-system-data-card[data]',
+  selector: 'app-calc-linear-system-data-card[input]',
   templateUrl: './calc-linear-system-data-card.component.html',
   styleUrls: ['./calc-linear-system-data-card.component.css']
 })
-export class CalcLinearSystemDataCardComponent {
+export class CalcLinearSystemDataCardComponent implements OnInit {
 
-  @Input() data!: LinearSystemDataCardInput
+  @Input() input!: CalcLinearSystemDataCardInput
 
-  @Output() dataChange = new EventEmitter<LinearSystemData | null>()
+  @Output() outputChange = new EventEmitter<CalcLinearSystemDataCardOutput | null>()
 
-  linearSystemData: undefined | LinearSystemDataValues
+  initialized = false
+
+  targetVars!: Array<null | Fraction>
+  constraintVars!: Array<Array<null | Fraction>>
+  constraintVals!: Array<null | Fraction>
+
+  targetVarsValid!: boolean[]
+  constraintVarsValid!: boolean[][]
+  constraintValsValid!: boolean[]
 
   editable = true
 
-  /**
-   * Must only be invoked if sure that all input values !== null
-   */
-  emitInput(): void {
-    const linearSystemData = this.linearSystemData!
+  fractionFromInputEvent = fractionFromInputEvent
 
-    const targetVars = linearSystemData.targetVars as Array<Fraction>
-    const constraintVars = linearSystemData.constraintVars as Array<Array<Fraction>>
-    const constraintVals = linearSystemData.constraintVals as Array<Fraction>
+  get isInputCorrect(): boolean {
+    return this.targetVarsValid.every(bool => bool)
+      && this.constraintVarsValid.every(bools => bools.every(bool => bool))
+      && this.constraintValsValid.every(bool => bool)
+  }
 
-    this.dataChange.emit({targetVars, constraintVars, constraintVals})
+  ngOnInit(): void {
+    this.createArrays()
 
-    this.editable = false
+    this.initialized = true
+  }
+
+  checkUserInputAndEmit(): void {
+    this.checkUserInput()
+
+    if (this.isInputCorrect) {
+      const targetVars = this.targetVars as Fraction[]
+      const constraintVars = this.constraintVars as Fraction[][]
+      const constraintVals = this.constraintVals as Fraction[]
+
+      this.outputChange.emit({targetVars, constraintVars, constraintVals})
+
+      this.editable = false
+    }
   }
 
   startEditing(): void {
-    this.dataChange.emit(null)
+    this.outputChange.emit(null)
 
     this.editable = true
   }
 
-  getLinearSystemData(): LinearSystemDataInit {
-    return {
-      ...this.data!,
+  trackByIndex(index: number): number {
+    return index
+  }
 
-      targetVars: null,
-      constraintVars: null,
-      constraintVals: null
+  private createArrays(): void {
+    const {numberOfVars, numberOfConstraints} = this.input
+
+    this.targetVars = new Array<null | Fraction>(numberOfVars).fill(null)
+    this.targetVarsValid = new Array<boolean>(numberOfVars).fill(true)
+
+    this.constraintVars = new Array<Array<null | Fraction>>(numberOfConstraints)
+    this.constraintVarsValid = new Array<Array<boolean>>(numberOfConstraints)
+
+    for (let c = 0; c < this.constraintVars.length; c++) {
+      this.constraintVars[c] = new Array<null | Fraction>(numberOfVars).fill(null)
+      this.constraintVarsValid[c] = new Array<boolean>(numberOfVars).fill(true)
+    }
+
+    this.constraintVals = new Array<null | Fraction>(numberOfConstraints).fill(null)
+    this.constraintValsValid = new Array<boolean>(numberOfConstraints).fill(true)
+  }
+
+  private checkUserInput(): void {
+    for (let v = 0; v < this.targetVars.length; v++) {
+      this.targetVarsValid[v] = this.targetVars[v] !== null
+    }
+
+    for (let c = 0; c < this.constraintVars.length; c++) {
+      for (let v = 0; v < this.constraintVars[c].length; v++) {
+        this.constraintVarsValid[c][v] = this.constraintVars[c][v] !== null
+      }
+    }
+
+    for (let c = 0; c < this.constraintVals.length; c++) {
+      const constraintVal = this.constraintVals[c]
+      this.constraintValsValid[c] = constraintVal !== null && math.largerEq(constraintVal, 0) as boolean
     }
   }
 }
