@@ -81,14 +81,14 @@
 
   </table>
 
-  <!-- Calculate/Edit Button -->
+  <!-- Continue/Edit Button -->
 
   <ng-container *ngIf="editable; then calculate; else edit"></ng-container>
 
   <ng-template #calculate>
     <button class="btn btn-success btn-lg float-right mt-4"
             (click)="checkUserInputAndEmit()">
-      Berechnen
+      Weiter
     </button>
   </ng-template>
 

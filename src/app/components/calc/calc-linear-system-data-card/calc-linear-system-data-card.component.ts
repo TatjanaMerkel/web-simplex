@@ -20,6 +20,8 @@ export class CalcLinearSystemDataCardComponent implements OnInit {
 
   initialized = false
 
+  editable = true
+
   targetVars!: Array<null | Fraction>
   constraintVars!: Array<Array<null | Fraction>>
   constraintVals!: Array<null | Fraction>
@@ -28,11 +30,9 @@ export class CalcLinearSystemDataCardComponent implements OnInit {
   constraintVarsValid!: boolean[][]
   constraintValsValid!: boolean[]
 
-  editable = true
-
   fractionFromInputEvent = fractionFromInputEvent
 
-  get isInputCorrect(): boolean {
+  get isInputValid(): boolean {
     return this.targetVarsValid.every(bool => bool)
       && this.constraintVarsValid.every(bools => bools.every(bool => bool))
       && this.constraintValsValid.every(bool => bool)
@@ -47,7 +47,7 @@ export class CalcLinearSystemDataCardComponent implements OnInit {
   checkUserInputAndEmit(): void {
     this.checkUserInput()
 
-    if (this.isInputCorrect) {
+    if (this.isInputValid) {
       const targetVars = this.targetVars as Fraction[]
       const constraintVars = this.constraintVars as Fraction[][]
       const constraintVals = this.constraintVals as Fraction[]

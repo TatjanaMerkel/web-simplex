@@ -1,7 +1,7 @@
 import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
-import {LinearSystemSize} from '../app/components/calc/calc-linear-system-size-card/linear-system-size'
+import {CalcLinearSystemSizeCardOutput} from '../app/components/calc/calc-linear-system-size-card/calc-linear-system-size-card-output'
 import {CalcLinearSystemDataCardOutput} from "../app/components/calc/calc-linear-system-data-card/calc-linear-system-data-card-output";
 
 export interface Tableau {
@@ -21,7 +21,7 @@ export interface Tableau {
 
 export class Simplex {
 
-  static calcTableaus(linearSystemSize: LinearSystemSize,
+  static calcTableaus(linearSystemSize: CalcLinearSystemSizeCardOutput,
                       linearSystemData: CalcLinearSystemDataCardOutput
   ): Tableau[] {
 

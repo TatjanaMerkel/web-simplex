@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 
 import {HeaderService} from '../../../services/header.service'
-import {LinearSystemSize} from './calc-linear-system-size-card/linear-system-size'
+import {CalcLinearSystemSizeCardOutput} from './calc-linear-system-size-card/calc-linear-system-size-card-output'
 import {Simplex, Tableau} from '../../../common/simplex'
 import {SolutionInput} from './calc-solution-card/solution-input'
 import {StandardFormInput} from './calc-standard-form-card/standard-form-input'
@@ -17,7 +17,7 @@ import {CalcLinearSystemDataCardInput} from "./calc-linear-system-data-card/calc
 })
 export class CalcComponent implements OnInit {
 
-  linearSystemSizeOutput: LinearSystemSize | null = null
+  linearSystemSizeOutput: CalcLinearSystemSizeCardOutput | null = null
 
   linearSystemDataInitialized = false
   targetVars!: null | Fraction[]
@@ -34,7 +34,7 @@ export class CalcComponent implements OnInit {
     this.headerService.title.next('Rechnen')
   }
 
-  setLinearSystemSize(linearSystemSize: LinearSystemSize | null): void {
+  setLinearSystemSize(linearSystemSize: CalcLinearSystemSizeCardOutput | null): void {
     if (linearSystemSize !== null) {
       this.linearSystemSizeOutput = linearSystemSize
     } else {

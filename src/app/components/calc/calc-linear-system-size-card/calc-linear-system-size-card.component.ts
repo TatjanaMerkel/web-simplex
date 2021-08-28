@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core'
 
-import {LinearSystemSize} from './linear-system-size'
+import {CalcLinearSystemSizeCardOutput} from './calc-linear-system-size-card-output'
+import {numberFromInputEvent} from '../../../../common/numbers'
 
 @Component({
   selector: 'app-calc-linear-system-size-card',
@@ -9,51 +10,43 @@ import {LinearSystemSize} from './linear-system-size'
 })
 export class CalcLinearSystemSizeCardComponent {
 
-  @Output() dataChange = new EventEmitter<LinearSystemSize | null>()
+  @Output() outputChange = new EventEmitter<CalcLinearSystemSizeCardOutput | null>()
 
   editable = true
-  inputValid = false
 
   numberOfVars: null | number = null
   numberOfConstraints: null | number = null
 
-  emitInput(): void {
-    this.dataChange.emit({
-      numberOfVars: this.numberOfVars!,
-      numberOfConstraints: this.numberOfConstraints!
-    })
+  numberOfVarsValid = true
+  numberOfConstraintsValid = true
 
-    this.editable = false
+  numberFromInputEvent = numberFromInputEvent
+
+  get isInputValid(): boolean {
+    return this.numberOfVarsValid && this.numberOfConstraintsValid
+  }
+
+  checkUserInputAndEmit(): void {
+    this.checkUserInput()
+
+    if (this.isInputValid) {
+      const numberOfVars = this.numberOfVars!
+      const numberOfConstraints = this.numberOfConstraints!
+
+      this.outputChange.emit({numberOfVars, numberOfConstraints})
+
+      this.editable = false
+    }
   }
 
   startEditing(): void {
-    this.dataChange.emit(null)
+    this.outputChange.emit(null)
 
     this.editable = true
   }
 
-  onNumberOfVarsChange(event: Event): void {
-    this.numberOfVars = CalcLinearSystemSizeCardComponent.numberFromInputEvent(event)
-    this.inputValid = this.validateInput()
-  }
-
-  onNumberOfConstraintsChange(event: Event): void {
-    this.numberOfConstraints = CalcLinearSystemSizeCardComponent.numberFromInputEvent(event)
-    this.inputValid = this.validateInput()
-  }
-
-  validateInput(): boolean {
-    return this.numberOfVars !== null && this.numberOfConstraints !== null
-  }
-
-  private static numberFromInputEvent(event: Event): number | null {
-    const inputElement = event.target as HTMLInputElement
-    const inputValue = inputElement.value
-
-    if (inputValue === '') {
-      return null
-    } else {
-      return Number(inputValue)
-    }
+  private checkUserInput(): void {
+    this.numberOfVarsValid = this.numberOfVars !== null
+    this.numberOfConstraintsValid = this.numberOfConstraints !== null
   }
 }
