@@ -82,5 +82,12 @@ ol, ul {
   padding-left: 1.5em;
 }
 
+/* Text Color */
+.textColor {
+  color: dodgerblue;
+}
 
+.gree {
+  color: #b2afaf;
+}
 
