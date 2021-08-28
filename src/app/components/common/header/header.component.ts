@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core'
-import {Location} from '@angular/common'
 import {Router} from '@angular/router'
 
 import {HeaderService} from '../../../../services/header.service'
@@ -14,7 +13,6 @@ export class HeaderComponent implements OnInit {
   title: string | undefined
 
   constructor(private headerService: HeaderService,
-              public location: Location,
               public router: Router) {
   }
 
