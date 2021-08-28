@@ -67,7 +67,13 @@ export class AdminEditExerciseComponent implements OnInit {
     }
   }
 
-  submit() {
+  submitDelete() {
+    this.exerciseService.deleteExercise(this.id!).subscribe(() => {
+      this.router.navigate(['/admin/exercises'])
+    })
+  }
+
+  submitUpdate() {
     if (this.isInputValid()) {
       const exercise: Exercise = {
         id: this.id!,
