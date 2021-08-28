@@ -18,15 +18,17 @@ import {LinearSystemDataValues} from '../common/linear-system-data/linear-system
 })
 export class AdminEditExerciseComponent implements OnInit {
 
-  id: null | number = null
-  title: null | string = null
-  difficulty: null | Difficulty = null
-  task: null | string = null
-  numberOfVars: null | number = null
-  numberOfConstraints: null | number = null
-  targetVars: null | Array<null | Fraction> = null
-  constraintVars: null | Array<Array<null | Fraction>> = null
-  constraintVals: null | Array<null | Fraction> = null
+  initialized = false
+
+  id!: number
+  title!: string
+  difficulty!: Difficulty
+  task!: string
+  numberOfVars!: number
+  numberOfConstraints!: number
+  targetVars!: Array<null | Fraction>
+  constraintVars!: Array<Array<null | Fraction>>
+  constraintVals!: Array<null | Fraction>
 
   constructor(private activatedRoute: ActivatedRoute,
               private exerciseService: ExerciseService,
@@ -52,6 +54,8 @@ export class AdminEditExerciseComponent implements OnInit {
         this.targetVars = JSON.parse(JSON.stringify(exercise.targetVars), reviver)
         this.constraintVars = JSON.parse(JSON.stringify(exercise.constraintVars), reviver)
         this.constraintVals = JSON.parse(JSON.stringify(exercise.constraintVals), reviver)
+
+        this.initialized = true
       })
     })
   }
@@ -104,24 +108,8 @@ export class AdminEditExerciseComponent implements OnInit {
   }
 
   isInputValid(): boolean {
-    if (!this.title || this.title === '') {
-      return false
-    }
-
-    if (!this.targetVars || this.targetVars.indexOf(null) !== -1) {
-      return false
-    }
-
-    if (!this.constraintVars) {
-      return false
-    }
-
-    for (let constraintVarsRow of this.constraintVars) {
-      if (constraintVarsRow.indexOf(null) !== -1) {
-        return false
-      }
-    }
-
-    return !(!this.constraintVals || this.constraintVals.indexOf(null) !== -1)
+    return this.targetVars.every(targetVar => targetVar)
+      && this.constraintVars.every(constraintVarsRow => constraintVarsRow.every(constraintVar => constraintVar))
+      && this.constraintVals.every(constraintVal => constraintVal && math.largerEq(constraintVal, 0))
   }
 }

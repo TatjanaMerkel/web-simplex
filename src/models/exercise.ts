@@ -9,7 +9,7 @@ export interface Exercise {
 
   difficulty: Difficulty,
 
-  task: string | null,
+  task: string,
 
   numberOfVars: number,
   numberOfConstraints: number,

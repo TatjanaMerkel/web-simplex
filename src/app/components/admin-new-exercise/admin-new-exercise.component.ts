@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {Router} from '@angular/router'
 
+import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
 import {Difficulty} from '../../../models/difficulty'
@@ -73,21 +74,9 @@ export class AdminNewExerciseComponent implements OnInit {
   }
 
   isInputValid(): boolean {
-    if (this.title === '') {
-      return false
-    }
-
-    if (this.targetVars.indexOf(null) !== -1) {
-      return false
-    }
-
-    for (let constraintVarsRow of this.constraintVars) {
-      if (constraintVarsRow.indexOf(null) !== -1) {
-        return false
-      }
-    }
-
-    return this.constraintVals.indexOf(null) === -1
+    return this.targetVars.every(targetVar => targetVar)
+      && this.constraintVars.every(constraintVarsRow => constraintVarsRow.every(constraintVar => constraintVar))
+      && this.constraintVals.every(constraintVal => constraintVal && math.largerEq(constraintVal, 0))
   }
 
   storeLinearSystemData(linearSystemDataOutput: LinearSystemDataValues) {
