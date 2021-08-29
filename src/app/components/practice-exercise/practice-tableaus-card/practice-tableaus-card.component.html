@@ -12,7 +12,8 @@
   -->
 
   <ng-container *ngFor="let expectedTableau of expected; let t = index; trackBy: trackByIndex">
-    <table *ngIf="t <= solvedTableausCount">
+    <table *ngIf="t <= solvedTableausCount"
+           class="mx-auto">
 
       <!--
         Table Header
@@ -109,7 +110,7 @@
     </table>
   </ng-container>
 
-  <!-- Button -->
+  <!-- Next Button -->
 
   <button class="btn btn-lg float-right mt-4"
           [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"

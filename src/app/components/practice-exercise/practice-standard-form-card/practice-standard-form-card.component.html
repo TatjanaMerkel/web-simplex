@@ -8,7 +8,7 @@
   <!--   8 x1 +  9 x2 + 10 x3      + x5          = 11  -->
   <!--  12 x1 + 13 x2 + 14 x3           + x6     = 15  -->
   <!--                                                 -->
-  <table *ngIf="initialized">
+  <table class="mx-auto">
 
     <!--  -1 x1 -  2 x2 -  3 x3                + z =  0  -->
     <tr>
@@ -109,7 +109,7 @@
       </ng-container>
 
       <!--  + z  -->
-      <td class="operator solution-var">
+      <td class="operator">
         +
       </td>
       <td>
@@ -140,7 +140,7 @@
     </tr>
   </table>
 
-  <!-- Button -->
+  <!-- Next Button -->
 
   <button class="btn btn-lg float-right mt-4"
           [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"

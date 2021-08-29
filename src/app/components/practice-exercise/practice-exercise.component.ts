@@ -53,7 +53,13 @@ export class PracticeExerciseComponent implements OnInit {
 
     const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = exercise
 
-    return {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals}
+    return {
+      numberOfVars,
+      numberOfConstraints,
+      targetVars: targetVars.map(targetVar => math.multiply(targetVar, -1)) as Fraction[],
+      constraintVars,
+      constraintVals
+    }
   }
 
   get expectedTableaus(): ExpectedTableau[] {
