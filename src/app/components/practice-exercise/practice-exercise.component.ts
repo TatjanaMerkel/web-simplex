@@ -12,7 +12,7 @@ import {HeaderService} from '../../../services/header.service'
 import {ExpectedLinearSystemData} from './practice-linear-system-data-card/expected-linear-system-data'
 import {ExpectedLinearSystemSize} from './practice-linear-system-size-card/expected-linear-system-size'
 import {ExpectedStandardForm} from './practice-standard-form-card/expected-standard-form'
-import {Simplex, Tableau} from '../../../common/simplex'
+import {getSolution, Simplex, Tableau} from '../../../common/simplex'
 import {StandardFormInput} from '../calc/calc-standard-form-card/standard-form-input'
 
 @Component({
@@ -33,6 +33,9 @@ export class PracticeExerciseComponent implements OnInit {
   solutionCorrect = false
 
   tableaus!: Tableau[]
+
+  solutionVal!: Fraction
+  solutionVars!: Fraction[]
 
   get expectedLinearSystemSize(): ExpectedLinearSystemSize {
     const exercise = this.exercise!
@@ -82,15 +85,9 @@ export class PracticeExerciseComponent implements OnInit {
   }
 
   get expectedSolution(): ExpectedSolution {
-    const lastTableau = this.tableaus[this.tableaus.length - 1]
-
-    const solutionVars = Array.from(
-      {length: lastTableau.targetVars.length},
-      () => math.fraction(0) as Fraction)
-
     return {
-      solutionVal: lastTableau.targetVal,
-      solutionVars: solutionVars
+      solutionVal: this.solutionVal,
+      solutionVars: this.solutionVars
     }
   }
 
@@ -121,6 +118,11 @@ export class PracticeExerciseComponent implements OnInit {
         this.tableaus = Simplex.calcTableaus(
           {numberOfVars, numberOfConstraints},
           {targetVars, constraintVars, constraintVals})
+
+        const {solutionVal, solutionVars} = getSolution(this.tableaus[this.tableaus.length - 1])
+
+        this.solutionVal = solutionVal
+        this.solutionVars = solutionVars
 
         this.initialized = true
       })

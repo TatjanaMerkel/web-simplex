@@ -2,7 +2,7 @@ import * as math from 'mathjs'
 import {Fraction} from 'mathjs'
 
 import {CalcLinearSystemSizeCardOutput} from '../app/components/calc/calc-linear-system-size-card/calc-linear-system-size-card-output'
-import {CalcLinearSystemDataCardOutput} from "../app/components/calc/calc-linear-system-data-card/calc-linear-system-data-card-output";
+import {CalcLinearSystemDataCardOutput} from '../app/components/calc/calc-linear-system-data-card/calc-linear-system-data-card-output'
 
 export interface Tableau {
   targetVars: Fraction[]
@@ -209,4 +209,18 @@ export class Simplex {
 
     return tableaus
   }
+}
+
+export function getSolution(tableau: Tableau): { solutionVal: Fraction, solutionVars: Fraction[] } {
+  const solutionVal = tableau.targetVal
+  const solutionVars = Array.from(
+    {length: tableau.targetVars.length},
+    () => math.fraction(0) as Fraction)
+
+  for (let c = 0; c < tableau.slackVars.length; c++) {
+    const slackVar = tableau.slackVars[c]
+    solutionVars[slackVar] = tableau.constraintVals[c]
+  }
+
+  return {solutionVal, solutionVars}
 }

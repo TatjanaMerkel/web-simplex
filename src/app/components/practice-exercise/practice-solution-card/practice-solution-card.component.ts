@@ -19,11 +19,13 @@ export class PracticeSolutionCardComponent implements OnInit {
 
   initialized = false
 
-  solutionVal: Fraction | null = null
-  solutionVars!: Array<Fraction | null>
+  solutionVal: null | Fraction = null
+  solutionVars!: Array<null | Fraction>
 
   solutionValCorrect = true
   solutionVarsCorrect!: boolean[]
+
+  fractionFromInputEvent = fractionFromInputEvent
 
   get isInputCorrect(): boolean {
     return this.solutionValCorrect
@@ -31,18 +33,10 @@ export class PracticeSolutionCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.solutionVars = new Array<Fraction | null>(this.expected.solutionVars.length).fill(null)
+    this.solutionVars = new Array<null | Fraction>(this.expected.solutionVars.length).fill(null)
     this.solutionVarsCorrect = new Array<boolean>(this.expected.solutionVars.length).fill(true)
 
     this.initialized = true
-  }
-
-  saveSolutionVal(event: Event): void {
-    this.solutionVal = fractionFromInputEvent(event)
-  }
-
-  saveSolutionsVar(event: Event, v: number): void {
-    this.solutionVars[v] = fractionFromInputEvent(event)
   }
 
   checkUserInputAndEmit(): void {
