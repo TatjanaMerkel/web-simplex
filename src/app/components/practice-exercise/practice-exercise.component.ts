@@ -22,6 +22,8 @@ import {StandardFormInput} from '../calc/calc-standard-form-card/standard-form-i
 })
 export class PracticeExerciseComponent implements OnInit {
 
+  initialized = false
+
   exercise: undefined | Exercise
 
   linearSystemSizeCorrect = false
@@ -71,9 +73,11 @@ export class PracticeExerciseComponent implements OnInit {
 
     return this.tableaus.map((tableau: Tableau) => {
       const {numberOfVars, numberOfConstraints} = exercise
-      const {targetVars, targetVal, constraintVars, constraintVals, thetas} = tableau
+      const {targetVars, targetVal, constraintVars, constraintVals, thetas, slackVars} = tableau
 
-      return {numberOfVars, numberOfConstraints, targetVars, targetVal, constraintVars, constraintVals, thetas}
+      return {
+        numberOfVars, numberOfConstraints, targetVars, targetVal, constraintVars, constraintVals, thetas, slackVars
+      }
     })
   }
 
@@ -117,6 +121,8 @@ export class PracticeExerciseComponent implements OnInit {
         this.tableaus = Simplex.calcTableaus(
           {numberOfVars, numberOfConstraints},
           {targetVars, constraintVars, constraintVals})
+
+        this.initialized = true
       })
     })
   }

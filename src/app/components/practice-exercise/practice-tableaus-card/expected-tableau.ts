@@ -11,4 +11,5 @@ export default interface ExpectedTableau {
   constraintVals: Fraction[]
 
   thetas: Fraction[] | null
+  slackVars: number[]
 }

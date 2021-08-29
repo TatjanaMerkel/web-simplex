@@ -44,7 +44,16 @@
       <tbody>
       <tr *ngFor="let constraintVarsRow of expectedTableau.constraintVars; let c = index">
         <td class="line-right">
-          x<sub>0</sub>
+          <select [class.wrong]="t === solvedTableausCount && !slackVarsCorrect[c]"
+                  [disabled]="t < solvedTableausCount"
+                  (input)="slackVarsCorrect[c] = true"
+                  (change)="slackVars[c] = numberFromInputEvent($event)!">
+
+            <option [value]="null"></option>
+            <option *ngFor="let _ of [].constructor(targetVars.length); index as v" [value]="v">
+              x{{ v + 1 }}
+            </option>
+          </select>
         </td>
 
         <td *ngFor="let constraintVar of constraintVarsRow; let v = index">
@@ -52,7 +61,7 @@
                  [class.wrong]="t === solvedTableausCount && !constraintVarsCorrect[c][v]"
                  [disabled]="t < solvedTableausCount"
                  (input)="constraintVarsCorrect[c][v] = true"
-                 (change)="saveConstraintVar($event, c, v)"/>
+                 (change)="constraintVars[c][v] = fractionFromInputEvent($event)"/>
         </td>
 
         <td class="line-left">
@@ -60,7 +69,7 @@
                  [class.wrong]="t === solvedTableausCount && !constraintValsCorrect[c]"
                  [disabled]="t < solvedTableausCount"
                  (input)="constraintValsCorrect[c] = true"
-                 (change)="saveConstraintVal($event, c)"/>
+                 (change)="constraintVals[c] = fractionFromInputEvent($event)"/>
         </td>
 
         <td class="line-left">
@@ -68,7 +77,7 @@
                  [class.wrong]="t === solvedTableausCount && !thetasCorrect[c]"
                  [disabled]="t < solvedTableausCount"
                  (input)="thetasCorrect[c] = true"
-                 (change)="saveTheta($event, c)"/>
+                 (change)="thetas[c] = fractionFromInputEvent($event)"/>
         </td>
       </tr>
       </tbody>
@@ -90,7 +99,7 @@
                  [class.wrong]="t === solvedTableausCount && !targetVarsCorrect[v]"
                  [disabled]="t < solvedTableausCount"
                  (input)="targetVarsCorrect[v] = true"
-                 (change)="saveTargetVar($event, v)"/>
+                 (change)="targetVars[v] = fractionFromInputEvent($event)"/>
         </td>
 
         <td class="line-left">
@@ -98,12 +107,10 @@
                  [class.wrong]="t === solvedTableausCount && !targetValCorrect"
                  [disabled]="t < solvedTableausCount"
                  (input)="targetValCorrect = true"
-                 (change)="saveTargetVal($event)"/>
+                 (change)="targetVal = fractionFromInputEvent($event)"/>
         </td>
 
-        <td class="line-left">
-          ---
-        </td>
+        <td class="line-left"></td>
       </tr>
       </tfoot>
 

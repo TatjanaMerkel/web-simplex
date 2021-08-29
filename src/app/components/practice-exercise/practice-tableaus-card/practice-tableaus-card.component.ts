@@ -4,6 +4,7 @@ import {Fraction} from 'mathjs'
 
 import ExpectedTableau from './expected-tableau'
 import {fractionFromInputEvent, fractionsEqual} from '../../../../common/fractions'
+import {numberFromInputEvent} from "../../../../common/numbers";
 
 @Component({
   selector: 'app-practice-tableaus-card[expected]',
@@ -21,17 +22,22 @@ export class PracticeTableausCardComponent implements OnInit {
   solvedTableaus!: boolean[]
   solvedTableausCount = 0
 
-  targetVars!: Array<Fraction | null>
-  targetVal: Fraction | null = null
-  constraintVars!: Array<Array<Fraction | null>>
-  constraintVals!: Array<Fraction | null>
-  thetas!: Array<Fraction | null>
+  targetVars!: Array<null | Fraction>
+  targetVal: null | Fraction = null
+  constraintVars!: Array<Array<null | Fraction>>
+  constraintVals!: Array<null | Fraction>
+  thetas!: Array<null | Fraction>
+  slackVars!: Array<null | number>
 
   targetVarsCorrect!: boolean[]
   targetValCorrect = true
   constraintVarsCorrect!: boolean[][]
   constraintValsCorrect!: boolean[]
   thetasCorrect!: boolean[]
+  slackVarsCorrect!: boolean[]
+
+  numberFromInputEvent = numberFromInputEvent
+  fractionFromInputEvent = fractionFromInputEvent
 
   get isInputCorrect(): boolean {
     return this.targetVarsCorrect.every(bool => bool)
@@ -39,6 +45,7 @@ export class PracticeTableausCardComponent implements OnInit {
       && this.constraintVarsCorrect.every(bools => bools.every(bool => bool))
       && this.constraintValsCorrect.every(bool => bool)
       && this.thetasCorrect.every(bool => bool)
+      && this.slackVarsCorrect.every(bool => bool)
   }
 
   ngOnInit() {
@@ -48,44 +55,27 @@ export class PracticeTableausCardComponent implements OnInit {
 
     this.solvedTableaus = new Array<boolean>(expectedTableaus.length)
 
-    this.targetVars = new Array<Fraction | null>(expected.targetVars.length).fill(null)
+    this.targetVars = new Array<null | Fraction>(expected.targetVars.length).fill(null)
     this.targetVarsCorrect = new Array<boolean>(expected.targetVars.length).fill(true)
 
-    this.constraintVars = new Array<Array<Fraction | null>>(expected.constraintVars.length)
+    this.constraintVars = new Array<Array<null | Fraction>>(expected.constraintVars.length)
     this.constraintVarsCorrect = new Array<Array<boolean>>(expected.constraintVars.length)
 
     for (let c = 0; c < expected.constraintVars.length; c++) {
-      this.constraintVars[c] = new Array<Fraction | null>(expected.constraintVars[c].length).fill(null)
+      this.constraintVars[c] = new Array<null | Fraction>(expected.constraintVars[c].length).fill(null)
       this.constraintVarsCorrect[c] = new Array<boolean>(expected.constraintVars[c].length).fill(true)
     }
 
-    this.constraintVals = new Array<Fraction | null>(expected.constraintVars.length).fill(null)
+    this.constraintVals = new Array<null | Fraction>(expected.constraintVars.length).fill(null)
     this.constraintValsCorrect = new Array<boolean>(expected.constraintVars.length).fill(true)
 
-    this.thetas = new Array<Fraction | null>(expected.numberOfConstraints).fill(null)
+    this.thetas = new Array<null | Fraction>(expected.numberOfConstraints).fill(null)
     this.thetasCorrect = new Array<boolean>(expected.numberOfConstraints).fill(true)
 
+    this.slackVars = new Array<null | number>(expected.numberOfConstraints).fill(null)
+    this.slackVarsCorrect = new Array<boolean>(expected.numberOfConstraints).fill(true)
+
     this.initialized = true
-  }
-
-  saveTargetVar(event: Event, v: number): void {
-    this.targetVars[v] = fractionFromInputEvent(event)
-  }
-
-  saveTargetVal(event: Event): void {
-    this.targetVal = fractionFromInputEvent(event)
-  }
-
-  saveConstraintVar(event: Event, c: number, v: number): void {
-    this.constraintVars[c][v] = fractionFromInputEvent(event)
-  }
-
-  saveConstraintVal(event: Event, c: number): void {
-    this.constraintVals[c] = fractionFromInputEvent(event)
-  }
-
-  saveTheta(event: Event, c: number): void {
-    this.thetas[c] = fractionFromInputEvent(event)
   }
 
   checkUserInputAndEmit(): void {
@@ -128,6 +118,10 @@ export class PracticeTableausCardComponent implements OnInit {
         this.thetasCorrect[c] = fractionsEqual(this.thetas[c], expected.thetas[c]);
       }
     }
+
+    for (let c = 0; c < this.slackVars.length; c++) {
+      this.slackVarsCorrect[c] = this.slackVars[c] === expected.slackVars[c]
+    }
   }
 
   private resetUserInput(): void {
@@ -140,6 +134,7 @@ export class PracticeTableausCardComponent implements OnInit {
 
     this.constraintVals.fill(null)
     this.thetas.fill(null)
+    this.slackVars.fill(null)
   }
 
   trackByIndex(index: number): number {
