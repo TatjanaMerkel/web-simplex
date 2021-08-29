@@ -18,15 +18,11 @@ body {
 
 /* Learn Tableau */
 
-.learn-tableau {
-  margin: 40px auto;
-}
-
-.learn-tableau thead th {
+.learn-tableau > thead > tr {
   border-bottom: 1px solid white;
 }
 
-.learn-tableau tfoot > * {
+.learn-tableau > tfoot > tr {
   border-top: 1px solid white;
 }
 
@@ -34,7 +30,15 @@ body {
   border-right: 1px solid white;
 }
 
-.learn-tableau tr > *:nth-last-child(2), .learn-tableau tr > *:last-child {
+.learn-tableau-extended tr > *:nth-child(2) {
+  border-right: 1px solid white;
+}
+
+.learn-tableau tr > *:nth-last-child(2) {
+  border-left: 1px solid white;
+}
+
+.learn-tableau tr > *:last-child {
   border-left: 1px solid white;
 }
 
