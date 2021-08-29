@@ -23,3 +23,15 @@ export function fractionsEqual(first: Fraction | null, second: Fraction | null):
 
   return math.equal(first, second) as boolean
 }
+
+export function formatFraction(fraction: Fraction): string {
+  if (fraction.n === 0) {
+    return '0'
+  } else if (fraction.n === 1 && fraction.d === 1) {
+    return ''
+  } else if (fraction.d === 1) {
+    return fraction.n + ''
+  } else {
+    return fraction.n + '/' + fraction.d
+  }
+}

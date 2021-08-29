@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core'
 
-import {HeaderService} from '../../../services/header.service'
+import {CalcLinearSystemDataCardInput} from './calc-linear-system-data-card/calc-linear-system-data-card-input'
+import {CalcLinearSystemDataCardOutput} from './calc-linear-system-data-card/calc-linear-system-data-card-output'
 import {CalcLinearSystemSizeCardOutput} from './calc-linear-system-size-card/calc-linear-system-size-card-output'
-import {Simplex, Tableau} from '../../../common/simplex'
-import {SolutionInput} from './calc-solution-card/solution-input'
+import {CalcSolutionCardInput} from './calc-solution-card/calc-solution-card-input'
+import {Fraction} from 'mathjs'
+import {HeaderService} from '../../../services/header.service'
+import {getSolution, Simplex, Tableau} from '../../../common/simplex'
 import {StandardFormInput} from './calc-standard-form-card/standard-form-input'
 import {TableauInput} from './calc-tableau-card/tableau-input'
-import {Fraction} from "mathjs";
-import {CalcLinearSystemDataCardOutput} from "./calc-linear-system-data-card/calc-linear-system-data-card-output";
-import {CalcLinearSystemDataCardInput} from "./calc-linear-system-data-card/calc-linear-system-data-card-input";
 
 @Component({
   selector: 'app-calculator',
@@ -26,6 +26,9 @@ export class CalcComponent implements OnInit {
 
   tableaus: Tableau[] | null = null
   showTableaus = false
+
+  solutionVal: undefined | Fraction
+  solutionVars: undefined | Fraction[]
 
   constructor(private headerService: HeaderService) {
   }
@@ -70,6 +73,13 @@ export class CalcComponent implements OnInit {
 
       this.tableaus = Simplex.calcTableaus(this.linearSystemSizeOutput!,
         {targetVars, constraintVars, constraintVals})
+
+      const {solutionVal, solutionVars} = getSolution(this.tableaus[this.tableaus.length - 1])
+
+      this.solutionVal = solutionVal
+      this.solutionVars = solutionVars
+
+      this.showTableaus = true
     }
   }
 
@@ -117,16 +127,10 @@ export class CalcComponent implements OnInit {
     }
   }
 
-  /**
-   * Must only be called when tableau data has been calculated.
-   */
-  getSolutionInput(): SolutionInput {
-    const tableauData = this.tableaus!
-
-    const lastTableau = tableauData[tableauData.length - 1]
-
+  getSolutionInput(): CalcSolutionCardInput {
     return {
-      targetVal: lastTableau.targetVal
+      solutionVal: this.solutionVal as Fraction,
+      solutionVars: this.solutionVars as Fraction[]
     }
   }
 }
