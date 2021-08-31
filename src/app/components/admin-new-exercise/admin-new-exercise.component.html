@@ -36,18 +36,14 @@
                 [placeholder]="taskPlaceholder"
                 rows="3"></textarea>
 
-      <!-- Number of Variables -->
-
       <label for="numberOfVars">Variablen</label>
       <input id="numberOfVars" class="number-input"
-             type="number"
+             type="number" min="1"
              [(ngModel)]="numberOfVars"/>
-
-      <!-- Number of Constraints -->
 
       <label for="numberOfConstraints">Nebenbedingungen</label>
       <input id="numberOfConstraints" class="number-input"
-             type="number"
+             type="number" min="1"
              [(ngModel)]="numberOfConstraints"/>
 
       <!-- Linear System Data -->

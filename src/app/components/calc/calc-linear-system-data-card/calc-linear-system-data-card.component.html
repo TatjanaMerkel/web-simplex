@@ -58,7 +58,7 @@
           <input class="fraction-input"
                  [class.wrong]="!constraintVarsValid[c][v + 1]"
                  [disabled]="!editable"
-                 (input)="constraintVarsValid[c][v + 1]"
+                 (input)="constraintVarsValid[c][v + 1] = true"
                  (change)="constraintVars[c][v + 1] = fractionFromInputEvent($event)"/>
         </td>
         <td>
@@ -86,7 +86,9 @@
   <ng-container *ngIf="editable; then calculate; else edit"></ng-container>
 
   <ng-template #calculate>
-    <button class="btn btn-success btn-lg float-right mt-4"
+    <button class="btn btn-lg float-right mt-4"
+            [ngClass]="isInputValid ? 'btn-success' : 'btn-danger'"
+            [disabled]="!isInputValid"
             (click)="checkUserInputAndEmit()">
       Weiter
     </button>

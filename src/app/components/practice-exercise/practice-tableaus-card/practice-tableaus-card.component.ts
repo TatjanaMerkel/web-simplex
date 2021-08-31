@@ -4,7 +4,7 @@ import {Fraction} from 'mathjs'
 
 import ExpectedTableau from './expected-tableau'
 import {fractionFromInputEvent, fractionsEqual} from '../../../../common/fractions'
-import {numberFromInputEvent} from "../../../../common/numbers";
+import {numberFromInputEvent} from '../../../../common/numbers'
 
 @Component({
   selector: 'app-practice-tableaus-card[expected]',
@@ -14,6 +14,7 @@ import {numberFromInputEvent} from "../../../../common/numbers";
 export class PracticeTableausCardComponent implements OnInit {
 
   @Input() expected!: ExpectedTableau[]
+  @Input() disabled = false
 
   @Output() correct = new EventEmitter<void>()
 

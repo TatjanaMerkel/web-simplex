@@ -34,13 +34,15 @@
       <!-- Number of Variables -->
 
       <label for="numberOfVars">Variablen</label>
-      <input id="numberOfVars" type="number" class="number-input"
+      <input id="numberOfVars" class="number-input"
+             type="number" min="1"
              [(ngModel)]="numberOfVars"/>
 
       <!-- Number of Constraints -->
 
       <label for="numberOfConstraints">Nebenbedingungen</label>
-      <input id="numberOfConstraints" type="number" class="number-input"
+      <input id="numberOfConstraints" class="number-input"
+             type="number" min="1"
              [(ngModel)]="numberOfConstraints"/>
 
       <!-- Linear System Data -->

@@ -30,7 +30,9 @@
   <ng-container *ngIf="editable; then next; else edit"></ng-container>
 
   <ng-template #next>
-    <button class="btn btn-success btn-lg float-right mt-4"
+    <button class="btn btn-lg float-right mt-4"
+            [ngClass]="isInputValid ? 'btn-success' : 'btn-danger'"
+            [disabled]="!isInputValid"
             (click)="checkUserInputAndEmit()">
       Weiter
     </button>
@@ -39,7 +41,7 @@
   <ng-template #edit>
     <button class="btn btn-warning btn-lg float-right mt-4"
             (click)="startEditing()">
-      Edit
+      Ändern
     </button>
   </ng-template>
 
