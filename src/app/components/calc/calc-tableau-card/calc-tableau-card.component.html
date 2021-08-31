@@ -7,18 +7,18 @@
 <!--   z | 10 11  0  0  0 | 0  -->
 
 <ng-container *ngIf="data; else noData">
-  <table>
+  <table class="learn-tableau mx-auto">
 
     <!--  BV | x1 x2 x3 x4 x5 | b  -->
-    <thead class="line-bottom">
+    <thead>
     <tr>
-      <td class="line-right">BV</td>
+      <td>BV</td>
       <td *ngFor="let _ of [].constructor(data.numberOfVars); let v = index"
           [ngClass]="getClasses(null, v).join(' ')">
         <span [class.slack-var]="data.slackVars.indexOf(v) !== -1">x<sub>{{ v + 1 }}</sub></span>
       </td>
-      <td class="bar-left">b</td>
-      <td class="bar-left">theta</td>
+      <td>b</td>
+      <td>theta</td>
     </tr>
     </thead>
 
@@ -27,7 +27,7 @@
     <!--  x5 |  7  8  0  0  1 | 9  -->
     <tbody>
     <tr *ngFor="let _ of [].constructor(data.numberOfConstraints); let c = index">
-      <td [ngClass]="getClasses(c, null).concat('bar-right').join(' ')">
+      <td [ngClass]="getClasses(c, null).join(' ')">
         x<sub>{{ data.slackVars[c] + 1 }}</sub>
       </td>
 
@@ -36,26 +36,26 @@
         {{ formatFraction(constraintVar) }}
       </td>
 
-      <td [ngClass]="getClasses(c, null).concat('bar-left').join(' ')">
+      <td [ngClass]="getClasses(c, null).join(' ')">
         {{ formatFraction(data.constraintVals[c]) }}
       </td>
 
-      <td [ngClass]="getClasses(c, null).concat('bar-left').join(' ')"
+      <td [ngClass]="getClasses(c, null).join(' ')"
           [innerHTML]="data.thetas ? formatFraction(data.thetas[c]) : ''">
       </td>
     </tr>
     </tbody>
 
     <!--   z | 10 11  0  0  0 | 0  -->
-    <tfoot class="line-top">
+    <tfoot>
     <tr>
-      <td class="line-right">z</td>
+      <td>z</td>
       <td *ngFor="let targetVar of data.targetVars; let v = index"
           [ngClass]="getClasses(null, v).join(' ')">
         {{ formatFraction(targetVar) }}
       </td>
-      <td class="bar-left">{{ formatFraction(data.targetVal) }}</td>
-      <td class="bar-left">---</td>
+      <td>{{ formatFraction(data.targetVal) }}</td>
+      <td></td>
     </tr>
     </tfoot>
 

@@ -37,7 +37,7 @@ import {PracticeLinearSystemSizeCardComponent} from './components/practice-exerc
 import {PracticeSolutionCardComponent} from './components/practice-exercise/practice-solution-card/practice-solution-card.component'
 import {PracticeStandardFormCardComponent} from './components/practice-exercise/practice-standard-form-card/practice-standard-form-card.component'
 import {PracticeTableausCardComponent} from './components/practice-exercise/practice-tableaus-card/practice-tableaus-card.component'
-import {VarDirective} from '../ng-var.directive';
+import {VarDirective} from '../ng-var.directive'
 
 @NgModule({
   declarations: [

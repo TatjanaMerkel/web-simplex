@@ -9,16 +9,11 @@ import {HeaderService} from '../../../../services/header.service'
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  title: undefined | string
 
-  title: string | undefined
-
-  constructor(private headerService: HeaderService,
-              public router: Router) {
-  }
+  constructor(private headerService: HeaderService, public router: Router) {}
 
   ngOnInit(): void {
-    this.headerService.title.subscribe((title: string) => {
-      this.title = title
-    })
+    this.headerService.title.subscribe((title: string) => {this.title = title})
   }
 }

@@ -13,9 +13,7 @@ import {fractionFromInputEvent} from '../../../../common/fractions'
   styleUrls: ['./calc-linear-system-data-card.component.css']
 })
 export class CalcLinearSystemDataCardComponent implements OnInit {
-
   @Input() input!: CalcLinearSystemDataCardInput
-
   @Output() outputChange = new EventEmitter<CalcLinearSystemDataCardOutput | null>()
 
   initialized = false

@@ -107,7 +107,6 @@ export class PracticeExerciseComponent implements OnInit {
 
         this.exercise = {
           ...exercise,
-
           targetVars: JSON.parse(JSON.stringify(exercise.targetVars), reviver),
           constraintVars: JSON.parse(JSON.stringify(exercise.constraintVars), reviver),
           constraintVals: JSON.parse(JSON.stringify(exercise.constraintVals), reviver)

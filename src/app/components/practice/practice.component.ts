@@ -24,14 +24,9 @@ export class PracticeComponent implements OnInit {
     this.headerService.title.next('Üben')
 
     this.exerciseService.getExercises().subscribe(exercises => {
-      this.easyExercises = exercises
-        .filter(exercise => exercise.difficulty === Difficulty.EASY)
-
-      this.mediumExercises = exercises
-        .filter(exercise => exercise.difficulty === Difficulty.MEDIUM)
-
-      this.hardExercises = exercises
-        .filter(exercise => exercise.difficulty === Difficulty.HARD)
+      this.easyExercises = exercises.filter(exercise => exercise.difficulty === Difficulty.EASY)
+      this.mediumExercises = exercises.filter(exercise => exercise.difficulty === Difficulty.MEDIUM)
+      this.hardExercises = exercises.filter(exercise => exercise.difficulty === Difficulty.HARD)
     })
   }
 }

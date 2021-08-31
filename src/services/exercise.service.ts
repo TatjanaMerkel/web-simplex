@@ -11,9 +11,7 @@ import {Exercise} from '../models/exercise'
   providedIn: 'root'
 })
 export class ExerciseService {
-
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
