@@ -135,7 +135,7 @@ export class Simplex {
       const pivot = prevTableau.constraintVars[pivotRow][pivotCol]
 
       //
-      // Calculate new pivot row by dividing though pivot element
+      // Calculate new pivot row by dividing through pivot element
       //
 
       const newConstraintVars = new Array<Array<Fraction>>(prevTableau.constraintVars.length)

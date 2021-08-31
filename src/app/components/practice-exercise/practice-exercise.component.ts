@@ -14,6 +14,7 @@ import {ExpectedLinearSystemSize} from './practice-linear-system-size-card/expec
 import {ExpectedStandardForm} from './practice-standard-form-card/expected-standard-form'
 import {getSolution, Simplex, Tableau} from '../../../common/simplex'
 import {StandardFormInput} from '../calc/calc-standard-form-card/standard-form-input'
+import {InitLinearSystemData} from "./practice-init-linear-system-data-card/init-linear-system-data";
 
 @Component({
   selector: 'app-practice-exercise',
@@ -51,6 +52,14 @@ export class PracticeExerciseComponent implements OnInit {
     const {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals} = exercise
 
     return {numberOfVars, numberOfConstraints, targetVars, constraintVars, constraintVals}
+  }
+
+  get initLinearSystemData(): InitLinearSystemData {
+    const exercise = this.exercise!
+
+    const {targetVars, constraintVars, constraintVals} = exercise
+
+    return {targetVars, constraintVars, constraintVals}
   }
 
   get expectedStandardForm(): ExpectedStandardForm {

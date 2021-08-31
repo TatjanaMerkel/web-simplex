@@ -1,26 +1,40 @@
-<main *ngIf="initialized">
+<main *ngIf="initialized && exercise">
 
   <!-- Overview -->
 
-  <app-card class="card-1" title="Übersicht">
+  <app-card *ngIf="exercise.task"
+            class="card-1"
+            title="Übersicht">
     Löse die Textaufgabe indem du
 
     <ol class="task-list">
       <li>die Anzahl der Variablen und Nebenbedingungen bestimmst</li>
-      <li>das lineare Gleichungssystem aufstellst</li>
-      <li>das lineare Gleichungssystem in Normalform überführst</li>
-      <li>das lineare Gleichungssystem in mehreren Tableaus löst</li>
+      <li>das Ungleichungssystem aufstellst</li>
+      <li>das Ungleichungssystem in das standardisierte Gleichungssystem überführst</li>
+      <li>das lineare Gleichungssystem mittels mehrerer Tableaus löst</li>
+      <li>die Lösung aus dem letzten Tableau abliest</li>
+    </ol>
+  </app-card>
+
+  <app-card *ngIf="!exercise.task"
+            class="card-1"
+            title="Übersicht">
+    Löse die Rechenaufgabe indem du
+
+    <ol class="task-list">
+      <li>das Ungleichungssystem in das standardisierte Gleichungssystem überführst</li>
+      <li>das lineare Gleichungssystem mittels mehrerer Tableaus löst</li>
       <li>die Lösung aus dem letzten Tableau abliest</li>
     </ol>
   </app-card>
 
   <!-- Task -->
 
-  <div class="arrow arrow-2">
+  <div *ngIf="exercise.task" class="arrow arrow-2">
     <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
   </div>
 
-  <app-card *ngIf="exercise"
+  <app-card *ngIf="exercise.task"
             class="card-2"
             title="Aufgabe">
 
@@ -29,7 +43,7 @@
 
   <!-- Linear System Size -->
 
-  <ng-template [ngIf]="exercise">
+  <ng-template [ngIf]="exercise.task">
     <div class="arrow arrow-3">
       <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
@@ -43,7 +57,7 @@
 
   <!-- Linear System Data -->
 
-  <ng-template [ngIf]="linearSystemSizeCorrect">
+  <ng-template [ngIf]="linearSystemSizeCorrect && exercise.task">
     <div class="arrow arrow-4">
       <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
@@ -55,9 +69,21 @@
     </app-practice-linear-system-data-card>
   </ng-template>
 
+  <!-- Initialized Linear System Data -->
+
+  <ng-template [ngIf]="!exercise.task">
+    <div class="arrow arrow-4">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-practice-init-linear-system-data-card class="card-4"
+                                               [init]="initLinearSystemData">
+    </app-practice-init-linear-system-data-card>
+  </ng-template>
+
   <!-- Standard Form -->
 
-  <ng-template [ngIf]="linearSystemDataCorrect">
+  <ng-template [ngIf]="linearSystemDataCorrect || !exercise.task">
     <div class="arrow arrow-5">
       <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
@@ -84,7 +110,7 @@
 
   <!-- Solution -->
 
-  <ng-template [ngIf]="true">
+  <ng-template [ngIf]="tableausCorrect">
     <div class="arrow arrow-7">
       <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
     </div>
