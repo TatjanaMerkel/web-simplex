@@ -1,0 +1,11 @@
+/* Table Layout */
+
+td {
+  padding: 8px;
+}
+
+/* Table Gap */
+
+table:not(:first-child) {
+  margin-top: 32px;
+}

@@ -1,0 +1,71 @@
+<app-card title="Lösung ablesen">
+  <p>
+    Aus dem letzten Tableau lassen sich folgende Werte ablesen:
+
+  <table class="mx-auto my-4">
+    <tr>
+      <th>Zielfunktion:</th>
+      <td>z</td>
+      <td>= 10000</td>
+    </tr>
+    <tr>
+      <th>Basisvariablen:</th>
+      <td>x<sub>1</sub>, x<sub>2</sub></td>
+      <td> = 4</td>
+    </tr>
+    <tr>
+      <th>Nichtbasisvariablen:</th>
+      <td>x<sub>3</sub>, x<sub>4</sub></td>
+      <td> = 0</td>
+    </tr>
+  </table>
+
+  <p>
+    Wenn das Ungleichungsystem nochmal betrachtet wird
+  </p>
+
+  <table class="linear-system-table mx-auto my-4">
+    <tr>
+      <td>Z</td>
+      <td>=</td>
+      <td class="value">1000</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td class="value">1500</td>
+      <td>x<sub>2</sub></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="value">1</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td class="value">2</td>
+      <td>x<sub>2</sub></td>
+      <td>&#x2264;</td>
+      <td class="value">12</td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="value">15</td>
+      <td>x<sub>1</sub></td>
+      <td>+</td>
+      <td class="value">10</td>
+      <td>x<sub>2</sub></td>
+      <td>&#x2264;</td>
+      <td class="value">100</td>
+    </tr>
+  </table>
+
+  <p>
+    kann daraus hergeleitet werden, dass x<sub>1</sub> = 4 LKWs und
+    x<sub>2</sub> = 4 Busse transportiert werden müssen, damit der maximale Gewinn
+    von 4 * 1000€ + 4 * 1500€ = 10000€ erwirtschaft wird. Dabei werden
+    4 * 1 + 4 * 2 = 12 Stellplätze belegt und es fallen 4 * 15t + 4 * 10t = 100t Gewicht an.
+  </p>
+</app-card>

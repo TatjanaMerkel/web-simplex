@@ -1,0 +1,104 @@
+<app-card *ngIf="initialized"
+          title="Eingabe der Parameter">
+
+  <table class="mx-auto">
+
+    <!-- Target Vars -->
+
+    <tr>
+      <td>Z</td>
+      <td>=</td>
+
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!targetVarsValid[0]"
+               [disabled]="!editable"
+               (input)="targetVarsValid[0] = true"
+               (change)="targetVars[0] = fractionFromInputEvent($event)"/>
+      </td>
+      <td>
+        x<sub>1</sub>
+      </td>
+
+      <ng-container *ngFor="let _ of targetVars.slice(1); index as v; trackBy: trackByIndex">
+        <td>+</td>
+        <td>
+          <input class="fraction-input"
+                 [class.wrong]="!targetVarsValid[v + 1]"
+                 [disabled]="!editable"
+                 (input)="targetVarsValid[v + 1] = true"
+                 (change)="targetVars[v + 1] = fractionFromInputEvent($event)"/>
+        </td>
+        <td>
+          x<sub>{{v + 2}}</sub>
+        </td>
+      </ng-container>
+    </tr>
+
+    <!-- Constraint Vars -->
+
+    <tr *ngFor="let constraintVarsRow of constraintVars; index as c; trackBy: trackByIndex">
+      <td></td>
+      <td></td>
+
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!constraintVarsValid[c][0]"
+               [disabled]="!editable"
+               (input)="constraintVarsValid[c][0] = true"
+               (change)="constraintVars[c][0] = fractionFromInputEvent($event)"/>
+      </td>
+      <td>
+        x<sub>1</sub>
+      </td>
+
+      <ng-container *ngFor="let _ of constraintVarsRow.slice(1); index as v; trackBy: trackByIndex">
+        <td>+</td>
+        <td>
+          <input class="fraction-input"
+                 [class.wrong]="!constraintVarsValid[c][v + 1]"
+                 [disabled]="!editable"
+                 (input)="constraintVarsValid[c][v + 1] = true"
+                 (change)="constraintVars[c][v + 1] = fractionFromInputEvent($event)"/>
+        </td>
+        <td>
+          x<sub>{{v + 2}}</sub>
+        </td>
+      </ng-container>
+
+      <td>≤</td>
+
+      <!-- Constraint Vals -->
+
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!constraintValsValid[c]"
+               [disabled]="!editable"
+               (input)="constraintValsValid[c] = true"
+               (change)="constraintVals[c] = fractionFromInputEvent($event)"/>
+      </td>
+    </tr>
+
+  </table>
+
+  <!-- Next/Edit Button -->
+
+  <ng-container *ngIf="editable; then calculate; else edit"></ng-container>
+
+  <ng-template #calculate>
+    <button class="btn btn-lg float-right mt-4"
+            [ngClass]="isInputValid ? 'btn-success' : 'btn-danger'"
+            [disabled]="!isInputValid"
+            (click)="checkUserInputAndEmit()">
+      Weiter
+    </button>
+  </ng-template>
+
+  <ng-template #edit>
+    <button class="btn btn-warning btn-lg float-right mt-4"
+            (click)="startEditing()">
+      Ändern
+    </button>
+  </ng-template>
+
+</app-card>

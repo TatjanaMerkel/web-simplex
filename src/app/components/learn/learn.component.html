@@ -1,0 +1,112 @@
+<main>
+
+  <!-- Overview -->
+
+  <app-learn-overview-card class="card-1"
+                           [disabled]="overviewRead"
+                           (next)="overviewRead = true">
+  </app-learn-overview-card>
+
+  <!-- Linear System Size -->
+
+  <ng-container *ngIf="overviewRead">
+    <div class="arrow arrow-2">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-linear-system-size-card class="card-2"
+                                       [disabled]="linearSystemSizeRead"
+                                       (next)="linearSystemSizeRead = true">
+    </app-learn-linear-system-size-card>
+  </ng-container>
+
+  <!-- Linear System Data -->
+
+  <ng-container *ngIf="linearSystemSizeRead">
+    <div class="arrow arrow-3">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-linear-system-data-card class="card-3"
+                                       [disabled]="linearSystemDataRead"
+                                       (next)="linearSystemDataRead = true">
+    </app-learn-linear-system-data-card>
+  </ng-container>
+
+  <!-- Standard Form -->
+
+  <ng-container *ngIf="linearSystemDataRead">
+    <div class="arrow arrow-4">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-standard-form-card class="card-4"
+                                  [disabled]="standardFormRead"
+                                  (next)="standardFormRead = true">
+    </app-learn-standard-form-card>
+  </ng-container>
+
+  <!-- Tableaus (General) -->
+
+  <ng-container *ngIf="standardFormRead">
+    <div class="arrow arrow-5">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-tableaus-general-card class="card-5"
+                                     [disabled]="tableausGeneralRead"
+                                     (next)="tableausGeneralRead = true">
+    </app-learn-tableaus-general-card>
+  </ng-container>
+
+  <!-- Tableaus (1. Tableau) -->
+
+  <ng-container *ngIf="tableausGeneralRead">
+    <div class="arrow arrow-6">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-tableaus-first-card class="card-6"
+                                   [disabled]="tableausFirstRead"
+                                   (next)="tableausFirstRead = true">
+    </app-learn-tableaus-first-card>
+  </ng-container>
+
+  <!-- Tableaus (2. Tableau) -->
+
+  <ng-container *ngIf="tableausFirstRead">
+    <div class="arrow arrow-7">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-tableaus-second-card class="card-7"
+                                    [disabled]="tableausSecondRead"
+                                    (next)="tableausSecondRead = true">
+    </app-learn-tableaus-second-card>
+  </ng-container>
+
+  <!-- Tableaus (3. Tableau) -->
+
+  <ng-container *ngIf="tableausSecondRead">
+    <div class="arrow arrow-8">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-tableaus-third-card class="card-8"
+                                   [disabled]="tableausThirdRead"
+                                   (next)="tableausThirdRead = true">
+    </app-learn-tableaus-third-card>
+  </ng-container>
+
+  <!-- Solution -->
+
+  <ng-container *ngIf="tableausThirdRead">
+    <div class="arrow arrow-9">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-learn-solution-card class="card-9">
+    </app-learn-solution-card>
+  </ng-container>
+
+</main>

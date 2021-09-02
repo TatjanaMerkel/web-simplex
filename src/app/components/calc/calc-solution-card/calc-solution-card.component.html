@@ -1,0 +1,21 @@
+<app-card title="Lösung">
+
+  <table class="mx-auto">
+    <tr>
+      <th>z</th>
+
+      <th *ngFor="let _ of input.solutionVars; index as v; trackBy: trackByIndex">
+        x<sub>{{ v + 1 }}</sub>
+      </th>
+    </tr>
+
+    <tr>
+      <td>{{ formatFraction(input.solutionVal) }}</td>
+
+      <td *ngFor="let solutionVar of input.solutionVars; index as v; trackBy: trackByIndex">
+        {{ formatFraction(solutionVar) }}
+      </td>
+    </tr>
+  </table>
+
+</app-card>

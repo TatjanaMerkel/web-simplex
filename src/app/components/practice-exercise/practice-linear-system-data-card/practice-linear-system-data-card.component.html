@@ -1,0 +1,93 @@
+<app-card *ngIf="initialized"
+          title="Zielfunktion & Nebenbedingungen">
+
+  <table class="mx-auto">
+
+    <!-- Target function -->
+
+    <tr>
+      <td>Z</td>
+      <td>=</td>
+
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!targetVarsCorrect[0]"
+               [disabled]="disabled"
+               (input)="targetVarsCorrect[0] = true"
+               (change)="saveTargetVar($event,0)"/>
+      </td>
+      <td>
+        x<sub>1</sub>
+      </td>
+
+      <ng-container *ngFor="let _ of targetVars.slice(1); index as v; trackBy: trackByIndex">
+        <td>+</td>
+        <td>
+          <input class="fraction-input"
+                 [class.wrong]="!targetVarsCorrect[v + 1]"
+                 [disabled]="disabled"
+                 (input)="targetVarsCorrect[v + 1] = true"
+                 (change)="saveTargetVar($event,v + 1)"/>
+        </td>
+        <td>
+          x<sub>{{v + 2}}</sub>
+        </td>
+      </ng-container>
+    </tr>
+
+    <!-- Constraints -->
+
+    <tr *ngFor="let _ of [].constructor(numberOfConstraints); index as c">
+      <td></td>
+      <td></td>
+
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!constraintVarsCorrect[c][0]"
+               [disabled]="disabled"
+               (input)="constraintVarsCorrect[c][0] = true"
+               (change)="saveConstraintVar($event, c, 0)"/>
+      </td>
+      <td>
+        x<sub>1</sub>
+      </td>
+
+      <ng-container *ngFor="let _ of constraintVars![c].slice(1); index as v; trackBy: trackByIndex">
+        <td>+</td>
+        <td>
+          <input class="fraction-input"
+                 [class.wrong]="!constraintVarsCorrect[c][v + 1]"
+                 [disabled]="disabled"
+                 (input)="constraintVarsCorrect[c][v + 1] = true"
+                 (change)="saveConstraintVar($event, c,v + 1)"/>
+        </td>
+        <td>
+          x<sub>{{v + 2}}</sub>
+        </td>
+      </ng-container>
+
+      <td>≤</td>
+
+      <!-- Boundary vector -->
+
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!constraintValsCorrect[c]"
+               [disabled]="disabled"
+               (input)="constraintValsCorrect[c] = true"
+               (change)="saveConstraintVal($event, c)"/>
+      </td>
+    </tr>
+
+  </table>
+
+  <!-- Next Button -->
+
+  <button class="btn btn-lg float-right mt-4"
+          [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
+          [disabled]="disabled || !isInputCorrect"
+          (click)="checkUserInputAndEmit()">
+    Weiter
+  </button>
+
+</app-card>

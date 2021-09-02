@@ -1,0 +1,62 @@
+<main>
+
+  <!-- Linear System Size -->
+
+  <app-calc-linear-system-size-card class="card-1"
+                                    (outputChange)="setLinearSystemSize($event)">
+  </app-calc-linear-system-size-card>
+
+  <!-- Linear System Data -->
+
+  <ng-container *ngIf="linearSystemSizeOutput">
+    <div class="arrow arrow-2">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-calc-linear-system-data-card class="card-2"
+                                      [input]="linearSystemSizeOutput"
+                                      (outputChange)="setLinearSystemData($event)">
+    </app-calc-linear-system-data-card>
+  </ng-container>
+
+  <!-- Standard Form -->
+
+  <ng-container *ngIf="targetVars && constraintVars && constraintVals">
+    <div class="arrow arrow-3">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-calc-standard-form-card class="card-3"
+                                 [data]="getStandardFormInput()"
+                                 (click)="showTableaus = true">
+    </app-calc-standard-form-card>
+  </ng-container>
+
+  <!-- Tableaus -->
+
+  <ng-container *ngIf="showTableaus">
+    <div class="arrow arrow-4">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-card class="card-4" title="Tableaus">
+      <ng-container *ngFor="let tableau of tableaus">
+        <app-calc-tableau-card [data]="getTableauInput(tableau)"></app-calc-tableau-card>
+        <br/>
+      </ng-container>
+    </app-card>
+  </ng-container>
+
+  <!-- Solution -->
+
+  <ng-container *ngIf="showTableaus">
+    <div class="arrow arrow-5">
+      <img src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-calc-solution-card class="card-5"
+                            [input]="getSolutionInput()">
+    </app-calc-solution-card>
+  </ng-container>
+
+</main>

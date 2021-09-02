@@ -1,0 +1,47 @@
+<app-card title="Variablen und Nebenbedingungen erkennen">
+  <p>
+    Die Beispielaufgabe handelt von einer Fähre die LKWs und Busse transportiert. Der
+    dadurch erwirtschaftete Gewinn hängt von der Anzahl der transportierten LKWs und
+    Busse ab. Dieser Sachverhalt wird sich in der Zielfunktion ausdrücken die von zwei
+    Variablen abhängt: Der Anzahl der LKWs und die Anzahl der Busse.
+  </p>
+
+  <p>
+    Prinzipiell steigt der Gewinn mit zunehmender Anzahl transportierter LKWs und Busse,
+    doch es gibt Nebenbedingungen die die Wahl beliebig hoher Anzahlen verhindern:
+  </p>
+
+  <ol>
+    <li>
+      LKWs und Busse benötigen Stellplätze. Auf der Fähre sind maximal 12 Stellplätze
+      verfügbar
+    </li>
+    <li>
+      LKWs und Busse haben ein gewisses Gewicht. Die Fähre kann maximal 100 Tonnen Gewicht
+      befördern.
+    </li>
+  </ol>
+
+  <p>
+    Für die Textaufgabe lässt sich also festhalten, dass zwei Variablen - die Anzahl der
+    LKWs und Busse - sowie zwei Nebenbedingungen - die maximale Anzahl der Stellplätze und
+    das maximale Gewicht - zu beachten sind:
+  </p>
+
+  <table class="mx-auto my-4 slack-var">
+    <tr>
+      <th>Anzahl Variablen</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Anzahl Nebenbedingungen</th>
+      <td>2</td>
+    </tr>
+  </table>
+
+  <button class="btn btn-success btn-lg float-right mt-4"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Weiter
+  </button>
+</app-card>

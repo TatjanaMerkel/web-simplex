@@ -1,0 +1,41 @@
+<app-card *ngIf="initialized"
+          title="Lösung">
+
+  <table class="mx-auto">
+    <tr>
+      <th>z</th>
+
+      <th *ngFor="let _ of solutionVars; index as v; trackBy: trackByIndex">
+        x<sub>{{ v + 1 }}</sub>
+      </th>
+    </tr>
+
+    <tr>
+      <td>
+        <input class="fraction-input"
+               [class.wrong]="!solutionValCorrect"
+               [disabled]="disabled"
+               (input)="solutionValCorrect = true"
+               (change)="solutionVal = fractionFromInputEvent($event)"/>
+      </td>
+
+      <td *ngFor="let solutionVar of solutionVars; index as v; trackBy: trackByIndex">
+        <input class="fraction-input"
+               [class.wrong]="!solutionVarsCorrect[v]"
+               [disabled]="disabled"
+               (input)="solutionVarsCorrect[v] = true"
+               (change)="solutionVars[v] = fractionFromInputEvent($event)"/>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Next Button -->
+
+  <button class="btn btn-lg float-right mt-4"
+          [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
+          [disabled]="disabled || !isInputCorrect"
+          (click)="checkUserInputAndEmit()">
+    Weiter
+  </button>
+
+</app-card>

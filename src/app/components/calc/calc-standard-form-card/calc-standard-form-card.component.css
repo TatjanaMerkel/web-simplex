@@ -1,0 +1,12 @@
+table {
+  border-spacing: 8px;
+}
+
+.value {
+  text-align: right;
+}
+
+.operator {
+  padding-left: 12px;
+  padding-right: 12px;
+}

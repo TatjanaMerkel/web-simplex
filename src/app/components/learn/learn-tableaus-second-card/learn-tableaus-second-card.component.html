@@ -1,0 +1,347 @@
+<app-card title="Tableaus berechnen (2. Tableau)">
+  <p>
+    Ausgehend vom initialen Tableau werden nun weitere Tableaus solange der negativste
+    Wert in der Zielfunktions-Zeile negativ ist. Theoretisch kann der Algorithmus also
+    direkt nach Aufstellen des initialen Tableaus abbrechen. In diesem Beispiel ist
+    der negativste Wert -1500 allerdings kleiner 0 und markiert somit die sogenannte
+    "Pivot-Spalte":
+  </p>
+
+  <table class="learn-tableau mx-auto my-4">
+    <thead>
+    <tr>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th class="pivot-col">x<sub>2</sub></th>
+      <th class="slack-var">x<sub>3</sub></th>
+      <th class="slack-var">x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th>x<sub>3</sub></th>
+      <td>1</td>
+      <td class="pivot-col">2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>12</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>x<sub>4</sub></th>
+      <td>15</td>
+      <td class="pivot-col">10</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td></td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th>z</th>
+      <td>-1000</td>
+      <td class="pivot-col">-1500</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Anhand der Pivot-Spalte kann nun die theta-Spalte für die Zeilen der Nebenbedingungen
+    befüllt werden. Die theta-Werte ergeben sich jeweils als Quotient der b- und der
+    Pivot-Spalte. Für die Zielfunktions-Zeile wird kein theta berechnet. Falls die
+    Pivot-Spalte den Wert 0 enthält ist theta undefiniert und wird bei den folgenden
+    Betrachtungen ingoriert.
+  </p>
+
+  <table class="learn-tableau mx-auto my-4">
+    <thead>
+    <tr>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th class="pivot-col">x<sub>2</sub></th>
+      <th class="slack-var">x<sub>3</sub></th>
+      <th class="slack-var">x<sub>4</sub></th>
+      <th>b</th>
+      <th class="wider">theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th>x<sub>3</sub></th>
+      <td>1</td>
+      <td class="pivot-col">2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>12</td>
+      <td class="wider">12 / 2 = 6</td>
+    </tr>
+    <tr>
+      <th>x<sub>4</sub></th>
+      <td>15</td>
+      <td class="pivot-col">10</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td class="wider">100 / 10 = 10</td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th>z</th>
+      <td>-1000</td>
+      <td class="pivot-col">-1500</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td class="wider"></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Die Zeile mit dem kleinsten theta größer 0 bildet die "Pivot-Zeile". Im obigen
+    Beispiel ist dies die mit x3 gekennzeichnete Zeile. Der Wert am Schnittpunkt
+    von Pivot-Spalte und -Zeile ist das "Pivot-Element" - hier also der Wert 2.
+  </p>
+
+  <table class="learn-tableau learn-tableau-extended mx-auto my-4">
+    <thead>
+    <tr>
+      <th></th>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th class="pivot-col">x<sub>2</sub></th>
+      <th class="slack-var">x<sub>3</sub></th>
+      <th class="slack-var">x<sub>4</sub></th>
+      <th>b</th>
+      <th class="wider">theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th class="pivot-row">A</th>
+      <th class="pivot-row">x<sub>3</sub></th>
+      <td class="pivot-row">1</td>
+      <td class="pivot-row-col">2</td>
+      <td class="pivot-row">1</td>
+      <td class="pivot-row">0</td>
+      <td class="pivot-row">12</td>
+      <td class="pivot-row wider">12 / 2 = 6</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <th>x<sub>4</sub></th>
+      <td>15</td>
+      <td class="pivot-col">10</td>
+      <td>0</td>
+      <td>1</td>
+      <td>100</td>
+      <td class="wider">100 / 10 = 10</td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th>C</th>
+      <th>z</th>
+      <td>-1000</td>
+      <td class="pivot-col">-1500</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td class="wider"></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Mithilfe des Pivot-Elements wird das nächste Tableau berechnet. In diesem
+    neuen Tableau soll die Variable der vorangehenden Pivot-Spalte - hier also
+    die Variable x<sub>2</sub> - zur Basisvariable werden. Um dies zu erreichen
+    wird zuerst die Pivot-Zeile durch das Pivot-Element geteilt. So ergibt sich
+    das 1-Element im Vektor:
+  </p>
+
+  <table class="learn-tableau learn-tableau-extended mx-auto my-4">
+    <thead>
+    <tr>
+      <th></th>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th class="slack-var">x<sub>2</sub></th>
+      <th>x<sub>3</sub></th>
+      <th class="slack-var">x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th>A / 2</th>
+      <th></th>
+      <td>1/2</td>
+      <td>1</td>
+      <td>1/2</td>
+      <td>0</td>
+      <td>6</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+      <th></th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th></th>
+      <th>z</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Anschließend werden alle anderen Zeilen, inklusive der Zielfunktions-Zeile, so
+    mit einem Vielfachen der Pivot-Zeile verrechnet, dass sich in der bisherigen
+    Pivot-Spalte der Wert 0 ergibt.
+  </p>
+
+  <table class="learn-tableau learn-tableau-extended mx-auto my-4">
+    <thead>
+    <tr>
+      <th class="wider"></th>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th class="slack-var">x<sub>2</sub></th>
+      <th>x<sub>3</sub></th>
+      <th class="slack-var">x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th class="wider">A / 2</th>
+      <th></th>
+      <td>1/2</td>
+      <td>1</td>
+      <td>1/2</td>
+      <td>0</td>
+      <td>6</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th class="wider">B - 5A</th>
+      <th></th>
+      <td>10</td>
+      <td>0</td>
+      <td>-5</td>
+      <td>1</td>
+      <td>40</td>
+      <td></td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th class="wider">C + 750A</th>
+      <th>z</th>
+      <td>-250</td>
+      <td>0</td>
+      <td>750</td>
+      <td>0</td>
+      <td>9000</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Durch die Berechnung ist x<sub>2</sub> zur Basisvariable geworden. x<sub>3</sub>
+    ist hingegen keine Basisvariable mehr. Dies spiegelt sich auch durch die
+    angepasste Beschriftung der Nebenbedingungs-Zeilen wieder:
+  </p>
+
+  <table class="learn-tableau learn-tableau-extended mx-auto my-4">
+    <thead>
+    <tr>
+      <th class="wider"></th>
+      <th>BV</th>
+      <th>x<sub>1</sub></th>
+      <th class="slack-var">x<sub>2</sub></th>
+      <th>x<sub>3</sub></th>
+      <th class="slack-var">x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th class="wider">A / 2</th>
+      <th>x<sub>2</sub></th>
+      <td>1/2</td>
+      <td>1</td>
+      <td>1/2</td>
+      <td>0</td>
+      <td>6</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th class="wider">B - 5A</th>
+      <th>x<sub>4</sub></th>
+      <td>10</td>
+      <td>0</td>
+      <td>-5</td>
+      <td>1</td>
+      <td>40</td>
+      <td></td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th class="wider">C + 750A</th>
+      <th>z</th>
+      <td>-250</td>
+      <td>0</td>
+      <td>750</td>
+      <td>0</td>
+      <td>9000</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <button class="btn btn-success btn-lg float-right mt-4"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Weiter
+  </button>
+</app-card>

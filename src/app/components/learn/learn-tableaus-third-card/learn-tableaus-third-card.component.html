@@ -1,0 +1,134 @@
+<app-card title="Tableaus berechnen (3. Tableau)">
+  <p>
+    Damit ist das zweite Tableau komplett und der Simplex-Zyklus wiederholt sich. Wie nach
+    dem Aufstellen des initialen Tableaus wird geprüft ob der negativste Parameter der
+    Zielfunktions-Variablen negativ ist. Da der Wert -250 negativ ist ist die
+    Abbruchbedingung noch nicht erreicht und ein weiterer Berechnungszyklus wird durchgeführt:
+  </p>
+
+  <ol>
+    <li>Pivot-Spalte markieren</li>
+    <li>theta-Werte berechnen</li>
+    <li>Pivot-Zeile und Pivot-Element markieren</li>
+    <li>Ehemalige Pivot-Zeile im nächsten Tableau berechnen</li>
+    <li>Alle weiteren Zeilen im nächsten Tableau berechnen</li>
+    <li>Basisvariablen im nächsten Tableau notieren</li>
+  </ol>
+
+  <p>
+    Nach Schritt 3 erhält man folgendes, ergänztes zweites Tableau als
+    Zwischenergebnis:
+  </p>
+
+  <table class="learn-tableau mx-auto my-4">
+
+    <thead>
+    <tr>
+      <th>BV</th>
+      <th class="pivot-col">x<sub>1</sub></th>
+      <th class="slack-var">x<sub>2</sub></th>
+      <th>x<sub>3</sub></th>
+      <th class="slack-var">x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th>x<sub>2</sub></th>
+      <td class="pivot-col">1/2</td>
+      <td>1</td>
+      <td>1/2</td>
+      <td>0</td>
+      <td>6</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th class="pivot-row">x<sub>4</sub></th>
+      <td class="pivot-row-col">10</td>
+      <td class="pivot-row">0</td>
+      <td class="pivot-row">-5</td>
+      <td class="pivot-row">1</td>
+      <td class="pivot-row">40</td>
+      <td class="pivot-row">4</td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th>z</th>
+      <td class="pivot-col">-250</td>
+      <td>0</td>
+      <td>750</td>
+      <td>0</td>
+      <td>9000</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Nach Schritt 6 erhält man folgendes drittes Tableau:
+  </p>
+
+  <table class="learn-tableau mx-auto my-4">
+    <thead>
+    <tr>
+      <th>BV</th>
+      <th class="slack-var">x<sub>1</sub></th>
+      <th class="slack-var">x<sub>2</sub></th>
+      <th>x<sub>3</sub></th>
+      <th>x<sub>4</sub></th>
+      <th>b</th>
+      <th>theta</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <th>x<sub>2</sub></th>
+      <td>0</td>
+      <td>1</td>
+      <td>3/4</td>
+      <td>-1/20</td>
+      <td>4</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>x<sub>1</sub></th>
+      <td>1</td>
+      <td>0</td>
+      <td>-1/2</td>
+      <td>1/10</td>
+      <td>4</td>
+      <td></td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <th>z</th>
+      <td>0</td>
+      <td>0</td>
+      <td>625</td>
+      <td>25</td>
+      <td>10000</td>
+      <td></td>
+    </tr>
+    </tfoot>
+  </table>
+
+  <p>
+    Das dritte Tableau enthält <span class="slack-var"><u>keine negativen Parameter</u></span> mehr in der Zielfunktion.
+    Damit
+    greift die Abbruchbedingung des Simplex-Algorithmus und die Lösung kann aus dem letzten
+    Tableau abgelesen werden.
+  </p>
+
+  <button class="btn btn-success btn-lg float-right mt-4"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Weiter
+  </button>
+</app-card>

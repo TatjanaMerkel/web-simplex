@@ -1,0 +1,137 @@
+<main *ngIf="initialized && exercise">
+
+  <!-- Overview -->
+
+  <app-card *ngIf="exercise.task"
+            class="card-1"
+            title="Übersicht">
+    Löse die Textaufgabe indem du
+
+    <ol class="task-list">
+      <li>die Anzahl der Variablen und Nebenbedingungen bestimmst</li>
+      <li>das Ungleichungssystem aufstellst</li>
+      <li>das Ungleichungssystem in das standardisierte Gleichungssystem überführst</li>
+      <li>das lineare Gleichungssystem mittels mehrerer Tableaus löst</li>
+      <li>die Lösung aus dem letzten Tableau abliest</li>
+    </ol>
+  </app-card>
+
+  <app-card *ngIf="!exercise.task"
+            class="card-1"
+            title="Übersicht">
+    Löse die Rechenaufgabe indem du
+
+    <ol class="task-list">
+      <li>das Ungleichungssystem in das standardisierte Gleichungssystem überführst</li>
+      <li>das lineare Gleichungssystem mittels mehrerer Tableaus löst</li>
+      <li>die Lösung aus dem letzten Tableau abliest</li>
+    </ol>
+  </app-card>
+
+  <!-- Task -->
+
+  <div *ngIf="exercise.task" class="arrow arrow-2">
+    <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+  </div>
+
+  <app-card *ngIf="exercise.task"
+            class="card-2"
+            title="Aufgabe">
+
+    {{ exercise.task }}
+  </app-card>
+
+  <!-- Linear System Size -->
+
+  <ng-template [ngIf]="exercise.task">
+    <div class="arrow arrow-3">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-practice-linear-system-size-card class="card-3"
+                                          [expected]="expectedLinearSystemSize"
+                                          [disabled]="linearSystemSizeCorrect"
+                                          (correct)="linearSystemSizeCorrect = true">
+    </app-practice-linear-system-size-card>
+  </ng-template>
+
+  <!-- Linear System Data -->
+
+  <ng-template [ngIf]="linearSystemSizeCorrect && exercise.task">
+    <div class="arrow arrow-4">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-practice-linear-system-data-card class="card-4"
+                                          [expected]="expectedLinearSystemData"
+                                          [disabled]="linearSystemDataCorrect"
+                                          (correct)="linearSystemDataCorrect = true">
+    </app-practice-linear-system-data-card>
+  </ng-template>
+
+  <!-- Initialized Linear System Data -->
+
+  <ng-template [ngIf]="!exercise.task">
+    <div class="arrow arrow-4">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-practice-init-linear-system-data-card class="card-4"
+                                               [init]="initLinearSystemData">
+    </app-practice-init-linear-system-data-card>
+  </ng-template>
+
+  <!-- Standard Form -->
+
+  <ng-template [ngIf]="linearSystemDataCorrect || !exercise.task">
+    <div class="arrow arrow-5">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-practice-standard-form-card class="card-5"
+                                     [expected]="expectedStandardForm"
+                                     [disabled]="standardFormCorrect"
+                                     (correct)="standardFormCorrect = true">
+    </app-practice-standard-form-card>
+  </ng-template>
+
+  <!-- Tableaus -->
+
+  <ng-template [ngIf]="standardFormCorrect">
+    <div class="arrow arrow-6">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-practice-tableaus-card class="card-6"
+                                [expected]="expectedTableaus"
+                                (correct)="tableausCorrect = true">
+    </app-practice-tableaus-card>
+  </ng-template>
+
+  <!-- Solution -->
+
+  <ng-template [ngIf]="tableausCorrect">
+    <div class="arrow arrow-7">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-practice-solution-card class="card-7"
+                                [expected]="expectedSolution"
+                                [disabled]="solutionCorrect"
+                                (correct)="solutionCorrect = true">
+    </app-practice-solution-card>
+  </ng-template>
+
+  <!-- Congratulations -->
+
+  <ng-template [ngIf]="solutionCorrect">
+    <div class="arrow arrow-8">
+      <img class="arrow arrow" src="../../../assets/images/bluearrow.png" alt="Blue Arrow">
+    </div>
+
+    <app-card class="card-8" title="Glückwunsch">
+      Du hast die Aufgabe korrekt gelöst!
+    </app-card>
+  </ng-template>
+
+</main>

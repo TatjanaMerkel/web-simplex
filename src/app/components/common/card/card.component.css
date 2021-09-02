@@ -1,0 +1,9 @@
+.card {
+  color: white;
+  font-size: 25px;
+  background-color: #475366;
+}
+
+.card-body {
+  padding: 32px;
+}

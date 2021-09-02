@@ -1,0 +1,8 @@
+.linear-system-table td {
+  padding: 4px;
+}
+
+.linear-system-table td.value {
+  width: 40px;
+  text-align: right;
+}

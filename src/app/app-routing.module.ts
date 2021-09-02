@@ -1,16 +1,26 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from "./home/home.component";
-import {CalculatorComponent} from "./pages/calculator/calculator.component";
-import {LearningComponent} from "./pages/learning/learning.component";
-import {PractiseComponent} from "./pages/practise/practise.component";
+import {NgModule} from '@angular/core'
+import {RouterModule, Routes} from '@angular/router'
+
+import {AdminEditExerciseComponent} from './components/admin-edit-exercise/admin-edit-exercise.component'
+import {AdminExercisesComponent} from './components/admin-exercises/admin-exercises.component'
+import {AdminNewExerciseComponent} from './components/admin-new-exercise/admin-new-exercise.component'
+import {CalcComponent} from './components/calc/calc.component'
+import {HomeComponent} from './components/home/home.component'
+import {LearnComponent} from './components/learn/learn.component'
+import {PracticeComponent} from './components/practice/practice.component'
+import {PracticeExerciseComponent} from './components/practice-exercise/practice-exercise.component'
 
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
-  {path: 'calculator', component: CalculatorComponent},
-  {path: 'learning', component: LearningComponent},
-  {path: 'practise', component: PractiseComponent}
-];
+  {path: 'admin', redirectTo: 'admin/exercises', pathMatch: 'full'},
+  {path: 'admin/exercises', component: AdminExercisesComponent},
+  {path: 'admin/exercises/new', component: AdminNewExerciseComponent},
+  {path: 'admin/exercises/:exercise_id', component: AdminEditExerciseComponent},
+  {path: 'calc', component: CalcComponent},
+  {path: 'learn', component: LearnComponent},
+  {path: 'practice', component: PracticeComponent},
+  {path: 'practice/:exercise_id', component: PracticeExerciseComponent}
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

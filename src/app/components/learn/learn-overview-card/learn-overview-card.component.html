@@ -1,0 +1,34 @@
+<app-card title="Übersicht">
+  <p>
+    Der Simplex-Algorithmus ermöglicht das optimale Lösen von häufig
+    auftretenden Ungleichungssystemen - beispielsweise für das folgende:
+  </p>
+
+  <p class="w-75 mx-auto my-4">
+  Eine Fähre für LKWs und Busse hat 12 Stellplätze und kann bis zu
+    100 Tonnen befördern. Ein LKW benötigt einen Stellplatz, wiegt 15
+    Tonnen und bringt 1000€ Gewinn. Ein Bus benötigt zwei Stellplätze,
+    wiegt 10 Tonnen und bringt 1500€ Gewinn. Insgesamt warten 8 LKWs
+    und 8 Busse auf die Überfahrt. Wie viele LKWs und Busse sollten
+    transportiert werden um den maximalen Gewinn zu erwirtschaften?
+  </p>
+
+  <p>
+    Im Folgenden wird erklärt wie ein <span class="slack-var"> Maximierungsproblem </span> gelöst wird.
+    Der Lösungsweg besteht aus folgenden Schritten:
+  </p>
+
+  <ol>
+    <li>Variablen und Nebenbedingungen erkennen</li>
+    <li>Ungleichungssystem aufstellen</li>
+    <li>Gleichungssystem in Standardform aufstellen</li>
+    <li>Tableaus berechnen</li>
+    <li>Die Lösung aus dem letzten Tableau ablesen</li>
+  </ol>
+
+  <button class="btn btn-success btn-lg float-right mt-4"
+          [disabled]="disabled"
+          (click)="next.emit()">
+    Weiter
+  </button>
+</app-card>

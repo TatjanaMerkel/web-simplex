@@ -1,0 +1,67 @@
+<div class="w-75 mx-auto my-4">
+  <app-card title="Aufgabe">
+
+    <div class="form-grid">
+
+      <!-- Title -->
+
+      <label for="title">Titel</label>
+      <input id="title" type="text" [(ngModel)]="title">
+
+      <!-- Difficulty -->
+
+      <label for="difficulty">Schwierigkeit</label>
+      <div id="difficulty">
+        <input id="easy"
+               type="radio" name="difficulty"
+               [(ngModel)]="difficulty" value="EASY">
+        <label for="easy" class="ml-2">Einfach</label>
+
+        <input id="medium" class="ml-4"
+               type="radio" name="difficulty"
+               [(ngModel)]="difficulty" value="MEDIUM">
+        <label for="medium" class="ml-2">Mittel</label>
+
+        <input id="hard"  class="ml-4"
+               type="radio" name="difficulty"
+               [(ngModel)]="difficulty" value="HARD">
+        <label for="hard" class="ml-2">Schwer</label>
+      </div>
+
+      <!-- Task -->
+
+      <label for="task">Textaufgabe</label>
+      <textarea id="task"
+                [(ngModel)]="task"
+                [placeholder]="taskPlaceholder"
+                rows="3"></textarea>
+
+      <label for="numberOfVars">Variablen</label>
+      <input id="numberOfVars" class="number-input"
+             type="number" min="1"
+             [(ngModel)]="numberOfVars"/>
+
+      <label for="numberOfConstraints">Nebenbedingungen</label>
+      <input id="numberOfConstraints" class="number-input"
+             type="number" min="1"
+             [(ngModel)]="numberOfConstraints"/>
+
+      <!-- Linear System Data -->
+
+      <label for="linearSystemData">Gleichungssystem</label>
+      <app-linear-system-data id="linearSystemData"
+                              [init]="getLinearSystemDataInput()"
+                              (dataChange)="storeLinearSystemData($event)">
+      </app-linear-system-data>
+
+    </div>
+
+    <!-- Create Button -->
+
+    <button class="btn btn-success btn-lg float-right mt-4"
+            (click)="submit()">
+      Erstellen
+    </button>
+
+  </app-card>
+</div>

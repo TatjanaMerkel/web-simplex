@@ -1,0 +1,26 @@
+td {
+  padding: 8px;
+}
+
+.center {
+  text-align: center;
+}
+
+/* Column Widths */
+
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+td:first-child {
+  width: 50px;
+}
+
+td:not(:first-child):not(:last-child) {
+  width: 80px;
+}
+
+td:last-child {
+  width: 80px;
+}

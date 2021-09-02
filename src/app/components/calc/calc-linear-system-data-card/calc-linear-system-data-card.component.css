@@ -1,0 +1,8 @@
+td {
+  width: 30px;
+}
+
+td > input {
+  width: 60px;
+  text-align: right;
+}

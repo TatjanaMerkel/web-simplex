@@ -1,0 +1,38 @@
+<app-card *ngIf="initialized"
+          title="Anzahl Variablen & Nebenbedingungen">
+
+  <table class="linear-system-size-table mx-auto">
+    <tr>
+      <td>Anzahl der Variablen:</td>
+      <td>
+        <input class="number-input"
+               [class.wrong]="!numberOfVarsCorrect"
+               type="number" min="0"
+               [disabled]="disabled"
+               (input)="numberOfVarsCorrect = true"
+               (change)="saveNumberOfVars($event)"/>
+      </td>
+    </tr>
+    <tr>
+      <td>Anzahl der Nebenbedingungen:</td>
+      <td>
+        <input class="number-input"
+               [class.wrong]="!numberOfConstraintsCorrect"
+               type="number" min="0"
+               [disabled]="disabled"
+               (input)="numberOfConstraintsCorrect = true"
+               (change)="saveNumberOfConstraints($event)"/>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Next Button -->
+
+  <button class="btn btn-lg float-right mt-4"
+          [ngClass]="isInputCorrect ? 'btn-success' : 'btn-danger'"
+          [disabled]="disabled || !isInputCorrect"
+          (click)="checkUserInputAndEmit()">
+    Weiter
+  </button>
+
+</app-card>

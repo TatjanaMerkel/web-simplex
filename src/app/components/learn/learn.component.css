@@ -1,0 +1,100 @@
+main {
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header  header  header"
+    ".       card-1  .     "
+    "arrow-2 .       .     "
+    ".       card-2  .     "
+    "arrow-3 .       .     "
+    ".       card-3  .     "
+    "arrow-4 .       .     "
+    ".       card-4  .     "
+    "arrow-5 .       .     "
+    ".       card-5  .     "
+    "arrow-6 .       .     "
+    ".       card-6  .     "
+    "arrow-7 .       .     "
+    ".       card-7  .     "
+    "arrow-8 .       .     "
+    ".       card-8  .     "
+    "arrow-9 .       .     "
+    ".       card-9  .     ";
+
+  width: 90%;
+  margin: 40px auto;
+}
+
+.card-1 {
+  grid-area: card-1;
+}
+
+.arrow-2 {
+  grid-area: arrow-2;
+}
+
+.card-2 {
+  grid-area: card-2;
+}
+
+.arrow-3 {
+  grid-area: arrow-3;
+}
+
+.card-3 {
+  grid-area: card-3;
+}
+
+.arrow-4 {
+  grid-area: arrow-4;
+}
+
+.card-4 {
+  grid-area: card-4;
+}
+
+.arrow-5 {
+  grid-area: arrow-5;
+}
+
+.card-5 {
+  grid-area: card-5;
+}
+
+.arrow-6 {
+  grid-area: arrow-6;
+}
+
+.card-6 {
+  grid-area: card-6;
+}
+
+.arrow-7 {
+  grid-area: arrow-7;
+}
+
+.card-7 {
+  grid-area: card-7;
+}
+
+.arrow-8 {
+  grid-area: arrow-8;
+}
+
+.card-8 {
+  grid-area: card-8;
+}
+
+.arrow-9 {
+  grid-area: arrow-9;
+}
+
+.card-9 {
+  grid-area: card-9;
+}
+
+.arrow {
+  width: 50px;
+  height: 50px;
+}
