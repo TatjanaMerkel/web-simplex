@@ -6,6 +6,7 @@ import {Observable, throwError} from 'rxjs'
 import {catchError, tap} from 'rxjs/operators'
 
 import {Exercise} from '../models/exercise'
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,14 @@ export class ExerciseService {
   }
 
   getExercises(): Observable<Exercise[]> {
-    return this.http.get<Exercise[]>('http://localhost:3000/exercises').pipe(
+    return this.http.get<Exercise[]>(`${environment.API_URL}/exercises`).pipe(
       tap(exercises => console.debug(exercises)),
       catchError(ExerciseService.handleError)
     )
   }
 
   getExercise(id: number): Observable<Exercise> {
-    return this.http.get<Exercise>(`http://localhost:3000/exercise/${id}`).pipe(
+    return this.http.get<Exercise>(`${environment.API_URL}/exercise/${id}`).pipe(
       tap(exercise => console.debug(exercise)),
       catchError(ExerciseService.handleError)
     )
@@ -41,7 +42,7 @@ export class ExerciseService {
       constraintVals: JSON.stringify(exercise.constraintVals, replacer)
     }
 
-    return this.http.post<Exercise>('http://localhost:3000/exercise', dbExercise, this.httpOptions).pipe(
+    return this.http.post<Exercise>(`${environment.API_URL}/exercise`, dbExercise, this.httpOptions).pipe(
       tap(exercise => console.debug(exercise)),
       catchError(ExerciseService.handleError)
     )
@@ -57,14 +58,14 @@ export class ExerciseService {
       constraintVals: JSON.stringify(exercise.constraintVals, replacer)
     }
 
-    return this.http.put(`http://localhost:3000/exercise/${exercise.id}`, dbExercise, this.httpOptions).pipe(
+    return this.http.put(`${environment.API_URL}/exercise/${exercise.id}`, dbExercise, this.httpOptions).pipe(
       tap(exercise => console.debug(exercise)),
       catchError(ExerciseService.handleError)
     )
   }
 
   deleteExercise(id: number): Observable<Exercise> {
-    return this.http.delete<Exercise>(`http://localhost:3000/exercise/${id}`, this.httpOptions).pipe(
+    return this.http.delete<Exercise>(`${environment.API_URL}/exercise/${id}`, this.httpOptions).pipe(
       tap(exercise => console.debug(exercise)),
       catchError(ExerciseService.handleError)
     )
